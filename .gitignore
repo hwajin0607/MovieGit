@@ -1,0 +1,7 @@
+/.metadata/
+MovieProject/.classpath
+MovieProject/.project
+MovieProject/.settings/
+*.jar
+MovieProject/WebContent/WEB-INF/web.xml
+MovieProject/WebContent/META-INF/MANIFEST.MF
