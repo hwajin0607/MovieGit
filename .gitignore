@@ -4,3 +4,9 @@ MovieProject/.project
 MovieProject/.settings/
 *.jar
 MovieProject/WebContent/META-INF/MANIFEST.MF
+.settings/.jsdtscope
+.settings/
+.project
+.classpath
+*.class
+WebContent/META-INF/MANIFEST.MF
