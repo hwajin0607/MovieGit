@@ -10,13 +10,16 @@
 		<style>
 			
 		</style>
-		
 	</head>
 	<body>
-		<a href="./Memberjoin.jsp">asdf</a>
-		<a href="./info">회원정보</a>
-		<a href="./MemberInfo.jsp">회원정보</a>
-		
+		<table>
+		<tr><td rowspan="5"><img></td>
+		<td>1등</td></tr>
+		<tr><td>2등</td></tr>
+		<tr><td>3등</td></tr>
+		<tr><td>4등</td></tr>
+		<tr><td>5등</td></tr>
+		</table>
 	</body>
 	<script>
 		

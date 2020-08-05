@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.movie.service.MovieService;
 
-@WebServlet({"/a"})
+@WebServlet({"/select"})
 public class MovieController extends HttpServlet {
 
 	@Override
@@ -34,9 +34,8 @@ public class MovieController extends HttpServlet {
 		
 		switch (addr) {
 		
-		case "/login":
-//			dis = req.getRequestDispatcher(page);
-//			dis.forward(req, resp);
+		case "/select":
+
 			break;
 		}
 		

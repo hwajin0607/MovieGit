@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.member.service.MemberService;
 
 
-@WebServlet({"/join","/overlay"})
+@WebServlet({"/join","/overlay","/info","/changing","/infoc"})
 public class MemberController extends HttpServlet {
 
 	@Override
@@ -58,6 +58,24 @@ public class MemberController extends HttpServlet {
 			ms.overlay();
 //			dis = req.getRequestDispatcher('location.href = "Memberjoin.jsp"');
 			//dis.forward(req, resp);
+			break;
+			
+		case "/info":
+			System.out.println("정보");
+			ms.info();
+
+			break;
+			
+		case "/changing":
+			System.out.println("회원상세정보");
+			ms.changing();
+
+			break;
+			
+		case "/infoc":
+			System.out.println("정보수정");
+			ms.infoc();
+
 			break;
 			
 		}
