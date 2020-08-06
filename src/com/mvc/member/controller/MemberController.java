@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.member.service.MemberService;
 
 
-@WebServlet({"/join","/overlay","/info","/changing","/infoc"})
+@WebServlet({"/login","/logout","/join","/overlay","/info","/changing","/infoc"})
 public class MemberController extends HttpServlet {
 
 	@Override
@@ -21,7 +21,7 @@ public class MemberController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		try {
 			Process(req,resp);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -32,13 +32,13 @@ public class MemberController extends HttpServlet {
 		req.setCharacterEncoding("UTF-8");
 		try {
 			Process(req,resp);
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	private void Process(HttpServletRequest req, HttpServletResponse resp) throws IOException, SQLException {
+	private void Process(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
 		String uri = req.getRequestURI();
 		String con = req.getContextPath();
@@ -48,6 +48,16 @@ public class MemberController extends HttpServlet {
 		MemberService ms = new MemberService(req,resp);
 		
 		switch (addr) {
+		
+		case "/login":
+			System.out.println("로그인 요청");
+			ms.login();
+			break;
+			
+		case "/logout":
+			System.out.println("로그아웃 요청");
+			ms.logout();
+			break;
 		
 		case "/join":
 			ms.join();

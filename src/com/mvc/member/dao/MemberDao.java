@@ -30,6 +30,18 @@ public class MemberDao {
 				e.printStackTrace();
 			}
 		}
+	
+	public boolean login(String id, String pw) throws SQLException {
+		boolean success = false;
+		String sql = "SELECT uIdx FROM Member WHERE uIden=? AND uPw=?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, id);
+		ps.setString(2, pw);
+		rs = ps.executeQuery();
+		success = rs.next();
+		System.out.println("success : "+success);
+		return success;	
+	}
 
 	public boolean overlay(String id) throws SQLException {
 		boolean success = false;
@@ -106,8 +118,7 @@ public class MemberDao {
 		ps.setString(2, pw);
 		rs = ps.executeQuery();
 		while (rs.next()) {
-			useridx = rs.getInt("uidx");
-			
+			useridx = rs.getInt("uidx");			
 		}
 		System.out.println(useridx);
 		return useridx;
@@ -193,5 +204,6 @@ public class MemberDao {
 		
 		return update;
 	}
+
 
 }
