@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.movie.service.MovieService;
 
-@WebServlet({"/a"})
+@WebServlet({"/a","/random"})
 public class MovieController extends HttpServlet {
 
 	@Override
@@ -24,13 +24,13 @@ public class MovieController extends HttpServlet {
 		Process(req,resp);
 	}
 
-	private void Process(HttpServletRequest req, HttpServletResponse resp) {
+	private void Process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String uri = req.getRequestURI();
 		String con = req.getContextPath();
 		String addr = uri.substring(con.length());
 		System.out.println(addr);
 		RequestDispatcher dis = null;
-		MovieService ms = new MovieService();
+		MovieService ms = new MovieService(req,resp);
 		
 		switch (addr) {
 		
@@ -38,6 +38,16 @@ public class MovieController extends HttpServlet {
 //			dis = req.getRequestDispatcher(page);
 //			dis.forward(req, resp);
 			break;
+
+		case "/random" :
+			System.out.println("뷰에서 랜덤 요청 받음");
+			ms.random();
+			break;
+			
+		case "/movieDetail":
+			
+			break;
+		
 		}
 		
 	}

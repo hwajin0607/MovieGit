@@ -9,16 +9,6 @@
         <title>메인 하단</title>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <style>
-            /* #bg{
-                /* background-image: url(img.jpg); 
-                position: fixed;
-                top : 0;
-                left : 0;
-                width : 100%;
-                height : 100%;
-                z-index : -1;
-            } */
-
 
             #a1{
                 width: 500px;
@@ -39,7 +29,7 @@
             }
 
             #random{
-                width: 1000px;
+                width: 877px;
                 height: 700px;
                 border: 2px solid black;
                 background-color: darkgray;
@@ -60,8 +50,12 @@
       <div id="a2" onclick="move2()">
         광고 2
       </div>
-      <div id="random">
-        랜덤
+      <div id="random" onclick="location.href='random'">
+        <c:forEach items="${list}" var="bbs">
+        	${bbs.mIdx}<br>
+        	${bbs.mName}<br>
+        	${bbs.mfUrl}
+        </c:forEach>
       </div>
 	</body>
     <script>
