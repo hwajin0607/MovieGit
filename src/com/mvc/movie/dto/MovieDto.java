@@ -3,7 +3,11 @@ package com.mvc.movie.dto;
 import java.sql.Date;
 
 public class MovieDto {
-	//private int idx;
+
+
+	private int mIdx;
+	
+	private String mfUrl;
 	
 	private int zidx;
 	
@@ -114,4 +118,19 @@ public class MovieDto {
 	public void setmAge(int mAge) {
 		this.mAge = mAge;
 	}
+
+	public int getmIdx() {
+		return mIdx;
+	}
+	public void setmIdx(int mIdx) {
+		this.mIdx = mIdx;
+	}
+
+	public String getMfUrl() {
+		return mfUrl;
+	}
+	public void setMfUrl(String mfUrl) {
+		this.mfUrl = mfUrl;
+	}
+
 }

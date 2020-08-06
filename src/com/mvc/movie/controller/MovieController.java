@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.movie.service.MovieService;
 
-@WebServlet({"/","/login","/zzim","/searchResult","/delete"})
+
+@WebServlet({"/","/login","/zzim","/searchResult","/delete","/a","/random"})
+
 public class MovieController extends HttpServlet {
 
 	@Override
@@ -31,6 +33,7 @@ public class MovieController extends HttpServlet {
 		System.out.println(addr);
 		RequestDispatcher dis = null;
 		MovieService ms = new MovieService(req, resp);
+
 		
 		switch (addr) {
 		
@@ -52,6 +55,16 @@ public class MovieController extends HttpServlet {
 			ms.delete();
 			System.out.println("1차 확인");
 			break;
+
+		case "/random" :
+			System.out.println("뷰에서 랜덤 요청 받음");
+			ms.random();
+			break;
+			
+		case "/movieDetail":
+			
+			break;
+		
 		}
 		
 	}
