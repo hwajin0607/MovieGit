@@ -10,7 +10,8 @@
 <style>
 
     body{
-        background-color: black;
+        background-color: gray;
+      
     }
 
     a>li{
@@ -31,16 +32,16 @@
         position: absolute;
         font-weight: 600;
     }
-  
-    li.emList{
+  /* 영화리스트 vsc */
+ /*    li.emList{
         float: left;
         border: 2px solid black;
         width: 200px;
         height: 200px;
         background-color: hotpink;
-        margin: 5px;
+        margin: 10px;
 
-    }
+    } */
     #next{
         clear: left;
     }
@@ -76,10 +77,31 @@
         position: absolute;
         top: 35%;
     }
-
-    .mo{
+/* 영화리스트 vsc */
+/*     .mo{
         position: absolute;
         top: 40%;
+        left: 20%; */
+    }
+    table,th,td{
+    	
+    	border-collapse : collapse;
+
+    }
+    td{
+    	background-color : hotpink;
+    	width: 250px;
+        height: 250px;
+        
+    }
+    
+    table{
+     border-spacing: 30px;
+     }
+    
+    .mList{
+    	position: absolute;
+    	top: 40%;
         left: 20%;
     }
 
@@ -95,12 +117,12 @@
         <!-- 전체영화 메뉴 바 -->
         <div class="moviebar">
             <ul class="genre">
-                <a href="#"><li>로멘스/코미디</li></a>
-                <a href="#"><li>스릴러/공포</li></a>
-                <a href="#"><li>SF/판타지</li></a>
-                <a href="#"><li>드라마/다큐</li></a>
-                <a href="#"><li>액션</li></a>
-                <a href="#"><li>애니메이션</li></a>
+                <a href="./movieListG?mGenre=로맨스/코미디"><li>로멘스/코미디</li></a>
+                <a href="./movieListG?mGenre=스릴러/공포"><li>스릴러/공포</li></a>
+                <a href="./movieListG?mGenre=SF/판타지"><li>SF/판타지</li></a>
+                <a href="./movieListG?mGenre=드라마/다큐"><li>드라마/다큐</li></a>
+                <a href="./movieListG?mGenre=액션"><li>액션</li></a>
+                <a href="./movieListG?mGenre=애니메이션"><li>애니메이션</li></a>
             </ul>
         </div>
         </br></br></br>
@@ -113,24 +135,40 @@
         </div>
         <!-- 정렬 -->
         <div class="sort">
-            <a href="#">최신 개봉일 순</a>/<a href="#">오래된 순</a>
+            <a href="./movieListS?mSort=내림차">최신 개봉일 순</a>/<a href="./movieListS?mSort=오름차">오래된 순</a>
         </div>
         </br>
         <!-- 영화목록보여주기 -->
-        <div class="mo">
-        <ul class="movie">
-            <a href="#"><li class="emList">movie</li></a>
-            <a href="#"><li class="emList">movie</li></a>
-            <a href="#"><li class="emList">movie</li></a>
-            <a href="#"><li class="emList">movie</li></a>
-        </ul>
+        <div class="mList">
+        <c:set var="i" value="0" /> 
+        <c:set var="j" value="4" /> 
+        <table > 
+        <c:forEach items="${movieList }" var="mlist"> 
+        <c:if test="${i%j == 0 }"><tr> </c:if> 
+        <td ><a href="./movieDetail?mIdx=${mlist.mIdx }">${mlist.mIdx }</a></td>
+        <c:if test="${i%j == j-1 }"> </tr> </c:if> 
+        <c:set var="i" value="${i+1 }" /> 
+        </c:forEach> 
+        </table>
         <a href="#" id="more">더보기</a>
         </div>
+        
+
+<!-- 영화리스트 vsc -->
+        <%-- <div class="mo">
+        <ul class="movie">
+        <c:forEach items="${movieList }" var="mlist">
+            <a href="#"><li class="emList">${mlist.mName }</li></a>
+        </c:forEach>
+        </ul>
+        <a href="#" id="more">더보기</a>
+        </div> --%>
+        
     </div>
 </body>
 <script>
     
-        $("#more").click(function(){
+/*         $("#more").click(function(){
             
             
             $(".movie").append("<a href='#'><li class='emList' id='next'>movie</li></a>");
@@ -140,8 +178,9 @@
             $(".movie").append(" <a href='#'><li class='emList' id='next'>movie </li></a>");
             $(".movie").append("<a href='#'><li class='emList'> movie </li></a>");
             $(".movie").append("<a href='#'><li class='emList'> movie </li></a>");
-            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>");
+            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>"); 
 
-        });
+        });*/
+        
 </script>
 </html>

@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.movie.service.MovieService;
 
-@WebServlet({"/"})
+@WebServlet({"/a","/movieList","/movieListG","/movieListS","/movieDetail"})
 public class MovieController extends HttpServlet {
 
 	@Override
@@ -24,13 +24,14 @@ public class MovieController extends HttpServlet {
 		Process(req,resp);
 	}
 
-	private void Process(HttpServletRequest req, HttpServletResponse resp) {
+	private void Process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String uri = req.getRequestURI();
 		String con = req.getContextPath();
 		String addr = uri.substring(con.length());
 		System.out.println(addr);
 		RequestDispatcher dis = null;
-		MovieService ms = new MovieService();
+		MovieService ms = new MovieService(req,resp);
 		
 		switch (addr) {
 		
@@ -38,7 +39,50 @@ public class MovieController extends HttpServlet {
 //			dis = req.getRequestDispatcher(page);
 //			dis.forward(req, resp);
 			break;
+			
+		case "/movieList":
+			System.out.println("전체 영화목록 보여주기");
+			ms.movieList();
+			break;
+			
+		case "/movieListG":
+			System.out.println("장르별 영화 보여주기");
+			String mGenre = req.getParameter("mGenre");
+			req.getSession().setAttribute("mGenre", mGenre);
+			System.out.println(mGenre);
+			ms.movieListG(mGenre);
+			break;
+			
+		case "/movieListS":
+			System.out.println("정렬 하기");
+			String mSort = req.getParameter("mSort");
+			String sqlb = " ";
+			if(mSort.equals("내림차")) {
+				sqlb="DESC";
+			}
+			String genre = (String) req.getSession().getAttribute("mGenre");
+			if(genre==null) {
+				genre="";
+			}
+			System.out.println(sqlb+genre);
+			ms.movieListS(sqlb,genre);
+			break;
+			
+		case "/movieDetail":
+			System.out.println("상세페이지 요청");
+			String mIdx = req.getParameter("mIdx");
+			//req.getSession().setAttribute("mIdx", mIdx);
+			System.out.println(mIdx);
+			break;
+			
+			
+			
+			
+			
+		
 		}
+		
+		
 		
 	}
 }

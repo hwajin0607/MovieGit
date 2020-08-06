@@ -13,7 +13,10 @@
 		
 	</head>
 	<body>
-		hello
+
+		<a href="./Memberjoin.jsp">asdf</a>
+		<a href="./MemberInfo.jsp">회원정보</a>
+		
 	</body>
 	<script>
 		
