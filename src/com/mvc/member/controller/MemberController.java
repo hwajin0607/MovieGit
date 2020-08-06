@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.member.service.MemberService;
 
 
-@WebServlet({"/"})
+@WebServlet({"/l"})
 public class MemberController extends HttpServlet {
 
 	@Override
