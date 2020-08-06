@@ -1,6 +1,7 @@
 package com.mvc.movie.dto;
 
 public class MovieDto {
+
 	//private int idx;
 	private int mIdx;
 	private String mName;
@@ -23,4 +24,5 @@ public class MovieDto {
 	public void setMfUrl(String mfUrl) {
 		this.mfUrl = mfUrl;
 	}
+
 }
