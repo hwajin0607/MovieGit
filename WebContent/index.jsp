@@ -3,27 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
-	<head>
-		<meta charset="UTF-8">
-		<title>Insert title here</title>
-		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-		<style>
-			
-		</style>
-		
-	</head>
-	<body>
-
-		<a href="./Memberjoin.jsp">asdf</a>
-		<a href="./info">회원정보</a>
-		<a href="./MemberInfo.jsp">회원정보</a>
-		
-	</body>
-	<script>
-		
-	</script>
-=======
    <head>
       <meta charset="UTF-8">
       <title>Insert title here</title>
@@ -41,5 +20,4 @@
    <script>
       
    </script>
->>>>>>> b5c310a75e5f5b718994bf7760125fb8e814d373
 </html>
