@@ -24,4 +24,15 @@ public class MovieDao {
 				e.printStackTrace();
 			}
 		}
+
+	public void selectGrade() {
+		String sql = "SELECT uidx FROM movie WHERE uiden = ? AND uPw = ?";
+		
+	}
+
+	public void selectBhit() {
+		String sql = "SELECT mName, mBhit FROM (SELECT ROW_NUMBER() OVER (ORDER by midx DESC) rnum,"
+				+ " mName, mBhit FROM movie) WHERE rnum BETWEEN 1 AND 10 ORDER by mBhit DESC";
+		
+	}
 }
