@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.HashMap;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +19,26 @@ public class MemberService {
 		this.req =req;
 		this.resp =resp;
 	}
+	
+	public void login() throws Exception {
+		String id = req.getParameter("id");
+		String pw = req.getParameter("pw");
+		System.out.println(id+"/"+pw);
+		MemberDao dao = new MemberDao();
+		String page = "login.jsp";
+		String msg = "로그인에 실패하였습니다.";
+		 if( dao.login(id,pw)) {
+			 page = "main_top.jsp";
+			msg = "로그인에 성공 하였습니다.";
+			 req.getSession().setAttribute("uIdx", dao.login(id,pw));
+			 
+		 }
+		req.setAttribute("msg", msg);
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+	}
+	
+
 	
 	public void join() throws IOException {
 		boolean success = false;
@@ -76,6 +97,15 @@ public class MemberService {
 		}
 		
 	}
+
+	public void logout() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
 
 
 }

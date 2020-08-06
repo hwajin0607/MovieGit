@@ -11,7 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.movie.service.MovieService;
 
+<<<<<<< HEAD
 @WebServlet({"/a","/movieList","/movieListG","/movieListS","/movieDetail"})
+=======
+
+@WebServlet({"/","/login","/zzim","/searchResult","/delete","/a","/random"})
+
+>>>>>>> b5c310a75e5f5b718994bf7760125fb8e814d373
 public class MovieController extends HttpServlet {
 
 	@Override
@@ -25,13 +31,21 @@ public class MovieController extends HttpServlet {
 	}
 
 	private void Process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+<<<<<<< HEAD
 		
+=======
+>>>>>>> b5c310a75e5f5b718994bf7760125fb8e814d373
 		String uri = req.getRequestURI();
 		String con = req.getContextPath();
 		String addr = uri.substring(con.length());
 		System.out.println(addr);
 		RequestDispatcher dis = null;
+<<<<<<< HEAD
 		MovieService ms = new MovieService(req,resp);
+=======
+		MovieService ms = new MovieService(req, resp);
+
+>>>>>>> b5c310a75e5f5b718994bf7760125fb8e814d373
 		
 		switch (addr) {
 		
@@ -40,6 +54,7 @@ public class MovieController extends HttpServlet {
 //			dis.forward(req, resp);
 			break;
 			
+<<<<<<< HEAD
 		case "/movieList":
 			System.out.println("전체 영화목록 보여주기");
 			ms.movieList();
@@ -76,8 +91,24 @@ public class MovieController extends HttpServlet {
 			break;
 			
 			
+		case "/zzim":
+			ms.zzim();
+			break;
 			
+		case "/searchResult":
+			ms.searchResult();
+			System.out.println("1차 확인");
+			break;
 			
+		case "/delete":
+			ms.delete();
+			System.out.println("1차 확인");
+			break;
+
+		case "/random" :
+			System.out.println("뷰에서 랜덤 요청 받음");
+			ms.random();
+			break;
 			
 		
 		}
