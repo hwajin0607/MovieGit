@@ -5,7 +5,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>관리자 페이지</title>
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<style>
 			
@@ -13,7 +13,12 @@
 		
 	</head>
 	<body>
-		
+		<h2>관리자 페이지</h2>
+		<br/>
+			<input type="submit" value="회원관리" onclick="location.href='member'">
+			<input type="submit" value="영화관리" onclick="location.href='movie.jsp'">
+						<input type="submit" value="영화댓글" onclick="location.href='content?page=1&mIdx=6'">
+
 	</body>
 	<script>
 		

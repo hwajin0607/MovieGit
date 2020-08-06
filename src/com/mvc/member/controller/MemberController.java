@@ -12,36 +12,41 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.member.service.MemberService;
 
 
-@WebServlet({"/"})
+
+
+@WebServlet("/member")
+
 public class MemberController extends HttpServlet {
 
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Process(req,resp);
-	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Process(req,resp);
-	}
-
-	private void Process(HttpServletRequest req, HttpServletResponse resp) {
-		String uri = req.getRequestURI();
-		String con = req.getContextPath();
-		String addr = uri.substring(con.length());
-		System.out.println(addr);
-		RequestDispatcher dis = null;
-		MemberService ms = new MemberService();
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
 		
-		switch (addr) {
-		
-		case "/login":
-//			dis = req.getRequestDispatcher(page);
-//			dis.forward(req, resp);
-			break;
+		String search = req.getParameter("search"); // 검색어 값 , 검색어가 존재하면 검색기능 //검색어가 없으면 전체검색
+		String pageparam = req.getParameter("page");
+
+
+		int page = 1;
+		if(pageparam != null ) {
+			page = Integer.parseInt(pageparam);
 		}
-		
+		MemberService service = new MemberService();
+		req.setAttribute("list", service.list(page,search));
+		req.setAttribute("currPage", page);
+		RequestDispatcher dis = req.getRequestDispatcher("member.jsp");
+		dis.forward(req, resp);
+
 	}
+
 
 	
+	
+	
+	
 }
+
+
+	
+
+
+

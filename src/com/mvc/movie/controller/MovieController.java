@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.movie.service.MovieService;
 
-@WebServlet({"/"})
+@WebServlet({"/bvcbvc"})
 public class MovieController extends HttpServlet {
 
 	@Override
