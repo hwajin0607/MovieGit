@@ -15,7 +15,9 @@ import com.mvc.member.service.MemberService;
 
 
 
-@WebServlet({"/login","/logout","/join","/overlay","/like"})
+
+@WebServlet({"/login","/logout","/join","/overlay","/info","/changing","/infoc","/like"})
+
 public class MemberController extends HttpServlet {
 
 	@Override
@@ -88,11 +90,30 @@ public class MemberController extends HttpServlet {
 			//dis.forward(req, resp);
 			break;
 			
+
 		case "/like":
 			System.out.println("취향 요청");
 			ms.like();
 			break;
+
+		case "/info":
+			System.out.println("정보");
+			ms.info();
+
+			break;
 			
+		case "/changing":
+			System.out.println("회원상세정보");
+			ms.changing();
+
+			break;
+			
+		case "/infoc":
+			System.out.println("정보수정");
+			ms.infoc();
+
+			break;
+
 			
 		}
 		

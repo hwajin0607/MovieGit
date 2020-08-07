@@ -5,10 +5,13 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
+
+import com.mvc.member.dto.MemberDto;
 
 
 public class MemberDao {
@@ -132,8 +135,88 @@ public class MemberDao {
 		while (rs.next()) {
 			System.out.println(rs.next());
 		}
+	}
+	public MemberDto info(String uidx) throws SQLException {
+		MemberDto dto = null;
+		String sql = "select uiden, uname, ubirth, ugender, uemail  FROM member WHERE uidx = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, uidx);
+		rs = ps.executeQuery();
+		while(rs.next()) {
+			dto = new MemberDto();
+			dto.setUiden(rs.getString("uiden"));
+			dto.setUname(rs.getString("uname"));
+			dto.setuBirth(rs.getDate("ubirth"));
+			dto.setUgender(rs.getString("ugender"));
+			dto.setUemail(rs.getString("uemail"));
+		}
+		
+		return dto;
+	}
+
+	public ArrayList<String> genre(String uidx) throws SQLException {
+		String genre = "";
+		String sql = "select gGenre  FROM userGenre WHERE uidx = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, uidx);
+		rs = ps.executeQuery();
+		ArrayList<String> list = new ArrayList<String>();
+		while (rs.next()) {
+			genre = rs.getString("gGenre");
+			list.add(genre);
+		}
+		return list;
+		
+
 		
 		
+	}
+
+
+	public int infoc(String uidx, String pw, String birth, String email) throws SQLException {
+		Date d = Date.valueOf(birth);
+		System.out.println(d);
+		if(pw == null || pw.equals("")) {
+			String sql = "UPDATE member SET ubirth = ?, uemail = ? WHERE uidx = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setDate(1, d);
+			ps.setString(2, email);
+			ps.setString(3, uidx);
+		}else {
+			String sql = "UPDATE member SET upw = ?, ubirth = ?, uemail = ? WHERE uidx = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, pw);
+			ps.setDate(2, d);
+			ps.setString(3, email);
+			ps.setString(4, uidx);
+		}
+		int sc =ps.executeUpdate();
+		return sc;
+	}
+
+	public int genrec(String uidx, String[] ugenre) throws SQLException {
+		int update = 0;
+		String sql = "delete from userGenre WHERE uidx = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, uidx);
+		if(ps.executeUpdate()>0) {
+		
+			String sql2 = "INSERT INTO userGenre(gIdx, uIdx, gGenre)"
+					+ " VALUES(userGenre_seq.NEXTVAL,?,?)";
+			
+			System.out.println("cnt: "+ugenre.length);
+			
+			for(String genre : ugenre) {
+				System.out.println("추가되는 장르 : " +genre);
+				ps =conn.prepareStatement(sql2);
+				ps.setString(1, uidx);
+				ps.setString(2, genre);
+				update += ps.executeUpdate();
+			}
+		}
+		System.out.println("장르에 추가된 갯수 : "+ update);
+		
+		return update;
 	}
 
 

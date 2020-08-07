@@ -2,14 +2,19 @@ package com.mvc.member.service;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.mvc.member.dao.MemberDao;
+import com.mvc.member.dto.MemberDto;
+
+import oracle.net.ns.SessionAtts;
 
 public class MemberService {
 	HttpServletRequest req = null;
@@ -88,7 +93,6 @@ public class MemberService {
 		}
 		
 	}
-
 	public void like() throws SQLException {
 		String uIdx =  Integer.toString((int) req.getSession().getAttribute("uIdx"));
 		System.out.println("고유번호 : "+uIdx);
@@ -98,8 +102,98 @@ public class MemberService {
 		
 	}
 
+	public void info() {
+		// String uidx = (String) req.getSession().getAttribute("idx"); 나중에 세션값 저장되면 사용할것
+		String uidx = "61";
+		MemberDto info = null;
+		ArrayList<String> infoG = null;
+		MemberDao dao = new MemberDao();
+		try {
+			info = dao.info(uidx);
+			infoG =  dao.genre(uidx);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+			req.setAttribute("info", info);
+			req.setAttribute("infoG", infoG);
+			RequestDispatcher dis = req.getRequestDispatcher("MemberInfo.jsp");
+			try {
+				dis.forward(req, resp);
+			} catch (ServletException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	
+	}
 
+	public void changing() {
+		// String uidx = (String) req.getSession().getAttribute("idx"); 나중에 세션값 저장되면 사용할것
+		String uidx = "61";
+		MemberDto info = null;
+		ArrayList<String> infoG = null;
+		MemberDao dao = new MemberDao();
+		try {
+			info = dao.info(uidx);
+			infoG =  dao.genre(uidx);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+			req.setAttribute("info", info);
+			req.setAttribute("infoG", infoG);
+			RequestDispatcher dis = req.getRequestDispatcher("MemberChanging.jsp");
+			try {
+				dis.forward(req, resp);
+			} catch (ServletException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
 
+	public void infoc() throws IOException {
+		// String uidx = (String) req.getSession().getAttribute("idx"); 나중에 세션값 저장되면 사용할것
+		boolean success = false;
+		String uidx = "61";
+		String pw = req.getParameter("pw");
+		String birth = req.getParameter("birth");
+		String email = req.getParameter("email");
+		String[] ugenre = req.getParameterValues("ugenre[]");
+		System.out.println(pw+birth+email);
+		MemberDao dao = new MemberDao();
+		int sc = 0;
+		try {
+			sc = dao.infoc(uidx,pw,birth,email);
+			
+			if(ugenre.length > 0) {
+				dao.genrec(uidx,ugenre);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			if(sc>0) {
+				success = true;
+			}
+			map.put("overlay", success);
+			Gson gson = new Gson();
+			String obj =  gson.toJson(map);
+			System.out.println("result : " + obj);
+			resp.getWriter().println(obj);
+		}
+			
+		
+		
+	}
+	
 
 
 
