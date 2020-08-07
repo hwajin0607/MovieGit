@@ -20,28 +20,16 @@ public class MemberService {
 		this.resp =resp;
 	}
 	
-	public void login() throws Exception {
-		String id = req.getParameter("id");
-		String pw = req.getParameter("pw");
-		System.out.println(id+"/"+pw);
+	public int login(String id, String pw) throws Exception {
 		MemberDao dao = new MemberDao();
-		String page = "login.jsp";
-		String msg = "로그인에 실패하였습니다.";
-		 if( dao.login(id,pw)) {
-			 page = "main_top.jsp";
-			msg = "로그인에 성공 하였습니다.";
-			 req.getSession().setAttribute("uIdx", dao.login(id,pw));
-			 
+		int useridx = dao.login(id,pw);
+		 if(useridx != 0) {
+			 System.out.println(id+" 의 로그인 결과 : "+useridx); 
 		 }
-		req.setAttribute("msg", msg);
-		RequestDispatcher dis = req.getRequestDispatcher(page);
-		dis.forward(req, resp);
+		 return useridx;
+
 	}
 	
-	public void logout() {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	public void join() throws IOException {
 		boolean success = false;
@@ -98,6 +86,15 @@ public class MemberService {
 			System.out.println("result : " + obj);
 			resp.getWriter().println(obj);
 		}
+		
+	}
+
+	public void like() throws SQLException {
+		String uIdx =  Integer.toString((int) req.getSession().getAttribute("uIdx"));
+		System.out.println("고유번호 : "+uIdx);
+		MemberDao dao = new MemberDao();
+		dao.like(uIdx);
+		
 		
 	}
 
