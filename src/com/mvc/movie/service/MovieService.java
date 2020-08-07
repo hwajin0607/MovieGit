@@ -140,4 +140,16 @@ public class MovieService {
 		dao.selectBhit();
 	}
 
+	//영화 상세페이지에 내용 띄우기
+	public void movieDetail(String mIdx) throws ServletException, IOException {
+		System.out.println("서비스에게 일을 시킨다.");
+		MovieDao dao = new MovieDao();
+		ArrayList<MovieDto>list = dao.movieDetail(mIdx);
+		System.out.println(list);
+		req.setAttribute("list", list);
+		RequestDispatcher dis = req.getRequestDispatcher("movie_detail.jsp");
+		dis.forward(req, resp);
+		dao.resClose();
+	}
+
 }

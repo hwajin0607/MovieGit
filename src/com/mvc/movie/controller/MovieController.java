@@ -82,6 +82,7 @@ public class MovieController extends HttpServlet {
 			String mIdx = req.getParameter("mIdx");
 			//req.getSession().setAttribute("mIdx", mIdx);
 			System.out.println(mIdx);
+			ms.movieDetail(mIdx);
 			break;
 			
 			
@@ -100,7 +101,7 @@ public class MovieController extends HttpServlet {
 			break;
 
 		case "/random" :
-			System.out.println("뷰에서 랜덤 요청 받음");
+			System.out.println("랜덤으로 가져오기");
 			ms.random();
 			break;
 			

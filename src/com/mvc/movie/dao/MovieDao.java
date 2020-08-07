@@ -76,6 +76,7 @@ public class MovieDao {
 			e.printStackTrace();
 		}	
 	}
+	
 	//장르별 영화 보여주기
 	public ArrayList<MovieDto> movieListG(String mGenre) throws SQLException {
 		int z = 0;
@@ -103,6 +104,7 @@ public class MovieDao {
 		System.out.println(z);
 		return list;
 	}
+	
 	//정렬
 	public ArrayList<MovieDto> movieListS(String sqlb, String genre) throws SQLException {
 		if(genre.equals("")||genre==null) {
@@ -151,7 +153,7 @@ public class MovieDao {
 			
 			while(rs.next()) {
 				MovieDto dto = new MovieDto();
-				dto.setMidx(rs.getInt("midx"));
+				dto.setmIdx(rs.getInt("midx"));
 				dto.setZidx(rs.getInt("zidx"));
 				dto.setZdate(rs.getDate("zdate"));
 				list.add(dto);
@@ -221,6 +223,40 @@ public class MovieDao {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	
+	public ArrayList<MovieDto> movieDetail(String mIdx) {
+		System.out.println("dao 일 시키기");
+		String sql = "select DISTINCT m.mIdx, m.mName, m.mGenre, m.mUrl, m.mAge, m.mContent, d.mddirector, a.maactor, f.mfurl "
+				+ "FROM Movie m, moviedirector d, movieactor a, moviefoster f where m.mIdx = ?";
+		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mIdx);
+			rs = ps.executeQuery();
+			boolean su = rs.next();
+			while(su) {
+				MovieDto dto = new MovieDto();
+//				dto.setmIdx(rs.getInt("mIdx"));
+				dto.setmName(rs.getString("mName"));
+				dto.setmGenre(rs.getString("mGenre"));
+				dto.setmUrl(rs.getString("mUrl"));
+				dto.setmAge(rs.getInt("mAge"));
+				dto.setmContent(rs.getString("mContent"));
+				dto.setMdDirector(rs.getString("mddirector"));
+				dto.setMaactor(rs.getString("maactor"));
+				dto.setMfUrl(rs.getString("mfurl"));
+				System.out.println(dto.getmIdx()+"/"+dto.getmName()+"/"+dto.getmGenre()+"/"+dto.getmUrl()+"/"+dto.getmAge()+"/"+dto.getmContent()+"/"
+						+dto.getMdDirector() +"/"+ dto.getMaactor() +"/"+ dto.getMfUrl());
+				su = false;
+				list.add(dto);
+			}
+			System.out.println("값을 가져오기");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			return list;
 	}
 	
 

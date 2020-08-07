@@ -13,15 +13,13 @@ public class MovieDto {
 	private int mAge;
 	private String mContent;
 	private String mfUrl;
-	
 	private int zidx;
-	
 	private int uidx;
-	
-	private int midx;
-	
 	private Date zdate;
+	private String mdDirector;
+	private String maactor;
 
+	
 	public int getmIdx() {
 		return mIdx;
 	}
@@ -118,14 +116,6 @@ public class MovieDto {
 		this.uidx = uidx;
 	}
 
-	public int getMidx() {
-		return midx;
-	}
-
-	public void setMidx(int midx) {
-		this.midx = midx;
-	}
-
 	public Date getZdate() {
 		return zdate;
 	}
@@ -133,6 +123,26 @@ public class MovieDto {
 	public void setZdate(Date zdate) {
 		this.zdate = zdate;
 	}
+
+
+
+	public String getMaactor() {
+		return maactor;
+	}
+
+	public void setMaactor(String maactor) {
+		this.maactor = maactor;
+	}
+
+	public String getMdDirector() {
+		return mdDirector;
+	}
+
+	public void setMdDirector(String mdDirector) {
+		this.mdDirector = mdDirector;
+	}
+
+
 
 
 }
