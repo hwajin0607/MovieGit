@@ -33,64 +33,64 @@
 	</head>
 	<body>
 	<!-- 성공하면 index로 실패하면 joinProc -->
-		<form action="chang" method="get">
+		<form action="/info" method="get">
 			<table>
 				<tr>
 					<th colspan="2"><h3>회원 정보 수정</h3></th> 		
 				</tr>
 				<tr>
 					<th>ID</th> 		
-					<td>id값
+					<td>${info.uiden}
                     </td>
 				</tr>
 				<tr>
 					<th>PW</th> 		
-					<td><input type="password" name="PW"/>
+					<td><input type="password" name="uPw"/>
                     </td>
 				</tr>
 				<tr>
 					<th>이름</th> 		
-					<td>이름값</td>
+					<td>${info.uname}</td>
 				</tr>
 				<tr>
 					<th>생일</th> 		
-					<td>생일 값</td>
+					<td><input type="text" name="ubirth" value="${info.uBirth}" /></td>
 				</tr>
 				<tr>
 					<th>성별</th> 		
-					<td>성별값</td>
+					<td>${info.ugender}</td>
 				</tr>
 				<tr>
 					<th>E-mail</th> 		
-					<td><input type="text" name="mail" value="기존 이메일 값"/></td>
+					<td><input type="text" name="uemail" value="${info.uemail}"/></td>
 				</tr>
 				<tr>
 					<th>취향</th> 		
 					<td>
-					<input type="checkbox" name="genre" onClick='count_ck(this)' value="애니메이션"/> 애니메이션
-					<input type="checkbox" name="genre" onClick='count_ck(this)' value="액션"/> 액션
-					<input type="checkbox" name="genre" onClick='count_ck(this)' value="SF/판타지"/> SF/판타지<br/>
-					<input type="checkbox" name="genre" onClick='count_ck(this)' value="로맨스/코미디"/> 로맨스/코미디
-					<input type="checkbox" name="genre" onClick='count_ck(this)' value="드라마/다큐"/> 드라마/다큐 
-					<input type="checkbox" name="genre" onClick='count_ck(this)' value="스릴러/공포" /> 스릴러/공포<br/></td>
+						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="애니메이션"/> 애니메이션
+						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="액션"/> 액션
+						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="SF/판타지"/> SF/판타지<br/>
+						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="로맨스/코미디"/> 로맨스/코미디
+						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="드라마/다큐"/> 드라마/다큐 
+						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="스릴러/공포" /> 스릴러/공포<br/>
+					</td>
 				</tr>
 				<tr>
 					<th colspan="2" align ="center">
-						<button  onclick="value_check()"><b>저장하기</b></button>
+						<input type="button" id="Changing" value="정보수정"/>
 					</th> 			
 				</tr>
 			</table>
 		</form>
 	</body>
 	<script>
-	var genre = new Array();
-    var str=null;
 	function count_ck(obj){
-		var chkbox = document.getElementsByName("genre");
+		var chkbox = document.getElementsByName("ugenre");
 		var chkCnt = 0;
 		for(var i=0;i<chkbox.length; i++){
 			if(chkbox[i].checked){
 				chkCnt++;
+				console.log(chkCnt);
 			}
 		}
 		if(chkCnt>3){
@@ -99,25 +99,50 @@
 			return false;
 		}
 	}
-    
-    function value_check() {
-        var check_count = document.getElementsByName("genre").length;
-        console.log(check_count);
-        for (var i=0; i<check_count; i++) {
-            if (document.getElementsByName("genre")[i].checked == true) {
-            	genre[i]=(document.getElementsByName("genre")[i].value);
-                if(genre[i]!=""){
-                    if(str == null){
-                        str = genre[i]+",";
-                    }else{
-                        str += genre[i]+",";
-                    }
-                }
-            }
 
-        }
-        console.log(str);
-    }
+	var checkArr=[];
 
+
+	$("#Changing").click(function(){
+			var $pw = $('input[name="uPw"]');
+			var $birth = $('input[name="ubirth"]');
+			var $email = $('input[name="uemail"]');
+			$('input[type="checkbox"]:checked').each(function(idx,item){
+				checkArr.push($(this).val());	
+			});
+			if($birth.val() == ""){
+				alert("생년월일를 넣어 주세요.");
+				$age.focus();
+			}else if($email.val() == ""){
+				alert("메일 주소를 입력 해 주세요.");		
+				$email.focus();
+			}else{
+				console.log('서버로 전송');
+				$.ajax({
+					type:"post",
+					url:"infoc",
+					data:{
+						"pw" : $pw.val(),	
+						"birth" : $birth.val(),
+						"email" : $email.val(),
+						"ugenre" : checkArr
+						},
+					dataType:"JSON",
+					success:function(data){
+						console.log(data);
+						if(data.overlay){
+							alert("회원 정보가 수정되었습니다.");
+							location.href="./info";
+						}else{
+							alert("회원 정보가 수정 실패되었습니다.");
+							location.href="./changing";
+						}
+					},
+					error:function(error){
+						console.log(error);
+					}				
+				});
+			}
+	});
 	</script>
 </html>

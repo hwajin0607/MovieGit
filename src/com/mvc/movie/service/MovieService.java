@@ -1,17 +1,19 @@
 package com.mvc.movie.service;
 
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mvc.movie.dao.MovieDao;
-
 import com.mvc.movie.dto.MovieDto;
+
 
 public class MovieService {
 		HttpServletRequest req = null;
@@ -169,6 +171,28 @@ public class MovieService {
 			dis.forward(req, resp);
 			dao.resClose();
 		}
+	}
+
+	public void selectGrade() {
+		MovieDao dao = new MovieDao();
+		dao.selectGrade();
+	}
+
+	public void selectBhit() {
+		MovieDao dao = new MovieDao();
+		dao.selectBhit();
+	}
+
+	//영화 상세페이지에 내용 띄우기
+	public void movieDetail(String mIdx) throws ServletException, IOException {
+		System.out.println("서비스에게 일을 시킨다.");
+		MovieDao dao = new MovieDao();
+		ArrayList<MovieDto>list = dao.movieDetail(mIdx);
+		System.out.println(list);
+		req.setAttribute("list", list);
+		RequestDispatcher dis = req.getRequestDispatcher("movie_detail.jsp");
+		dis.forward(req, resp);
+		dao.resClose();
 	}
 
 }

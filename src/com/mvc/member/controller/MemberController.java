@@ -10,10 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mvc.member.dao.MemberDao;
 import com.mvc.member.service.MemberService;
 
 
-@WebServlet({"/login","/logout","/join","/overlay"})
+
+
+@WebServlet({"/login","/logout","/join","/overlay","/info","/changing","/infoc","/like"})
+
 public class MemberController extends HttpServlet {
 
 	@Override
@@ -51,12 +55,28 @@ public class MemberController extends HttpServlet {
 		
 		case "/login":
 			System.out.println("로그인 요청");
-			ms.login();
+			String id = req.getParameter("id");
+			String pw = req.getParameter("pw");
+			System.out.println(id+"/"+pw);
+			String page = "login.jsp";
+			String msg = "로그인에 실패 하였습니다.";
+			 if( ms.login(id,pw) != 0) {
+				 page = "main_top.jsp";
+				 msg = "로그인에 성공 하였습니다.";
+				 req.getSession().setAttribute("uIdx", ms.login(id,pw));
+				 req.getSession().setAttribute("loginId", id);
+				 
+			 }
+			req.setAttribute("msg", msg);
+			dis = req.getRequestDispatcher(page);
+			dis.forward(req, resp);
+
 			break;
 			
 		case "/logout":
-			System.out.println("로그아웃 요청");
-			ms.logout();
+			req.getSession().removeAttribute("loginId");
+			
+			resp.sendRedirect("login.jsp");
 			break;
 		
 		case "/join":
@@ -70,6 +90,30 @@ public class MemberController extends HttpServlet {
 			//dis.forward(req, resp);
 			break;
 			
+
+		case "/like":
+			System.out.println("취향 요청");
+			ms.like();
+			break;
+
+		case "/info":
+			System.out.println("정보");
+			ms.info();
+
+			break;
+			
+		case "/changing":
+			System.out.println("회원상세정보");
+			ms.changing();
+
+			break;
+			
+		case "/infoc":
+			System.out.println("정보수정");
+			ms.infoc();
+
+			break;
+
 
 			
 		}

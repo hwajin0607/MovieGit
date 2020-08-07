@@ -12,19 +12,22 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.movie.service.MovieService;
 
 
-@WebServlet({"/zzim","/searchResult","/delete","/random","/a","/movieList","/movieListG","/movieListS","/movieDetail","/myPageZ"})
+
+@WebServlet({"/","/zzim","/searchResult","/delete","/random","/a","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/myPageZ"})
 
 
 public class MovieController extends HttpServlet {
-
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Process(req,resp);
+		req.setCharacterEncoding("UTF-8");
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Process(req,resp);
+		req.setCharacterEncoding("UTF-8");
 	}
 
 	private void Process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,11 +37,17 @@ public class MovieController extends HttpServlet {
 		String addr = uri.substring(con.length());
 		System.out.println(addr);
 		RequestDispatcher dis = null;
-
-		MovieService ms = new MovieService(req, resp);
-
+		MovieService ms = new MovieService(req,resp);
 		
 		switch (addr) {
+
+		case "/selectBhit":
+			ms.selectBhit();
+			break;
+			
+		case "/selectGrade":
+			ms.selectGrade();
+			break;
 			
 		case "/movieList":
 			System.out.println("전체 영화목록 보여주기");
@@ -75,6 +84,7 @@ public class MovieController extends HttpServlet {
 			String mIdx = req.getParameter("mIdx");
 			//req.getSession().setAttribute("mIdx", mIdx);
 			System.out.println(mIdx);
+			ms.movieDetail(mIdx);
 			break;
 			
 			
@@ -93,7 +103,7 @@ public class MovieController extends HttpServlet {
 			break;
 
 		case "/random" :
-			System.out.println("뷰에서 랜덤 요청 받음");
+			System.out.println("랜덤으로 가져오기");
 			ms.random();
 			break;
 			
