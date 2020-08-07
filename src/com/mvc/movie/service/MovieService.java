@@ -28,13 +28,25 @@ public class MovieService {
 	public void movieList() throws ServletException, IOException {
 		ArrayList<MovieDto> list = null;
 		MovieDao dao = new MovieDao();
+		
+		String pageParam = req.getParameter("page");
+		int page = 1;
+		if(pageParam != null) {
+			page = Integer.parseInt(pageParam);
+			
+			if(page == 0) {
+				page = 1;
+			}
+		}
+		
 		try {
-			list = dao.movieList();
+			list = dao.movieList(page);
 			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}finally {
+			req.setAttribute("currPage", page);
 			req.setAttribute("movieList", list);
 			RequestDispatcher dis = req.getRequestDispatcher("movieList.jsp");
 			dis.forward(req, resp);
@@ -44,17 +56,29 @@ public class MovieService {
 	}
 	
 	//장르별 영화 목록
-	public void movieListG(String mGenre) throws ServletException, IOException {
+	public void movieListG(String mGenre,int page) throws ServletException, IOException {
 		System.out.println(mGenre);
 		ArrayList<MovieDto> list = null;
 		MovieDao dao = new MovieDao();
+		
+		String pageParam = req.getParameter("page");
+		page = 1;
+		if(pageParam != null) {
+			page = Integer.parseInt(pageParam);
+			
+			if(page == 0) {
+				page = 1;
+			}
+		}
+		
 		try {
-			list = dao.movieListG(mGenre);
+			list = dao.movieListG(mGenre,page);
 			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}finally {
+			req.setAttribute("currPage", page);
 			req.setAttribute("movieList", list);
 			RequestDispatcher dis = req.getRequestDispatcher("movieList.jsp");
 			dis.forward(req, resp);
@@ -126,6 +150,25 @@ public class MovieService {
 			RequestDispatcher dis = req.getRequestDispatcher("main_bottom.jsp");
 			dis.forward(req, resp);
 			dao.resClose();
+	}
+	
+	//마이페이지 찜목록
+	public void myPageZ() throws ServletException, IOException {
+		ArrayList<MovieDto> list = null;
+		String uIdx = "61";
+		MovieDao dao = new MovieDao();
+		try {
+			list = dao.myPageZ(uIdx);
+			dao.myPageM(list);
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}finally {
+			req.setAttribute("myPageZ", list);
+			RequestDispatcher dis = req.getRequestDispatcher("myPage.jsp");
+			dis.forward(req, resp);
+			dao.resClose();
+		}
 	}
 
 }

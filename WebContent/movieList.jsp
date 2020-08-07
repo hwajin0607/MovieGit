@@ -101,9 +101,24 @@
     
     .mList{
     	position: absolute;
+    
+
     	top: 40%;
         left: 20%;
+        
     }
+        img{
+        max-width: 60px;
+        max-height: 60px;
+    }
+    #zzim{
+    	position : absolute;
+    	top: 30%;
+    	left: 80%;
+    }
+ 	.pageArea{
+		margin: 10px;
+	}
 
   
 </style>
@@ -140,6 +155,20 @@
         </br>
         <!-- 영화목록보여주기 -->
         <div class="mList">
+        <table>
+        	<tr>
+        	<c:forEach items="${movieList }" var="mlist"> 
+				<td><a href="./movieDetail?mIdx=${mlist.mIdx }">${mlist.mIdx }</a></td>
+			</c:forEach>
+			</tr>
+		
+		</table>
+		<div class="pageArea">
+			<a href="./movieList?=${currPage+1}" id="more">더보기</a>
+		</div>
+		</div>
+        
+        <%-- <div class="mList">
         <c:set var="i" value="0" /> 
         <c:set var="j" value="4" /> 
         <table > 
@@ -151,7 +180,7 @@
         </c:forEach> 
         </table>
         <a href="#" id="more">더보기</a>
-        </div>
+        </div>  --%>
         
 
 <!-- 영화리스트 vsc -->
@@ -167,6 +196,7 @@
     </div>
 </body>
 <script>
+
     
 /*         $("#more").click(function(){
             

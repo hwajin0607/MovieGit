@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.movie.service.MovieService;
 
 
-@WebServlet({"/","/login","/zzim","/searchResult","/delete","/random","/a","/movieList","/movieListG","/movieListS","/movieDetail"})
+@WebServlet({"/zzim","/searchResult","/delete","/random","/a","/movieList","/movieListG","/movieListS","/movieDetail","/myPageZ"})
 
 
 public class MovieController extends HttpServlet {
@@ -39,23 +39,20 @@ public class MovieController extends HttpServlet {
 
 		
 		switch (addr) {
-		
-		case "/login":
-//			dis = req.getRequestDispatcher(page);
-//			dis.forward(req, resp);
-			break;
 			
 		case "/movieList":
 			System.out.println("전체 영화목록 보여주기");
+			req.getSession().setAttribute("mGenre", "");
 			ms.movieList();
 			break;
 			
 		case "/movieListG":
 			System.out.println("장르별 영화 보여주기");
 			String mGenre = req.getParameter("mGenre");
+			int page = 0;
 			req.getSession().setAttribute("mGenre", mGenre);
 			System.out.println(mGenre);
-			ms.movieListG(mGenre);
+			ms.movieListG(mGenre,page);
 			break;
 			
 		case "/movieListS":
@@ -98,6 +95,12 @@ public class MovieController extends HttpServlet {
 		case "/random" :
 			System.out.println("뷰에서 랜덤 요청 받음");
 			ms.random();
+			break;
+			
+		case "/myPageZ":
+			System.out.println("마이페이지 찜목록 두개 보여주기");
+			ms.myPageZ();
+
 			break;
 			
 		
