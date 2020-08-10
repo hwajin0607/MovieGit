@@ -1,6 +1,7 @@
 package com.mvc.movie.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -42,11 +43,21 @@ public class MovieController extends HttpServlet {
 		switch (addr) {
 		
 		case "/selectBhit":
-			ms.selectBhit();
+			try {
+				ms.selectBhit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 			
 		case "/selectGrade":
-			ms.selectGrade();
+			try {
+				ms.selectGrade();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 			
 		case "/movieList":

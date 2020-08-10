@@ -13,6 +13,7 @@ public class MovieDto {
 	private int mAge;
 	private String mContent;
 	private String mfUrl;
+	private String mravg;
 	
 	private int zidx;
 	
@@ -132,6 +133,14 @@ public class MovieDto {
 
 	public void setZdate(Date zdate) {
 		this.zdate = zdate;
+	}
+
+	public String getMravg() {
+		return mravg;
+	}
+
+	public void setMravg(String mravg) {
+		this.mravg = mravg;
 	}
 
 

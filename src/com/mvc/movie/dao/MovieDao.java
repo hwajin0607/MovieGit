@@ -29,15 +29,34 @@ public class MovieDao {
 			}
 		}
 
-	public void selectGrade() {
-		String sql = "SELECT uidx FROM movie WHERE uiden = ? AND uPw = ?";
+	public ArrayList<MovieDto> selectGrade() throws SQLException {
+		String sql = "SELECT m.midx, ROUND(avg(r.mrrating),2) mravg FROM (SELECT ROW_NUMBER() OVER (ORDER by m.midx DESC) rnum, midx FROM movie m) m ,"
+				+ "movieRating r where m.midx = r.midx AND r.midx BETWEEN 1 AND 10 GROUP by m.midx ORDER by mravg DESC";
+		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
+		ps = conn.prepareStatement(sql);
+		rs = ps.executeQuery();
+		while(rs.next()) {
+			MovieDto dto = new MovieDto();
+			dto.setmIdx(rs.getInt("mIdx"));
+			dto.setMravg(rs.getString("mravg"));
+			list.add(dto);
+		}
+		return list;
 		
 	}
 
-	public void selectBhit() {
+	public ArrayList<MovieDto> selectBhit() throws SQLException {
 		String sql = "SELECT mName, mBhit FROM (SELECT ROW_NUMBER() OVER (ORDER by midx DESC) rnum,"
 				+ " mName, mBhit FROM movie) WHERE rnum BETWEEN 1 AND 10 ORDER by mBhit DESC";
-		
+		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
+		ps = conn.prepareStatement(sql);
+		rs = ps.executeQuery();
+		while(rs.next()) {
+			MovieDto dto = new MovieDto();
+			dto.setmName(rs.getString("mName"));
+			list.add(dto);
+		}
+		return list;
 	}
 	
     //전체영화목록	
@@ -222,6 +241,12 @@ public class MovieDao {
 		}
 		return list;
 	}
+
+	public void grademName(ArrayList<MovieDto> list) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 
 }

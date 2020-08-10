@@ -151,7 +151,7 @@
 </style>
 </head>
 <body>
-    <div class="header"><a href="main_top.jsp"><img id="logo" src="logo.png"/></a>
+    <div class="header"><img id="logo" src="MovieGit/WebContent/logo.png "/><a href="main_top.jsp"></a>
         <div id="search"><img id="search2" src="search.png"/></div>
         <div id="allmenu"><a href="">전체 메뉴</a></div>
         <div id="mypage"><a href="">마이페이지</a></div>
@@ -161,36 +161,18 @@
     <div class="recommend">
         <div id="recommendmovie">Recommend Movie</div>
         <ul class="alllist">
-            <a href=""><li class="list">극한직업</li></a><div class="heart"></div>
-            <a href=""><li class="list">기생충</li></a><div class="heart"></div>
-            <a href=""><li class="list">독전</li></a><div class="heart"></div>
-            <a href=""><li class="list">백두산</li></a><div class="heart"></div>
+            <a href="#"><li class="list">극한직업</li></a><div class="heart"></div>
+            <a href="#"><li class="list">기생충</li></a><div class="heart"></div>
+            <a href="#"><li class="list">독전</li></a><div class="heart"></div>
+            <a href="#"><li class="list">백두산</li></a><div class="heart"></div>
         </ul>
-        <!-- <ul class="alllist2">
-            <a href=""><li class="list">ㅂ</li></a>
-            <a href=""><li class="list">ㅈ</li></a>
-            <a href=""><li class="list">ㄷ</li></a>
-            <a href=""><li class="list">ㄱ</li></a>
-        </ul> -->
+
     </div>
     <div class="sidebar">
         <div id="sid1"><a href="">찜목록</a></div>
     </div>
 </body>
 <script>
-var msg = "${msg}";
-if(msg!=""){
-	alert(msg);
-}
-
-$(document).ready(function() {
-
-    $("#search").click(function(){
-        $(".panel").css({"display":"block"});
-    });
-
-    });
-
 
 </script>
 

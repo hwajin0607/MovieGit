@@ -130,14 +130,24 @@ public class MovieService {
 			dao.resClose();
 	}
 
-	public void selectGrade() {
+	public void selectGrade() throws SQLException, ServletException, IOException {	
 		MovieDao dao = new MovieDao();
-		dao.selectGrade();
+		ArrayList<MovieDto>list =dao.selectGrade();
+		dao.grademName(list);
+		req.setAttribute("list", list);
+		RequestDispatcher dis = req.getRequestDispatcher("select.jsp");
+		dis.forward(req, resp);
+		dao.resClose();
 	}
 
-	public void selectBhit() {
+	public void selectBhit() throws SQLException, ServletException, IOException {
 		MovieDao dao = new MovieDao();
-		dao.selectBhit();
+		ArrayList<MovieDto>list = dao.selectBhit();
+		req.setAttribute("list", list);
+		RequestDispatcher dis = req.getRequestDispatcher("select.jsp");
+		dis.forward(req, resp);
+		dao.resClose();
+
 	}
 
 }
