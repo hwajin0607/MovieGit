@@ -167,6 +167,7 @@
         <div id="login"></div>
         <div id="logout"><a href="logout">로그아웃</a></div>
     </div>
+    
     <div class="panel"><a href="like">검색창</a></div>
     <div class="recommend">
         <div id="recommendmovie">Recommend Movie</div>
