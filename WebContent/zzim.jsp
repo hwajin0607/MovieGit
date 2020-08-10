@@ -157,16 +157,7 @@
 
 	</body>
 	<script>
-        $("#add").click(function(){
-            $(".Wishlist").append("<li class='mo' id='next'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img idS='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo' id='next'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
-        });
+        
         
         $("#close").click(function(){
         	$(list).remove("${result}");
