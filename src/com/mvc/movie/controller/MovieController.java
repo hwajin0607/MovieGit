@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.movie.service.MovieService;
 
 
-@WebServlet({"/","/login","/zzim","/searchResult","/delete","/a","/random"})
+@WebServlet({"/zzim","/searchResult","/search","/random","/del"})
 
 public class MovieController extends HttpServlet {
 
@@ -51,19 +51,24 @@ public class MovieController extends HttpServlet {
 			System.out.println("1차 확인");
 			break;
 			
-		case "/delete":
-			ms.delete();
-			System.out.println("1차 확인");
+		case "/search":
+			ms.search();
+			System.out.println("1차 검색확인");
 			break;
 
-		case "/random" :
+		case "/random":
 			System.out.println("뷰에서 랜덤 요청 받음");
 			ms.random();
 			break;
-			
-		case "/movieDetail":
-			
+		
+		//찜 목록 삭제
+		case "/del":
+			System.out.println("찜 목록에서 삭제 요청");
+			String idx = req.getParameter("idx");
+			System.out.println("DEL idx : " + idx);
+			ms.del();
 			break;
+			
 		
 		}
 		

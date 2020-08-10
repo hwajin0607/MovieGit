@@ -154,7 +154,7 @@
     <div class="header"><a href="main_top.jsp"><img id="logo" src="logo.png"/></a>
         <div id="search"><img id="search2" src="search.png"/></div>
         <div id="allmenu"><a href="">전체 메뉴</a></div>
-        <div id="mypage"><a href="">마이페이지</a></div>
+        <div id="mypage"><a href="myPage.jsp">마이페이지</a></div>
         <div id="logout"><a href="login.jsp">로그아웃</a></div>
     </div>
     <div class="panel">검색창</div>

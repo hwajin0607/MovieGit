@@ -30,19 +30,23 @@ public class MovieDao {
 		}
 	//찜 목록 리스트
 	public ArrayList<MovieDto> list(String uidx) {
-		String sql ="SELECT zidx,midx,zdate FROM zzim WHERE uidx = ? ORDER BY zidx DESC";
+		String sql ="SELECT DISTINCT mo.mName, z.uidx, z.midx, m.mfurl FROM movie mo,zzim z,(SELECT m.midx, f.mfidx,f.mfurl FROM movie m, moviefoster f WHERE m.midx = f.midx) m WHERE mo.midx = z.midx and z.uidx =?";
 		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, uidx);
 			rs = ps.executeQuery();
-			
 			while(rs.next()) {
 				MovieDto dto = new MovieDto();
+				dto.setUidx(rs.getInt("uidx"));
 				dto.setMidx(rs.getInt("midx"));
-				dto.setZidx(rs.getInt("zidx"));
-				dto.setZdate(rs.getDate("zdate"));
+				dto.setMfUrl(rs.getString("mfurl"));
+				dto.setmName(rs.getString("mName"));
 				list.add(dto);
+				
+				System.out.println(dto.getmName());
+				System.out.println(dto.getMidx());
+				System.out.println(dto.getMfUrl());
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,25 +68,31 @@ public class MovieDao {
 	}
 	
 	//검색 목록 리스트
-	public ArrayList<MovieDto> srlist(String mName, String mGenre) {
+	public ArrayList<MovieDto> srlist(String mName) {
 		ArrayList<MovieDto> srlist = new ArrayList<MovieDto>();
-		String sql = "SELECT mName,mOpen,mGenre,mUrl,mAge FROM movie WHERE mName = ? OR mGenre=?";
+		String sql ="SELECT distinct m.midx, m.mName, m.mGenre, d.mdDirector, a.maActor, m.mUrl, m.mAge, m.mOpen" 
+					+"FROM movie m, movieDirector d, movieActor a"
+					+"where m.midx = d.midx and d.midx = a.midx and a.maActor = ? or d.mdDirector = ? or m.mName = ?  or m.mGenre = ?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1,mName);
-			ps.setString(2, mGenre);
+			ps.setString(2, mName);
+			ps.setString(3, mName);
+			ps.setString(4, mName);
 			rs = ps.executeQuery();
 			System.out.println("2차 확인");
 			
 			while(rs.next()) {
 				MovieDto dto = new MovieDto();
+				dto.setMidx(rs.getInt("midx"));
+				dto.setmaActor(rs.getString("maActor"));
 				dto.setmName(rs.getString("mName"));
 				dto.setmOpen(rs.getDate("mOpen"));
 				dto.setmGenre(rs.getString("mGenre"));
 				dto.setmUrl(rs.getString("mUrl"));
-				
 				dto.setmAge(rs.getInt("mAge"));
+				dto.setmdDirector(rs.getString("mdDirector"));
 				srlist.add(dto);
 				System.out.println("3차 확인");
 			}
@@ -119,5 +129,52 @@ public class MovieDao {
 		}
 		return list;
 	}
+	public ArrayList<MovieDto> slist(String mName, String mGenre, String mdDirector, String maActor) {
+		boolean result = false;
+		String sql = "SELECT mName,mOpen,mGenre,mUrl,mBhit,mContent,mdDirector,mfUrl FROM Movie, movieDirector, movieActor, movieFoster"
+						+"WHERE mName=? OR mGenre=? OR mdDirector=? OR maActor=?";
+		ArrayList<MovieDto> slist = new ArrayList<MovieDto>();
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, mName);
+			ps.setString(2, mGenre);
+			ps.setString(3, mdDirector);
+			ps.setString(4, maActor);
+			rs=ps.executeQuery();
+			result = rs.next();
+			while(result) {
+				MovieDto dto = new MovieDto();	
+				dto.setmName(rs.getString("mName"));
+				dto.setmGenre(rs.getString("mGenre"));
+				dto.setmdDirector(rs.getString("mdDirector"));
+				dto.setmaActor(rs.getString("maActor"));
+				result = false;
+				System.out.println("점검 : " + dto.getmName()+ dto.getmGenre()+ dto.getmdDirector()+ dto.getmaActor());
+				slist.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return slist;
+	}
+	public boolean del(String uidx) {
+		String sql = "DELETE FROM zzim WHERE uidx=?";
+		boolean result = false;
+		try {
+			ps=conn.prepareStatement(sql);
+			ps.setString(1, uidx);
+			int success =ps.executeUpdate();
+			if(success>0) {
+				result=true;
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			resClose();
+		}
+		return result;
+	}
+	
 	
 }

@@ -30,6 +30,10 @@ public class MovieDto {
 	private Date mDate;
 	
 	private int mAge;
+	
+	private String mdDirector;
+	
+	private String maActor;
 
 	public int getZidx() {
 		return zidx;
@@ -131,6 +135,22 @@ public class MovieDto {
 	}
 	public void setMfUrl(String mfUrl) {
 		this.mfUrl = mfUrl;
+	}
+
+	public String getmdDirector() {
+		return mdDirector;
+	}
+
+	public void setmdDirector(String mdDirector) {
+		this.mdDirector = mdDirector;
+	}
+
+	public String getmaActor() {
+		return maActor;
+	}
+
+	public void setmaActor(String maActor) {
+		this.maActor = maActor;
 	}
 
 }
