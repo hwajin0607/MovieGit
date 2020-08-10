@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core"%>   
 <%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
 <html>
     <head>
 		<meta charset="utf-8">
@@ -222,31 +221,33 @@
         </style>	
     </head>
     <body>
-        <div id="ready">
-            <div id="post" onclick="location.href='#'">
-                영화 재생
-            </div>
-            <div id="age">
-                연령
-            </div>
-            <div id="title">
-                제목
-            </div>
-            <div id="heart">찜</div>
-            <div id="movie">
-                <div id="m1">장르</div>
-                <div id="m2">감독</div>
-                <div id="bar1"></div>
-                <div id="bar2"></div>
-                <div id="m3">내용</div>
-            </div>
-            <div id="pj">평점</div>
-        </div>
+    	<c:forEach items="${list}" var="mms">
+	        <div id="ready">
+	            <div id="post" onclick="location.href='#'">
+	                ${mms.mUrl}
+	            </div>
+	            <div id="age">
+	                ${mms.mAge}
+	            </div>
+	            <div id="title">
+	                ${mms.mName}
+	            </div>
+	            <div id="heart">찜</div>
+	            <div id="movie">
+	                <div id="m1">${mms.mGenre}</div>
+	                <div id="m2">${mms.mdDirector}</div>
+	                <div id="bar1"></div>
+	                <div id="bar2"></div>
+	                <div id="m3">${mms.mContent}</div>
+	            </div>
+	            <div id="pj">평점</div>
+	        </div>
+        </c:forEach>
         <!--댓글 창-->
         <div id="com">
             <fieldset>
                 <legend><h3>댓글</h3></legend>
-                <form>
+                <form action="#" method="get">
                     <input type="text" name="content" class="content"/>&nbsp;&nbsp;<input type="submit" value="submit" class="submit"/>
                 </form>
                 <div class="clickbox">
@@ -256,7 +257,11 @@
                 </div>
                 <div class="com">user id</div>
                 <div class="mon"><textarea>댓글내용</textarea></div>
-                <div id="mon"><input type="text" name="coment" class="recon"/>&nbsp;&nbsp;<input type="submit" value="submit" id="su"/></div>
+                <div id="mon">
+                    <form action="#" method="get">
+                    <input type="text" name="coment" class="recon"/>&nbsp;&nbsp;<input type="submit" value="submit" id="su"/>
+                    </form>
+                </div>
                 &nbsp;
                 <div class="bar3"></div>
                 &nbsp;&nbsp;

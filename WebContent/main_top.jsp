@@ -79,6 +79,14 @@
         top: 26px;
         left: 95%;
     }
+        #login{
+        width: 75px;
+        height: 36px;
+        position: absolute;
+        top: 26px;
+        left: 1719px;
+        color:white;
+    }
     .panel{
         width: 92%;
         height: 420px;
@@ -151,13 +159,16 @@
 </style>
 </head>
 <body>
+
     <div class="header"><a href="main_top.jsp"><img id="logo" src="logo.png"/></a>
         <div id="search"><img id="search2" src="search.png"/></div>
         <div id="allmenu"><a href="">전체 메뉴</a></div>
-        <div id="mypage"><a href="myPage.jsp">마이페이지</a></div>
-        <div id="logout"><a href="login.jsp">로그아웃</a></div>
+        <div id="mypage"><a href="">마이페이지</a></div>
+        <div id="login"></div>
+        <div id="logout"><a href="logout">로그아웃</a></div>
     </div>
-    <div class="panel">검색창</div>
+    
+    <div class="panel"><a href="like">검색창</a></div>
     <div class="recommend">
         <div id="recommendmovie">Recommend Movie</div>
         <ul class="alllist">
@@ -178,6 +189,20 @@
     </div>
 </body>
 <script>
+ var uIdx = "${sessionScope.uIdx}";
+var loginId = "${sessionScope.loginId}";
+
+if(loginId==""){
+	
+	alert("로그인이 필요한 서비스 입니다.");
+	location.href="login.jsp";
+}else{
+$("#login").html(loginId+' 님♡');
+
+
+}
+
+
 var msg = "${msg}";
 if(msg!=""){
 	alert(msg);

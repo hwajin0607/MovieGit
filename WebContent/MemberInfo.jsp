@@ -33,35 +33,40 @@
 	</head>
 	<body>
 	<!-- 성공하면 index로 실패하면 joinProc -->
-		<form action='MemberChanging.jsp' method="post">
+		<form action='./changing' method="post">
 			<table>
 				<tr>
 					<th colspan="2"><h3>회원 정보</h3></th> 		
 				</tr>
 				<tr>
 					<th>ID</th> 		
-					<td>id값
+					<td>${info.uiden}
                     </td>
 				</tr>
 				<tr>
 					<th>이름</th> 		
-					<td>이름값</td>
+					<td>${info.uname}</td>
 				</tr>
 				<tr>
 					<th>생일</th> 		
-					<td>생일 값</td>
+					<td>${info.uBirth}</td>
 				</tr>
 				<tr>
 					<th>성별</th> 		
-					<td>성별값</td>
+					<td>${info.ugender}</td>
 				</tr>
 				<tr>
 					<th>E-mail</th> 		
-					<td>이메일값</td>
+					<td>${info.uemail}</td>
 				</tr>
 				<tr>
 					<th>취향</th> 		
-					<td>취향 값</td>
+					<td>
+					<c:forEach items="${infoG}" var="genre">
+					${genre}
+					</c:forEach>
+					
+					</td>
 				</tr>
 				<tr>
 					<th colspan="2" align ="center">
