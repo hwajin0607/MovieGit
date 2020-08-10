@@ -152,4 +152,12 @@ public class MovieService {
 		dao.resClose();
 	}
 
+	public void writeRating(String mIdx) {
+		System.out.println("서비스에게 일 시킨다.");
+		String pjpoint = req.getParameter("pjpoint");
+		mIdx = req.getParameter("mIdx");
+		System.out.println(pjpoint+"/"+mIdx);
+				
+	}
+
 }

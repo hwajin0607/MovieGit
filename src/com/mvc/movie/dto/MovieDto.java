@@ -18,7 +18,7 @@ public class MovieDto {
 	private Date zdate;
 	private String mdDirector;
 	private String maactor;
-
+	private double mrRating;
 	
 	public int getmIdx() {
 		return mIdx;
@@ -125,7 +125,6 @@ public class MovieDto {
 	}
 
 
-
 	public String getMaactor() {
 		return maactor;
 	}
@@ -141,6 +140,16 @@ public class MovieDto {
 	public void setMdDirector(String mdDirector) {
 		this.mdDirector = mdDirector;
 	}
+
+	public double getMrRating() {
+		return mrRating;
+	}
+
+	public void setMrRating(double mrRating) {
+		this.mrRating = mrRating;
+	}
+
+
 
 
 

@@ -93,12 +93,39 @@
                 left: 71%;
             }
 
-            #pj{
+             #pj{
                 position: absolute;
                 width: 100px;
                 height: 50px;
                 left: 30%;
                 background-color: aquamarine;
+            }
+
+            #pj1{
+                position: absolute;
+                width: 125px;
+                height: 35px;
+                left: 35%;
+                top: 80%;
+                background-color: aquamarine;  
+            }
+
+            #pj2{
+                position: absolute;
+                width: 40px;
+                height: 35px;
+                left: 45%;
+                top: 80%;
+                background-color: aquamarine;  
+            }
+
+            #pj3{
+                position: absolute;
+                width: 75px;
+                height: 30px;
+                left: 29%;
+                top: 80%;
+                background-color: aquamarine;  
             }
 
             #m3{
@@ -240,8 +267,16 @@
 	                <div id="bar2"></div>
 	                <div id="m3">${mms.mContent}</div>
 	            </div>
-	            <div id="pj">평점</div>
-	        </div>
+	           <div><input class = "pjbox" id ="pj" type="button" value="${mms.mrRating}" onclick="pjbox()"/></div>
+            <div>
+                <form action = "writeRating" id="va">
+                	<input type ="hidden" name="mIdx" value="${mms.mIdx}"/>
+                    <div class="3" style="display:none" id="pj3">평점(1~5) </div>
+                    <input class = "1" type="hidden" name="pjpoint" min="1" max="5" id ="pj1" />
+                    <input class = "2" type="hidden" id="pj2" />
+                </form> 
+            </div>
+        </div>
         </c:forEach>
         <!--댓글 창-->
         <div id="com">
@@ -327,5 +362,13 @@
             console.log("찍힌다.");
             alert('삭제되었습니다.');
         });
+        
+        function pjbox(){
+            $('.1').attr("type","range");
+            $('.2').attr("type","submit");
+            $('.pjbox').attr("type","hidden");
+            $('.3').css({'display':'inline'});
+        };
+        
 	</script>
 </html>

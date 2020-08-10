@@ -228,17 +228,18 @@ public class MovieDao {
 	
 	public ArrayList<MovieDto> movieDetail(String mIdx) {
 		System.out.println("dao 일 시키기");
-		String sql = "select DISTINCT m.mIdx, m.mName, m.mGenre, m.mUrl, m.mAge, m.mContent, d.mddirector, a.maactor, f.mfurl "
-				+ "FROM Movie m, moviedirector d, movieactor a, moviefoster f where m.mIdx = ?";
+		String sql = "select DISTINCT m.mIdx, m.mName, m.mGenre, m.mUrl, m.mAge, m.mContent, d.mddirector, a.maactor, f.mfurl,"
+				+ "(select ROUND(AVG(mrRating),1) from movierating where midx = ?)as mrRating from Movie m, moviedirector d, movieactor a, moviefoster f where m.mIdx = ?";
 		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, mIdx);
+			ps.setString(2, mIdx);
 			rs = ps.executeQuery();
 			boolean su = rs.next();
 			while(su) {
 				MovieDto dto = new MovieDto();
-//				dto.setmIdx(rs.getInt("mIdx"));
+				dto.setmIdx(rs.getInt("mIdx"));
 				dto.setmName(rs.getString("mName"));
 				dto.setmGenre(rs.getString("mGenre"));
 				dto.setmUrl(rs.getString("mUrl"));
@@ -247,8 +248,10 @@ public class MovieDao {
 				dto.setMdDirector(rs.getString("mddirector"));
 				dto.setMaactor(rs.getString("maactor"));
 				dto.setMfUrl(rs.getString("mfurl"));
+				System.out.println(rs.getDouble("mrRating"));
+				dto.setMrRating(rs.getDouble("mrRating"));
 				System.out.println(dto.getmIdx()+"/"+dto.getmName()+"/"+dto.getmGenre()+"/"+dto.getmUrl()+"/"+dto.getmAge()+"/"+dto.getmContent()+"/"
-						+dto.getMdDirector() +"/"+ dto.getMaactor() +"/"+ dto.getMfUrl());
+						+dto.getMdDirector() +"/"+ dto.getMaactor() +"/"+ dto.getMfUrl()+"/"+dto.getMrRating());
 				su = false;
 				list.add(dto);
 			}
@@ -258,6 +261,7 @@ public class MovieDao {
 		}
 			return list;
 	}
+
 	
 
 }

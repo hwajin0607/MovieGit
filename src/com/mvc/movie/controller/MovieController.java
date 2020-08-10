@@ -13,7 +13,7 @@ import com.mvc.movie.service.MovieService;
 
 
 
-@WebServlet({"/","/zzim","/searchResult","/delete","/random","/a","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade"})
+@WebServlet({"/","/zzim","/searchResult","/delete","/random","/a","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating"})
 
 
 public class MovieController extends HttpServlet {
@@ -105,6 +105,14 @@ public class MovieController extends HttpServlet {
 			ms.random();
 			break;
 			
+		case "/writeRating" :
+			System.out.println("평점 넣기");
+			mIdx = req.getParameter("mIdx");
+			System.out.println(mIdx);
+			ms.writeRating(mIdx);
+			break;
+			
+
 		
 		}
 		
