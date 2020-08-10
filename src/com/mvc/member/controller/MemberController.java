@@ -54,24 +54,25 @@ public class MemberController extends HttpServlet {
 		switch (addr) {
 		
 		case "/login":
-			System.out.println("로그인 요청");
-			String id = req.getParameter("id");
-			String pw = req.getParameter("pw");
-			System.out.println(id+"/"+pw);
-			String page = "login.jsp";
-			String msg = "로그인에 실패 하였습니다.";
-			 if( ms.login(id,pw) != 0) {
-				 page = "main_top.jsp";
-				 msg = "로그인에 성공 하였습니다.";
-				 req.getSession().setAttribute("uIdx", ms.login(id,pw));
-				 req.getSession().setAttribute("loginId", id);
-				 
-			 }
-			req.setAttribute("msg", msg);
-			dis = req.getRequestDispatcher(page);
-			dis.forward(req, resp);
-
-			break;
+	         System.out.println("로그인 요청");
+	         String id = req.getParameter("id");
+	         String pw = req.getParameter("pw");
+	         System.out.println(id+"/"+pw);
+	         String page = "login.jsp";
+	         String msg = "로그인에 실패 하였습니다.";
+	         int login = ms.login(id,pw);
+	         if(login != 0) {
+	             msg = "로그인에 성공 하였습니다.";
+	             req.getSession().setAttribute("uIdx", login);
+	             req.getSession().setAttribute("loginId", id);
+	             
+	          }
+	         String uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
+	         System.out.println(uidx);
+	         req.setAttribute("msg", msg);
+	         dis = req.getRequestDispatcher("like");
+	         dis.forward(req, resp);
+	         break;
 			
 		case "/logout":
 			req.getSession().removeAttribute("loginId");

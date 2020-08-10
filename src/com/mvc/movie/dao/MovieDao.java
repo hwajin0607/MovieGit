@@ -374,6 +374,12 @@ public class MovieDao {
 		}
 			return list;
 	}
+	
+	//찜기능
+	public void zzimadd(String midx) {
+		String sql = "";
+		
+	}
 
 	
 

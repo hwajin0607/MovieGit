@@ -147,7 +147,7 @@
                 <input type='text' class='sch_text' />
             </span>
             <!-- <button type='submit' class='sch'>검색</button> -->
-             <a href="./searchResult" id="sch" target="_parent">검색</a>
+             <a href="./search" id="sch" target="_parent">검색</a>
         </div>
         <!-- 정렬 -->
         <div class="sort">

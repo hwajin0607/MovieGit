@@ -215,6 +215,8 @@ public class MovieService {
 		System.out.println("찜목록에보내기 서비스");
 		MovieDao dao = new MovieDao();
 		String uIdx = (String) req.getSession().getAttribute("uIdx");
+		System.out.println(midx+"/"+uIdx);
+		dao.zzimadd(midx);
 	}
 
 	// 평점 넣기
