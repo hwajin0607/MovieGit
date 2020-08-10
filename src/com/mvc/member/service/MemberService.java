@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.mvc.member.dao.MemberDao;
 import com.mvc.member.dto.MemberDto;
+import com.mvc.movie.dto.MovieDto;
 
 import oracle.net.ns.SessionAtts;
 
@@ -25,25 +26,17 @@ public class MemberService {
 		this.resp =resp;
 	}
 	
-	public void login() throws Exception {
-		String id = req.getParameter("id");
-		String pw = req.getParameter("pw");
-		System.out.println(id+"/"+pw);
+	public int login(String id, String pw) throws Exception {
 		MemberDao dao = new MemberDao();
-		String page = "login.jsp";
-		String msg = "로그인에 실패하였습니다.";
-		 if( dao.login(id,pw)) {
-			 page = "main_top.jsp";
-			msg = "로그인에 성공 하였습니다.";
-			 req.getSession().setAttribute("uIdx", dao.login(id,pw));
-			 
+		int useridx = dao.login(id,pw);
+		 if(useridx != 0) {
+			 System.out.println(id+" 의 로그인 결과 : "+useridx); 
 		 }
-		req.setAttribute("msg", msg);
-		RequestDispatcher dis = req.getRequestDispatcher(page);
-		dis.forward(req, resp);
+		 dao.resClose();
+		 return useridx;
+
 	}
 	
-
 	
 	public void join() throws IOException {
 		boolean success = false;
@@ -100,6 +93,25 @@ public class MemberService {
 			System.out.println("result : " + obj);
 			resp.getWriter().println(obj);
 		}
+		
+	}
+	public void like() throws SQLException, ServletException, IOException {
+		String uIdx =  Integer.toString((int) req.getSession().getAttribute("uIdx"));
+		System.out.println("고유번호 : "+uIdx);
+		ArrayList<MovieDto> list = null;
+		MemberDao dao = new MemberDao();
+
+		try {
+			list = dao.like(uIdx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+			req.setAttribute("list", list);
+			RequestDispatcher dis = req.getRequestDispatcher("main_top.jsp");
+			dis.forward(req, resp);
+		}
+		
 		
 	}
 
@@ -195,10 +207,6 @@ public class MemberService {
 		
 	}
 	
-	public void logout() {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 

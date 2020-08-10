@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri = "http://java.sun.com/jsp/jstl/core"%>   
 <%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
-<!DOCTYPE html>
 <html>
     <head>
 		<meta charset="utf-8">
@@ -94,12 +93,39 @@
                 left: 71%;
             }
 
-            #pj{
+             #pj{
                 position: absolute;
                 width: 100px;
                 height: 50px;
                 left: 30%;
                 background-color: aquamarine;
+            }
+
+            #pj1{
+                position: absolute;
+                width: 125px;
+                height: 35px;
+                left: 35%;
+                top: 80%;
+                background-color: aquamarine;  
+            }
+
+            #pj2{
+                position: absolute;
+                width: 40px;
+                height: 35px;
+                left: 45%;
+                top: 80%;
+                background-color: aquamarine;  
+            }
+
+            #pj3{
+                position: absolute;
+                width: 75px;
+                height: 30px;
+                left: 29%;
+                top: 80%;
+                background-color: aquamarine;  
             }
 
             #m3{
@@ -222,31 +248,43 @@
         </style>	
     </head>
     <body>
-        <div id="ready">
-            <div id="post" onclick="location.href='#'">
-                영화 재생
+    	<c:forEach items="${list}" var="mms">
+	        <div id="ready">
+	            <div id="post" onclick="location.href='#'">
+	                ${mms.mUrl}
+	            </div>
+	            <div id="age">
+	                ${mms.mAge}
+	            </div>
+	            <div id="title">
+	                ${mms.mName}
+	            </div>
+	       
+	            <div id="heart"><button onclick="location.href='./zzimadd?midx=${mms.mIdx}'">찜</button></div>
+	
+	            <div id="movie">
+	                <div id="m1">${mms.mGenre}</div>
+	                <div id="m2">${mms.mdDirector}</div>
+	                <div id="bar1"></div>
+	                <div id="bar2"></div>
+	                <div id="m3">${mms.mContent}</div>
+	            </div>
+	           <div><input class = "pjbox" id ="pj" type="button" value="${mms.mrRating}" onclick="pjbox()"/></div>
+            <div>
+                <form action = "writeRating" id="va">
+                	<input type ="hidden" name="mIdx" value="${mms.mIdx}"/>
+                    <div class="3" style="display:none" id="pj3">평점(1~5) </div>
+                    <input class = "1" type="hidden" name="pjpoint" min="1" max="5" id ="pj1" />
+                    <input class = "2" type="hidden" id="pj2" />
+                </form> 
             </div>
-            <div id="age">
-                연령
-            </div>
-            <div id="title">
-                제목
-            </div>
-            <div id="heart">찜</div>
-            <div id="movie">
-                <div id="m1">장르</div>
-                <div id="m2">감독</div>
-                <div id="bar1"></div>
-                <div id="bar2"></div>
-                <div id="m3">내용</div>
-            </div>
-            <div id="pj">평점</div>
         </div>
+        </c:forEach>
         <!--댓글 창-->
         <div id="com">
             <fieldset>
                 <legend><h3>댓글</h3></legend>
-                <form>
+                <form action="#" method="get">
                     <input type="text" name="content" class="content"/>&nbsp;&nbsp;<input type="submit" value="submit" class="submit"/>
                 </form>
                 <div class="clickbox">
@@ -256,7 +294,11 @@
                 </div>
                 <div class="com">user id</div>
                 <div class="mon"><textarea>댓글내용</textarea></div>
-                <div id="mon"><input type="text" name="coment" class="recon"/>&nbsp;&nbsp;<input type="submit" value="submit" id="su"/></div>
+                <div id="mon">
+                    <form action="#" method="get">
+                    <input type="text" name="coment" class="recon"/>&nbsp;&nbsp;<input type="submit" value="submit" id="su"/>
+                    </form>
+                </div>
                 &nbsp;
                 <div class="bar3"></div>
                 &nbsp;&nbsp;
@@ -305,6 +347,8 @@
         </div>
 	</body>
     <script>
+
+   
         $('.p1').click(function(){
             console.log("찍힌다.");
             alert('신고가 되었습니다');
@@ -322,5 +366,15 @@
             console.log("찍힌다.");
             alert('삭제되었습니다.');
         });
+        
+
+        function pjbox(){
+            $('.1').attr("type","range");
+            $('.2').attr("type","submit");
+            $('.pjbox').attr("type","hidden");
+            $('.3').css({'display':'inline'});
+        };
+
+        
 	</script>
 </html>

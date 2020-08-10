@@ -101,9 +101,24 @@
     
     .mList{
     	position: absolute;
+    
+
     	top: 40%;
         left: 20%;
+        
     }
+        img{
+        max-width: 60px;
+        max-height: 60px;
+    }
+    #zzim{
+    	position : absolute;
+    	top: 30%;
+    	left: 80%;
+    }
+ 	.pageArea{
+		margin: 10px;
+	}
 
   
 </style>
@@ -129,9 +144,10 @@
         <!-- 검색창 -->
         <div class="searchbar">
             <span class='emsearch'>
-                <input type='text' class='input_text' />
+                <input type='text' class='sch_text' />
             </span>
-            <button type='submit' class='sch_smit'>검색</button>
+            <!-- <button type='submit' class='sch'>검색</button> -->
+             <a href="./searchResult" id="sch" target="_parent">검색</a>
         </div>
         <!-- 정렬 -->
         <div class="sort">
@@ -140,6 +156,20 @@
         </br>
         <!-- 영화목록보여주기 -->
         <div class="mList">
+        <table>
+        	<tr>
+        	<c:forEach items="${movieList }" var="mlist"> 
+				<td><a href="./movieDetail?mIdx=${mlist.mIdx }">${mlist.mIdx }</a></td>
+			</c:forEach>
+			</tr>
+		
+		</table>
+		<div class="pageArea">
+			<a href="./movieList?=${currPage+1}" id="more">더보기</a>
+		</div>
+		</div>
+        
+        <%-- <div class="mList">
         <c:set var="i" value="0" /> 
         <c:set var="j" value="4" /> 
         <table > 
@@ -151,7 +181,7 @@
         </c:forEach> 
         </table>
         <a href="#" id="more">더보기</a>
-        </div>
+        </div>  --%>
         
 
 <!-- 영화리스트 vsc -->
@@ -167,6 +197,7 @@
     </div>
 </body>
 <script>
+
     
 /*         $("#more").click(function(){
             

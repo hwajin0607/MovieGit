@@ -82,7 +82,7 @@
                 background-color: aquamarine;
                 width: 300px;
                 height: 500px;
-                border: 5px solid red;
+                border-left: 50px solid black;
             }
 
             .movie{
@@ -151,6 +151,7 @@
             </div>
 
             <!--검색 바-->
+            
             <div class="SearchZone">
                 <div class="searchBar">
                     <input id="searchTxt" type="text" placeholder="Search..."/>
@@ -161,7 +162,14 @@
             <!--영화 검색 리스트-->
             <div class="movie">
                 <ul class="list">
-                    <li class="mo">movie${srlist }
+                <c:forEach items="${srlist }" var="srlist">
+                    <li class="mo">movie${srlist.mName}
+                        <a href="#">
+                        <span class="glyphicon glyphicon-heart"></span>
+                        </a>
+                    </li>
+                </c:forEach>
+<%--                     <li class="mo">movie${srlist }
                         <a href="#">
                         <span class="glyphicon glyphicon-heart"></span>
                         </a>
@@ -177,13 +185,7 @@
                         <a href="#">
                         <span class="glyphicon glyphicon-heart"></span>
                         </a>
-                    </li>
-                    
-                    <li class="mo">movie${srlist }
-                        <a href="#">
-                        <span class="glyphicon glyphicon-heart"></span>
-                        </a>
-                    </li>
+                    </li> --%>
                     
                 </ul>
 

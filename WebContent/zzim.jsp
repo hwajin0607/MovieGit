@@ -15,7 +15,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<style>
             body{
-                background-color: black;
+                background-color: white;
                 position: relative;
                 z-index: 9;
             }
@@ -95,7 +95,9 @@
             }
 
             #close{
-                margin-left: 200px;
+            	position:absolute;
+                margin-left: 100px;
+                cursor:pointer
             }
 
             #remove{
@@ -115,7 +117,7 @@
         <div class="MainBody">
         <!--<img src="back.jpg" style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative;">-->
         <!--전체 삭제-->
-        <button id="remove">전체 삭제</button>
+        <!-- <button id="remove">전체 삭제</button> -->
 
         <!--로그 아웃-->
         <form>
@@ -137,19 +139,16 @@
             </div>
 
         
-            
             <!--영화 찜목록 리스트-->
             <div class="movie">
                 <ul class="Wishlist">
-                    <li class="mo">movie ${list}<img id="close" src="closeBar.png"/></li>
-                    
-                    <li class="mo">movie${list}<img id="close" src="closeBar.png"/></li>
-                    
-                    <li class="mo">movie${list}<img id="close" src="closeBar.png"/></li>
-                    
-                    <li class="mo">movie${list}<img id="close" src="closeBar.png"/></li>
+                
+                <c:forEach items="${list }" var="list">
+                    <li class="mo">${list.mName}</li>
+                    <img id="close" src="closeBar.png"/>
+                </c:forEach>
+                
                 </ul>
-
                 <button id="add">더보기</button>
                 
             </div>
@@ -162,11 +161,15 @@
             $(".Wishlist").append("<li class='mo' id='next'>movie<img id='close' src='closeBar.png'/></li>")
             $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
             $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
+            $(".Wishlist").append("<li class='mo'>movie<img idS='close' src='closeBar.png'/></li>")
             $(".Wishlist").append("<li class='mo' id='next'>movie<img id='close' src='closeBar.png'/></li>")
             $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
             $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
             $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
+        });
+        
+        $("#close").click(function(){
+        	$(list).remove("${result}");
         });
 	</script>
 </html>

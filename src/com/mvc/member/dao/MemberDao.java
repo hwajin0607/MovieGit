@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.mvc.member.dto.MemberDto;
+import com.mvc.movie.dto.MovieDto;
 
 
 public class MemberDao {
@@ -31,16 +32,18 @@ public class MemberDao {
 			}
 		}
 	
-	public boolean login(String id, String pw) throws SQLException {
-		boolean success = false;
+	public int login(String id, String pw) throws SQLException {
+		int useridx = 0;
 		String sql = "SELECT uIdx FROM Member WHERE uIden=? AND uPw=?";
 		ps = conn.prepareStatement(sql);
 		ps.setString(1, id);
 		ps.setString(2, pw);
 		rs = ps.executeQuery();
-		success = rs.next();
-		System.out.println("success : "+success);
-		return success;	
+		while (rs.next()) {
+			useridx = rs.getInt("uIdx");			
+		}
+		System.out.println("아이디 고유번호: "+useridx);
+		return useridx;	
 	}
 
 	public boolean overlay(String id) throws SQLException {
@@ -124,6 +127,22 @@ public class MemberDao {
 		return useridx;
 	}
 
+	public ArrayList<MovieDto> like(String uIdx) throws SQLException {
+		System.out.println("아이디 고유번호 2차 확인 : "+uIdx);
+		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
+		String sql = "select f.mfidx, m.midx from movieFoster f, movie m WHERE f.midx=m.midx AND m.midx IN"
+				+ "(select m.midx from movie m, userGenre u WHERE m.mgenre=u.ggenre(+) AND u.uidx=?)";
+		ps =conn.prepareStatement(sql);
+		ps.setString(1, uIdx);
+		rs = ps.executeQuery();
+		while (rs.next()) {
+			MovieDto dto = new MovieDto();
+			dto.setmIdx(rs.getInt("mfIdx"));
+			list.add(dto);
+		}
+		System.out.println(list);
+		return list;
+	}
 	public MemberDto info(String uidx) throws SQLException {
 		MemberDto dto = null;
 		String sql = "select uiden, uname, ubirth, ugender, uemail  FROM member WHERE uidx = ?";
@@ -155,9 +174,11 @@ public class MemberDao {
 		}
 		return list;
 		
+
 		
 		
 	}
+
 
 	public int infoc(String uidx, String pw, String birth, String email) throws SQLException {
 		Date d = Date.valueOf(birth);
@@ -204,6 +225,7 @@ public class MemberDao {
 		
 		return update;
 	}
+
 
 
 }
