@@ -80,12 +80,13 @@
         left: 95%;
     }
         #login{
-        width: 75px;
-        height: 36px;
-        position: absolute;
-        top: 26px;
-        left: 1719px;
-        color:white;
+	    width: 90px;
+	    height: 36px;
+	    position: absolute;
+	    top: 26px;
+	    left: 1686px;
+	    color: white;
+	    text-align: right;
     }
     .panel{
         width: 92%;
@@ -167,14 +168,20 @@
         <div id="login"></div>
         <div id="logout"><a href="logout">로그아웃</a></div>
     </div>
-    <div class="panel"><a href="like">검색창</a></div>
+    <div class="panel">검색창
+
+    </div>
+    
     <div class="recommend">
+
         <div id="recommendmovie">Recommend Movie</div>
         <ul class="alllist">
-            <a href=""><li class="list">극한직업</li></a><div class="heart"></div>
-            <a href=""><li class="list">기생충</li></a><div class="heart"></div>
-            <a href=""><li class="list">독전</li></a><div class="heart"></div>
-            <a href=""><li class="list">백두산</li></a><div class="heart"></div>
+            	<c:forEach items="${list }" var="likelist">
+    	
+            <a href=""><li class="list">${likelist.mIdx}</li></a><div class="heart"></div>
+             
+            </c:forEach>
+
         </ul>
         <!-- <ul class="alllist2">
             <a href=""><li class="list">ㅂ</li></a>
@@ -200,10 +207,13 @@ $("#login").html(loginId+' 님♡');
 
 
 }
+<c:forEach items="${list }" var="likelist">
+console.log(${likelist.mIdx});
+</c:forEach>
 
 
 var msg = "${msg}";
-if(msg!=""){
+if(msg!="like"){
 	alert(msg);
 }
 
