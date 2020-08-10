@@ -13,8 +13,8 @@ import com.mvc.movie.service.MovieService;
 
 
 
-@WebServlet({"/","/zzim","/searchResult","/delete","/random","/a","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating"})
 
+@WebServlet({"/","/zzim","/searchResult","/del","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search"})
 
 public class MovieController extends HttpServlet {
 	
@@ -40,7 +40,7 @@ public class MovieController extends HttpServlet {
 		MovieService ms = new MovieService(req,resp);
 		
 		switch (addr) {
-		
+
 		case "/selectBhit":
 			ms.selectBhit();
 			break;
@@ -51,15 +51,17 @@ public class MovieController extends HttpServlet {
 			
 		case "/movieList":
 			System.out.println("전체 영화목록 보여주기");
+			req.getSession().setAttribute("mGenre", "");
 			ms.movieList();
 			break;
 			
 		case "/movieListG":
 			System.out.println("장르별 영화 보여주기");
 			String mGenre = req.getParameter("mGenre");
+			int page = 0;
 			req.getSession().setAttribute("mGenre", mGenre);
 			System.out.println(mGenre);
-			ms.movieListG(mGenre);
+			ms.movieListG(mGenre,page);
 			break;
 			
 		case "/movieListS":
@@ -77,6 +79,7 @@ public class MovieController extends HttpServlet {
 			ms.movieListS(sqlb,genre);
 			break;
 			
+			//상세페이지 띄우기
 		case "/movieDetail":
 			System.out.println("상세페이지 요청");
 			String mIdx = req.getParameter("mIdx");
@@ -95,16 +98,25 @@ public class MovieController extends HttpServlet {
 			System.out.println("1차 확인");
 			break;
 			
-		case "/delete":
-			ms.delete();
-			System.out.println("1차 확인");
+		case "/search":
+			ms.search();
+			System.out.println("1차 검색확인");
 			break;
+		
+		//찜 목록 삭제
+		case "/del":
+			System.out.println("찜 목록에서 삭제 요청");
+			String idx = req.getParameter("idx");
+			System.out.println("DEL idx : " + idx);
+			ms.del();
 
+			// 랜덤으로 가져오기
 		case "/random" :
 			System.out.println("랜덤으로 가져오기");
 			ms.random();
 			break;
 			
+			//평점 매기기
 		case "/writeRating" :
 			System.out.println("평점 넣기");
 			mIdx = req.getParameter("mIdx");
@@ -112,7 +124,12 @@ public class MovieController extends HttpServlet {
 			ms.writeRating(mIdx);
 			break;
 			
+		case "/myPageZ":
+			System.out.println("마이페이지 찜목록 두개 보여주기");
+			ms.myPageZ();
 
+			break;
+			
 		
 		}
 		
