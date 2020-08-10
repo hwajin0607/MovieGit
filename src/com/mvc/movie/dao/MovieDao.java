@@ -332,6 +332,7 @@ public class MovieDao {
 		String sql ="SELECT mName, mGenre FROM movie WHERE uidx = ?";
 	}
 	
+	//영화 상세페이지 보여주기
 	public ArrayList<MovieDto> movieDetail(String mIdx) {
 		System.out.println("dao 일 시키기");
 		String sql = "select DISTINCT m.mIdx, m.mName, m.mGenre, m.mUrl, m.mAge, m.mContent, d.mddirector, a.maactor, f.mfurl,"
