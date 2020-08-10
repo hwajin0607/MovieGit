@@ -232,7 +232,9 @@
 	            <div id="title">
 	                ${mms.mName}
 	            </div>
-	            <div id="heart">찜</div>
+	       
+	            <div id="heart"><button onclick="location.href='./zzimadd?midx=${mms.mIdx}'">찜</button></div>
+	
 	            <div id="movie">
 	                <div id="m1">${mms.mGenre}</div>
 	                <div id="m2">${mms.mdDirector}</div>
@@ -310,6 +312,8 @@
         </div>
 	</body>
     <script>
+
+   
         $('.p1').click(function(){
             console.log("찍힌다.");
             alert('신고가 되었습니다');
@@ -327,5 +331,8 @@
             console.log("찍힌다.");
             alert('삭제되었습니다.');
         });
+        
+     
+        
 	</script>
 </html>

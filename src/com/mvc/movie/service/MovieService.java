@@ -91,18 +91,29 @@ public class MovieService {
 	
 	
 	//영화 목록 정렬
-	public void movieListS(String sqlb, String genre) throws ServletException, IOException {
+	public void movieListS(String sqlb, String genre, int page) throws ServletException, IOException {
 		System.out.println(sqlb);
 		ArrayList<MovieDto> list = null;
 		MovieDao dao = new MovieDao();
+		
+		String pageParam = req.getParameter("page");
+		page = 1;
+		if(pageParam != null) {
+			page = Integer.parseInt(pageParam);
+			
+			if(page == 0) {
+				page = 1;
+			}
+		}
 		try {
-			list = dao.movieListS(sqlb,genre);
+			list = dao.movieListS(sqlb,genre,page);
 			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}finally {
 			req.setAttribute("movieList", list);
+			req.setAttribute("currPage", page);
 			RequestDispatcher dis = req.getRequestDispatcher("movieList.jsp");
 			dis.forward(req, resp);
 			dao.resClose();
@@ -193,6 +204,13 @@ public class MovieService {
 		RequestDispatcher dis = req.getRequestDispatcher("movie_detail.jsp");
 		dis.forward(req, resp);
 		dao.resClose();
+	}
+	
+	//찜목록에 보내기
+	public void zzimadd(String midx) {
+		System.out.println("찜목록에보내기 서비스");
+		MovieDao dao = new MovieDao();
+		String uIdx = (String) req.getSession().getAttribute("uIdx");
 	}
 
 }

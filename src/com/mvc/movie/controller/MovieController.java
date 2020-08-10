@@ -13,7 +13,7 @@ import com.mvc.movie.service.MovieService;
 
 
 
-@WebServlet({"/","/zzim","/searchResult","/delete","/random","/a","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/myPageZ"})
+@WebServlet({"/","/zzim","/zzimadd", "/searchResult","/delete","/random","/a","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/myPageZ"})
 
 
 public class MovieController extends HttpServlet {
@@ -68,6 +68,7 @@ public class MovieController extends HttpServlet {
 			System.out.println("정렬 하기");
 			String mSort = req.getParameter("mSort");
 			String sqlb = " ";
+			page = 0;
 			if(mSort.equals("내림차")) {
 				sqlb="DESC";
 			}
@@ -76,7 +77,7 @@ public class MovieController extends HttpServlet {
 				genre="";
 			}
 			System.out.println(sqlb+genre);
-			ms.movieListS(sqlb,genre);
+			ms.movieListS(sqlb,genre,page);
 			break;
 			
 		case "/movieDetail":
@@ -90,6 +91,13 @@ public class MovieController extends HttpServlet {
 			
 		case "/zzim":
 			ms.zzim();
+			break;
+			
+		case "/zzimadd":
+			System.out.println("찜목록에 보내기");
+			String midx = req.getParameter("midx");
+			System.out.println(midx);
+			ms.zzimadd(midx);
 			break;
 			
 		case "/searchResult":
