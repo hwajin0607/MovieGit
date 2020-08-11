@@ -17,7 +17,7 @@ public class MemberService {
 	public Object list(int page, String search) {
 	
 		System.out.println(search+":"+page);
-		int pagePerCnt = 5; //페이지당 보여줄 게시물의 수
+		int pagePerCnt = 25; //페이지당 보여줄 게시물의 수
 		int end = page*pagePerCnt;
 		int start = (end-pagePerCnt)+1; 
 		
@@ -50,10 +50,10 @@ public class MemberService {
 				
 				sql = "select rnum, uidx, uname, ubirth, ugender, uIden, upw, uemail, udate "
 						+ "from (select row_number() over (order by uidx desc) as rnum, uidx, uname, "
-						+ "ubirth, ugender, uIden, upw, uemail, udate from member) where uname like %? and "
+						+ "ubirth, ugender, uIden, upw, uemail, udate from member) where uname like ? and "
 						
 						+ "rnum between ? and ? ";
-				System.out.println(sql);
+				
 				ps = conn.prepareStatement(sql);
 				ps.setString(1, "%"+search+"%");
 				ps.setInt(2, start);

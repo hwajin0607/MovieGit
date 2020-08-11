@@ -35,10 +35,10 @@ public class Service {
 	}
 	
 	//신고 하기
-	public int count(int cId, int uId) {
+	/*public int count(int cId, int uId) {
 		
 		return 0;
 		
-	}
+	}*/
 	
 }

@@ -43,7 +43,7 @@
 			<form method="GET" action = "member">
 			<input type="text" class="sech" name="search">
 			
-			<input type="submit" class="member_btn" value="search" />
+			<input type="submit" class="member_btn" value="회원명검색" />
 			</form>
 			<br/>
 			<br/>

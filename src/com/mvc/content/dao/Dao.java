@@ -173,4 +173,34 @@ public class Dao {
 		
 		return result; // 0이면 실패, 1이면 성공
 	}
+	
+	//댓글 신고 
+	
+	/*public int updateCount(int cId, int uId) {
+		
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			
+			//댓글 신고 업데이트 문
+			String sql = "";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, cId);
+			ps.setInt(2, uId);
+			
+			result = ps.executeUpdate();
+			
+		} catch (Exception e) {
+			
+		}finally {
+			closeConnection(conn, ps, null);
+		}
+		
+		return result;
+		
+	}*/
+	
+	
 }
