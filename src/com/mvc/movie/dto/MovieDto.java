@@ -2,7 +2,11 @@ package com.mvc.movie.dto;
 
 import java.sql.Date;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 public class MovieDto {
+
 	private int mIdx;
 	private String mName;
 	private Date mOpen;
@@ -12,7 +16,6 @@ public class MovieDto {
 	private Date mDate;
 	private int mAge;
 	private String mdDirector;
-	
 	private String maActor;
 	private String mContent;
 	private String mfUrl;
@@ -20,13 +23,12 @@ public class MovieDto {
 	private int mfIdx;
 	private String mfOri;
 	private String mfNew;
-
-	
 	private int zidx;
 	private int uidx;
 	private Date zdate;
 	private String maactor;
 	private double mrRating;
+	
 	
 	public int getmIdx() {
 		return mIdx;
@@ -100,32 +102,30 @@ public class MovieDto {
 	public void setMfUrl(String mfUrl) {
 		this.mfUrl = mfUrl;
 	}
-
+	public String getMravg() {
+		return mravg;
+	}
+	public void setMravg(String mravg) {
+		this.mravg = mravg;
+	}
 	public int getMfIdx() {
 		return mfIdx;
 	}
-
 	public void setMfIdx(int mfIdx) {
 		this.mfIdx = mfIdx;
 	}
-
 	public String getMfOri() {
 		return mfOri;
 	}
-
 	public void setMfOri(String mfOri) {
 		this.mfOri = mfOri;
 	}
-
 	public String getMfNew() {
 		return mfNew;
 	}
-
 	public void setMfNew(String mfNew) {
 		this.mfNew = mfNew;
 	}
-
-
 	public int getZidx() {
 		return zidx;
 	}
@@ -157,13 +157,20 @@ public class MovieDto {
 		this.mrRating = mrRating;
 	}
 
-
-	public String getMravg() {
-		return mravg;
-	}
-
-	public void setMravg(String mravg) {
-		this.mravg = mravg;
+	// 
+//	public String toJSON () {
+//		Gson obj = new JsonObject();
+//		obj.add("mIdx", this.mIdx);
+//		return "";
+//	}
+	//
+	@Override
+	public String toString() {
+		return "{mIdx:" + mIdx + ", mName:" + mName + ", mOpen:" + mOpen + ", mGenre:" + mGenre + ", mUrl:"
+				+ mUrl + ", mBhit:" + mBhit + ", mDate:" + mDate + ", mAge:" + mAge + ", mdDirector:" + mdDirector
+				+ ", maActor:" + maActor + ", mContent:" + mContent + ", mfUrl:" + mfUrl + ", mravg:" + mravg
+				+ ", mfIdx:" + mfIdx + ", mfOri:" + mfOri + ", mfNew:" + mfNew + ", zidx:" + zidx + ", uidx:" + uidx
+				+ ", zdate:" + zdate + ", maactor:" + maactor + ", mrRating:" + mrRating + "}";
 	}
 
 

@@ -1,5 +1,6 @@
 package com.mvc.member.service;
 
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ import com.mvc.member.dao.MemberDao;
 import com.mvc.member.dto.MemberDto;
 import com.mvc.movie.dto.MovieDto;
 
-import oracle.net.ns.SessionAtts;
 
 public class MemberService {
 	HttpServletRequest req = null;
@@ -27,8 +27,10 @@ public class MemberService {
 	}
 	
 	public int login(String id, String pw) throws Exception {
+		req.setCharacterEncoding("UTF-8");
 		MemberDao dao = new MemberDao();
 		int useridx = dao.login(id,pw);
+		System.out.println(id+" 의 로그인 결과 : "+useridx); 
 		 if(useridx != 0) {
 			 System.out.println(id+" 의 로그인 결과 : "+useridx); 
 		 }
@@ -95,14 +97,16 @@ public class MemberService {
 		}
 		
 	}
-	public void like() throws SQLException, ServletException, IOException {
+	public void like(int page1) throws SQLException, ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		String uIdx =  Integer.toString((int) req.getSession().getAttribute("uIdx"));
 		System.out.println("고유번호 : "+uIdx);
+		
 		ArrayList<MovieDto> list = null;
 		MemberDao dao = new MemberDao();
 
 		try {
-			list = dao.like(uIdx);
+			list = dao.like(uIdx,page1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -209,5 +213,5 @@ public class MemberService {
 	
 
 
-
+	
 }

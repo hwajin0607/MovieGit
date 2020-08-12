@@ -8,6 +8,9 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<style>
+			table, td, th{
+				background-color: white;
+			}
 			table, td{
 				border : 1px solid black;
 				border-collapse: collapse;
@@ -119,68 +122,8 @@ $("#overlay").click(function(){
 });
 
 $("#join").click(function(){
-	if(overChk){
-		var $id = $('input[name="uid"]');
-		var $pw = $('input[name="uPw"]');
-		var $name = $('input[name="uName"]');
-		var $birth = $('input[name="ubirth"]');
-		var $gender = $('input[name="ugender"]:checked');
-		var $email = $('input[name="uemail"]');
-		$('input[type="checkbox"]:checked').each(function(idx,item){
-			checkArr.push($(this).val());	
-		});
-		if($id.val() == ""){
-			alert("아이디를 확인해 주세요.");
-			$id.focus();
-		}else if($pw.val() == ""){
-			alert("비밀번호를 넣어 주세요.");
-			$pw.focus();
-		}else if($name.val() == ""){
-			alert("이름을 넣어 주세요.");
-			$name.focus();
-		}else if($birth.val() == ""){
-			alert("나이를 넣어 주세요.");
-			$age.focus();
-		}else if($gender.val() == null){
-			alert("성별을 선택 해 주세요.");			
-		}else if($email.val() == ""){
-			alert("메일 주소를 입력 해 주세요.");		
-			$email.focus();
-		}else{//모든 항목을 입력 했을 경우
-			console.log('서버로 전송');
-			$.ajax({
-				type:"post",
-				url:"join",
-				data:{
-					"id" : $id.val(),
-					"pw" : $pw.val(),
-					"name" : $name.val(),
-					"birth" : $birth.val(),
-					"gender" : $gender.val(),
-					"email" : $email.val(),
-					"ugenre" : checkArr},
-				dataType:"JSON",
-				success:function(data){
-					console.log(data);
-					if(data.join){
-						alert("회원 가입에 성공 했습니다.");
-						$('div').css({"display" : "none" });
-					}else{
-						alert("회원 가입에 실패 했습니다.");
-						location.href="Memberjoin.jsp";
-					}
-				},
-				error:function(error){
-					console.log(error);
-				}				
-			});
-		}
 
-		
-	}else{
-		alert("중복 체크를 확인 해 주세요.");
-		$('input[name="uId"]').focus();
-	}
+	$("html").css('display','none');
 });
 </script>
 </html>

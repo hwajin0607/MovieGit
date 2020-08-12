@@ -3,12 +3,13 @@ package com.mvc.member.dto;
 import java.sql.Date;
 
 public class MemberDto {
+
+
 	private String uiden;
 	private String uname;
 	private Date uBirth;
 	private String ugender;
 	private String uemail;
-	
 	public String getUiden() {
 		return uiden;
 	}
@@ -39,6 +40,10 @@ public class MemberDto {
 	public void setUemail(String uemail) {
 		this.uemail = uemail;
 	}
+	
+	
+	
+
 	
 	
 }

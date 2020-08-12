@@ -3,6 +3,7 @@ package com.mvc.movie.service;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.mvc.movie.dao.MovieDao;
 import com.mvc.movie.dto.MovieDto;
 
@@ -111,12 +113,19 @@ public class MovieService {
 	// 찜한 영화 목록
 	public void zzim() throws ServletException, IOException {
 		MovieDao dao = new MovieDao();
+
 		String uidx = "61";
 		System.out.println("유저 idx : " + uidx);
 		req.setAttribute("list", dao.list(uidx));
 		dis = req.getRequestDispatcher("zzim.jsp");
 		dis.forward(req, resp);
 
+		System.out.println("값 확인");
+		String idx = String.valueOf(req.getSession().getAttribute("uIdx"));
+		System.out.println("유저 idx : " + idx );
+		req.setAttribute("list", dao.list(idx));
+		dis = req.getRequestDispatcher("zzim.jsp");
+		dis.forward(req, resp);
 	}
 
 	// 검색한 영화 불러오기
@@ -132,7 +141,8 @@ public class MovieService {
 	// 보고 싶은 영화 검색하기
 	public void search() throws ServletException, IOException {
 		MovieDao dao = new MovieDao();
-		String mName = "testDate3";
+		//req.getParameter("mGenre");
+		String mName = "testDate2";
 		String mGenre = "호러";
 		String mdDirector = "더미데이터";
 		String maActor = "더미데이터 배우";
@@ -143,18 +153,24 @@ public class MovieService {
 
 	}
 
-	// 랜덤으로 영화 한개 불러오기
-	public void random() throws IOException, ServletException {
-		MovieDao dao = new MovieDao();
-		ArrayList<MovieDto> list = dao.random();
-		System.out.println(list);
-		req.setAttribute("list", list);
-		RequestDispatcher dis = req.getRequestDispatcher("main_bottom.jsp");
-		dis.forward(req, resp);
-		dao.resClose();
-	}
-
-	// 마이페이지 찜목록
+	   //랜덤으로 영화 한개 불러오기
+	   public void random() throws IOException, ServletException {
+	      MovieDao dao = new MovieDao();
+	      MovieDto list = dao.random();
+	      System.out.print(list);
+	      //랜덤처리가 끝난뒤 페이지를 이동시켜주는 것이 아니라 데이터를 내려줘야함
+	      // 데이터 타입의 경우 처리하기 편한 방식으로 변경해서 내려주면 됨
+	      resp.setContentType("text/html;charset=UTF-8");
+	      
+	      HashMap<String, Object> map = new HashMap<String, Object>();
+	       map.put("movie",list);
+	      Gson json = new Gson();
+	      String obj = json.toJson(map);
+	      resp.getWriter().print(obj);
+	      dao.resClose();
+	   }
+	   
+	//마이페이지 찜목록
 	public void myPageZ() throws ServletException, IOException {
 		ArrayList<MovieDto> list = null;
 		String uIdx = "61";
@@ -247,8 +263,11 @@ public class MovieService {
 		String uidx = req.getParameter("uidx");
 		System.out.println("점검 : " + uidx);
 
+		System.out.println("찜 목록 삭제 요청");
+		String zidx = req.getParameter("zidx"); //해당 유저의 하나의 찜 목록 리스트를 삭제
+		System.out.println("zidx 출력 확인 : " + zidx);//zidx 출력확인
 		MovieDao dao = new MovieDao();
-		dao.del(uidx);
+		dao.del(zidx);
 		String page = "/zzim";
 		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
@@ -293,6 +312,17 @@ public class MovieService {
 
 	public void test() throws ServletException, IOException {
 		RequestDispatcher dis = req.getRequestDispatcher("/movieList");
+		dis.forward(req, resp);
+		
+	}
+
+	public void Alldel(String uidx) throws ServletException, IOException {
+		System.out.println("찜 목록 전체 삭제 요청");
+		System.out.println("uidx 출력 : " + uidx);
+		MovieDao dao = new MovieDao();
+		dao.Alldel(uidx);
+		String page = "/zzim";
+		RequestDispatcher dis = req.getRequestDispatcher(page);
 		dis.forward(req, resp);
 		
 	}
