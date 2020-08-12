@@ -16,12 +16,19 @@ public class MovieDto {
 	private String maActor;
 	private String mContent;
 	private String mfUrl;
+	private String mravg;
+	private int mfIdx;
+	private String mfOri;
+	private String mfNew;
+
+	
 	private int zidx;
 	private int uidx;
 	private Date zdate;
 	private String maactor;
+	private double mrRating;
 	
-	public int getMidx() {
+	public int getmIdx() {
 		return mIdx;
 	}
 	public void setmIdx(int mIdx) {
@@ -78,7 +85,7 @@ public class MovieDto {
 	public String getMaActor() {
 		return maActor;
 	}
-	public void setmaActor(String maActor) {
+	public void setMaActor(String maActor) {
 		this.maActor = maActor;
 	}
 	public String getmContent() {
@@ -93,6 +100,32 @@ public class MovieDto {
 	public void setMfUrl(String mfUrl) {
 		this.mfUrl = mfUrl;
 	}
+
+	public int getMfIdx() {
+		return mfIdx;
+	}
+
+	public void setMfIdx(int mfIdx) {
+		this.mfIdx = mfIdx;
+	}
+
+	public String getMfOri() {
+		return mfOri;
+	}
+
+	public void setMfOri(String mfOri) {
+		this.mfOri = mfOri;
+	}
+
+	public String getMfNew() {
+		return mfNew;
+	}
+
+	public void setMfNew(String mfNew) {
+		this.mfNew = mfNew;
+	}
+
+
 	public int getZidx() {
 		return zidx;
 	}
@@ -116,6 +149,21 @@ public class MovieDto {
 	}
 	public void setMaactor(String maactor) {
 		this.maactor = maactor;
+	}
+	public double getMrRating() {
+		return mrRating;
+	}
+	public void setMrRating(double mrRating) {
+		this.mrRating = mrRating;
+	}
+
+
+	public String getMravg() {
+		return mravg;
+	}
+
+	public void setMravg(String mravg) {
+		this.mravg = mravg;
 	}
 
 

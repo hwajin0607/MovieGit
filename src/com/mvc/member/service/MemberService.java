@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.mvc.member.dao.MemberDao;
 import com.mvc.member.dto.MemberDto;
+import com.mvc.movie.dto.MovieDto;
 
 import oracle.net.ns.SessionAtts;
 
@@ -31,6 +32,7 @@ public class MemberService {
 		 if(useridx != 0) {
 			 System.out.println(id+" 의 로그인 결과 : "+useridx); 
 		 }
+		 dao.resClose();
 		 return useridx;
 
 	}
@@ -93,11 +95,22 @@ public class MemberService {
 		}
 		
 	}
-	public void like() throws SQLException {
+	public void like() throws SQLException, ServletException, IOException {
 		String uIdx =  Integer.toString((int) req.getSession().getAttribute("uIdx"));
 		System.out.println("고유번호 : "+uIdx);
+		ArrayList<MovieDto> list = null;
 		MemberDao dao = new MemberDao();
-		dao.like(uIdx);
+
+		try {
+			list = dao.like(uIdx);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+			req.setAttribute("list", list);
+			RequestDispatcher dis = req.getRequestDispatcher("main_top.jsp");
+			dis.forward(req, resp);
+		}
 		
 		
 	}

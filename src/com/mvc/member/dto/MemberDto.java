@@ -8,6 +8,7 @@ public class MemberDto {
 	private Date uBirth;
 	private String ugender;
 	private String uemail;
+	
 	public String getUiden() {
 		return uiden;
 	}

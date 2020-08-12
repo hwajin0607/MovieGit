@@ -50,7 +50,6 @@ public class MemberController extends HttpServlet {
 		System.out.println(addr);
 		RequestDispatcher dis = null;
 		MemberService ms = new MemberService(req,resp);
-		
 		switch (addr) {
 		
 		case "/login":
@@ -73,6 +72,7 @@ public class MemberController extends HttpServlet {
 	         dis = req.getRequestDispatcher("like");
 	         dis.forward(req, resp);
 	         break;
+
 			
 		case "/logout":
 			req.getSession().removeAttribute("loginId");
@@ -94,7 +94,15 @@ public class MemberController extends HttpServlet {
 
 		case "/like":
 			System.out.println("취향 요청");
-			ms.like();
+			msg = "like";
+			 if(req.getSession().getAttribute("uIdx")!=null) {
+				 ms.like();		
+				 msg = "로그인에 성공 하였습니다.";
+			 }
+			req.setAttribute("msg", msg);
+			dis = req.getRequestDispatcher("main_top.jsp");
+			dis.include(req, resp);
+			
 			break;
 
 		case "/info":
