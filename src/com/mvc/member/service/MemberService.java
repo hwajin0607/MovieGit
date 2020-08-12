@@ -1,99 +1,213 @@
 package com.mvc.member.service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.mvc.member.dao.MemberDao;
 import com.mvc.member.dto.MemberDto;
+import com.mvc.movie.dto.MovieDto;
 
 
 public class MemberService {
+	HttpServletRequest req = null;
+	HttpServletResponse resp = null;
 
-	public Object list(int page, String search) {
+	public MemberService(HttpServletRequest req, HttpServletResponse resp) {
+		this.req =req;
+		this.resp =resp;
+	}
 	
-		System.out.println(search+":"+page);
-		int pagePerCnt = 25; //페이지당 보여줄 게시물의 수
-		int end = page*pagePerCnt;
-		int start = (end-pagePerCnt)+1; 
-		
-		ArrayList<MemberDto> list = new ArrayList<MemberDto>();
-		Connection conn= null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		
-		
-	try {
+	public int login(String id, String pw) throws Exception {
+		MemberDao dao = new MemberDao();
+		int useridx = dao.login(id,pw);
+		 if(useridx != 0) {
+			 System.out.println(id+" 의 로그인 결과 : "+useridx); 
+		 }
+		 dao.resClose();
+		 return useridx;
 
-		Context ctx = new InitialContext();
-		DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");		
-		conn = ds.getConnection();
-		String sql = "";
-		
-		//서치가 널이거나 아니면 서치가 공백이라면
-		if(search == null || search.equals("")) { 
-			
-			sql = "select rnum, uidx, uname, ubirth, ugender, uIden, upw, uemail, udate "
-					+ "from (select row_number() over (order by uidx desc) as rnum, uidx, uname, "
-					+ "ubirth, ugender, uIden, upw, uemail, udate from member) where rnum between ? and ?";
-			
-			ps = conn.prepareStatement(sql);
-			ps.setInt(1, start);
-			ps.setInt(2, end);
-			System.out.println("제대로 작동");
-			
-			}else {
-				
-				sql = "select rnum, uidx, uname, ubirth, ugender, uIden, upw, uemail, udate "
-						+ "from (select row_number() over (order by uidx desc) as rnum, uidx, uname, "
-						+ "ubirth, ugender, uIden, upw, uemail, udate from member) where uname like ? and "
-						
-						+ "rnum between ? and ? ";
-				
-				ps = conn.prepareStatement(sql);
-				ps.setString(1, "%"+search+"%");
-				ps.setInt(2, start);
-				ps.setInt(3, end);
+	}
+	
+	
+	public void join() throws IOException {
+		boolean success = false;
+		String id = req.getParameter("id");
+		String pw = req.getParameter("pw");
+		String name = req.getParameter("name");
+		String birth = req.getParameter("birth");
+		String gender = req.getParameter("gender");
+		String email = req.getParameter("email");
+		String[] ugenre = req.getParameterValues("ugenre[]");
+		System.out.println(id+"/"+pw+"/"+name+"/"+birth+"/"+gender+"/"+email+"/"+ugenre.length);
+		String reid = req.getParameter("id");
+		String repw = req.getParameter("pw");
+		System.out.println(reid+"/"+repw);
+		MemberDao dao = new MemberDao();
+		try {
+			if(dao.join(id,pw,name,birth,gender,email)) {
+				int useridx = dao.uidx(reid,repw);
+				if(dao.genrejoin(ugenre,useridx)==ugenre.length) {
+					success = true;
+				}
 			}
-			rs = ps.executeQuery();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			System.out.println("success");
+			map.put("join", success);
+			Gson gson = new Gson();
+			String obj =  gson.toJson(map);
+			System.out.println("result : " + obj);
+			resp.getWriter().println(obj);
+		}
+		
+		
+	}
 
-			
-		while(rs.next()) {
-				MemberDto dto = new MemberDto();
-				dto.setuIdx(rs.getInt("uIdx"));
-				dto.setuName(rs.getString("uName"));
-				dto.setuBirth(rs.getDate("uBirth"));
-				dto.setuGender(rs.getString("uGender"));
-				dto.setuIden(rs.getString("uIden"));
-				dto.setuPw(rs.getString("uPw"));
-				dto.setuEmail(rs.getString("uEmail"));
-				dto.setuDate(rs.getDate("uDate"));
-				
-				list.add(dto); 
+	public void overlay() throws IOException {
+		String id = req.getParameter("id");
+		boolean success = false;
+		System.out.println("3차 확인 id : " + id);
+		MemberDao dao = new MemberDao();
+		try {
+			success = dao.overlay(id);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("overlay", success);
+			Gson gson = new Gson();
+			String obj =  gson.toJson(map);
+			System.out.println("result : " + obj);
+			resp.getWriter().println(obj);
+		}
+		
+	}
+	public void like() throws SQLException, ServletException, IOException {
+		String uIdx =  Integer.toString((int) req.getSession().getAttribute("uIdx"));
+		System.out.println("고유번호 : "+uIdx);
+		ArrayList<MovieDto> list = null;
+		MemberDao dao = new MemberDao();
 
-				
-			}
+		try {
+			list = dao.like(uIdx);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally {
+			dao.resClose();
+			req.setAttribute("list", list);
+			RequestDispatcher dis = req.getRequestDispatcher("main_top.jsp");
+			dis.forward(req, resp);
+		}
+		
+		
+	}
+
+	public void info() {
+		// String uidx = (String) req.getSession().getAttribute("idx"); 나중에 세션값 저장되면 사용할것
+		String uidx = "61";
+		MemberDto info = null;
+		ArrayList<String> infoG = null;
+		MemberDao dao = new MemberDao();
+		try {
+			info = dao.info(uidx);
+			infoG =  dao.genre(uidx);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+			req.setAttribute("info", info);
+			req.setAttribute("infoG", infoG);
+			RequestDispatcher dis = req.getRequestDispatcher("MemberInfo.jsp");
 			try {
-				if(rs != null) {rs.close();}
-				if(ps != null) {ps.close();}
-				if(conn != null) {conn.close();}
-				
-			
-			} catch (Exception e) {
+				dis.forward(req, resp);
+			} catch (ServletException | IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		
+	
+	}
+
+	public void changing() {
+		// String uidx = (String) req.getSession().getAttribute("idx"); 나중에 세션값 저장되면 사용할것
+		String uidx = "61";
+		MemberDto info = null;
+		ArrayList<String> infoG = null;
+		MemberDao dao = new MemberDao();
+		try {
+			info = dao.info(uidx);
+			infoG =  dao.genre(uidx);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+			req.setAttribute("info", info);
+			req.setAttribute("infoG", infoG);
+			RequestDispatcher dis = req.getRequestDispatcher("MemberChanging.jsp");
+			try {
+				dis.forward(req, resp);
+			} catch (ServletException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		
-		return list;
+	}
+
+	public void infoc() throws IOException {
+		// String uidx = (String) req.getSession().getAttribute("idx"); 나중에 세션값 저장되면 사용할것
+		boolean success = false;
+		String uidx = "61";
+		String pw = req.getParameter("pw");
+		String birth = req.getParameter("birth");
+		String email = req.getParameter("email");
+		String[] ugenre = req.getParameterValues("ugenre[]");
+		System.out.println(pw+birth+email);
+		MemberDao dao = new MemberDao();
+		int sc = 0;
+		try {
+			sc = dao.infoc(uidx,pw,birth,email);
+			
+			if(ugenre.length > 0) {
+				dao.genrec(uidx,ugenre);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			if(sc>0) {
+				success = true;
+			}
+			map.put("overlay", success);
+			Gson gson = new Gson();
+			String obj =  gson.toJson(map);
+			System.out.println("result : " + obj);
+			resp.getWriter().println(obj);
+		}
+			
+		
+		
 	}
 	
 
+
+	
 }

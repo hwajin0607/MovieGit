@@ -3,21 +3,42 @@ package com.mvc.movie.dto;
 import java.sql.Date;
 
 public class MovieDto {
+
 	
+
+
 	private int mIdx;
+	private String mName;
 	private Date mOpen;
 	private String mGenre;
 	private String mUrl;
 	private int mBhit;
 	private Date mDate;
 	private int mAge;
+	private String mdDirector;
+	private String maActor;
 	private String mContent;
-	private String mName;
+	private String mfUrl;
+	private String mravg;
+	private int mfIdx;
+	private String mfOri;
+	private String mfNew;
+	private int zidx;
+	private int uidx;
+	private Date zdate;
+	private String maactor;
+	private double mrRating;
 	public int getmIdx() {
 		return mIdx;
 	}
 	public void setmIdx(int mIdx) {
 		this.mIdx = mIdx;
+	}
+	public String getmName() {
+		return mName;
+	}
+	public void setmName(String mName) {
+		this.mName = mName;
 	}
 	public Date getmOpen() {
 		return mOpen;
@@ -55,18 +76,85 @@ public class MovieDto {
 	public void setmAge(int mAge) {
 		this.mAge = mAge;
 	}
+	public String getMdDirector() {
+		return mdDirector;
+	}
+	public void setMdDirector(String mdDirector) {
+		this.mdDirector = mdDirector;
+	}
+	public String getMaActor() {
+		return maActor;
+	}
+	public void setMaActor(String maActor) {
+		this.maActor = maActor;
+	}
 	public String getmContent() {
 		return mContent;
 	}
 	public void setmContent(String mContent) {
 		this.mContent = mContent;
 	}
-	public String getmName() {
-		return mName;
+	public String getMfUrl() {
+		return mfUrl;
 	}
-	public void setmName(String mName) {
-		this.mName = mName;
+	public void setMfUrl(String mfUrl) {
+		this.mfUrl = mfUrl;
 	}
+	public String getMravg() {
+		return mravg;
+	}
+	public void setMravg(String mravg) {
+		this.mravg = mravg;
+	}
+	public int getMfIdx() {
+		return mfIdx;
+	}
+	public void setMfIdx(int mfIdx) {
+		this.mfIdx = mfIdx;
+	}
+	public String getMfOri() {
+		return mfOri;
+	}
+	public void setMfOri(String mfOri) {
+		this.mfOri = mfOri;
+	}
+	public String getMfNew() {
+		return mfNew;
+	}
+	public void setMfNew(String mfNew) {
+		this.mfNew = mfNew;
+	}
+	public int getZidx() {
+		return zidx;
+	}
+	public void setZidx(int zidx) {
+		this.zidx = zidx;
+	}
+	public int getUidx() {
+		return uidx;
+	}
+	public void setUidx(int uidx) {
+		this.uidx = uidx;
+	}
+	public Date getZdate() {
+		return zdate;
+	}
+	public void setZdate(Date zdate) {
+		this.zdate = zdate;
+	}
+	public String getMaactor() {
+		return maactor;
+	}
+	public void setMaactor(String maactor) {
+		this.maactor = maactor;
+	}
+	public double getMrRating() {
+		return mrRating;
+	}
+	public void setMrRating(double mrRating) {
+		this.mrRating = mrRating;
+	}
+
 	
 	
 }

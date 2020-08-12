@@ -40,7 +40,7 @@
 				<a href="manager.jsp">초기화면으로 돌아가기</a>
 			
 			</div>
-			<form method="GET" action = "member">
+			<form method="POST" action = "member">
 			<input type="text" class="sech" name="search">
 			
 			<input type="submit" class="member_btn" value="회원명검색" />

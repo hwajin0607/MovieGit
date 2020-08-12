@@ -4,27 +4,23 @@ import java.sql.Date;
 
 public class MemberDto {
 
-	private int uIdx;
-	private String uName;
+
+	private String uiden;
+	private String uname;
 	private Date uBirth;
-	private String uGender;
-	private String uIden;
-	private String uPw;
-	private String uEmail;
-	private Date uDate;
-	
-	
-	public int getuIdx() {
-		return uIdx;
+	private String ugender;
+	private String uemail;
+	public String getUiden() {
+		return uiden;
 	}
-	public void setuIdx(int uIdx) {
-		this.uIdx = uIdx;
+	public void setUiden(String uiden) {
+		this.uiden = uiden;
 	}
-	public String getuName() {
-		return uName;
+	public String getUname() {
+		return uname;
 	}
-	public void setuName(String uName) {
-		this.uName = uName;
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
 	public Date getuBirth() {
 		return uBirth;
@@ -32,37 +28,22 @@ public class MemberDto {
 	public void setuBirth(Date uBirth) {
 		this.uBirth = uBirth;
 	}
-	public String getuGender() {
-		return uGender;
+	public String getUgender() {
+		return ugender;
 	}
-	public void setuGender(String uGender) {
-		this.uGender = uGender;
+	public void setUgender(String ugender) {
+		this.ugender = ugender;
 	}
-	public String getuIden() {
-		return uIden;
+	public String getUemail() {
+		return uemail;
 	}
-	public void setuIden(String uIden) {
-		this.uIden = uIden;
-	}
-	public String getuPw() {
-		return uPw;
-	}
-	public void setuPw(String uPw) {
-		this.uPw = uPw;
-	}
-	public String getuEmail() {
-		return uEmail;
-	}
-	public void setuEmail(String uEmail) {
-		this.uEmail = uEmail;
-	}
-	public Date getuDate() {
-		return uDate;
-	}
-	public void setuDate(Date uDate) {
-		this.uDate = uDate;
+	public void setUemail(String uemail) {
+		this.uemail = uemail;
 	}
 	
+	
+	
+
 	
 	
 }
