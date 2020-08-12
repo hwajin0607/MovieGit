@@ -59,12 +59,15 @@ public class MemberController extends HttpServlet {
 			System.out.println(id+"/"+pw);
 			String page = "login.jsp";
 			String msg = "로그인에 실패 하였습니다.";
-			 if( ms.login(id,pw) != 0) {
+			int login = ms.login(id,pw);
+			if(login != 0) {
 				 msg = "로그인에 성공 하였습니다.";
-				 req.getSession().setAttribute("uIdx", ms.login(id,pw));
+				 req.getSession().setAttribute("uIdx", login);
 				 req.getSession().setAttribute("loginId", id);
 				 
 			 }
+			String uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
+			System.out.println("세션에 저장된 값 : "+uidx);
 			req.setAttribute("msg", msg);
 			dis = req.getRequestDispatcher("like");
 			dis.forward(req, resp);

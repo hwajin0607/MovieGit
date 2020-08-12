@@ -190,8 +190,10 @@ public class MovieService {
 
 	public void selectGrade() throws SQLException, ServletException, IOException {	
 		MovieDao dao = new MovieDao();
-		ArrayList<MovieDto>list =dao.selectGrade();
-		dao.grademName(list);
+		ArrayList<MovieDto>list2 =dao.selectGrade();
+		ArrayList<MovieDto> list = dao.grademName(list2);
+		System.out.println("평점순" + list.get(0).getmName());
+		System.out.println("평점순" + list.get(0).getMfUrl());
 		req.setAttribute("list", list);
 		RequestDispatcher dis = req.getRequestDispatcher("select.jsp");
 		dis.forward(req, resp);
@@ -201,6 +203,9 @@ public class MovieService {
 	public void selectBhit() throws SQLException, ServletException, IOException {
 		MovieDao dao = new MovieDao();
 		ArrayList<MovieDto>list = dao.selectBhit();
+		System.out.println("123"+list);
+		System.out.println("조회순" + list.get(0).getmName());
+		System.out.println("조회순" + list.get(0).getMfUrl());
 		req.setAttribute("list", list);
 		RequestDispatcher dis = req.getRequestDispatcher("select.jsp");
 		dis.forward(req, resp);

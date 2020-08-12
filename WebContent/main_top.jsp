@@ -188,7 +188,7 @@
  -->
             	<c:forEach items="${list }" var="likelist">
     	
-            <a href=""><li class="list">${likelist.mIdx}</li></a><div class="heart"></div>
+            <a href="l"><li class="list">${likelist.mIdx}</li></a><div class="heart"></div>
              
             </c:forEach>
 

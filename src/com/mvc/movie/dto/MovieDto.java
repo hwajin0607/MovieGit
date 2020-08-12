@@ -12,7 +12,7 @@ public class MovieDto {
 	private Date mDate;
 	private int mAge;
 	private String mdDirector;
-	
+	private String mfURL;
 	private String maActor;
 	private String mContent;
 	private String mfUrl;
@@ -164,6 +164,12 @@ public class MovieDto {
 
 	public void setMravg(String mravg) {
 		this.mravg = mravg;
+	}
+	public String getMfURL() {
+		return mfURL;
+	}
+	public void setMfURL(String mfURL) {
+		this.mfURL = mfURL;
 	}
 
 
