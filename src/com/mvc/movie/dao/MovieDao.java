@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -249,32 +250,27 @@ public class MovieDao {
 		
 		return srlist;
 	}
-
-
-	//랜덤으로 값 가져오기 
-	public ArrayList<MovieDto> random() {
-		String sql = "SELECT m.mIdx, m.mName, f.mfUrl FROM Movie m, movieFoster f order by SYS.dbms_random.VALUE";
-		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
+	// 랜덤으로 값 가져오기 
+	public MovieDto random() {
+		String sql = "SELECT m.mIdx, m.mName, f.mfUrl "
+				+ "FROM Movie m, movieFoster f "
+				+ "WHERE m.midx = f.midx "
+				+ "ORDER BY SYS.dbms_random.VALUE";
+		MovieDto dto = new MovieDto();
 		try {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			boolean su = rs.next();
-			while(su) {
-				MovieDto dto = new MovieDto();
+			if(rs.next()) {
 				dto.setmIdx(rs.getInt("mIdx"));
 				dto.setmName(rs.getString("mName"));
 				dto.setMfUrl(rs.getString("mfUrl"));
-				su = false;
-				System.out.println(dto.getmIdx()+dto.getmName()+dto.getMfUrl());
-				list.add(dto);
 			}
-			System.out.println("값을 가져오기");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return list;
+		return dto;
 	}
-
+	//
 	public void grademName(ArrayList<MovieDto> list) {
 		// TODO Auto-generated method stub
 		
@@ -314,12 +310,13 @@ public class MovieDao {
 		}
 		return slist;
 	}
-	public boolean del(String zidx) {
-		String sql = "DELETE FROM zzim WHERE zidx=?";
+
+	public boolean del(String uidx) {
+		String sql = "DELETE FROM zzim WHERE uidx=?";
 		boolean result = false;
 		try {
 			ps=conn.prepareStatement(sql);
-			ps.setString(1, zidx);
+			ps.setString(1, uidx);
 			int success =ps.executeUpdate();
 			if(success>0) {
 				result=true;
@@ -366,15 +363,19 @@ public class MovieDao {
 		String sql ="SELECT mName, mGenre FROM movie WHERE uidx = ?";
 	}
 	
+	//영화 상세페이지 보여주기
 	public ArrayList<MovieDto> movieDetail(String mIdx) {
 		System.out.println("dao 일 시키기");
 		String sql = "select DISTINCT m.mIdx, m.mName, m.mGenre, m.mUrl, m.mAge, m.mContent, d.mddirector, a.maactor, f.mfurl,"
-				+ "(select ROUND(AVG(mrRating),1) from movierating where midx = ?)as mrRating from Movie m, moviedirector d, movieactor a, moviefoster f where m.mIdx = ?";
+				+ "(select ROUND(AVG(mrRating),1) from movierating where midx = ?)as mrRating, "
+				+ "(select COUNT(uidx) from movierating where midx = ?) as uIdx "
+				+ "from Movie m, moviedirector d, movieactor a, moviefoster f where m.mIdx = ?";
 		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
 		try {
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, mIdx);
 			ps.setString(2, mIdx);
+			ps.setString(3, mIdx);
 			rs = ps.executeQuery();
 			boolean su = rs.next();
 			while(su) {
@@ -388,8 +389,9 @@ public class MovieDao {
 				dto.setMdDirector(rs.getString("mddirector"));
 				dto.setMaActor(rs.getString("maactor"));
 				dto.setMfUrl(rs.getString("mfurl"));
-				System.out.println(rs.getDouble("mrRating"));
 				dto.setMrRating(rs.getDouble("mrRating"));
+				dto.setUidx(rs.getInt("uidx"));
+				System.out.println(rs.getInt("uidx"));
 				System.out.println(dto.getmIdx()+"/"+dto.getmName()+"/"+dto.getmGenre()+"/"+dto.getmUrl()+"/"+dto.getmAge()+"/"+dto.getmContent()+"/"
 						+dto.getMdDirector() +"/"+ dto.getMaactor() +"/"+ dto.getMfUrl()+"/"+dto.getMrRating());
 				System.out.println(dto.getmIdx()+"/"+dto.getmName()+"/"+dto.getmGenre()+"/"+dto.getmUrl()+"/"+dto.getmAge()+"/"+dto.getmContent()+"/"
@@ -422,7 +424,45 @@ public class MovieDao {
 			resClose();
 		}
 		return Alldel;
-		
+	}
+
+	// 평점 매기기
+	public boolean writeRating(String mIdx, String pjpoint, String uIdx) {
+		System.out.println("dao 일 시키기");
+		boolean result = false;
+		String sql = "SELECT * FROM movieRating where uidx = ? and midx = ?";
+		try {
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, uIdx);
+			ps.setString(2, mIdx);
+			rs = ps.executeQuery();
+			System.out.println(rs);
+			if(rs.next() == false) {
+				String sql2 ="INSERT INTO movierating(mridx, uidx, midx, mrrating) VALUES(movieRating_seq.NEXTVAL,?,?,?)";
+				System.out.println("한번도 평점을 매기지않은 회원이 평점을 매길 경우");
+				try {
+					ps = conn.prepareStatement(sql2);
+					ps.setString(1, uIdx);
+					ps.setString(2, mIdx);
+					ps.setString(3, pjpoint);
+					if(ps.executeUpdate()>0) {
+						result = true;
+					}
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+	
+			}else {
+				result = false;
+				System.out.println("한번이라도 평점을 매긴 회원이 평점을 매길 경우");
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			result = false;
+		}
+
+		return result;
+
 	}
 
 	

@@ -4,6 +4,7 @@ package com.mvc.movie.service;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.mvc.movie.dao.MovieDao;
 import com.mvc.movie.dto.MovieDto;
 
@@ -159,16 +161,22 @@ public class MovieService {
 	}
 
 	
-	//랜덤으로 영화 한개 불러오기
-	public void random() throws IOException, ServletException {
-		MovieDao dao = new MovieDao();
-		ArrayList<MovieDto>list = dao.random();
-		System.out.println(list);
-			req.setAttribute("list", list);
-			RequestDispatcher dis = req.getRequestDispatcher("main_bottom.jsp");
-			dis.forward(req, resp);
-			dao.resClose();
-	}
+	   //랜덤으로 영화 한개 불러오기
+	   public void random() throws IOException, ServletException {
+	      MovieDao dao = new MovieDao();
+	      MovieDto list = dao.random();
+	      System.out.print(list);
+	      //랜덤처리가 끝난뒤 페이지를 이동시켜주는 것이 아니라 데이터를 내려줘야함
+	      // 데이터 타입의 경우 처리하기 편한 방식으로 변경해서 내려주면 됨
+	      resp.setContentType("text/html;charset=UTF-8");
+	      
+	      HashMap<String, Object> map = new HashMap<String, Object>();
+	       map.put("movie",list);
+	      Gson json = new Gson();
+	      String obj = json.toJson(map);
+	      resp.getWriter().print(obj);
+	      dao.resClose();
+	   }
 	
 	//마이페이지 찜목록
 	public void myPageZ() throws ServletException, IOException {

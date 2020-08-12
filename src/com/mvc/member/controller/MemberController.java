@@ -16,11 +16,15 @@ import com.mvc.member.service.MemberService;
 
 
 
+
+
+
 @WebServlet({"/login","/logout","/join","/overlay","/info","/changing","/infoc","/like"})
+
 
 public class MemberController extends HttpServlet {
 
-	@Override
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		try {
@@ -64,15 +68,15 @@ public class MemberController extends HttpServlet {
 	             msg = "로그인에 성공 하였습니다.";
 	             req.getSession().setAttribute("uIdx", login);
 	             req.getSession().setAttribute("loginId", id);
-	             
+
 	          }
 	         String uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
 	         System.out.println(uidx);
 	         req.setAttribute("msg", msg);
-	         dis = req.getRequestDispatcher("like");
+
+	         dis = req.getRequestDispatcher(page);
 	         dis.forward(req, resp);
 	         break;
-
 			
 		case "/logout":
 			req.getSession().removeAttribute("loginId");
@@ -125,9 +129,21 @@ public class MemberController extends HttpServlet {
 
 
 			
+
 		}
-		
+	
+
 	}
 
+
+	
+	
+	
 	
 }
+
+
+	
+
+
+
