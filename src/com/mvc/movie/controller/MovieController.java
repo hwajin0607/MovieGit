@@ -10,19 +10,25 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mvc.member.service.MemberService;
 import com.mvc.movie.service.MovieService;
 
 
-@WebServlet({"/","/zzim","/zzimadd","/searchResult","/del","/delete","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search"})
+
+@WebServlet({"/","/page","/zzim","/zzimadd","/searchResult","/Alldel","/del","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search"})
+
 
 public class MovieController extends HttpServlet {
-	
-	@Override
+
+
+
+		@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Process(req,resp);
-		req.setCharacterEncoding("UTF-8");
+			Process(req,resp);
+			req.setCharacterEncoding("UTF-8");
 	}
 
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Process(req,resp);
@@ -60,17 +66,32 @@ public class MovieController extends HttpServlet {
 			
 		case "/movieList":
 			System.out.println("전체 영화목록 보여주기");
-			req.getSession().setAttribute("mGenre", "");
-			ms.movieList();
+			String genre = String.valueOf(req.getSession().getAttribute("mGenre"));
+			System.out.println("장르 값 확인 용"+genre);
+			String cPage = req.getParameter("page");
+			System.out.println("cPage 값 : "+cPage);
+			int page = 1;
+			if(cPage!=null) {
+				page = Integer.parseInt(cPage);
+			}
+			System.out.println("cPager 값 : "+cPage);
+			System.out.println("page 값 : " +page);
+			if(genre == null || genre =="null") {
+				System.out.println("2차");
+				ms.movieList(page);
+			}else {
+				ms.movieListG(genre,page);
+			}
+			
 			break;
 			
 		case "/movieListG":
-			System.out.println("장르별 영화 보여주기");
 			String mGenre = req.getParameter("mGenre");
-			int page = 0;
 			req.getSession().setAttribute("mGenre", mGenre);
+			page = 1;
 			System.out.println(mGenre);
 			ms.movieListG(mGenre,page);
+			req.getSession().setAttribute("sort", "1");
 			break;
 			
 		case "/movieListS":
@@ -80,13 +101,17 @@ public class MovieController extends HttpServlet {
 			page = 0;
 			if(mSort.equals("내림차")) {
 				sqlb="DESC";
+				req.getSession().setAttribute("sqlb", " DESC");
+			}else {
+				req.getSession().setAttribute("sqlb", " ");
 			}
-			String genre = (String) req.getSession().getAttribute("mGenre");
-			if(genre==null) {
-				genre="";
-			}
-			System.out.println(sqlb+genre);
-			ms.movieListS(sqlb,genre,page);
+			//genre = (String) req.getSession().getAttribute("mGenre");
+			//if(genre==null) {
+			//	genre="";
+			//}
+			// System.out.println(sqlb+genre);
+			//ms.movieListS(sqlb,genre,page);
+			ms.test();
 			break;
 			
 			//상세페이지 띄우기
@@ -96,10 +121,12 @@ public class MovieController extends HttpServlet {
 			//req.getSession().setAttribute("mIdx", mIdx);
 			System.out.println(mIdx);
 			ms.movieDetail(mIdx);
+
 			break;
 			
 			
 		case "/zzim":
+			System.out.println("찜한 목록 가져오기");
 			ms.zzim();
 			break;
 			
@@ -123,8 +150,8 @@ public class MovieController extends HttpServlet {
 		//찜 목록 삭제
 		case "/del":
 			System.out.println("찜 목록에서 삭제 요청");
-			String idx = req.getParameter("idx");
-			System.out.println("DEL idx : " + idx);
+			String zidx = req.getParameter("zidx");
+			System.out.println("DEL zidx : " + zidx);
 			ms.del();
 
 			// 랜덤으로 가져오기
@@ -132,7 +159,6 @@ public class MovieController extends HttpServlet {
 			System.out.println("랜덤으로 가져오기");
 			ms.random();
 			break;
-			
 			//평점 매기기
 		case "/writeRating" :
 			System.out.println("평점 넣기");
@@ -144,13 +170,48 @@ public class MovieController extends HttpServlet {
 		case "/myPageZ":
 			System.out.println("마이페이지 찜목록 두개 보여주기");
 			ms.myPageZ();
+			
+		case "/page" :
+			
+			req.getSession().removeAttribute("mGenre");
+			page = 1;
+			ms.movieList(page);
+			/*System.out.println("페이지 이동");
+			//mSort = req.getParameter("mSort");
+			//System.out.println("mSort : "+mSort2);
+			sqlb = " ";
+			page = 1;
+			/*
+			 * if(mSort.equals("내림차")) { sqlb="DESC"; };
 
+
+			mGenre = req.getParameter("mGenre");
+			String mgenre = (String) req.getSession().getAttribute("mGenre");
+			System.out.println(mgenre+"/"+page+"/"+sqlb);
+			if(mgenre==null) {
+				mgenre="";
+			}
+			System.out.println(mgenre);
+			ms.page(mgenre,page,sqlb);
+			*/
+			break;
+			
+		case "/Alldel":
+			System.out.println("모든 찜 목록 리스트 삭제");
+			String uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
+			System.out.println("Alldel uidx : " + uidx);
+			ms.Alldel(uidx);
 			break;
 			
 		
 		}
+
 		
 		
 		
 	}
+
+
+
+		
 }

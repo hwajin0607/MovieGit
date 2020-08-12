@@ -9,10 +9,6 @@
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
 
-    body{
-        background-color: gray;
-      
-    }
 
     a>li{
         float:left;
@@ -29,7 +25,13 @@
        
     }
     #ent{
-        position: absolute;
+    	position:absolute;
+    	background-color:black;
+    	opacity: 0.5;
+    	width:100%;
+    	color:white;
+    	top:11%;
+    	left:0;
         font-weight: 600;
     }
   /* 영화리스트 vsc */
@@ -81,8 +83,8 @@
 /*     .mo{
         position: absolute;
         top: 40%;
-        left: 20%; */
-    }
+        left: 20%; 
+    }*/
     table,th,td{
     	
     	border-collapse : collapse;
@@ -92,6 +94,8 @@
     	background-color : hotpink;
     	width: 250px;
         height: 250px;
+        float:left;
+        margin:30px;
         
     }
     
@@ -107,10 +111,10 @@
         left: 20%;
         
     }
-        img{
+       /* img{
         max-width: 60px;
         max-height: 60px;
-    }
+    }*/
     #zzim{
     	position : absolute;
     	top: 30%;
@@ -119,6 +123,20 @@
  	.pageArea{
 		margin: 10px;
 	}
+	#next{
+		clear:left;
+	}
+	.mainImg>img{
+		position: relative;
+		width: 100%;
+		height: 100%;
+		opacity: 0.5; 
+	}
+	a#more{
+		position: absolute;
+		text-align: center;
+		
+	}
 
   
 </style>
@@ -126,12 +144,14 @@
 <body>
     <div class="mainbody">
     <!-- 배경이미지 -->
-        <!-- <img src="bgimg.jpg" style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative;" alt=""> -->
-    
-        <div id="ent">Entire film</div>
+    	<div class="mainImg">
+        	<img src="/photo/back.jpg"  />
+    	</div>
+        <div id="ent"><h1>&nbsp;Entire film</h1></div>
         <!-- 전체영화 메뉴 바 -->
         <div class="moviebar">
             <ul class="genre">
+           		<a href="./page"><li>전체</li></a>
                 <a href="./movieListG?mGenre=로맨스/코미디"><li>로멘스/코미디</li></a>
                 <a href="./movieListG?mGenre=스릴러/공포"><li>스릴러/공포</li></a>
                 <a href="./movieListG?mGenre=SF/판타지"><li>SF/판타지</li></a>
@@ -142,13 +162,14 @@
         </div>
         </br></br></br>
         <!-- 검색창 -->
-        <div class="searchbar">
+        <form class="searchbar" action="./searchResult">
             <span class='emsearch'>
-                <input type='text' class='sch_text' />
+                <input type='text' class='sch_text' name="searchTxt"/>
             </span>
-            <!-- <button type='submit' class='sch'>검색</button> -->
-             <a href="./searchResult" id="sch" target="_parent">검색</a>
-        </div>
+            <button type='submit' class='sch'>검색</button>
+            <!-- <button type='submit' class='sch'>검색</button>
+             <a href="./searchResult" id="sch" target="_parent">검색</a> -->
+        </form>
         <!-- 정렬 -->
         <div class="sort">
             <a href="./movieListS?mSort=내림차">최신 개봉일 순</a>/<a href="./movieListS?mSort=오름차">오래된 순</a>
@@ -159,59 +180,24 @@
         <table>
         	<tr>
         	<c:forEach items="${movieList }" var="mlist"> 
-				<td><a href="./movieDetail?mIdx=${mlist.mIdx }">${mlist.mIdx }</a></td>
+				<td><a href="./movieDetail?mIdx=${mlist.mIdx }">${mlist.mIdx}</a></td>
 			</c:forEach>
 			</tr>
 		
 		</table>
 		<div class="pageArea">
-			<a href="./movieList?=${currPage+1}" id="more">더보기</a>
+			<a href="./movieList?page=${currPage +1}" id="more">
+			<img src="/photo/more.png" style="width: 30px; height: 30px; ">
+			</a>
 		</div>
 		</div>
-        
-        <%-- <div class="mList">
-        <c:set var="i" value="0" /> 
-        <c:set var="j" value="4" /> 
-        <table > 
-        <c:forEach items="${movieList }" var="mlist"> 
-        <c:if test="${i%j == 0 }"><tr> </c:if> 
-        <td ><a href="./movieDetail?mIdx=${mlist.mIdx }">${mlist.mIdx }</a></td>
-        <c:if test="${i%j == j-1 }"> </tr> </c:if> 
-        <c:set var="i" value="${i+1 }" /> 
-        </c:forEach> 
-        </table>
-        <a href="#" id="more">더보기</a>
-        </div>  --%>
         
 
-<!-- 영화리스트 vsc -->
-        <%-- <div class="mo">
-        <ul class="movie">
-        <c:forEach items="${movieList }" var="mlist">
-            <a href="#"><li class="emList">${mlist.mName }</li></a>
-        </c:forEach>
-        </ul>
-        <a href="#" id="more">더보기</a>
-        </div> --%>
-        
     </div>
 </body>
 <script>
 
-    
-/*         $("#more").click(function(){
-            
-            
-            $(".movie").append("<a href='#'><li class='emList' id='next'>movie</li></a>");
-            $(".movie").append("<a href='#'><li class='emList'>movie </li></a>");
-            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>");
-            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>");
-            $(".movie").append(" <a href='#'><li class='emList' id='next'>movie </li></a>");
-            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>");
-            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>");
-            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>"); 
 
-        });*/
-        
+    
 </script>
 </html>

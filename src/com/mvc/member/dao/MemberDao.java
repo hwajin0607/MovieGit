@@ -127,17 +127,24 @@ public class MemberDao {
 		return useridx;
 	}
 
-	public ArrayList<MovieDto> like(String uIdx) throws SQLException {
+	public ArrayList<MovieDto> like(String uIdx,int page1) throws SQLException {
 		System.out.println("아이디 고유번호 2차 확인 : "+uIdx);
+		
+		   int pagePerCnt = 4;//페이지당 보여줄 게시물의 수
+		   int end = page1*pagePerCnt;
+		   int start = (end-pagePerCnt)+1;
+
 		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
-		String sql = "select f.mfidx, m.midx from movieFoster f, movie m WHERE f.midx=m.midx AND m.midx IN"
-				+ "(select m.midx from movie m, userGenre u WHERE m.mgenre=u.ggenre(+) AND u.uidx=?)";
+		String sql = "select distinct f.rnum, f.mfidx, m.midx from (select ROW_NUMBER() OVER(ORDER BY f.mfidx DESC) AS rnum, m.midx, f.mfidx from moviefoster f, movie m WHERE f.midx=m.midx AND m.midx IN(select m.midx from movie m, userGenre u WHERE m.mgenre=u.ggenre AND u.uidx=?)) f, movie m where f.midx = m.midx and f.rnum BETWEEN ? AND ?  ORDER BY f.rnum";
 		ps =conn.prepareStatement(sql);
 		ps.setString(1, uIdx);
+		ps.setInt(2, start);
+        ps.setInt(3, end);
 		rs = ps.executeQuery();
 		while (rs.next()) {
 			MovieDto dto = new MovieDto();
-			dto.setmIdx(rs.getInt("mfIdx"));
+			dto.setmIdx(rs.getInt("mIdx"));
+			dto.setMfIdx(rs.getInt("mfIdx"));
 			list.add(dto);
 		}
 		System.out.println(list);

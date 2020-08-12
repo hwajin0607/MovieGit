@@ -16,11 +16,15 @@ import com.mvc.member.service.MemberService;
 
 
 
+
+
+
 @WebServlet({"/login","/logout","/join","/overlay","/info","/changing","/infoc","/like"})
+
 
 public class MemberController extends HttpServlet {
 
-	@Override
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		try {
@@ -37,7 +41,6 @@ public class MemberController extends HttpServlet {
 		try {
 			Process(req,resp);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -52,30 +55,48 @@ public class MemberController extends HttpServlet {
 		MemberService ms = new MemberService(req,resp);
 		switch (addr) {
 		
-		case "/login":
-			System.out.println("로그인 요청");
-			String id = req.getParameter("id");
-			String pw = req.getParameter("pw");
-			System.out.println(id+"/"+pw);
-			String page = "login.jsp";
-			String msg = "로그인에 실패 하였습니다.";
-			int login = ms.login(id,pw);
-			if(login != 0) {
-				 msg = "로그인에 성공 하였습니다.";
-				 req.getSession().setAttribute("uIdx", login);
-				 req.getSession().setAttribute("loginId", id);
-				 
-			 }
-			String uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
-			System.out.println("세션에 저장된 값 : "+uidx);
-			req.setAttribute("msg", msg);
-			dis = req.getRequestDispatcher("like");
-			dis.forward(req, resp);
-			break;
+	      case "/login":
+	            System.out.println("로그인 요청");
+	            String id = req.getParameter("id");
+	            String pw = req.getParameter("pw");
+	            System.out.println(id+"/"+pw);
+	            String page = "login.jsp";
+	            String msg = "로그인에 실패 하였습니다.";
+	            
+	            int login = 0;
+	            
+	            if(id==null || pw ==null) {
+	            	msg = "로그인이 필요한 서비스 입니다.";
+	            }
+            	login = ms.login(id,pw);
+
+ 	            if(login != 0) {
+ 	            	msg = "로그인에 성공 하였습니다.";
+ 	                page = "like";
+
+ 	                if(id.equals("manager")){
+	                	msg = "관리자 페이지 입니다.";
+	                	page="manager";	
+	                	
+	                } 
+ 	            }
+            	
+
+                req.getSession().setAttribute("loginId", id);
+                req.getSession().setAttribute("loginPw", pw);
+ 	            req.getSession().setAttribute("uIdx", login);
+ 	            
+
+                System.out.println("loginId=="+req.getSession().getAttribute("loginId"));
+	            req.setAttribute("msg", msg);
+	            
+	            dis = req.getRequestDispatcher(page);
+	            dis.forward(req, resp);
+	            break;
 			
 		case "/logout":
+			req.getSession().removeAttribute("uIdx");
 			req.getSession().removeAttribute("loginId");
-			
 			resp.sendRedirect("login.jsp");
 			break;
 		
@@ -92,15 +113,28 @@ public class MemberController extends HttpServlet {
 			
 
 		case "/like":
+			/* req.setCharacterEncoding("UTF-8"); */
 			System.out.println("취향 요청");
-			msg = "like";
-			 if(req.getSession().getAttribute("uIdx")!=null) {
-				 ms.like();		
-				 msg = "로그인에 성공 하였습니다.";
-			 }
-			req.setAttribute("msg", msg);
-			dis = req.getRequestDispatcher("main_top.jsp");
-			dis.include(req, resp);
+			/* String msg1 = "like"; */
+			 String pageParam = req.getParameter("page");
+				int page1 = 1;
+				page=null;
+				if(pageParam != null) {
+					page1 = Integer.parseInt(pageParam);
+				}
+				
+				 if(req.getSession().getAttribute("loginId")=="manager") {
+						page="manager.jsp";	 
+					}
+				 else if(req.getSession().getAttribute("uIdx") != "") {
+					 ms.like(page1);		
+					 page="main_top.jsp";
+				}
+			 dis = req.getRequestDispatcher(page);
+				dis.include(req, resp);
+//				msg = "로그인에 성공 하였습니다.";
+//			 req.setAttribute("msg", msg);
+				req.setAttribute("currPage", page1);
 			
 			break;
 
@@ -124,9 +158,21 @@ public class MemberController extends HttpServlet {
 
 
 			
+
 		}
-		
+	
+
 	}
 
+
+	
+	
+	
 	
 }
+
+
+	
+
+
+
