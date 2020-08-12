@@ -62,7 +62,7 @@ public class MainController extends HttpServlet {
 			result = service.reContent(member, content, cIdx); // 리설트를 리턴 할고얌
 		}
 		
-		
+		 
 	}
 	
 	

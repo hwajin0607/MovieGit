@@ -17,7 +17,8 @@
 		<br/>
 			<input type="submit" value="회원관리" onclick="location.href='member'">
 			<input type="submit" value="영화관리" onclick="location.href='movie'">
-						<input type="submit" value="영화댓글" onclick="location.href='content?page=1&mIdx=6'">
+			<input type="submit" value="영화댓글" onclick="location.href='content?page=1&mIdx=6'">
+
 
 	</body>
 	<script>

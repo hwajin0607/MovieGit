@@ -37,7 +37,7 @@
 			<h4>영화 관리페이지</h4>
 			<br/>
 			<div class="backpage">
-				<a href="main.jsp">초기화면으로 돌아가기</a>
+				<a href="manager.jsp">초기화면으로 돌아가기</a>
 			
 			</div>
 			<form method="GET" action = "movie">
