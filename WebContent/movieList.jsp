@@ -144,9 +144,10 @@
         <!-- 검색창 -->
         <div class="searchbar">
             <span class='emsearch'>
-                <input type='text' class='input_text' />
+                <input type='text' class='sch_text' />
             </span>
-            <button type='submit' class='sch_smit'>검색</button>
+            <!-- <button type='submit' class='sch'>검색</button> -->
+             <a href="./searchResult" id="sch" target="_parent">검색</a>
         </div>
         <!-- 정렬 -->
         <div class="sort">

@@ -2,8 +2,10 @@ package com.mvc.movie.service;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,6 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.mvc.movie.dao.MovieDao;
 import com.mvc.movie.dto.MovieDto;
 
@@ -91,18 +96,29 @@ public class MovieService {
 	
 	
 	//영화 목록 정렬
-	public void movieListS(String sqlb, String genre) throws ServletException, IOException {
+	public void movieListS(String sqlb, String genre, int page) throws ServletException, IOException {
 		System.out.println(sqlb);
 		ArrayList<MovieDto> list = null;
 		MovieDao dao = new MovieDao();
+		
+		String pageParam = req.getParameter("page");
+		page = 1;
+		if(pageParam != null) {
+			page = Integer.parseInt(pageParam);
+			
+			if(page == 0) {
+				page = 1;
+			}
+		}
 		try {
-			list = dao.movieListS(sqlb,genre);
+			list = dao.movieListS(sqlb,genre,page);
 			
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}finally {
 			req.setAttribute("movieList", list);
+			req.setAttribute("currPage", page);
 			RequestDispatcher dis = req.getRequestDispatcher("movieList.jsp");
 			dis.forward(req, resp);
 			dao.resClose();
@@ -141,21 +157,24 @@ public class MovieService {
 		System.out.println("파라메터 점검 : " +mName+ mGenre+ mdDirector+ maActor);
 		req.setAttribute("slist", dao.slist(mName, mGenre, mdDirector, maActor));
 		dis = req.getRequestDispatcher("searchResult.jsp");
-		dis.forward(req, resp);
-		
-		
+		dis.forward(req, resp);		
 	}
 
-	
 	//랜덤으로 영화 한개 불러오기
 	public void random() throws IOException, ServletException {
 		MovieDao dao = new MovieDao();
-		ArrayList<MovieDto>list = dao.random();
-		System.out.println(list);
-			req.setAttribute("list", list);
-			RequestDispatcher dis = req.getRequestDispatcher("main_bottom.jsp");
-			dis.forward(req, resp);
-			dao.resClose();
+		MovieDto list = dao.random();
+		System.out.print(list);
+		//랜덤처리가 끝난뒤 페이지를 이동시켜주는 것이 아니라 데이터를 내려줘야함
+		// 데이터 타입의 경우 처리하기 편한 방식으로 변경해서 내려주면 됨
+		resp.setContentType("text/html;charset=UTF-8");
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+	    map.put("movie",list);
+		Gson json = new Gson();
+		String obj = json.toJson(map);
+		resp.getWriter().print(obj);
+		dao.resClose();
 	}
 	
 	//마이페이지 찜목록
@@ -177,14 +196,24 @@ public class MovieService {
 		}
 	}
 
-	public void selectGrade() {
+	public void selectGrade() throws SQLException, ServletException, IOException {	
 		MovieDao dao = new MovieDao();
-		dao.selectGrade();
+		ArrayList<MovieDto>list =dao.selectGrade();
+		dao.grademName(list);
+		req.setAttribute("list", list);
+		RequestDispatcher dis = req.getRequestDispatcher("select.jsp");
+		dis.forward(req, resp);
+		dao.resClose();
 	}
 
-	public void selectBhit() {
+	public void selectBhit() throws SQLException, ServletException, IOException {
 		MovieDao dao = new MovieDao();
-		dao.selectBhit();
+		ArrayList<MovieDto>list = dao.selectBhit();
+		req.setAttribute("list", list);
+		RequestDispatcher dis = req.getRequestDispatcher("select.jsp");
+		dis.forward(req, resp);
+		dao.resClose();
+
 	}
 
 	//영화 상세페이지에 내용 띄우기
@@ -198,20 +227,38 @@ public class MovieService {
 		dis.forward(req, resp);
 		dao.resClose();
 	}
+	
+	//찜목록에 보내기
+	public void zzimadd(String midx) {
+		System.out.println("찜목록에보내기 서비스");
+		MovieDao dao = new MovieDao();
+		String uIdx = (String) req.getSession().getAttribute("uIdx");
+	}
 
-	// 평점 넣기
-	public void writeRating(String mIdx) {
+	// 평점 넣기 + 한번 넣은 사람은 못 넣게 하기
+	public void writeRating(String mIdx) throws ServletException, IOException {
 		System.out.println("서비스에게 일 시킨다.");
+		String uIdx = String.valueOf(req.getSession().getAttribute("uIdx"));
 		String pjpoint = req.getParameter("pjpoint");
 		mIdx = req.getParameter("mIdx");
-		System.out.println(pjpoint+"/"+mIdx);
-		
+		System.out.println("영화 번호 : "+mIdx+"/"+"평점 : "+pjpoint+"/"+"회원번호 : "+uIdx);
+		MovieDao dao = new MovieDao();
+		String msg = "한번 매긴 평점을 다시 매길 수 없습니다.";
+		String page = "movieDetail?mIdx="+mIdx;
+		if(dao.writeRating(mIdx,pjpoint,uIdx)) {
+			System.out.println("정상 업데이트");
+			msg = "평점이 매겨졌습니다.";
+			System.out.println("평점이 정상적으로 매겨졌습니다.");
+		}
+		req.setAttribute("msg", msg);
+		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+		//resp.sendRedirect(page);
 	}
 				
 	public void del() throws ServletException, IOException {
 		String uidx = req.getParameter("uidx");
 		System.out.println("점검 : " + uidx);
-		
 		MovieDao dao = new MovieDao();
 		dao.del(uidx);
 		String page = "/zzim";

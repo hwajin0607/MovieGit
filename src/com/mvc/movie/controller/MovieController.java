@@ -1,6 +1,7 @@
 package com.mvc.movie.controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,9 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.movie.service.MovieService;
 
 
-
-
-@WebServlet({"/","/zzim","/searchResult","/del","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search"})
+@WebServlet({"/","/zzim","/zzimadd","/searchResult","/del","/delete","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search"})
 
 public class MovieController extends HttpServlet {
 	
@@ -42,11 +41,21 @@ public class MovieController extends HttpServlet {
 		switch (addr) {
 
 		case "/selectBhit":
-			ms.selectBhit();
+			try {
+				ms.selectBhit();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 			
 		case "/selectGrade":
-			ms.selectGrade();
+			try {
+				ms.selectGrade();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 			
 		case "/movieList":
@@ -68,6 +77,7 @@ public class MovieController extends HttpServlet {
 			System.out.println("정렬 하기");
 			String mSort = req.getParameter("mSort");
 			String sqlb = " ";
+			page = 0;
 			if(mSort.equals("내림차")) {
 				sqlb="DESC";
 			}
@@ -76,7 +86,7 @@ public class MovieController extends HttpServlet {
 				genre="";
 			}
 			System.out.println(sqlb+genre);
-			ms.movieListS(sqlb,genre);
+			ms.movieListS(sqlb,genre,page);
 			break;
 			
 			//상세페이지 띄우기
@@ -91,6 +101,13 @@ public class MovieController extends HttpServlet {
 			
 		case "/zzim":
 			ms.zzim();
+			break;
+			
+		case "/zzimadd":
+			System.out.println("찜목록에 보내기");
+			String midx = req.getParameter("midx");
+			System.out.println(midx);
+			ms.zzimadd(midx);
 			break;
 			
 		case "/searchResult":
@@ -115,7 +132,6 @@ public class MovieController extends HttpServlet {
 			System.out.println("랜덤으로 가져오기");
 			ms.random();
 			break;
-			
 			//평점 매기기
 		case "/writeRating" :
 			System.out.println("평점 넣기");
