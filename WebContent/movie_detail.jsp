@@ -8,16 +8,27 @@
         <title>영화 상세 페이지</title>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <style>
+ 		
+ 		  #bg::after{
+                width : 100%;
+                height : 1000px;
+                z-index : 1;
+                position : absolute; 
+                top: 0; 
+                left: 0;
+            }
+
         /*영화 상세 관련*/       
             #ready{
                 width: 85%;
                 height: 50%;
                 background-color: black;
-                opacity: 0.4;
+                opacity: 0.9;
                 margin-top: 3%;
                 margin-bottom: 30px;
                 margin-left: 7%;
                 position: relative;
+                z-index: 10;
             }
 
             #post{
@@ -152,13 +163,14 @@
             }
 
             /*댓글 관련*/
-            #com{
+             #com{
                 width: 85%;
                 height: 110%;
                 background-color: black;
-                opacity: 0.4;
+                opacity: 0.9;
                 margin-left: 7%;
                 position: relative;
+                z-index: 10;
             }
 
             .content{
@@ -213,6 +225,7 @@
                 left: 90%;
                 margin-bottom: -15;
                 cursor: pointer;
+                width: 115px;
             }
 
             textarea{
@@ -248,6 +261,10 @@
         </style>	
     </head>
     <body>
+ 	 <div>
+            <img src = "/photo/main.jpg" style = "width : 100%;  height : 170%; z-index : 2; position : absolute; top: 0; left: 0; opacity: 0.8;" id="bg" > 
+       </div>
+       
     	<c:forEach items="${list}" var="mms">
 	        <div id="ready">
 	            <div id="post" onclick="location.href='#'">
@@ -269,7 +286,7 @@
 	                <div id="bar2"></div>
 	                <div id="m3">${mms.mContent}</div>
 	            </div>
-	           <div><input class = "pjbox" id ="pj" type="button" value="${mms.mrRating}" onclick="pjbox()"/></div>
+	           <div><input class = "pjbox" id ="pj" type="button" value="${mms.mrRating}&nbsp;&nbsp;( ${mms.uidx} )" onclick="pjbox()"/></div>
             <div>
                 <form action = "writeRating" id="va">
                 	<input type ="hidden" name="mIdx" value="${mms.mIdx}"/>
@@ -345,6 +362,7 @@
                 <div>페이징 넣을 예정</div>
             </fieldset>
         </div>
+
 	</body>
     <script>
 
@@ -375,6 +393,10 @@
             $('.3').css({'display':'inline'});
         };
 
-        
+    	var msg = "${msg}";
+    	if(msg !=""){
+    		alert(msg);
+    	}
+    	
 	</script>
 </html>

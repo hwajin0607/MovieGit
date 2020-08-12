@@ -1,5 +1,6 @@
 package com.mvc.member.service;
 
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,7 +16,6 @@ import com.mvc.member.dao.MemberDao;
 import com.mvc.member.dto.MemberDto;
 import com.mvc.movie.dto.MovieDto;
 
-import oracle.net.ns.SessionAtts;
 
 public class MemberService {
 	HttpServletRequest req = null;
@@ -213,5 +213,5 @@ public class MemberService {
 	
 
 
-
+	
 }

@@ -15,13 +15,15 @@
 		</style>
 	</head>
 	<body>  
+	${list }
+	${list[0].mName }
 		<table>
 		<tr>
             <td rowspan="5">
-          		<a href="location.href='selectBhit'">조회순</a> / 
-            	<a href="location.href='selectGrade'">평점순</a>
+          		<a href="./selectBhit">조회순</a> / 
+            	<a href="./selectGrade">평점순</a>
             </td>
-            <td>1등</td>
+            <td>${list[0].mName }</td>
             <td rowspan="5">
                 <form method="GET">
                     <input type="text" name="select"/>
@@ -29,16 +31,16 @@
 				</form></td>
 		</tr>
         <tr>
-			<td>2등</td>
+			<td>${list[1].mName }</td>
         </tr>
 		<tr>
-            <td>3등</td>
+            <td>${list[2].mName }</td>
         </tr>
 		<tr>
-            <td>4등</td>
+            <td>${list[3].mName }</td>
         </tr>
 		<tr>
-            <td>5등</td>
+            <td>${list[4].mName }</td>
         </tr>
 		</table>
 	</body>

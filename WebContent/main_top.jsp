@@ -188,18 +188,27 @@
         <div id="recommendmovie" >Recommend Movie</div>
         <ul class="alllist">
 
+
          	<c:forEach items="${list }" var="likelist">
             <a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list">${likelist.mfIdx}</li></a><div class="heart"></div>
            </c:forEach>
 
 
+<!-- 
+            <a href="#"><li class="list">극한직업</li></a><div class="heart"></div>
+            <a href="#"><li class="list">기생충</li></a><div class="heart"></div>
+            <a href="#"><li class="list">독전</li></a><div class="heart"></div>
+            <a href="#"><li class="list">백두산</li></a><div class="heart"></div>
+ -->
+            	<c:forEach items="${list }" var="likelist">
+    	
+            <a href=""><li class="list">${likelist.mIdx}</li></a><div class="heart"></div>
+             
+            </c:forEach>
+
+
         </ul>
-        <!-- <ul class="alllist2">
-            <a href=""><li class="list">ㅂ</li></a>
-            <a href=""><li class="list">ㅈ</li></a>
-            <a href=""><li class="list">ㄷ</li></a>
-            <a href=""><li class="list">ㄱ</li></a>
-        </ul> -->
+
     </div>
     <div class="sidebar">
         <div id="sid1"><a href="">찜목록</a></div>

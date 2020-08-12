@@ -3,6 +3,8 @@ package com.mvc.member.dto;
 import java.sql.Date;
 
 public class MemberDto {
+
+
 	private String uiden;
 	private String uname;
 	private Date uBirth;
@@ -38,6 +40,10 @@ public class MemberDto {
 	public void setUemail(String uemail) {
 		this.uemail = uemail;
 	}
+	
+	
+	
+
 	
 	
 }
