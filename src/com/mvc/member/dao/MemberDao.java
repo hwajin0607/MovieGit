@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import com.mvc.member.dto.MemberDto;
+import com.mvc.movie.dto.MovieDto;
 
 
 public class MemberDao {
@@ -126,15 +127,21 @@ public class MemberDao {
 		return useridx;
 	}
 
-	public void like(String uIdx) throws SQLException {
+	public ArrayList<MovieDto> like(String uIdx) throws SQLException {
 		System.out.println("아이디 고유번호 2차 확인 : "+uIdx);
-		String sql = "select gGenre from usergenre where uIdx=?";
+		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
+		String sql = "select f.mfidx, m.midx from movieFoster f, movie m WHERE f.midx=m.midx AND m.midx IN"
+				+ "(select m.midx from movie m, userGenre u WHERE m.mgenre=u.ggenre(+) AND u.uidx=?)";
 		ps =conn.prepareStatement(sql);
 		ps.setString(1, uIdx);
 		rs = ps.executeQuery();
 		while (rs.next()) {
-			System.out.println(rs.next());
+			MovieDto dto = new MovieDto();
+			dto.setmIdx(rs.getInt("mfIdx"));
+			list.add(dto);
 		}
+		System.out.println(list);
+		return list;
 	}
 	public MemberDto info(String uidx) throws SQLException {
 		MemberDto dto = null;

@@ -16,6 +16,12 @@ public class MovieDto {
 	private String maActor;
 	private String mContent;
 	private String mfUrl;
+	private String mravg;
+	private int mfIdx;
+	private String mfOri;
+	private String mfNew;
+
+	
 	private int zidx;
 	private int uidx;
 	private Date zdate;
@@ -94,6 +100,32 @@ public class MovieDto {
 	public void setMfUrl(String mfUrl) {
 		this.mfUrl = mfUrl;
 	}
+
+	public int getMfIdx() {
+		return mfIdx;
+	}
+
+	public void setMfIdx(int mfIdx) {
+		this.mfIdx = mfIdx;
+	}
+
+	public String getMfOri() {
+		return mfOri;
+	}
+
+	public void setMfOri(String mfOri) {
+		this.mfOri = mfOri;
+	}
+
+	public String getMfNew() {
+		return mfNew;
+	}
+
+	public void setMfNew(String mfNew) {
+		this.mfNew = mfNew;
+	}
+
+
 	public int getZidx() {
 		return zidx;
 	}
@@ -123,6 +155,15 @@ public class MovieDto {
 	}
 	public void setMrRating(double mrRating) {
 		this.mrRating = mrRating;
+	}
+
+
+	public String getMravg() {
+		return mravg;
+	}
+
+	public void setMravg(String mravg) {
+		this.mravg = mravg;
 	}
 
 

@@ -374,6 +374,11 @@
             $('.pjbox').attr("type","hidden");
             $('.3').css({'display':'inline'});
         };
+        
+        var msg = "${msg}";
+        if(msg!=""){
+        	alert(msg);
+        }
 
         
 	</script>

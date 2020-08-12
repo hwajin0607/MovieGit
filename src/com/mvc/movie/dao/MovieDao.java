@@ -29,24 +29,53 @@ public class MovieDao {
 			}
 		}
 
-	public void selectGrade() {
-		String sql = "SELECT uidx FROM movie WHERE uiden = ? AND uPw = ?";
+	public ArrayList<MovieDto> selectGrade() throws SQLException {
+		String sql = "SELECT m.midx, ROUND(avg(r.mrrating),2) mravg FROM (SELECT ROW_NUMBER() OVER (ORDER by m.midx DESC) rnum, midx FROM movie m) m ,"
+				+ "movieRating r where m.midx = r.midx AND r.midx BETWEEN 1 AND 10 GROUP by m.midx ORDER by mravg DESC";
+		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
+		ps = conn.prepareStatement(sql);
+		rs = ps.executeQuery();
+		while(rs.next()) {
+			MovieDto dto = new MovieDto();
+			dto.setmIdx(rs.getInt("mIdx"));
+			dto.setMravg(rs.getString("mravg"));
+			
+			list.add(dto);
+		}
+		return list;
 		
 	}
 
-	public void selectBhit() {
+	public ArrayList<MovieDto> selectBhit() throws SQLException {
 		String sql = "SELECT mName, mBhit FROM (SELECT ROW_NUMBER() OVER (ORDER by midx DESC) rnum,"
 				+ " mName, mBhit FROM movie) WHERE rnum BETWEEN 1 AND 10 ORDER by mBhit DESC";
-		
+		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
+		ps = conn.prepareStatement(sql);
+		rs = ps.executeQuery();
+		while(rs.next()) {
+			MovieDto dto = new MovieDto();
+			dto.setmName(rs.getString("mName"));
+			list.add(dto);
+		}
+		return list;
 	}
 	
     //전체영화목록	
-	public ArrayList<MovieDto> movieList(int page) throws SQLException {
-		int pagePerCnt = 4; //페이지당 보여줄 게시물의 수
-		int end = page*pagePerCnt;
-		int start = (end-pagePerCnt)+1;
+	public ArrayList<MovieDto> movieList(int page, String sqlo) throws SQLException {
+		int z = page *2; //페이지당 보여줄 게시물의 수
+		if(z==2) {
+			z=1;
+		}
+		int end = 4*z;
+		int start = 1;
 		System.out.println(start);
-		String sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mIdx DESC) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.rnum";
+		System.out.println(sqlo);
+		String sql = "";
+		if(sqlo==null || sqlo.equals("null")) {
+			sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mOpen) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.rnum";
+		}else {
+			sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mOpen "+sqlo+") AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.rnum";
+		}
 		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, start);
@@ -64,6 +93,7 @@ public class MovieDao {
 			dto.setmDate(rs.getDate("mDate"));
 			dto.setmAge(rs.getInt("mAge"));
 			dto.setmContent(rs.getString("mContent"));
+			dto.setMfUrl(rs.getString("mfURL"));
 			list.add(dto);
 		}
 		
@@ -84,12 +114,20 @@ public class MovieDao {
 	}
 	
 	//장르별 영화 보여주기
-	public ArrayList<MovieDto> movieListG(String mGenre,int page) throws SQLException {
-		//int z = 0;
-		int pagePerCnt = 4; //페이지당 보여줄 게시물의 수
-		int end = page*pagePerCnt;
-		int start = (end-pagePerCnt)+1;
-		String sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mIdx DESC) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx and m.mgenre =?) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.rnum";
+	public ArrayList<MovieDto> movieListG(String sqlb, int page,String mGenre) throws SQLException {
+		System.out.println("장르 쿼리준비");
+		int z = page *2; //페이지당 보여줄 게시물의 수
+		if(z==2) {
+			z=1;
+		}
+		int end = 4*z;
+		int start = 1;
+		String sql = "";
+		if(sqlb==null || sqlb.equals("null")) {
+			sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mOpen DESC) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx and m.mgenre =?) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.rnum";
+		}else {
+			sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mOpen DESC) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx and m.mgenre =?) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? "+sqlb;
+		}
 		/*String sql = "SELECT mIdx, mName, mOpen, mGenre, mUrl, mBhit, mDate, mAge, mContent FROM Movie "
 				+ "WHERE mGenre = ? ORDER BY mName DESC";*/
 		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
@@ -110,6 +148,7 @@ public class MovieDao {
 			dto.setmDate(rs.getDate("mDate"));
 			dto.setmAge(rs.getInt("mAge"));
 			dto.setmContent(rs.getString("mContent"));
+			dto.setMfUrl(rs.getString("mfURL"));
 			list.add(dto);
 			//z++;
 		}
@@ -119,19 +158,23 @@ public class MovieDao {
 	
 	//정렬
 	public ArrayList<MovieDto> movieListS(String sqlb, String genre, int page) throws SQLException {
-		int pagePerCnt = 4; //페이지당 보여줄 게시물의 수
-		int end = page*pagePerCnt;
-		int start = (end-pagePerCnt)+1;
+		System.out.println("정렬 쿼리 준비");
+		int z = page *2; //페이지당 보여줄 게시물의 수
+		if(z==2) {
+			z=1;
+		}
+		int end = 4*z;
+		int start = 1;
 		
 		if(genre.equals("")||genre==null) {
-			String sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mIdx DESC) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.mOpen "+sqlb;
+			String sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mOpen DESC) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.mOpen "+sqlb;
 			System.out.println(sqlb);
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, start);
 			ps.setInt(2, end);
 			
 		}else {
-			String sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mIdx DESC) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx and m.mgenre =?) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.mOpen "+sqlb;
+			String sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mOpen DESC) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx and m.mgenre =?) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.mOpen "+sqlb;
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, genre);
 			ps.setInt(2, start);
@@ -153,6 +196,7 @@ public class MovieDao {
 			dto.setmDate(rs.getDate("mDate"));
 			dto.setmAge(rs.getInt("mAge"));
 			dto.setmContent(rs.getString("mContent"));
+			dto.setMfUrl(rs.getString("mfURL"));
 			list.add(dto);
 		}
 		
@@ -255,6 +299,12 @@ public class MovieDao {
 		}
 		return list;
 	}
+
+	public void grademName(ArrayList<MovieDto> list) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	public ArrayList<MovieDto> slist(String mName, String mGenre, String mdDirector, String maActor) {
 		boolean result = false;
@@ -295,7 +345,6 @@ public class MovieDao {
 				result=true;
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			resClose();
@@ -376,9 +425,67 @@ public class MovieDao {
 	}
 	
 	//찜기능
-	public void zzimadd(String midx) {
-		String sql = "";
+	public int zzimadd(String mIdx, String uIdx) throws SQLException {
+			int success=0;
+			String sql = "SELECT zidx FROM zzim WHERE mIdx=? AND uIdx=?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mIdx);
+			ps.setString(2, uIdx);
+			if(!ps.executeQuery().next()) {
+				String sql2 = "INSERT INTO zzim (zIdx, uIdx, mIdx) VALUES(zzim_seq.NEXTVAL,?,?)";
+				ps = conn.prepareStatement(sql2);
+				ps.setString(1, uIdx);
+				ps.setString(2, mIdx);
+				
+				success = ps.executeUpdate();
+				
+			}
+			
+
+		return success; 
 		
+	}
+
+	public ArrayList<MovieDto> page(String mgenre, int page, String sqlb) throws SQLException {
+		int pagePerCnt = 4; //페이지당 보여줄 게시물의 수
+		int end = page*pagePerCnt;
+		int start = (end-pagePerCnt)+1;
+
+		System.out.println(start);
+		if(mgenre.equals("")||mgenre==null) {
+			String sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mIdx DESC) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.mOpen "+sqlb;
+			System.out.println(sqlb);
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, start);
+			ps.setInt(2, end);
+			
+		}else {
+			String sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mIdx DESC) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx and m.mgenre =?) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.mOpen "+sqlb;
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, mgenre);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
+		}
+		
+		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
+		rs = ps.executeQuery();
+		
+		while(rs.next()) {
+			MovieDto dto = new MovieDto();
+			dto.setmIdx(rs.getInt("mIdx"));
+			dto.setmName(rs.getString("mName"));
+			dto.setmOpen(rs.getDate("mOpen"));
+			dto.setmGenre(rs.getString("mGenre"));
+			dto.setmUrl(rs.getString("mUrl"));
+			dto.setmBhit(rs.getInt("mBhit"));
+			dto.setmDate(rs.getDate("mDate"));
+			dto.setmAge(rs.getInt("mAge"));
+			dto.setmContent(rs.getString("mContent"));
+		
+			list.add(dto);
+		}
+		
+		return list;
 	}
 
 	

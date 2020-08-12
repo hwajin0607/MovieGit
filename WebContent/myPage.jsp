@@ -8,11 +8,22 @@
 <title>mypage</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
+	body{
+
+		background-color:black;
+	}
     #ent{
+    	position:absolute;
+    	background-color:black;
+    	opacity: 0.5;
+    	width:100%;
+    	color:white;
+    	top:11%;
+    	left:0;
         font-weight: 600;
     }
-    .mypage{
-        
+   /* .mypage{
+
         float: left;
         background-color: teal;
         width: 500px;
@@ -20,19 +31,19 @@
         margin: 10px;
         text-align: center;
        
-    }
+    }*/
     #view{
         text-align: end;
         text-decoration: none;
     }
-    #zzim{
-        position: relative;
+    /*#zzim{
+        
         width: 450px;
         height: 60px;
         background-color: white;
         margin: 30px;
         float: left;
-    }
+    }*/
     #play{
         position: absolute;
         text-align: end;
@@ -48,49 +59,69 @@
         text-align: left;
         left: 180;
     }
-    img{
-        max-width: 60px;
-        max-height: 60px;
+    /*.mypage img{
+        width:100%;
+        height:100%
+    }*/
+    #user{
+    	position: absolute;
+    	background-image:url("/photo/userinfo.jpg");
+    	background-repeat: repeat;
+    	top: 40%;
+    	left: 60%;
+        width: 500px;
+        height: 500px;
+        margin: 10px;
+        text-align: center;
+        border-radius: 15%;
     }
-  
+    #wishList{
+        position: absolute;
+		background-image:url("/photo/heart.jpg");
+    	background-repeat: repeat;
+    	top: 40%;
+    	left: 10%;
+        width: 500px;
+        height: 500px;
+        margin: 10px;
+        text-align: center;
+        border-radius: 15%;
+    }
+    h3{
+    	position:absolute;
+    	top:30%;
+    	left:40%;
+    	font-weight: 600;
+    }
+    #wishList:hover{
+    	color:black;
+    	font-size: xx-large;
+    }
+    #user:hover{
+	   	color:black;
+	   	font-size: xx-large;
+    }
+  	a:visited{
+  		color:black;
+  	}
+
 </style>
 </head>
 <body>
     <div class="mainbody">
-        <!-- <img src="bgimg.jpg" style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative;" alt=""> -->
+        <img src="/photo/back.jpg" style="width: 100%; height: 100%; opacity: 0.5; position:relative;">
     
-        <div id="ent">Mypage</div>
+        <div id="ent"><h1>&nbsp; profile Detail</h1></div>
         <br/>
 
         <div class="mypage">
-            <h3>WishList</h3>
-            <hr/>
-            <a href="./zzim" id="view" target="_parent"><p>더보기</p></a>
-            
-                <div id="zzim">
-                    <div><img src="#" id="cover"></div>
-                    <div id="ex">
-                    강철비2<br/>
-                    감독 : 양우석<br/>
-                    장르 : 드라마, 액션
-                    </div>
-                    <div id="play"><a href="#detail"><img src="재생.jpg"></a></div>
-                </div>
-            <hr/>
-                <div id="zzim">
-                    <div><img src="#" id="cover"></div>
-                    <div id="ex">
-                    반도<br/>
-                    감독 : 연상호<br/>
-                    장르 : 드라마, 액션
-                    </div>
-                    <div id="play"><a href="#detail"><img src="재생.jpg"></a></div>
-                </div>
-
+	        <a href="./zzim" target="_parent">
+	        	<div  id="wishList"><h3>WishList</h3></div>
+	        </a>
+	        <a href="./info" target="_parent">
+	            <div  id="user"><h3>userInfo</h3></div>
+	        </a>
         </div>
-        <a href="./info" target="_parent">
-            <div class="mypage"><h3>User Info</h3></div>
-        </a>
     </div>
 </body>
 <script>

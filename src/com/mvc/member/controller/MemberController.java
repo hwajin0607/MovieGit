@@ -50,7 +50,6 @@ public class MemberController extends HttpServlet {
 		System.out.println(addr);
 		RequestDispatcher dis = null;
 		MemberService ms = new MemberService(req,resp);
-		
 		switch (addr) {
 		
 		case "/login":
@@ -65,9 +64,11 @@ public class MemberController extends HttpServlet {
 	             msg = "로그인에 성공 하였습니다.";
 	             req.getSession().setAttribute("uIdx", login);
 	             req.getSession().setAttribute("loginId", id);
-	             
 	          }
 	         String uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
+
+	         req.getSession().setAttribute("sort","0");
+	         req.getSession().removeAttribute("mGenre");
 	         System.out.println(uidx);
 	         req.setAttribute("msg", msg);
 	         dis = req.getRequestDispatcher("like");
@@ -94,7 +95,15 @@ public class MemberController extends HttpServlet {
 
 		case "/like":
 			System.out.println("취향 요청");
-			ms.like();
+			msg = "like";
+			 if(req.getSession().getAttribute("uIdx")!=null) {
+				 ms.like();		
+				 msg = "로그인에 성공 하였습니다.";
+			 }
+			req.setAttribute("msg", msg);
+			dis = req.getRequestDispatcher("main_top.jsp");
+			dis.include(req, resp);
+			
 			break;
 
 		case "/info":
