@@ -85,6 +85,7 @@ public class MovieController extends HttpServlet {
 			//req.getSession().setAttribute("mIdx", mIdx);
 			System.out.println(mIdx);
 			ms.movieDetail(mIdx);
+
 			break;
 			
 			

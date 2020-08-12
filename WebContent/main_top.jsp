@@ -130,9 +130,11 @@
         height: 730px;
         top: 170px;
         left: 48px;
-        background-color: khaki;
+        opacity:0.8;
+        background-color: black;
         z-index: 8;
     }
+
     #recommendmovie{
         width: 100%;
         height: 50px;
@@ -161,10 +163,11 @@
 </head>
 <body>
 
-    <div class="header"><a href="main_top.jsp"><img id="logo" src="logo.png"/></a>
-        <div id="search"><img id="search2" src="search.png"/></div>
-        <div id="allmenu"><a href="">전체 메뉴</a></div>
-        <div id="mypage"><a href="">마이페이지</a></div>
+
+    <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
+        <div id="search"><img id="search2" src="/photo/search.png"/></div>
+        <div id="allmenu"><a href="movieList">전체 메뉴</a></div>
+        <div id="mypage"><a href="myPage.jsp">마이페이지</a></div>
         <div id="login"></div>
         <div id="logout"><a href="logout">로그아웃</a></div>
     </div>
@@ -174,17 +177,21 @@
     </div>
     
     
-    <div class="panel"><a href="like">검색창</a></div>
+    <div class="panel"><a href="">검색창</a></div>
+    
+    		<div id="background" style="width: 99%; height: 100%; position:absolute; opacity:0.6">
+        <img src="/photo/main.jpg"  style="width: 100%; height: 100%;"/>
+    	</div>
 
     <div class="recommend">
 
-        <div id="recommendmovie">Recommend Movie</div>
+        <div id="recommendmovie" >Recommend Movie</div>
         <ul class="alllist">
-            	<c:forEach items="${list }" var="likelist">
-    	
-            <a href=""><li class="list">${likelist.mIdx}</li></a><div class="heart"></div>
-             
-            </c:forEach>
+
+         	<c:forEach items="${list }" var="likelist">
+            <a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list">${likelist.mfIdx}</li></a><div class="heart"></div>
+           </c:forEach>
+
 
         </ul>
         <!-- <ul class="alllist2">
@@ -201,25 +208,24 @@
 <script>
  var uIdx = "${sessionScope.uIdx}";
 var loginId = "${sessionScope.loginId}";
-
-if(loginId==""){
-	
-	alert("로그인이 필요한 서비스 입니다.");
-	location.href="login.jsp";
-}else{
-$("#login").html(loginId+' 님♡');
-
-
-}
-<c:forEach items="${list }" var="likelist">
-console.log(${likelist.mIdx});
-</c:forEach>
-
-
+var loginPw = "${sessionScope.loginPw}";
 var msg = "${msg}";
-if(msg!="like"){
-	alert(msg);
-}
+
+/*   if(loginPw=="" || loginId==""){
+	alert("로그인이 필요한 서비스입니다.");
+	location.href="login.jsp";
+
+  }else(loginPw !="" || loginId !=""){ */
+	 if(loginId !=""){
+	$("#login").html(loginId+' 님♡');
+	if(msg!=""){
+		alert(msg);
+		msg="";
+		 }
+	 }
+
+
+ 
 
 $(document).ready(function() {
 
