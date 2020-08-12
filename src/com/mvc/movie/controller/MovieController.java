@@ -10,19 +10,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mvc.member.service.MemberService;
 import com.mvc.movie.service.MovieService;
+
 
 
 @WebServlet({"/","/zzim","/zzimadd","/searchResult","/del","/delete","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search"})
 
 public class MovieController extends HttpServlet {
-	
-	@Override
+
+
+
+		@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Process(req,resp);
-		req.setCharacterEncoding("UTF-8");
+			Process(req,resp);
+			req.setCharacterEncoding("UTF-8");
 	}
 
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Process(req,resp);
@@ -148,8 +153,13 @@ public class MovieController extends HttpServlet {
 			
 		
 		}
+
 		
 		
 		
 	}
+
+
+
+		
 }

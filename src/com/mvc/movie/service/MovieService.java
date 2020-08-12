@@ -1,6 +1,5 @@
 package com.mvc.movie.service;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -9,7 +8,6 @@ import java.util.HashMap;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,6 +16,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.mvc.movie.dao.MovieDao;
 import com.mvc.movie.dto.MovieDto;
+
 
 
 public class MovieService {
@@ -266,4 +265,6 @@ public class MovieService {
 		dis.forward(req, resp);
 	}
 
+
+	
 }

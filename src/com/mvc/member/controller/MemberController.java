@@ -16,11 +16,15 @@ import com.mvc.member.service.MemberService;
 
 
 
+
+
+
 @WebServlet({"/login","/logout","/join","/overlay","/info","/changing","/infoc","/like"})
+
 
 public class MemberController extends HttpServlet {
 
-	@Override
+	
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		try {
@@ -124,9 +128,21 @@ public class MemberController extends HttpServlet {
 
 
 			
+
 		}
-		
+	
+
 	}
 
+
+	
+	
+	
 	
 }
+
+
+	
+
+
+
