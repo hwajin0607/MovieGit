@@ -375,124 +375,87 @@
           <div id="background">
         <img src="/photo/main.jpg" style="width:100%; height:100%; position:relative;"/>
        </div>
-    	<c:forEach items="${list}" var="mms">
-	        <div id="ready">
-	            <div id="post" onclick="location.href='http://youtube.com'">
-	                ${mms.mfUrl}
-	            </div>
-	            <div id="age">
-	                ${mms.mAge}
-	            </div>
-	            <div id="title">
-	                ${mms.mName}
-	            </div>
-	       
-	            <div id="heart"><button onclick="location.href='./zzimadd?midx=${mms.mIdx}'">찜</button></div>
-	
-	            <div id="movie">
-	                <div id="m1">${mms.mGenre}</div>
-	                <div id="m2">${mms.mdDirector}</div>
-	                <div id="bar1"></div>
-	                <div id="bar2"></div>
-	                <div id="m3">${mms.mContent}</div>
-	            </div>
-	           <div><input class = "pjbox" id ="pj" type="button" value="${mms.mrRating}&nbsp;&nbsp;( ${mms.uidx} )" onclick="pjbox()"/></div>
+    	 <c:forEach items="${list}" var="mms">
+           <div id="ready">
+               <div id="post" onclick="location.href='#'">
+                   ${mms.mUrl}
+               </div>
+               <div id="age">
+                   ${mms.mAge}
+               </div>
+               <div id="title">
+                   ${mms.mName}
+               </div>
+          
+               <div id="heart"><button onclick="location.href='./zzimadd?midx=${mms.mIdx}'">찜</button></div>
+   
+               <div id="movie">
+                   <div id="m1">${mms.mGenre}</div>
+                   <div id="m2">${mms.mdDirector}</div>
+                   <div id="bar1"></div>
+                   <div id="bar2"></div>
+                   <div id="m3">${mms.mContent}</div>
+               </div>
+              <div><input class = "pjbox" id ="pj" type="button" value="${mms.mrRating}&nbsp;&nbsp;( ${mms.uidx} )" onclick="pjbox()"/></div>
             <div>
                 <form action = "writeRating" id="va">
-                	<input type ="hidden" name="mIdx" value="${mms.mIdx}"/>
+                   <input type ="hidden" name="mIdx" value="${mms.mIdx}"/>
                     <div class="3" style="display:none" id="pj3">평점(1~5) </div>
                     <input class = "1" type="hidden" name="pjpoint" min="1" max="5" id ="pj1" />
                     <input class = "2" type="hidden" id="pj2" />
                 </form> 
             </div>
         </div>
-
+        </c:forEach>
         <!--댓글 창-->
         <div id="com">
             <fieldset>
                 <legend><h3>댓글</h3></legend>
-                <form action="#" method="get">
-                    <input type="text" name="content" class="content"/>&nbsp;&nbsp;<input type="submit" value="submit" class="submit"/>
+                <form action="./movieconten" method="get">
+                    <input type="text" name="contentTxt" class="content"/>&nbsp;&nbsp;<input type="submit" value="submit" class="submit"/>
                 </form>
-                <div class="clickbox">
-                    <div class="p1">신고|</div>&nbsp;
-                    <div class="p2" id="p2_1">수정|</div>&nbsp;
-                    <div class="p3">삭제</div>
-                </div>
-                <div class="com">user id</div>
-                <div class="mon"><textarea>댓글내용</textarea></div>
-                <div id="mon">
-                    <form action="#" method="get">
-                    <input type="text" name="coment" class="recon"/>&nbsp;&nbsp;<input type="submit" value="submit" id="su"/>
-                    </form>
-                </div>
-                &nbsp;
-                <div class="bar3"></div>
                 &nbsp;&nbsp;
+                <c:forEach items="${Content }" var="moviecontent">
                 <div class="clickbox">
                     <div class="p1" >신고|</div>&nbsp;
                     <div class="p2">수정|</div>&nbsp;
                     <div class="p3">삭제</div>
                 </div>
-                <div class="com">user id</div>
-                <div class="mon">댓글내용</div>
+                <input type ="hidden" name="conIdx" value="${moviecontent.conidx}"/>
+                <div class="com">${moviecontent.uiden }</div>
+                <div class="mon">${moviecontent.conContent }</div>
                 &nbsp;
                 <div class="bar3"></div>
-                &nbsp;&nbsp;
-                <div class="clickbox">
-                    <div class="p1">신고|</div>&nbsp;
-                    <div class="p2">수정|</div>&nbsp;
-                    <div class="p3">삭제</div>
-                </div>
-                <div class="com">user id</div>
-                <div class="mon">댓글내용</div>
-                &nbsp;
-                <div class="bar3"></div>
-                &nbsp;&nbsp;
-                <div class="clickbox">
-                    <div class="p1">신고|</div>&nbsp;
-                    <div class="p2">수정|</div>&nbsp;
-                    <div class="p3">삭제</div>
-                </div>
-                <div class="com">user id</div>
-                <div class="mon">댓글내용</div>
-                &nbsp;
-                <div class="bar3"></div>
-                &nbsp;&nbsp;
-                <div class="clickbox">
-                    <div class="p1">신고|</div>&nbsp;
-                    <div class="p2">수정|</div>&nbsp;
-                    <div class="p3">삭제</div>
-                </div>
-                <div class="com">user id</div>
-                <div class="mon">댓글내용</div>
-                &nbsp;
-                <div class="bar3"></div>         
                 </c:forEach>
-                &nbsp;
                 <div>페이징 넣을 예정</div>
             </fieldset>
         </div>
 
-	</body>
+   </body>
     <script>
-    
-    var loginId = "${sessionScope.loginId}";
-		
-    if(loginId !=""){
-    	   $("#login").html(loginId+' 님♡');
-/*     	   if(msg!=""){
-    	      alert(msg);
-    	      msg="";
-    	       } */
-    	    }
+
    
         $('.p1').click(function(){
             console.log("찍힌다.");
             alert('신고가 되었습니다');
         });
-
-        $('#p2_1').click(function(){
+        
+        var midx = $('input[name = "mIdx"]').val();
+        var conidx = $('input[name = "conIdx"]').val();
+        $('.p2').click(function(){
+             console.log(conidx);
+             $(this).parent().next().next().next().html('<form action="./conup" method="GET">'
+                   +'<input type="text" name="coment" class="recon"/>&nbsp;&nbsp;<input type="submit" value="submit" id="su"/>'
+                   +'<input type="hidden" name="midx" value="'+midx+'"/>'
+                   +'<input type="hidden" name="conIdx" value="'+conidx+'"/>'
+                   +'</form>');
+       });
+       $('.p3').click(function(){
+             console.log(conidx);
+             location.href="./conDel?conidx="+conidx;
+       });
+        
+        $('#p2').click(function(){
             $('#mon').css({'display':'block'});
         });
 
@@ -500,10 +463,6 @@
             $('#mon').css({'display':'none'});
         });
 
-        $('.p3').click(function(){
-            console.log("찍힌다.");
-            alert('삭제되었습니다.');
-        });
         
 
         function pjbox(){
@@ -515,12 +474,8 @@
         
         var msg = "${msg}";
         if(msg!=""){
-        	alert(msg);
+           alert(msg);
         }
 
-        $("#search").click(function(){
-            $(".panel").css({"display":"block"});
-        });
-    	
 	</script>
 </html>

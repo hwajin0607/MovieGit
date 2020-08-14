@@ -8,9 +8,6 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<style>
-			body{
-				background-color: white;
-			}
 			table, td{
 				border : 1px solid black;
 				border-collapse: collapse;
@@ -152,6 +149,7 @@
 					<tr>
 						<td colspan="2">
 							<input type="button" id="join" value="회원가입"/>
+							<input type="button" id="close" value="닫기"/>
 						</td>
 					</tr>
 				</table>
@@ -204,7 +202,7 @@ $("#overlay").click(function(){
 });
 
 $("#join").click(function(){
-	/* if(overChk){
+	if(overChk){
 		var $id = $('input[name="uid"]');
 		var $pw = $('input[name="uPw"]');
 		var $name = $('input[name="uName"]');
@@ -250,7 +248,8 @@ $("#join").click(function(){
 					console.log(data);
 					if(data.join){
 						alert("회원 가입에 성공 했습니다.");
-				        $("#memberjoin").css('display','none');
+						location.href="Memberjoin.jsp";
+						parent.DoSend();
 					}else{
 						alert("회원 가입에 실패 했습니다.");
 						location.href="Memberjoin.jsp";
@@ -266,9 +265,12 @@ $("#join").click(function(){
 	}else{
 		alert("중복 체크를 확인 해 주세요.");
 		$('input[name="uId"]').focus();
-	} */
-	$("html").css('display','none');
+	} 
+});
 
+$("#close").click(function(){
+	location.href="Memberjoin.jsp";
+	parent.DoSend();
 });
 </script>
 </html>

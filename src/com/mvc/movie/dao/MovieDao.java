@@ -589,5 +589,44 @@ public class MovieDao {
 
 	}
 
+	public ArrayList<MovieDto> Content(String mIdx) throws SQLException {
+		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
+		String sql = "SELECT c.conidx,c.uIdx,c.mIdx,c.conContent,c.condate,b.uiden FROM Content c, member b where c.uidx = b.uidx and c.mIdx = ? ORDER by condate DESC";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, mIdx);
+		rs = ps.executeQuery();
+		while(rs.next()){
+			MovieDto dto = new MovieDto();
+			dto.setConidx(rs.getInt("conidx"));
+			dto.setUidx(rs.getInt("uIdx"));
+			dto.setmIdx(rs.getInt("midx"));
+			dto.setUiden(rs.getString("uiden"));
+			dto.setConContent(rs.getString("conContent"));
+			list.add(dto);
+		}
+		System.out.println("확인용" + list);
+		return list;
+	}
+
+	public void conten(String uidx, String cont, String contmidx) throws SQLException {
+		String sql = "INSERT INTO Content(conIdx, uIdx, mIdx, conContent) VALUES(Content_seq.NEXTVAL,?,?,?)";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, uidx);
+		ps.setString(2, contmidx);
+		ps.setString(3, cont);
+		ps.executeUpdate();
+		
+	}
+
+	public void conup(String coment, String conidx) throws SQLException {
+		
+		String sql = "UPDATE Content SET conContent = ? WHERE conidx = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, coment);
+		ps.setString(2, conidx);
+		ps.executeUpdate();
+		
+	}
+
 
 }

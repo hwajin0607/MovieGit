@@ -233,6 +233,14 @@ public class MemberDao {
 		return update;
 	}
 
+	public void conDel(String conidx) throws SQLException {
+		String sql = "DELETE FROM Content WHERE conidx = ?";
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, conidx);
+		ps.executeUpdate();
+		
+	}
+
 
 
 }

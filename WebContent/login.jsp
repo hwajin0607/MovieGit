@@ -79,15 +79,23 @@
     a:link a:visited a:active a:hover{
         color: white;
     }
-    iframe{
+    #memberjoin{
        position: absolute;
        top: 200px;
        left: 703px;
        width: 473px;
        height: 404px;
-       position: absolute;
        z-index: 9;
-       display:none;
+       background-color: white;
+      display:none;
+    }
+    iframe{
+       width: 100%;
+       height: 100%;
+       border: 0;
+       top: 8px;
+       left: 13px;
+       position: absolute;
     }
     span{
        cursor:pointer;
@@ -133,10 +141,14 @@
      $(document).ready(function(){
       
         $("span").click(function(){
-        	$("iframe").css('display','block');
+          $("#memberjoin").css('display','block');
         });
 
      });
+
+     function DoSend() {
+    	 $("#memberjoin").css('display','none');
+	}
 
 </script>
 
