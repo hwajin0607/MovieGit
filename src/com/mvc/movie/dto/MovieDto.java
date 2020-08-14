@@ -2,6 +2,14 @@ package com.mvc.movie.dto;
 
 import java.sql.Date;
 
+
+
+
+	
+
+
+import com.google.gson.JsonObject;
+
 public class MovieDto {
 
 	private int conIdx;
@@ -9,7 +17,6 @@ public class MovieDto {
 	private String conContent;
 	private Date conDate;
 	private Date conRedate;
-
 	private String uIden;
 	private int mIdx;
 	private String mName;
@@ -32,6 +39,9 @@ public class MovieDto {
 	private Date zdate;
 	private String maactor;
 	private double mrRating;
+	private int conidx;
+
+	private String uiden;
 	
 	
 	
@@ -39,9 +49,7 @@ public class MovieDto {
 	public int getConIdx() {
 		return conIdx;
 	}
-	public String getConContent() {
-		return conContent;
-	}
+
 	public Date getConDate() {
 		return conDate;
 	}
@@ -54,6 +62,8 @@ public class MovieDto {
 	public void setuIden(String uIden) {
 		this.uIden = uIden;
 	}
+
+
 	public int getmIdx() {
 		return mIdx;
 	}
@@ -197,6 +207,37 @@ public class MovieDto {
 		
 	}
 
-	
-	
+	public int getConidx() {
+		return conidx;
+	}
+	public void setConidx(int conidx) {
+		this.conidx = conidx;
+	}
+	public String getConContent() {
+		return conContent;
+	}
+
+	public String getUiden() {
+		return uiden;
+	}
+	public void setUiden(String uiden) {
+		this.uiden = uiden;
+	}
+
+	@Override
+	public String toString() {
+		return "{mIdx:" + mIdx + ", mName:" + mName + ", mOpen:" + mOpen + ", mGenre:" + mGenre + ", mUrl:"
+				+ mUrl + ", mBhit:" + mBhit + ", mDate:" + mDate + ", mAge:" + mAge + ", mdDirector:" + mdDirector
+				+ ", maActor:" + maActor + ", mContent:" + mContent + ", mfUrl:" + mfUrl + ", mravg:" + mravg
+				+ ", mfIdx:" + mfIdx + ", mfOri:" + mfOri + ", mfNew:" + mfNew + ", zidx:" + zidx + ", uidx:" + uidx
+				+ ", zdate:" + zdate + ", maactor:" + maactor + ", mrRating:" + mrRating + "}";
+	}
+
+		//	public String toJSON () {
+		//		Gson obj = new JsonObject();
+		//		obj.add("mIdx", this.mIdx);
+		//		return "";
+		//	}
+			//
+
 }

@@ -8,12 +8,39 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<style>
-			table, tr, th, td{
-				border: 1px solid;
-				border-collapse: collapse;
+			body{
+				background-image: url("/photo/memberinfo.jpg");
+				background-repeat: no-repeat;
 			}
-			table, tr, th{
-				padding: 5px 10px;
+			#mainbody{
+				position: absolute;
+				top : 0px;
+				left: 0px;
+				height: 100%;
+				width: 100%;
+				background-color: rgba(0, 0, 0, 0.4);
+			}
+			table{
+				position: absolute;
+				top : 20%;
+				left: 35%;
+			}
+			table, tr, th, td{
+				border:1px solid rgb(37, 35, 35);
+				border-collapse: collapse;
+				background-color: rgb(37, 35, 35);
+				font:white;
+			}
+			table, tr, th, td{
+				padding: 5px 20px;
+			}
+			td,th{
+				background-color: rgb(37, 35, 35);
+				color: white;
+			}
+			.topbox{
+				background-color: black;
+				color: white;
 			}
 			button{
 				width: 200px;
@@ -32,56 +59,68 @@
 		</style>
 	</head>
 	<body>
-	<!-- 성공하면 index로 실패하면 joinProc -->
-		<form action="/info" method="get">
-			<table>
-				<tr>
-					<th colspan="2"><h3>회원 정보 수정</h3></th> 		
-				</tr>
-				<tr>
-					<th>ID</th> 		
-					<td>${info.uiden}
-                    </td>
-				</tr>
-				<tr>
-					<th>PW</th> 		
-					<td><input type="password" name="uPw"/>
-                    </td>
-				</tr>
-				<tr>
-					<th>이름</th> 		
-					<td>${info.uname}</td>
-				</tr>
-				<tr>
-					<th>생일</th> 		
-					<td><input type="text" name="ubirth" value="${info.uBirth}" /></td>
-				</tr>
-				<tr>
-					<th>성별</th> 		
-					<td>${info.ugender}</td>
-				</tr>
-				<tr>
-					<th>E-mail</th> 		
-					<td><input type="text" name="uemail" value="${info.uemail}"/></td>
-				</tr>
-				<tr>
-					<th>취향</th> 		
-					<td>
-						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="애니메이션"/> 애니메이션
-						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="액션"/> 액션
-						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="SF/판타지"/> SF/판타지<br/>
-						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="로맨스/코미디"/> 로맨스/코미디
-						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="드라마/다큐"/> 드라마/다큐 
-						<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="스릴러/공포" /> 스릴러/공포<br/>
-					</td>
-				</tr>
-				<tr>
-					<th colspan="2" align ="center">
-						<input type="button" id="Changing" value="정보수정"/>
-					</th> 			
-				</tr>
-			</table>
-		</form>
+		<div id="mainbody" >
+		<!-- 성공하면 index로 실패하면 joinProc -->
+			<form action="/info" method="get">
+			<div  id="tablebox" >
+				<table>
+					<tr>
+						<th class = "topbox"colspan="2"><h3>회원 정보 수정</h3></th> 		
+					</tr>
+					<tr>
+						<th>ID</th> 		
+						<td>${info.uiden}
+	                    </td>
+					</tr>
+					<tr>
+						<th>PW</th> 		
+						<td><input type="password" name="uPw"/>
+	                    </td>
+					</tr>
+					<tr>
+						<th>이름</th> 		
+						<td>${info.uname}</td>
+					</tr>
+					<tr>
+						<th>생일</th> 		
+						<td><input type="text" name="ubirth" value="${info.uBirth}" /></td>
+					</tr>
+					<tr>
+						<th>성별</th> 		
+						<td>${info.ugender}</td>
+					</tr>
+					<tr>
+						<th>E-mail</th> 		
+						<td><input type="text" name="uemail" value="${info.uemail}"/></td>
+					</tr>
+					<tr>
+						<th>기존취향</th> 
+						<td>		
+						<c:forEach items="${infoG}" var="genre">
+						${genre}, 
+						</c:forEach>
+						</td>
+					</tr>
+					<tr>
+						<th>변경할 취향</th> 		
+						<td>
+							<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="애니메이션"/> 애니메이션
+							<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="액션"/> 액션
+							<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="SF/판타지"/> SF/판타지<br/>
+							<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="로맨스/코미디"/> 로맨스/코미디
+							<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="드라마/다큐"/> 드라마/다큐 
+							<input type="checkbox" name="ugenre" onClick='count_ck(this)' value="스릴러/공포" /> 스릴러/공포<br/>
+						</td>
+					</tr>
+					<tr>
+						<th colspan="2" align ="center">
+							<input type="button" id="Changing" value="정보수정"/>
+						</th> 			
+					</tr>
+				</table>
+				</div>
+			</form>
+			</div>
 	</body>
 	<script>
 	function count_ck(obj){

@@ -15,7 +15,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<style>
             body{
-                background-color: white;
+                background-color: black;
                 position: relative;
                 z-index: 9;
             }
@@ -29,17 +29,9 @@
 
             #Log-Out{
                 color: white;
-
             }
 
-            /*.SrMain{
-                background-image:url(backimg.jpg);
-                background-size: cover;
-                position: relative;
-                z-index: 5;
-                width: 2000px;
-                height: 1000px;
-            }*/
+            
             .searchLogo>img{
                 position: absolute;
                 width: 70px;
@@ -69,23 +61,32 @@
                 font-size: 40px;
             }
 
+            #WishList{
+                position: absolute;
+                top: 20%;
+            }
+
             .mo{
-                float: left;
                 background-color: aquamarine;
                 width: 300px;
                 height: 500px;
                 top: 50%;
-                border: 5px solid red;
+                border: 5px solid white;
+                list-style-type: none;
+                margin:50px;
+            }
+            
+            .molist{
+            float:left;
             }
 
             .movie{
                 position: absolute;
-                margin-top: 30%;
+                top: 30%;
             }
 
             #add{
                 top: 1000px;
-                left: 45%;
             }
             
             
@@ -95,8 +96,8 @@
             }
 
             #close{
-            	position:absolute;
-                margin-left: 100px;
+            	position:relative;
+            	left:60%;
                 cursor:pointer
             }
 
@@ -104,72 +105,85 @@
                 position: absolute;
                 top: 20%;
             }
+            .AllDelMain{
+                position: absolute;
+                border-top: 10px;
+            }
+            .backimg{
+                margin-left: 2%;
+                margin-top: 5%;
+                margin-right: 2%;
+                position: relative;
+                width: 1800px;
+                height: 1000px;
+                z-index: 0;
+            }
+            
+            
 			
 		</style>
 		
 	</head>
 	<body>
         <!--로고-->
-		<div>
-            <img class="logo" src="logo.png"/>
-        </div>
+            <img class="logo" src="/photo/logo.png"/>
+        
 
         <div class="MainBody">
-        <!--<img src="back.jpg" style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative;">-->
         <!--전체 삭제-->
-        <!-- <button id="remove">전체 삭제</button> -->
+        <div class="AllDelMain" style="left: 90%; margin-top: 8%; z-index: 10;">
+            <a id="AllDel" href="./Alldel?uidx=${Alldel.uidx}" style="color: white;">전체 삭제</a>
+        </div>
 
         <!--로그 아웃-->
         <form>
-            <a id="Log-Out" onclick="">Log-Out</a>
+            <a id="Log-Out" style="position: absolute;">Log-Out</a>
         </form>
 
         <!--WishList 전체 영역-->
         <div class="WsMain">
-            <div class="searchLogo">
+            <div class="backimg">
+                <img style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative;" src="/photo/back.jpg" alt="">
+            
+                <div class="searchLogo">
+                    <!--돋보기 로고-->
+                    <img src="/photo/search.png" style="top: 10%;">
 
-                <!--돋보기 로고-->
-                <img src="search.png">
-
-                <!--WishList-->
-                <div id="WishList">
-                    <div id="WsMainBar"></div>
-                    <a>Wish List</a>
+                    <!--WishList-->
+                    <div id="WishList">
+                        <div id="WsMainBar"></div>
+                        <a>Wish List</a>
+                    </div>
                 </div>
-            </div>
 
-        
-            <!--영화 찜목록 리스트-->
-            <div class="movie">
-                <ul class="Wishlist">
                 
-                <c:forEach items="${list }" var="list">
-                    <li class="mo">${list.mName}</li>
-                    <img id="close" src="closeBar.png"/>
-                </c:forEach>
                 
-                </ul>
-                <button id="add">더보기</button>
+
+            
+                <!--영화 찜목록 리스트-->
+                <div class="movie">
+                    <ul class="Wishlist">
+                        <c:forEach items="${list }" var="list">
+                            <div class="molist">
+                                <li class="mo">${list.mIdx}
+                                <a href="./del?zidx=${list.zidx }"><img id="close" src="/photo/closeBar.png" /></a>
+                                </li>
+                            </div>
+                        </c:forEach>
+                        <div class="pageArea">
+							<a href="./zzim?page=${currPage+1}" id="more">더보기</a>
+						</div>
+                    </ul>
+                    
+                    
                 
+                </div>
+
             </div>
-        </div>
         </div>
 
 	</body>
 	<script>
-        $("#add").click(function(){
-            $(".Wishlist").append("<li class='mo' id='next'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img idS='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo' id='next'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
-            $(".Wishlist").append("<li class='mo'>movie<img id='close' src='closeBar.png'/></li>")
-        });
         
-        $("#close").click(function(){
-        	$(list).remove("${result}");
-        });
 	</script>
 </html>

@@ -8,11 +8,88 @@
 <title>mypage</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
-    #ent{
+
+	    .header{
+        background-color: black;
+        left:0;
+        width: 100%;
+        height: 111px;
+        position: fixed;
+        padding-top: 87px;
+        display : inline-block;
+        top:-5px;
+        z-index: 10;
+	}
+    #logo{
+        width: 185px;
+        height: 158px;
+        position: absolute;
+        top: 5px;
+        left: 869px;
+        z-index: 9;
+    }
+    #allmenu{
+        width: 100px;
+        height: 30px;
+        z-index: 9;
+        position: absolute;
+        top: 150px;
+        left: 657px;
+        font-size: 20px;
+    }
+    #mypage{
+        width: 303px;
+        height: 30px;
+        z-index: 9;
+        position: absolute;
+        top: 150px;
+        left: 1200px;
+        font-size: 20px;
+    }
+
+    a{
+        text-decoration: none;
+        color: white;
         font-weight: 600;
     }
-    .mypage{
-        
+    a:link a:visited a:active a:hover{
+        text-decoration: none;
+        color: white;
+    }
+    #logout{
+        width: 75px;
+        height: 36px;
+        position: absolute;
+        top: 26px;
+        left: 95%;
+    }
+    #login{
+       width: 90px;
+       height: 36px;
+       position: absolute;
+       top: 26px;
+       left: 1686px;
+       color: white;
+       text-align: right;
+    }
+    
+	body{
+
+		background-color:black;
+		height:100%;
+	}
+    #ent{
+    	position:absolute;
+    	background-color:gray;
+    	background-color: rgba(128, 128, 128, 0.5);
+    	width:100%;
+    	color:white;
+    	top:20%;
+    	left:0;
+        font-weight: 600;
+    }
+   /* .mypage{
+
         float: left;
         background-color: teal;
         width: 500px;
@@ -20,19 +97,19 @@
         margin: 10px;
         text-align: center;
        
-    }
+    }*/
     #view{
         text-align: end;
         text-decoration: none;
     }
-    #zzim{
-        position: relative;
+    /*#zzim{
+        
         width: 450px;
         height: 60px;
         background-color: white;
         margin: 30px;
         float: left;
-    }
+    }*/
     #play{
         position: absolute;
         text-align: end;
@@ -48,53 +125,88 @@
         text-align: left;
         left: 180;
     }
-    img{
-        max-width: 60px;
-        max-height: 60px;
+    /*.mypage img{
+        width:100%;
+        height:100%
+    }*/
+    #user{
+    	position: absolute;
+    	background-image:url("/photo/userinfo.jpg");
+    	background-repeat: repeat;
+    	top: 40%;
+    	left: 60%;
+        width: 500px;
+        height: 500px;
+        margin: 10px;
+        text-align: center;
+        border-radius: 15%;
     }
-  
+    #wishList{
+        position: absolute;
+		background-image:url("/photo/heart.jpg");
+    	background-repeat: repeat;
+    	top: 40%;
+    	left: 10%;
+        width: 500px;
+        height: 500px;
+        margin: 10px;
+        text-align: center;
+        border-radius: 15%;
+    }
+    h3{
+    	position:absolute;
+    	top:30%;
+    	left:40%;
+    	font-weight: 600;
+    }
+    #wishList:hover{
+    	color:black;
+    	font-size: xx-large;
+    }
+    #user:hover{
+	   	color:black;
+	   	font-size: xx-large;
+    }
+  	.mypage>a:visited{
+  		color:black;
+  	}
+
 </style>
 </head>
 <body>
     <div class="mainbody">
-        <!-- <img src="bgimg.jpg" style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative;" alt=""> -->
-    
-        <div id="ent">Mypage</div>
+        <img src="/photo/back.jpg" style="width: 100%; height: 100%; opacity: 0.5; position:relative;">
+    	 <div class="header"><a href="like"><img id="logo" src="/photo/main.png"/></a>
+        <div id="search"></div>
+        <div id="allmenu"><a href="movieList">전체 메뉴</a></div>
+        <div id="mypage"><a href="myPage.jsp">마이페이지</a></div>
+        <div id="login"></div>
+        <div id="logout"><a href="logout">로그아웃</a></div>
+    </div>
+        <div id="ent"><h1>&nbsp; profile Detail</h1></div>
         <br/>
 
         <div class="mypage">
-            <h3>WishList</h3>
-            <hr/>
-            <a href="./zzim" id="view" target="_parent"><p>더보기</p></a>
-            
-                <div id="zzim">
-                    <div><img src="#" id="cover"></div>
-                    <div id="ex">
-                    강철비2<br/>
-                    감독 : 양우석<br/>
-                    장르 : 드라마, 액션
-                    </div>
-                    <div id="play"><a href="#detail"><img src="재생.jpg"></a></div>
-                </div>
-            <hr/>
-                <div id="zzim">
-                    <div><img src="#" id="cover"></div>
-                    <div id="ex">
-                    반도<br/>
-                    감독 : 연상호<br/>
-                    장르 : 드라마, 액션
-                    </div>
-                    <div id="play"><a href="#detail"><img src="재생.jpg"></a></div>
-                </div>
-
+	        <a href="./zzim" target="_parent">
+	        	<div  id="wishList"><h3>WishList</h3></div>
+	        </a>
+	        <a href="./info" target="_parent">
+	            <div  id="user"><h3>UserInfo</h3></div>
+	        </a>
         </div>
-        <a href="./info" target="_parent">
-            <div class="mypage"><h3>User Info</h3></div>
-        </a>
     </div>
 </body>
 <script>
 
+var loginId = "${sessionScope.loginId}";
+
+if(loginId !=""){
+	   $("#login").html(loginId+' 님♡');
+	   if(msg!=""){
+	      alert(msg);
+	      msg="";
+	       }
+	    }
 
 </script>
 </html>

@@ -78,17 +78,17 @@
             }
 
             .mo{
-                float: left;
-                background-color: aquamarine;
+                background-color: white;
                 width: 300px;
                 height: 500px;
-                border-left: 50px solid black;
+                border: 5px solid red;
+                margin:50px;
+                
             }
 
             .movie{
                 position: absolute;
                 z-index: 10;
-                margin-left: 15%;
                 top: 30%;
             }
 
@@ -121,12 +121,21 @@
                 border-radius: 10px;
             }
             
+            .molist{
+            float:left;
+            }
+          
+          .addbody{
+          
+          
+          }
+            
 		</style>
 		
 	</head>
 	<body>
         <!--로고-->
-            <img class="logo" src="logo.png"/>
+        <img class="logo" src="/photo/logo.png"/>
         
 
         <!--로그 아웃-->
@@ -137,76 +146,53 @@
         <!--SearchResult 전체 영역-->
         <div class="SrMain">
             <div class="backimg">
-            <img style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative;" src="back.jpg" alt="">
-            <div class="searchLogo">
-
-                <!--돋보기 로고-->
-                <img style="top: 2%; cursor: pointer;" src="search.png">
-
-                <!--Search Result-->
-                <div id="SearchResult">
-                    <div id="SrMainBar"></div>
-                    <a>Search Result</a>
-                </div>
-            </div>
-
-            <!--검색 바-->
-            
-            <div class="SearchZone">
-                <div class="searchBar">
-                    <input id="searchTxt" type="text" placeholder="Search..."/>
-                    <button id="serbar">검색</button>
-                </div>
-            </div>
-            
-            <!--영화 검색 리스트-->
-            <div class="movie">
-                <ul class="list">
-                <c:forEach items="${srlist }" var="srlist">
-                    <li class="mo">movie${srlist.mName}
-                        <a href="#">
-                        <span class="glyphicon glyphicon-heart"></span>
-                        </a>
-                    </li>
-                </c:forEach>
-<%--                     <li class="mo">movie${srlist }
-                        <a href="#">
-                        <span class="glyphicon glyphicon-heart"></span>
-                        </a>
-                    </li>
-                    
-                    <li class="mo">movie${srlist }
-                        <a href="#">
-                        <span class="glyphicon glyphicon-heart"></span>
-                        </a>
-                    </li>
-                    
-                    <li class="mo">movie${srlist }
-                        <a href="#">
-                        <span class="glyphicon glyphicon-heart"></span>
-                        </a>
-                    </li> --%>
-                    
-                </ul>
-
-                <button id="add">더보기</button>
+                <img style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative;" src="/photo/back.jpg" alt="">
                 
-            </div>
-        </div>
-        </div>
+                <!--돋보기 로고-->
+                <div class="searchLogo">
+                    <img style="top: 2%; cursor: pointer;" src="/photo/search.png">
 
+                    <!--Search Result-->
+                    <div id="SearchResult">
+                        <div id="SrMainBar"></div>
+                        <a>Search Result</a>
+                    </div>
+                </div>
+
+                <!--검색 바-->
+                
+                <form action="./search">
+                    <div class="SearchZone">
+                        <div class="searchBar">
+                            <input id="searchTxt" type="text" name="searchTxt" placeholder="Search..."/>
+                            <button id="serbar">검색</button>
+                        </div>
+                    </div>
+                </form>
+                <!--영화 검색 리스트-->
+                <div class="movie">
+                    <ul class="list">
+                        <c:forEach items="${slist}" var="srlist">
+                        <div class="molist">
+                            <li class="mo">movie${srlist.mName}
+                                <a href="#">
+                                <span class="glyphicon glyphicon-heart"></span>
+                                </a>
+                            </li>
+                        </div>
+                        
+                        </c:forEach>
+                    </ul>
+                </div>
+                
+        </div>
+                        <div class="pageArea">
+							<a href="./search?page=${currPage+1}" id="more">더보기</a>
+						</div>
+        </div>
 
 	</body>
 	<script>
-        $("#add").click(function(){
-            $(".list").append("<li class='mo' id='next'>movie<a href='#'><span class='glyphicon glyphicon-heart'></span> </a></li>")
-            $(".list").append("<li class='mo'>movie<a href='#'><span class='glyphicon glyphicon-heart'></span> </a></li>")
-            $(".list").append("<li class='mo'>movie<a href='#'><span class='glyphicon glyphicon-heart'></span> </a></li>")
-            $(".list").append("<li class='mo'>movie<a href='#'><span class='glyphicon glyphicon-heart'></span> </a></li>")
-            $(".list").append("<li class='mo' id='next'>movie<a href='#'><span class='glyphicon glyphicon-heart'></span> </a></li>")
-            $(".list").append("<li class='mo'>movie<a href='#'><span class='glyphicon glyphicon-heart'></span> </a></li>")
-            $(".list").append("<li class='mo'>movie<a href='#'><span class='glyphicon glyphicon-heart'></span> </a></li>")
-            $(".list").append("<li class='mo'>movie<a href='#'><span class='glyphicon glyphicon-heart'></span> </a></li>")
-        });
+       
 	</script>
 </html>
