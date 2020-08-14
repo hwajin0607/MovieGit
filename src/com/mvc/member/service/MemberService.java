@@ -194,9 +194,10 @@ public class MemberService {
 		int sc = 0;
 		try {
 			sc = dao.infoc(uidx,pw,birth,email);
-			
-			if(ugenre.length > 0) {
-				dao.genrec(uidx,ugenre);
+			if(ugenre != null) {
+				if(ugenre.length > 0) {
+					dao.genrec(uidx,ugenre);
+				}
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

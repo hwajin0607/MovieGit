@@ -118,6 +118,8 @@
                 height: 1000px;
                 z-index: 0;
             }
+            
+            
 			
 		</style>
 		
@@ -163,14 +165,17 @@
                     <ul class="Wishlist">
                         <c:forEach items="${list }" var="list">
                             <div class="molist">
-                                <li class="mo">${list.mName}
+                                <li class="mo">${list.mIdx}
                                 <a href="./del?zidx=${list.zidx }"><img id="close" src="/photo/closeBar.png" /></a>
                                 </li>
                             </div>
                         </c:forEach>
+                        <div class="pageArea">
+							<a href="./zzim?page=${currPage+1}" id="more">더보기</a>
+						</div>
                     </ul>
                     
-                    <button id="add" style="left: 50%;">더보기</button>
+                    
                 
                 </div>
 

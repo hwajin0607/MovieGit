@@ -78,18 +78,17 @@
             }
 
             .mo{
-                float: left;
                 background-color: white;
                 width: 300px;
                 height: 500px;
                 border: 5px solid red;
-                margin:1%;
+                margin:50px;
+                
             }
 
             .movie{
                 position: absolute;
                 z-index: 10;
-                margin-left: 15%;
                 top: 30%;
             }
 
@@ -122,6 +121,15 @@
                 border-radius: 10px;
             }
             
+            .molist{
+            float:left;
+            }
+          
+          .addbody{
+          
+          
+          }
+            
 		</style>
 		
 	</head>
@@ -153,7 +161,7 @@
 
                 <!--검색 바-->
                 
-                <form action="./searchResult">
+                <form action="./search">
                     <div class="SearchZone">
                         <div class="searchBar">
                             <input id="searchTxt" type="text" name="searchTxt" placeholder="Search..."/>
@@ -161,25 +169,27 @@
                         </div>
                     </div>
                 </form>
-                
                 <!--영화 검색 리스트-->
                 <div class="movie">
                     <ul class="list">
-                        <c:forEach items="${srlist}" var="srlist">
+                        <c:forEach items="${slist}" var="srlist">
+                        <div class="molist">
                             <li class="mo">movie${srlist.mName}
                                 <a href="#">
                                 <span class="glyphicon glyphicon-heart"></span>
                                 </a>
                             </li>
+                        </div>
+                        
                         </c:forEach>
                     </ul>
-
-                    <button id="add">더보기</button>
-                    
                 </div>
+                
         </div>
+                        <div class="pageArea">
+							<a href="./search?page=${currPage+1}" id="more">더보기</a>
+						</div>
         </div>
-
 
 	</body>
 	<script>
