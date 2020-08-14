@@ -166,7 +166,7 @@
 
     <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
         <div id="search"><img id="search2" src="/photo/search.png"/></div>
-        <div id="allmenu"><a href="movieList">전체 메뉴</a></div>
+        <div id="allmenu"><a href="page">전체 메뉴</a></div>
         <div id="mypage"><a href="myPage.jsp">마이페이지</a></div>
         <div id="login"></div>
         <div id="logout"><a href="logout">로그아웃</a></div>
