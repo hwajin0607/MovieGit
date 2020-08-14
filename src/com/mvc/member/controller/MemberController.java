@@ -13,13 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mvc.member.dao.MemberDao;
 import com.mvc.member.service.MemberService;
 
-
-
-
-
-
-
-@WebServlet({"/login","/logout","/join","/overlay","/info","/changing","/infoc","/like"})
+@WebServlet({"/login","/logout","/join","/overlay","/info","/changing","/infoc","/like","/conDel"})
 
 
 public class MemberController extends HttpServlet {
@@ -54,6 +48,7 @@ public class MemberController extends HttpServlet {
 		RequestDispatcher dis = null;
 		MemberService ms = new MemberService(req,resp);
 		switch (addr) {
+		
 	      case "/login":
 	            System.out.println("로그인 요청");
 	            String id = req.getParameter("id");
@@ -74,8 +69,10 @@ public class MemberController extends HttpServlet {
  	                page = "like";
 
  	                if(id.equals("manager")){
+
+	                	//msg = "관리자 페이지 입니다.";
 	                	msg = "관리자 페이지 입니다.";
-	                	page="manager";	
+	                	page="manager.jsp";	
 	                	
 	                } 
  	            }
@@ -84,7 +81,7 @@ public class MemberController extends HttpServlet {
                 req.getSession().setAttribute("loginId", id);
                 req.getSession().setAttribute("loginPw", pw);
  	            req.getSession().setAttribute("uIdx", login);
- 	            
+	            req.getSession().setAttribute("sort","0");
 
                 System.out.println("loginId=="+req.getSession().getAttribute("loginId"));
 	            req.setAttribute("msg", msg);
@@ -154,8 +151,12 @@ public class MemberController extends HttpServlet {
 			ms.infoc();
 
 			break;
+			
+		case "/conDel":
+			System.out.println("댓글 삭제");
+			ms.conDel();
 
-
+			break;
 			
 
 		}

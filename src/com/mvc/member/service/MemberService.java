@@ -45,7 +45,10 @@ public class MemberService {
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pw");
 		String name = req.getParameter("name");
-		String birth = req.getParameter("birth");
+		String day = req.getParameter("day");
+		String month = req.getParameter("month");
+		String year = req.getParameter("year");
+		String birth = year+"-"+month+"-"+day;
 		String gender = req.getParameter("gender");
 		String email = req.getParameter("email");
 		String[] ugenre = req.getParameterValues("ugenre[]");
@@ -120,8 +123,9 @@ public class MemberService {
 	}
 
 	public void info() {
-		// String uidx = (String) req.getSession().getAttribute("idx"); 나중에 세션값 저장되면 사용할것
-		String uidx = "61";
+		String uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
+		System.out.println(uidx);
+		//String uidx = "61";
 		MemberDto info = null;
 		ArrayList<String> infoG = null;
 		MemberDao dao = new MemberDao();
@@ -135,6 +139,7 @@ public class MemberService {
 			dao.resClose();
 			req.setAttribute("info", info);
 			req.setAttribute("infoG", infoG);
+			req.getSession().setAttribute("infoG", infoG);
 			RequestDispatcher dis = req.getRequestDispatcher("MemberInfo.jsp");
 			try {
 				dis.forward(req, resp);
@@ -148,12 +153,14 @@ public class MemberService {
 	}
 
 	public void changing() {
-		// String uidx = (String) req.getSession().getAttribute("idx"); 나중에 세션값 저장되면 사용할것
-		String uidx = "61";
+		String uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
+		//String uidx = "61";
 		MemberDto info = null;
 		ArrayList<String> infoG = null;
 		MemberDao dao = new MemberDao();
 		try {
+			String str = String.valueOf(req.getSession().getAttribute("infoG"));
+			System.out.println(str);
 			info = dao.info(uidx);
 			infoG =  dao.genre(uidx);
 		} catch (SQLException e) {
@@ -209,6 +216,29 @@ public class MemberService {
 			
 		
 		
+	}
+
+	public void conDel() {
+		String conidx = req.getParameter("conidx");
+		System.out.println(conidx);
+		MemberDao dao = new MemberDao();
+		try {
+			dao.conDel(conidx);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+		}
+		String cmidx = String.valueOf(req.getSession().getAttribute("mIdx"));
+		System.out.println("idx 값"+cmidx);
+		RequestDispatcher dis = req.getRequestDispatcher("/movieDetail?mIdx="+cmidx);
+		try {
+			dis.forward(req, resp);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 

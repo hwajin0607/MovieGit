@@ -15,7 +15,11 @@ import com.mvc.movie.service.MovieService;
 
 
 
-@WebServlet({"/","/page","/zzim","/zzimadd","/searchResult","/Alldel","/del","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search"})
+
+
+
+@WebServlet({"/conup","/page","/zzim","/zzimadd","/searchResult","/Alldel","/del","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search","/movieconten","/randomDetail"})
+
 
 
 public class MovieController extends HttpServlet {
@@ -31,8 +35,8 @@ public class MovieController extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Process(req,resp);
 		req.setCharacterEncoding("UTF-8");
+		Process(req,resp);
 	}
 
 	private void Process(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -118,9 +122,14 @@ public class MovieController extends HttpServlet {
 		case "/movieDetail":
 			System.out.println("상세페이지 요청");
 			String mIdx = req.getParameter("mIdx");
-			//req.getSession().setAttribute("mIdx", mIdx);
+			req.getSession().setAttribute("mIdx", mIdx);
 			System.out.println(mIdx);
-			ms.movieDetail(mIdx);
+			try {
+				ms.movieDetail(mIdx);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			break;
 			
@@ -159,6 +168,7 @@ public class MovieController extends HttpServlet {
 			System.out.println("랜덤으로 가져오기");
 			ms.random();
 			break;
+			
 			//평점 매기기
 		case "/writeRating" :
 			System.out.println("평점 넣기");
@@ -203,7 +213,41 @@ public class MovieController extends HttpServlet {
 			ms.Alldel(uidx);
 			break;
 			
+
+		case "/randomDetail":
+			System.out.println("randomDetail");
+			ms.randomDetail();
+			break;	
+			
+
+		case "/movieconten":
+			System.out.println("댓글추가");
+			uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
+			String cont = req.getParameter("contentTxt");
+			String contmidx = String.valueOf(req.getSession().getAttribute("mIdx"));
+			try {
+				ms.conten(uidx,cont,contmidx);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+
 		
+		case "/conup":
+			System.out.println("댓글수정");
+			String coment = req.getParameter("coment");
+			String conidx = req.getParameter("conIdx");
+			String cmidx = req.getParameter("midx");
+			System.out.println(coment);
+			try {
+				ms.conup(coment,conidx,cmidx);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
 		}
 
 		

@@ -80,34 +80,34 @@
         color: white;
     }
     #memberjoin{
-	    position: absolute;
-	    top: 200px;
-	    left: 703px;
-	    width: 473px;
-	    height: 404px;
-	    z-index: 9;
-	    background-color: white;
-	   display:none;
+       position: absolute;
+       top: 200px;
+       left: 703px;
+       width: 473px;
+       height: 404px;
+       z-index: 9;
+       background-color: white;
+      display:none;
     }
     iframe{
-	    width: 100%;
-	    height: 100%;
-	    border: 0;
-	    top: 8px;
-	    left: 13px;
-	    position: absolute;
+       width: 100%;
+       height: 100%;
+       border: 0;
+       top: 8px;
+       left: 13px;
+       position: absolute;
     }
     span{
-    	cursor:pointer;
+       cursor:pointer;
     }
 </style>
 </head>
 <body>
-	<div id="memberjoin"><iframe src="Memberjoin.jsp"></iframe></div>
-	
-    	<div>
+   <div id="memberjoin"><iframe src="Memberjoin.jsp"></iframe></div>
+   
+       <div>
         <img src="/photo/main.jpg" style="width: 100%; height: 900px; opacity: 0.3;">
-    	</div>
+       </div>
         <form action="login" method="post">  
             <div class="loginBox"><div id="login-top"><h3>LOGIN</h3></div>   
                 <table>
@@ -126,25 +126,33 @@
 
 </body>
 <script>
-	var uIdx = "${sessionScope.uIdx}";
-	var loginId = "${sessionScope.loginId}";
-	var loginPw = "${sessionScope.loginPw}";
-	console.log(uIdx)
-	
-	 if(uIdx=="0" || loginId==""){
-		var msg = "${msg}";
-		if(msg!=""){
-			alert(msg);
-	 	}
-	 }
+   var uIdx = "${sessionScope.uIdx}";
+   var loginId = "${sessionScope.loginId}";
+   var loginPw = "${sessionScope.loginPw}";
+   console.log(uIdx)
+   
+    if(uIdx=="0" || loginId==""){
+      var msg = "${msg}";
+      if(msg!=""){
+         alert(msg);
+       }
+    }
  
      $(document).ready(function(){
-		
-    	 $("span").click(function(){
-    		$("#memberjoin").css('display','block');
-    	 });
+      
+        $("span").click(function(){
+          $("#memberjoin").css('display','block');
+        });
 
      });
+
+     function DoSend() {
+
+        $("#memberjoin").css('display','none');
+   }
+
+
+
 
 </script>
 
