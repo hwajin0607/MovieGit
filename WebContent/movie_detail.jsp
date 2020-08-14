@@ -244,7 +244,11 @@
                 position: relative;
                 left: 5%;   
             }
-
+            .pageArea{
+			margin : 10px;
+			
+		}
+		
         </style>	
     </head>
     <body>
@@ -281,73 +285,55 @@
         </div>
         </c:forEach>
         <!--댓글 창-->
+       
         <div id="com">
             <fieldset>
                 <legend><h3>댓글</h3></legend>
-                <form action="#" method="get">
-                    <input type="text" name="content" class="content"/>&nbsp;&nbsp;<input type="submit" value="submit" class="submit"/>
+                <form action="content" method="POST">
+                    <input type="text" name="conContent" class="content" />
+                   
+                    <input type="submit" value="submit" class="submit"/>
                 </form>
+                
+                <c:forEach items="${list}" var ="content">
                 <div class="clickbox">
                     <div class="p1">신고|</div>&nbsp;
                     <div class="p2" id="p2_1">수정|</div>&nbsp;
                     <div class="p3">삭제</div>
                 </div>
-                <div class="com">user id</div>
-                <div class="mon"><textarea>댓글내용</textarea></div>
+                <div class="com">${content.uIden}</div>
+                <div class="mon"><textarea>${content.conContent}</textarea></div>
                 <div id="mon">
                     <form action="#" method="get">
                     <input type="text" name="coment" class="recon"/>&nbsp;&nbsp;<input type="submit" value="submit" id="su"/>
                     </form>
                 </div>
-                &nbsp;
-                <div class="bar3"></div>
-                &nbsp;&nbsp;
-                <div class="clickbox">
-                    <div class="p1" >신고|</div>&nbsp;
-                    <div class="p2">수정|</div>&nbsp;
-                    <div class="p3">삭제</div>
-                </div>
-                <div class="com">user id</div>
-                <div class="mon">댓글내용</div>
-                &nbsp;
-                <div class="bar3"></div>
-                &nbsp;&nbsp;
-                <div class="clickbox">
-                    <div class="p1">신고|</div>&nbsp;
-                    <div class="p2">수정|</div>&nbsp;
-                    <div class="p3">삭제</div>
-                </div>
-                <div class="com">user id</div>
-                <div class="mon">댓글내용</div>
-                &nbsp;
-                <div class="bar3"></div>
-                &nbsp;&nbsp;
-                <div class="clickbox">
-                    <div class="p1">신고|</div>&nbsp;
-                    <div class="p2">수정|</div>&nbsp;
-                    <div class="p3">삭제</div>
-                </div>
-                <div class="com">user id</div>
-                <div class="mon">댓글내용</div>
-                &nbsp;
-                <div class="bar3"></div>
-                &nbsp;&nbsp;
-                <div class="clickbox">
-                    <div class="p1">신고|</div>&nbsp;
-                    <div class="p2">수정|</div>&nbsp;
-                    <div class="p3">삭제</div>
-                </div>
-                <div class="com">user id</div>
-                <div class="mon">댓글내용</div>
-                &nbsp;
-                <div class="bar3"></div>
-                &nbsp;
-                <div>페이징 넣을 예정</div>
+               </c:forEach>
+               
+              
+                <div class = "pageArea">
+				<a href = "./movieDetail?page=${currPage-1}"><span >이전 페이지</span></a>
+				<span><b>${currPage}</b></span>
+				<a href = "./movieDetail?page=${currPage+1}"><span>다음 페이지</span></a>
+				</div>			
+              
             </fieldset>
         </div>
 	</body>
     <script>
 
+		var d = ${currPage};
+		
+		
+		if(d < 1){
+		location.href="./movieDetail?page=${currPage+1}";		
+		}
+	
+
+    
+    
+    
+    
    
         $('.p1').click(function(){
             console.log("찍힌다.");

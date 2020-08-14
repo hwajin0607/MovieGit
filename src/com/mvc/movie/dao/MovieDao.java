@@ -58,7 +58,6 @@ public class MovieDao {
 		}
 		return list;
 	}
-	
     //전체영화목록	
 	public ArrayList<MovieDto> movieList(int page) throws SQLException {
 		int pagePerCnt = 4; //페이지당 보여줄 게시물의 수

@@ -4,9 +4,13 @@ import java.sql.Date;
 
 public class MovieDto {
 
-	
+	private int conIdx;
 
+	private String conContent;
+	private Date conDate;
+	private Date conRedate;
 
+	private String uIden;
 	private int mIdx;
 	private String mName;
 	private Date mOpen;
@@ -28,6 +32,28 @@ public class MovieDto {
 	private Date zdate;
 	private String maactor;
 	private double mrRating;
+	
+	
+	
+	
+	public int getConIdx() {
+		return conIdx;
+	}
+	public String getConContent() {
+		return conContent;
+	}
+	public Date getConDate() {
+		return conDate;
+	}
+	public Date getConRedate() {
+		return conRedate;
+	}
+	public String getuIden() {
+		return uIden;
+	}
+	public void setuIden(String uIden) {
+		this.uIden = uIden;
+	}
 	public int getmIdx() {
 		return mIdx;
 	}
@@ -153,6 +179,22 @@ public class MovieDto {
 	}
 	public void setMrRating(double mrRating) {
 		this.mrRating = mrRating;
+	}
+	public void setConIdx(int int1) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setConContent(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setConDate(Date date) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setConRedate(Date date) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	
