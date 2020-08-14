@@ -19,7 +19,7 @@ import com.mvc.member.service.MemberService;
 
 
 
-@WebServlet({"/login","/logout","/join","/overlay","/info","/changing","/infoc","/like"})
+@WebServlet({"/login","/logout","/join","/overlay","/info","/changing","/infoc","/like","/conDel"})
 
 
 public class MemberController extends HttpServlet {
@@ -155,8 +155,12 @@ public class MemberController extends HttpServlet {
 			ms.infoc();
 
 			break;
+			
+		case "/conDel":
+			System.out.println("댓글 삭제");
+			ms.conDel();
 
-
+			break;
 			
 
 		}

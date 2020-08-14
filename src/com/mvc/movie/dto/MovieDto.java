@@ -29,7 +29,9 @@ public class MovieDto {
 	private Date zdate;
 	private String maactor;
 	private double mrRating;
-	
+	private int conidx;
+	private String conContent;
+	private String uiden;
 	
 	public int getmIdx() {
 		return mIdx;
@@ -179,6 +181,25 @@ public class MovieDto {
 	public void setMfURL(String mfURL) {
 		this.mfURL = mfURL;
 	}
+	public int getConidx() {
+		return conidx;
+	}
+	public void setConidx(int conidx) {
+		this.conidx = conidx;
+	}
+	public String getConContent() {
+		return conContent;
+	}
+	public void setConContent(String conContent) {
+		this.conContent = conContent;
+	}
+	public String getUiden() {
+		return uiden;
+	}
+	public void setUiden(String uiden) {
+		this.uiden = uiden;
+	}
+
 
 
 }

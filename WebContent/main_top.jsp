@@ -200,9 +200,9 @@
             <a href="#"><li class="list">독전</li></a><div class="heart"></div>
             <a href="#"><li class="list">백두산</li></a><div class="heart"></div>
  -->
-            	<c:forEach items="${list }" var="likelist">
+            <c:forEach items="${list }" var="likelist">
     	
-            <a href="l"><li class="list">${likelist.mIdx}</li></a><div class="heart"></div>
+            	<a href="l"><li class="list">${likelist.mIdx}</li></a><div class="heart"></div>
              
             </c:forEach>
 

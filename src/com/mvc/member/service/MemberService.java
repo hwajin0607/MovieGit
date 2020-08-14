@@ -217,6 +217,29 @@ public class MemberService {
 		
 		
 	}
+
+	public void conDel() {
+		String conidx = req.getParameter("conidx");
+		System.out.println(conidx);
+		MemberDao dao = new MemberDao();
+		try {
+			dao.conDel(conidx);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			dao.resClose();
+		}
+		String cmidx = String.valueOf(req.getSession().getAttribute("mIdx"));
+		System.out.println("idx 값"+cmidx);
+		RequestDispatcher dis = req.getRequestDispatcher("/movieDetail?mIdx="+cmidx);
+		try {
+			dis.forward(req, resp);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 
 

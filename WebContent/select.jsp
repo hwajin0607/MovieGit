@@ -29,9 +29,10 @@
             <td><a href="#" class="movie1">${list[0].mName }</a><!--<a href="#" class="movie6">${list[5].mName }</a>--></td>
             <td rowspan="5">
                 <form action="./search" method="GET">
-                    <input type="text" name="mGenre"/>
+                    <input type="text" name="searchTxt"/>
                     <button>검색</button>
-				</form></td>
+				</form>
+				</td>
 		</tr>
         <tr>
 			<td><a href="#" class="movie2">${list[1].mName }</a><!--<a href="#" class="movie7">${list[6].mName }</a>--></td>

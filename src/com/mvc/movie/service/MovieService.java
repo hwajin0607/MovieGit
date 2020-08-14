@@ -216,12 +216,16 @@ public class MovieService {
 	}
 
 	// 영화 상세페이지에 내용 띄우기
-	public void movieDetail(String mIdx) throws ServletException, IOException {
+	public void movieDetail(String mIdx) throws ServletException, IOException, SQLException {
 		System.out.println("서비스에게 일을 시킨다.");
+		req.getSession().setAttribute("mIdx", mIdx);
 		MovieDao dao = new MovieDao();
 		ArrayList<MovieDto> list = dao.movieDetail(mIdx);
+		ArrayList<MovieDto> movieContent = dao.Content(mIdx);
 		System.out.println(list);
+		System.out.println(movieContent);
 		req.setAttribute("list", list);
+		req.setAttribute("Content", movieContent);
 		RequestDispatcher dis = req.getRequestDispatcher("movie_detail.jsp");
 		dis.forward(req, resp);
 		dao.resClose();
@@ -329,6 +333,25 @@ public class MovieService {
 		dao.Alldel(uidx);
 		String page = "/zzim";
 		RequestDispatcher dis = req.getRequestDispatcher(page);
+		dis.forward(req, resp);
+		
+	}
+
+	public void conten(String uidx, String cont, String contmidx) throws ServletException, IOException, SQLException {
+		MovieDao dao = new MovieDao();
+		System.out.println(uidx+"/"+cont+"/"+contmidx);
+		dao.conten(uidx,cont,contmidx);
+		RequestDispatcher dis = req.getRequestDispatcher("/movieDetail?mIdx="+contmidx);
+		dis.forward(req, resp);
+		
+	}
+
+	public void conup(String coment, String conidx, String cmidx) throws SQLException, ServletException, IOException {
+		MovieDao dao = new MovieDao();
+		req.setCharacterEncoding("UTF-8");
+		System.out.println(coment);
+		dao.conup(coment,conidx);
+		RequestDispatcher dis = req.getRequestDispatcher("/movieDetail?mIdx="+cmidx);
 		dis.forward(req, resp);
 		
 	}
