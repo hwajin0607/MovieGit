@@ -200,11 +200,6 @@
             <a href="#"><li class="list">독전</li></a><div class="heart"></div>
             <a href="#"><li class="list">백두산</li></a><div class="heart"></div>
  -->
-            	<c:forEach items="${list }" var="likelist">
-    	
-            <a href="l"><li class="list">${likelist.mIdx}</li></a><div class="heart"></div>
-             
-            </c:forEach>
 
 
         </ul>
@@ -215,34 +210,34 @@
     </div>
 </body>
 <script>
- var uIdx = "${sessionScope.uIdx}";
-var loginId = "${sessionScope.loginId}";
-var loginPw = "${sessionScope.loginPw}";
-var msg = "${msg}";
-
-/*   if(loginPw=="" || loginId==""){
-	alert("로그인이 필요한 서비스입니다.");
-	location.href="login.jsp";
-
-  }else(loginPw !="" || loginId !=""){ */
-	 if(loginId !=""){
-	$("#login").html(loginId+' 님♡');
-	if(msg!=""){
-		alert(msg);
-		msg="";
-		 }
-	 }
-
-
- 
-
-$(document).ready(function() {
-
-    $("#search").click(function(){
-        $(".panel").css({"display":"block"});
-    });
-
-    });
+		var uIdx = "${sessionScope.uIdx}";
+		var loginId = "${sessionScope.loginId}";
+		var loginPw = "${sessionScope.loginPw}";
+		var msg = "${msg}";
+		
+		/*   if(loginPw=="" || loginId==""){
+			alert("로그인이 필요한 서비스입니다.");
+			location.href="login.jsp";
+		
+		  }else(loginPw !="" || loginId !=""){ */
+			 if(loginId !=""){
+			$("#login").html(loginId+' 님♡');
+			if(msg!=""){
+				alert(msg);
+				msg="";
+				 }
+			 }
+		
+		
+		 
+		
+		$(document).ready(function() {
+		
+		    $("#search").click(function(){
+		        $(".panel").css({"display":"block"});
+		    });
+		
+		    });
 
 
 </script>

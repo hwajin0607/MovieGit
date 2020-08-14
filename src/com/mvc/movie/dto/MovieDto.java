@@ -16,7 +16,6 @@ public class MovieDto {
 	private Date mDate;
 	private int mAge;
 	private String mdDirector;
-	private String mfURL;
 	private String maActor;
 	private String mContent;
 	private String mfUrl;
@@ -173,12 +172,7 @@ public class MovieDto {
 				+ ", mfIdx:" + mfIdx + ", mfOri:" + mfOri + ", mfNew:" + mfNew + ", zidx:" + zidx + ", uidx:" + uidx
 				+ ", zdate:" + zdate + ", maactor:" + maactor + ", mrRating:" + mrRating + "}";
 	}
-	public String getMfURL() {
-		return mfURL;
-	}
-	public void setMfURL(String mfURL) {
-		this.mfURL = mfURL;
-	}
+
 
 
 }

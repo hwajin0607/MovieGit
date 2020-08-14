@@ -10,6 +10,10 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <style>
 
+			body{
+				background-color: rgb(0,0,0,0.8);
+			}
+			
             #a1{
                 width: 500px;
                 height: 300px;
@@ -116,9 +120,10 @@
       </div>
 	</body>
     <script>
+    
         var a1 = document.getElementById('a1');
         function move() {
-            window.location.href="http://www.naver.com";
+            window.open("http://www.naver.com");
         };
 
         var a2 = document.getElementById('a2');

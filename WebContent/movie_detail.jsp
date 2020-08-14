@@ -8,47 +8,143 @@
         <title>영화 상세 페이지</title>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <style>
+ 		 
+ 		 body{
+ 		 	background-color: black;
+ 		 	height: 100%;
+ 		 }
  		
- 		  #bg::after{
-                width : 100%;
-                height : 1000px;
-                z-index : 1;
-                position : absolute; 
-                top: 0; 
-                left: 0;
-            }
-
+		 .header{
+		        background-color: black;
+		        width: 99%;
+		        height: 111px;
+		        position: fixed;
+		        padding-top: 87px;
+		        display : inline-block;
+		        top:-20px;
+		        z-index: 10;
+		    }
+		    
+		    #search{
+		        width: 59px;
+		        height: 52px;
+		        z-index: 9;
+		        position: relative;
+		        top: 48px;
+		        left: 367px;
+		        z-index: 9;
+		        cursor: pointer;
+		    }
+		    
+		    #search2{
+		        width: 62px;
+		        height: 57px;
+		        z-index: 9;
+		        position: absolute;	
+		        z-index: 10;
+		    }
+		    
+		    #logo{
+		        width: 185px;
+		        height: 158px;
+		        position: absolute;
+		        top: 5px;
+		        left: 869px;
+		        z-index: 9;
+		    }
+		    
+		    #allmenu{
+		        width: 100px;
+		        height: 30px;
+		        z-index: 9;
+		        position: absolute;
+		        top: 150px;
+		        left: 657px;
+		        font-size: 20px;
+		    }
+		    
+		    #mypage{
+		        width: 303px;
+		        height: 30px;
+		        z-index: 9;
+		        position: absolute;
+		        top: 150px;
+		        left: 1200px;
+		        font-size: 20px;
+		    }
+		
+		    a{
+		        text-decoration: none;
+		        color: white;
+		        font-weight: 600;
+		    }
+		    a:link a:visited a:active a:hover{
+		        text-decoration: none;
+		        color: white;
+		    }
+		    
+		    #logout{
+		        width: 75px;
+		        height: 36px;
+		        position: absolute;
+		        top: 26px;
+		        left: 95%;
+		    }
+		    
+		    #login{
+		       width: 90px;
+		       height: 36px;
+		       position: absolute;
+		       top: 26px;
+		       left: 1686px;
+		       color: white;
+		       text-align: right;
+		    }
+		    
+		    .panel{
+		        width: 92%;
+		        height: 420px;
+		        background-color: gray;
+		        position: absolute;
+		        top: 129px;
+		        left: 77px;
+		        z-index: 10;
+		        display: none;
+		    }
+    
         /*영화 상세 관련*/       
             #ready{
                 width: 85%;
-                height: 50%;
-                background-color: black;
-                opacity: 0.9;
+                height: 55%;
+                background-color: rgb(0,0,0,0.9);
                 margin-top: 3%;
                 margin-bottom: 30px;
                 margin-left: 7%;
                 position: relative;
-                z-index: 10;
+                z-index: 9;
+                top : -180%;
             }
 
             #post{
                 position: relative;
                 width: 25%;
-                height: 75%;
+                height: 88%;
                 background-color: blanchedalmond;
-                top: 11%;
-                left: 3%;
+                top: 5%;
+                left: 2%;
                 cursor: pointer;
             }
 
             #age{
                 position: absolute;
-                width: 3%;
+                width: 2%;
                 height: 7%;
                 background-color: cadetblue;
                 top: 10%;
                 left: 30%;
                 border-radius: 50px;
+                text-align: center;
+                line-height: 35px;
             }
 
             #title{
@@ -57,33 +153,34 @@
                 height: 8%;
                 background-color: crimson;
                 top: 10%;
-                left: 38%;
+                left: 34%;
             }
 
             #movie{
                 position: absolute;
-                width: 65%;
-                height: 50%;
+                width: 69%;
+                height: 60%;
                 background-color: darkblue;
                 top: 20%;
-                left: 30%;
+                left: 29%;
             }
 
             #m1{
                 position: absolute;
-                width: 50px;
+                width: 110px;
                 height: 25px;
                 background-color: blueviolet;
                 top: 10%;
-
+                left: 3%;
+                text-align: center;
             }
 
             #m2{
                 position: absolute;
-                width: 50px;
+                width: 70px;
                 height: 25px;
                 background-color: darkorange;
-                left: 10%;
+                left: 14%;
                 top: 10%;
             }
 
@@ -93,6 +190,7 @@
                 width: 300px;
                 height: 2px;
                 top: 23%;
+                left:3%;
             }
 
             #bar2{
@@ -108,8 +206,9 @@
                 position: absolute;
                 width: 100px;
                 height: 50px;
-                left: 30%;
+                left: 29%;
                 background-color: aquamarine;
+                top: 83%;
             }
 
             #pj1{
@@ -117,7 +216,7 @@
                 width: 125px;
                 height: 35px;
                 left: 35%;
-                top: 80%;
+                top: 83%;
                 background-color: aquamarine;  
             }
 
@@ -126,7 +225,7 @@
                 width: 40px;
                 height: 35px;
                 left: 45%;
-                top: 80%;
+                top: 83%;
                 background-color: aquamarine;  
             }
 
@@ -135,18 +234,18 @@
                 width: 75px;
                 height: 30px;
                 left: 29%;
-                top: 80%;
+                top: 83%;
                 background-color: aquamarine;  
             }
 
             #m3{
                 position: absolute;
                 color: black;
-                top: 40%;
-                left: 40%;
+                top: 30%;
+                left: 3%;
                 font-size: 20px;
-                width: 50px;
-                height: 30px;
+                width: 1030px;
+                height: 120px;
                 background-color: tomato;
                 
             }
@@ -166,11 +265,11 @@
              #com{
                 width: 85%;
                 height: 110%;
-                background-color: black;
-                opacity: 0.9;
+                background-color: rgb(0,0,0,0.9);
                 margin-left: 7%;
                 position: relative;
-                z-index: 10;
+                z-index: 9;
+                top : -178%;
             }
 
             .content{
@@ -262,13 +361,24 @@
     </head>
     <body>
  	 <div>
-            <img src = "/photo/main.jpg" style = "width : 100%;  height : 170%; z-index : 2; position : absolute; top: 0; left: 0; opacity: 0.8;" id="bg" > 
+            <img src = "/photo/main.jpg" style = "width : 100%;  height : 100%; position:relative" > 
+      </div>
+       <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
+        <div id="search"><img id="search2" src="/photo/search.png"/></div>
+        <div id="allmenu"><a href="movieList">전체 메뉴</a></div>
+        <div id="mypage"><a href="myPage.jsp">마이페이지</a></div>
+        <div id="login"></div>
+        <div id="logout"><a href="logout">로그아웃</a></div>
+    </div>
+        <div class="panel"><a href="">검색창</a></div>
+    
+          <div id="background">
+        <img src="/photo/main.jpg" style="width:100%; height:100%; position:relative;"/>
        </div>
-       
     	<c:forEach items="${list}" var="mms">
 	        <div id="ready">
-	            <div id="post" onclick="location.href='#'">
-	                ${mms.mUrl}
+	            <div id="post" onclick="location.href='http://youtube.com'">
+	                ${mms.mfUrl}
 	            </div>
 	            <div id="age">
 	                ${mms.mAge}
@@ -296,7 +406,7 @@
                 </form> 
             </div>
         </div>
-        </c:forEach>
+
         <!--댓글 창-->
         <div id="com">
             <fieldset>
@@ -357,7 +467,8 @@
                 <div class="com">user id</div>
                 <div class="mon">댓글내용</div>
                 &nbsp;
-                <div class="bar3"></div>
+                <div class="bar3"></div>         
+                </c:forEach>
                 &nbsp;
                 <div>페이징 넣을 예정</div>
             </fieldset>
@@ -365,7 +476,16 @@
 
 	</body>
     <script>
-
+    
+    var loginId = "${sessionScope.loginId}";
+		
+    if(loginId !=""){
+    	   $("#login").html(loginId+' 님♡');
+/*     	   if(msg!=""){
+    	      alert(msg);
+    	      msg="";
+    	       } */
+    	    }
    
         $('.p1').click(function(){
             console.log("찍힌다.");
@@ -398,10 +518,9 @@
         	alert(msg);
         }
 
-    	var msg = "${msg}";
-    	if(msg !=""){
-    		alert(msg);
-    	}
+        $("#search").click(function(){
+            $(".panel").css({"display":"block"});
+        });
     	
 	</script>
 </html>

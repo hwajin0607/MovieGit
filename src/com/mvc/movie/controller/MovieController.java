@@ -159,6 +159,7 @@ public class MovieController extends HttpServlet {
 			System.out.println("랜덤으로 가져오기");
 			ms.random();
 			break;
+			
 			//평점 매기기
 		case "/writeRating" :
 			System.out.println("평점 넣기");

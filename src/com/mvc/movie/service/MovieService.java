@@ -256,14 +256,27 @@ public class MovieService {
 		}
 	}
 
-	// 평점 넣기
-	public void writeRating(String mIdx) {
-		System.out.println("서비스에게 일 시킨다.");
-		String pjpoint = req.getParameter("pjpoint");
-		mIdx = req.getParameter("mIdx");
-		System.out.println(pjpoint + "/" + mIdx);
-
-	}
+	// 평점 넣기 + 한번 넣은 사람은 못 넣게 하기
+		public void writeRating(String mIdx) throws ServletException, IOException {
+			System.out.println("서비스에게 일 시킨다.");
+			String uIdx = String.valueOf(req.getSession().getAttribute("uIdx"));
+			String pjpoint = req.getParameter("pjpoint");
+			mIdx = req.getParameter("mIdx");
+			System.out.println("영화 번호 : "+mIdx+"/"+"평점 : "+pjpoint+"/"+"회원번호 : "+uIdx);
+			MovieDao dao = new MovieDao();
+			String msg = "한번 매긴 평점을 다시 매길 수 없습니다.";
+			String page = "movieDetail?mIdx="+mIdx;
+			if(dao.writeRating(mIdx,pjpoint,uIdx)) {
+				System.out.println("정상 업데이트");
+				msg = "평점이 매겨졌습니다.";
+				System.out.println("평점이 정상적으로 매겨졌습니다.");
+			}
+			req.setAttribute("msg", msg);
+			RequestDispatcher dis = req.getRequestDispatcher(page);
+			dis.forward(req, resp);
+			//resp.sendRedirect(page);
+		}
+		
 
 	public void del() throws ServletException, IOException {
 		String uidx = req.getParameter("uidx");
