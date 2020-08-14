@@ -234,6 +234,7 @@
     <div class="recommend">
 
         <div id="recommendmovie" >Recommend Movie</div>
+
         <div id="alllist">
             <div class="front">
          		<c:forEach items="${list }" var="likelist"  begin="0" end="3" step="1">
@@ -245,7 +246,6 @@
             		<a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list">${likelist.mfIdx}</li></a>
            		</c:forEach>
             </div>
-       
 
     </div>
     <div class="sidebar">
@@ -260,6 +260,7 @@
 	</div>
 </footer>
 <script>
+
  var uIdx = "${sessionScope.uIdx}";
 var loginId = "${sessionScope.loginId}";
 var loginPw = "${sessionScope.loginPw}";
@@ -299,6 +300,33 @@ $(document).ready(function() {
 	function DoSend() {
 		location.href="./randomDetail";
 	}
+=======
+		var uIdx = "${sessionScope.uIdx}";
+		var loginId = "${sessionScope.loginId}";
+		var loginPw = "${sessionScope.loginPw}";
+		var msg = "${msg}";
+		
+		/*   if(loginPw=="" || loginId==""){
+			alert("로그인이 필요한 서비스입니다.");
+			location.href="login.jsp";
+		
+		  }else(loginPw !="" || loginId !=""){ */
+			 if(loginId !=""){
+			$("#login").html(loginId+' 님♡');
+/* 			if(msg!=""){
+				alert(msg);
+				msg="";
+				 } */
+			 }
+				
+		$(document).ready(function() {
+		
+		    $("#search").click(function(){
+		        $(".panel").css({"display":"block"});
+		    });
+		
+		    });
+>>>>>>> 98b7fc1b0b2c33971f578c2b08ee0e69c55b959f
 
 
 </script>
