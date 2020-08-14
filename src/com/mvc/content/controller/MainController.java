@@ -40,30 +40,30 @@ public class MainController extends HttpServlet {
 	
 	
 	
-	//댓글 생성 및 수정
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		int result = 0; //0이면 false
-		String uIdx = req.getParameter("uIdx"); 
-		String content = req.getParameter("conContent");
-		String conIdx = req.getParameter("conIdx");
-		String mIdx = req.getParameter("mIdx");
-		
-		int member = Integer.parseInt(uIdx);
-		int movie = Integer.parseInt(mIdx);
-		
-		// 댓글번호가 비였으면 신규 댓글 작성 // 있으면 댓글수정 (
-		if(conIdx == null || conIdx.equals("")) {
-			// 신규
-			result = service.newContent(member,content,movie); // 리설트를 리턴 할고얌
-		}else {
-			// 수정\
-		int cIdx = Integer.parseInt(conIdx);
-			result = service.reContent(member, content, cIdx); // 리설트를 리턴 할고얌
-		}
-		
-		 
-	}
+//	//댓글 생성 및 수정
+//	@Override
+//	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		int result = 0; //0이면 false
+//		String uIdx = req.getParameter("uIdx"); 
+//		String content = req.getParameter("conContent");
+//		String conIdx = req.getParameter("conIdx");
+//		String mIdx = req.getParameter("mIdx");
+//		
+//		int member = Integer.parseInt(uIdx);
+//		int movie = Integer.parseInt(mIdx);
+//		
+//		// 댓글번호가 비였으면 신규 댓글 작성 // 있으면 댓글수정 (
+//		if(conIdx == null || conIdx.equals("")) {
+//			// 신규
+//			result = service.newContent(member,content,movie); // 리설트를 리턴 할고얌
+//		}else {
+//			// 수정\
+//		int cIdx = Integer.parseInt(conIdx);
+//			result = service.reContent(member, content, cIdx); // 리설트를 리턴 할고얌
+//		}
+//		
+//		 
+//	}
 	
 	
 

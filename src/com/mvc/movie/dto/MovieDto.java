@@ -16,7 +16,6 @@ public class MovieDto {
 	private Date mDate;
 	private int mAge;
 	private String mdDirector;
-	private String mfURL;
 	private String maActor;
 	private String mContent;
 	private String mfUrl;
@@ -160,27 +159,6 @@ public class MovieDto {
 		this.mrRating = mrRating;
 	}
 
-	// 
-//	public String toJSON () {
-//		Gson obj = new JsonObject();
-//		obj.add("mIdx", this.mIdx);
-//		return "";
-//	}
-	//
-	@Override
-	public String toString() {
-		return "{mIdx:" + mIdx + ", mName:" + mName + ", mOpen:" + mOpen + ", mGenre:" + mGenre + ", mUrl:"
-				+ mUrl + ", mBhit:" + mBhit + ", mDate:" + mDate + ", mAge:" + mAge + ", mdDirector:" + mdDirector
-				+ ", maActor:" + maActor + ", mContent:" + mContent + ", mfUrl:" + mfUrl + ", mravg:" + mravg
-				+ ", mfIdx:" + mfIdx + ", mfOri:" + mfOri + ", mfNew:" + mfNew + ", zidx:" + zidx + ", uidx:" + uidx
-				+ ", zdate:" + zdate + ", maactor:" + maactor + ", mrRating:" + mrRating + "}";
-	}
-	public String getMfURL() {
-		return mfURL;
-	}
-	public void setMfURL(String mfURL) {
-		this.mfURL = mfURL;
-	}
 	public int getConidx() {
 		return conidx;
 	}
@@ -200,6 +178,20 @@ public class MovieDto {
 		this.uiden = uiden;
 	}
 
+	@Override
+	public String toString() {
+		return "{mIdx:" + mIdx + ", mName:" + mName + ", mOpen:" + mOpen + ", mGenre:" + mGenre + ", mUrl:"
+				+ mUrl + ", mBhit:" + mBhit + ", mDate:" + mDate + ", mAge:" + mAge + ", mdDirector:" + mdDirector
+				+ ", maActor:" + maActor + ", mContent:" + mContent + ", mfUrl:" + mfUrl + ", mravg:" + mravg
+				+ ", mfIdx:" + mfIdx + ", mfOri:" + mfOri + ", mfNew:" + mfNew + ", zidx:" + zidx + ", uidx:" + uidx
+				+ ", zdate:" + zdate + ", maactor:" + maactor + ", mrRating:" + mrRating + "}";
+	}
 
+		//	public String toJSON () {
+		//		Gson obj = new JsonObject();
+		//		obj.add("mIdx", this.mIdx);
+		//		return "";
+		//	}
+			//
 
 }

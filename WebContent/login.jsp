@@ -147,8 +147,12 @@
      });
 
      function DoSend() {
-    	 $("#memberjoin").css('display','none');
-	}
+
+        $("#memberjoin").css('display','none');
+   }
+
+
+
 
 </script>
 

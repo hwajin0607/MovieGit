@@ -15,7 +15,11 @@ import com.mvc.movie.service.MovieService;
 
 
 
-@WebServlet({"/conup","/page","/zzim","/zzimadd","/searchResult","/Alldel","/del","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search","/movieconten"})
+
+
+
+@WebServlet({"/conup","/page","/zzim","/zzimadd","/searchResult","/Alldel","/del","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search","/movieconten","/randomDetail"})
+
 
 
 public class MovieController extends HttpServlet {
@@ -24,8 +28,8 @@ public class MovieController extends HttpServlet {
 
 		@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-			Process(req,resp);
 			req.setCharacterEncoding("UTF-8");
+			Process(req,resp);
 	}
 
 	
@@ -143,13 +147,13 @@ public class MovieController extends HttpServlet {
 			break;
 			
 		case "/searchResult":
-			ms.searchResult();
 			System.out.println("1차 확인");
+			ms.searchResult();
 			break;
 			
 		case "/search":
-			ms.search();
 			System.out.println("1차 검색확인");
+			ms.search();
 			break;
 		
 		//찜 목록 삭제
@@ -164,6 +168,7 @@ public class MovieController extends HttpServlet {
 			System.out.println("랜덤으로 가져오기");
 			ms.random();
 			break;
+			
 			//평점 매기기
 		case "/writeRating" :
 			System.out.println("평점 넣기");
@@ -207,7 +212,15 @@ public class MovieController extends HttpServlet {
 			System.out.println("Alldel uidx : " + uidx);
 			ms.Alldel(uidx);
 			break;
+
 			
+
+		case "/randomDetail":
+			System.out.println("randomDetail");
+			ms.randomDetail();
+			break;	
+			
+
 		case "/movieconten":
 			System.out.println("댓글추가");
 			uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
@@ -220,6 +233,7 @@ public class MovieController extends HttpServlet {
 				e.printStackTrace();
 			}
 			break;
+
 		
 		case "/conup":
 			System.out.println("댓글수정");
