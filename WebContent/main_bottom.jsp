@@ -116,10 +116,10 @@
       </div>
 	</body>
     <script>
-        var a1 = document.getElementById('a1');
-        function move() {
-            window.location.href="http://www.naver.com";
-        };
+    var a1 = document.getElementById('a1');
+    function move() {
+        window.open("http://www.naver.com");
+    };
 
         var a2 = document.getElementById('a2');
         function move2() {
@@ -142,14 +142,20 @@
 	     	            $('#ran2').css({'display':'block'});
 	        			$('img.poster_img').attr('src', movie.mfUrl);
 						$('h3.movie_title').html(movie.mName); 
+						//parent.Form.input.value = movie.mIdx;
+						// window.opener.location.href = "movieDetail?mIdx="+movie.mIdx ;
+						
+						
+						var midx = movie.mIdx;
 	        			$("#ran1").click(function(){
-		    	        	console.log(movie.mIdx);
-		    	        	location.href="movieDetail?mIdx="+movie.mIdx;
+		    	        	console.log("??"+movie.mIdx);
+		    	        	parent.DoSend();
 		    	        });
 	        			$("#ran2").click(function(){
 		    	        	console.log(movie.mIdx);
-		    	        	location.href="movieDetail?mIdx="+movie.mIdx;
-		    	        });
+		    	        	
+		    	        	parent.DoSend();
+		    	        }); 
 	        		}
         		},
         		error : function (){ // 에러처리

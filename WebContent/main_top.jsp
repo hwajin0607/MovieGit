@@ -8,14 +8,19 @@
 <title>메인</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
+	html,body{
+		background-color:black;
+		height:100%;
+	}
     .header{
         background-color: black;
-        width: 99%;
+        width: 100%;
         height: 111px;
         position: fixed;
         padding-top: 87px;
         display : inline-block;
         top:-20px;
+        left:0px;
         z-index: 10;
     }
     #search{
@@ -79,7 +84,7 @@
         top: 26px;
         left: 95%;
     }
-        #login{
+    #login{
 	    width: 90px;
 	    height: 36px;
 	    position: absolute;
@@ -98,47 +103,30 @@
         z-index: 10;
         display: none;
     }
-    .alllist{
+    #alllist{
         position: relative;
-        top:198px;
-        left:50px;
-    }
-    /* .alllist2{
-        position: absolute;
-        top:198px;
-        left:50px;
-    } */
-    ul li{
-        float: left;
-        margin: 102px;
-        width: 203px;
-        height: 265px;
-        background-color: indianred;
-        list-style-type: none;
-    }
-    .heart{
-        width: 50px;
-        height: 50px;
-        background-color: indianred;
-        position: absolute;
-        top: 380px;
-        left: 142px;
+        top: 315px;
+        left: 85px;
+        transition: 1s;
+        width: 1698px;
+        height: 380px;
+        transform-style: preserve-3d;
+        padding: 0px;
     }
     .recommend{
         position: relative;
         width: 95%;
         height: 730px;
-        top: 170px;
+        top: -2154px;
         left: 48px;
-        opacity:0.8;
-        background-color: black;
-        z-index: 8;
+        background-color: rgb(0, 0, 0, 0.8);
+        z-index: 9;
     }
 
     #recommendmovie{
         width: 100%;
         height: 50px;
-        background-color: indianred;
+        background-color: gray;
         position: absolute;
         top: 110px;
         left: 0%;
@@ -158,11 +146,75 @@
         background-color: tan;
         z-index: 10;
         position: fixed;
-            }
+    }
+    .list{
+        backface-visibility: hidden;
+        float: left;
+        margin: 0px 19px 0px 73px;
+        width: 300px;
+    	height: 380px;
+        background-color: gray;
+        list-style-type: none;
+        position: relative;
+    }
+    .front{
+        position: absolute;
+        width: 100%;
+        height: 380px;
+        backface-visibility: hidden;
+    }
+    .back{
+        position: absolute;
+        width: 100%;
+        height: 380px;
+        backface-visibility: hidden;
+        transform: rotateX(180deg);
+    }
+       #mainbottom{
+	    position: absolute;
+	    background-color: rgb(0, 0, 0, 0.8);
+	    top: 946px;
+	    left: 48px;
+	    width: 95%;
+	    height: 100%;
+	    z-index: 9;
+          }
+    #main{
+       width: 100%;
+       height: 100%;
+       border: 0;
+       top: 8px;
+       left: 13px;
+       position: absolute;
+       
+    }
+        #down{
+       width: 100%;
+       height: 100%;
+       border: 0;
+       top: 102px;
+       left: 13px;
+       position: absolute;
+       
+    }
+    #footer{
+	position: absolute;
+    background-color: rgb(0, 0, 0, 0.8);
+    top: 1667px;
+    left: 8px;
+    width: 100%;
+    height: 50%;
+    z-index: 9;
+    }
+
 </style>
 </head>
 <body>
-
+	<div id="mainbottom">
+	
+		<iframe id ="main" src="main_bottom.jsp" scrolling=no></iframe>
+	
+	</div>
 
     <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
         <div id="search"><img id="search2" src="/photo/search.png"/></div>
@@ -171,54 +223,47 @@
         <div id="login"></div>
         <div id="logout"><a href="logout">로그아웃</a></div>
     </div>
-
-    <div class="panel">검색창
-
-    </div>
     
     
     <div class="panel"><a href="">검색창</a></div>
     
-    		<div id="background" style="width: 99%; height: 100%; position:absolute; opacity:0.6">
-        <img src="/photo/main.jpg"  style="width: 100%; height: 100%;"/>
+    		<div id="background">
+        <img src="/photo/main.jpg" style="width:100%; height:77%; position:relative;"/>
     	</div>
 
     <div class="recommend">
 
         <div id="recommendmovie" >Recommend Movie</div>
-        <ul class="alllist">
-
-
-         	<c:forEach items="${list }" var="likelist">
-            <a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list">${likelist.mfIdx}</li></a><div class="heart"></div>
-           </c:forEach>
-
-
-<!-- 
-            <a href="#"><li class="list">극한직업</li></a><div class="heart"></div>
-            <a href="#"><li class="list">기생충</li></a><div class="heart"></div>
-            <a href="#"><li class="list">독전</li></a><div class="heart"></div>
-            <a href="#"><li class="list">백두산</li></a><div class="heart"></div>
- -->
-            	<c:forEach items="${list }" var="likelist">
-    	
-            <a href="l"><li class="list">${likelist.mIdx}</li></a><div class="heart"></div>
-             
-            </c:forEach>
-
-
-        </ul>
+        <div id="alllist">
+            <div class="front">
+         		<c:forEach items="${list }" var="likelist"  begin="0" end="3" step="1">
+            		<a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list">${likelist.mfIdx}</li></a>
+           		</c:forEach>
+            </div>
+            <div class="back">
+           		<c:forEach items="${list }" var="likelist"  begin="4" end="7" step="1">
+            		<a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list">${likelist.mfIdx}</li></a>
+           		</c:forEach>
+            </div>
+       
 
     </div>
     <div class="sidebar">
         <div id="sid1"><a href="">찜목록</a></div>
     </div>
 </body>
+<footer>
+<div id="footer">
+	
+		<iframe id="down" src="footer.jsp" scrolling=no></iframe>
+	
+	</div>
+</footer>
 <script>
  var uIdx = "${sessionScope.uIdx}";
 var loginId = "${sessionScope.loginId}";
 var loginPw = "${sessionScope.loginPw}";
-var msg = "${msg}";
+
 
 /*   if(loginPw=="" || loginId==""){
 	alert("로그인이 필요한 서비스입니다.");
@@ -227,10 +272,8 @@ var msg = "${msg}";
   }else(loginPw !="" || loginId !=""){ */
 	 if(loginId !=""){
 	$("#login").html(loginId+' 님♡');
-	if(msg!=""){
-		alert(msg);
-		msg="";
-		 }
+
+		 
 	 }
 
 
@@ -238,11 +281,24 @@ var msg = "${msg}";
 
 $(document).ready(function() {
 
-    $("#search").click(function(){
-        $(".panel").css({"display":"block"});
-    });
+        $("#search").click(function(){
+            $(".panel").css({"display":"block"});
+        });
+	    var arr = ['rotateX(180deg)','rotateX(0deg)','rotateX(180deg)','rotateX(0deg)'];
+        var i=0;
+        setInterval(function(){
+            $("#alllist").css({transform:arr[i]});
+                i++;
+                if(i>=arr.length){
+                        i=0;
+                    }
+        },3000);  
+
 
     });
+	function DoSend() {
+		location.href="./randomDetail";
+	}
 
 
 </script>

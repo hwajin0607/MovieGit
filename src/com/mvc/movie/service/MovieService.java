@@ -161,9 +161,10 @@ public class MovieService {
 	      //랜덤처리가 끝난뒤 페이지를 이동시켜주는 것이 아니라 데이터를 내려줘야함
 	      // 데이터 타입의 경우 처리하기 편한 방식으로 변경해서 내려주면 됨
 	      resp.setContentType("text/html;charset=UTF-8");
-	      
+	      System.out.println("값 확인용 " + list.getmIdx());
+	      req.getSession().setAttribute("randomidx", list.getmIdx());
 	      HashMap<String, Object> map = new HashMap<String, Object>();
-	       map.put("movie",list);
+	      map.put("movie",list);
 	      Gson json = new Gson();
 	      String obj = json.toJson(map);
 	      resp.getWriter().print(obj);
@@ -219,7 +220,22 @@ public class MovieService {
 	public void movieDetail(String mIdx) throws ServletException, IOException {
 		System.out.println("서비스에게 일을 시킨다.");
 		MovieDao dao = new MovieDao();
+		String ridx = String.valueOf(req.getSession().getAttribute("randomidx"));
+		System.out.println("랜덤 idx 값 확인용 : "+ridx);
 		ArrayList<MovieDto> list = dao.movieDetail(mIdx);
+		System.out.println(list);
+		req.setAttribute("list", list);
+		RequestDispatcher dis = req.getRequestDispatcher("movie_detail.jsp");
+		dis.forward(req, resp);
+		dao.resClose();
+	}
+	
+	public void randomDetail() throws ServletException, IOException {
+		System.out.println("서비스에게 일을 시킨다.");
+		MovieDao dao = new MovieDao();
+		String ridx = String.valueOf(req.getSession().getAttribute("randomidx"));
+		System.out.println("랜덤 idx 값 확인용 : "+ridx);
+		ArrayList<MovieDto> list = dao.movieDetail(ridx);
 		System.out.println(list);
 		req.setAttribute("list", list);
 		RequestDispatcher dis = req.getRequestDispatcher("movie_detail.jsp");

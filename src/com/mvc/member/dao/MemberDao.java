@@ -130,7 +130,7 @@ public class MemberDao {
 	public ArrayList<MovieDto> like(String uIdx,int page1) throws SQLException {
 		System.out.println("아이디 고유번호 2차 확인 : "+uIdx);
 		
-		   int pagePerCnt = 4;//페이지당 보여줄 게시물의 수
+		   int pagePerCnt = 8;//페이지당 보여줄 게시물의 수
 		   int end = page1*pagePerCnt;
 		   int start = (end-pagePerCnt)+1;
 
@@ -147,7 +147,7 @@ public class MemberDao {
 			dto.setMfIdx(rs.getInt("mfIdx"));
 			list.add(dto);
 		}
-		System.out.println(list);
+		System.out.println("리스트 보여주기 : "+list);
 		return list;
 	}
 	public MemberDto info(String uidx) throws SQLException {

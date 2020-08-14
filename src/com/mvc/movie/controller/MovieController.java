@@ -15,7 +15,7 @@ import com.mvc.movie.service.MovieService;
 
 
 
-@WebServlet({"/","/page","/zzim","/zzimadd","/searchResult","/Alldel","/del","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search"})
+@WebServlet({"/","/page","/zzim","/zzimadd","/searchResult","/Alldel","/del","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search","/randomDetail"})
 
 
 public class MovieController extends HttpServlet {
@@ -202,6 +202,11 @@ public class MovieController extends HttpServlet {
 			System.out.println("Alldel uidx : " + uidx);
 			ms.Alldel(uidx);
 			break;
+			
+		case "/randomDetail":
+			System.out.println("randomDetail");
+			ms.randomDetail();
+			break;	
 			
 		
 		}
