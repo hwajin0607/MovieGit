@@ -8,11 +8,75 @@
 <title>movieList</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
-
-    body{
-        background-color: gray;
-      
+	    .header{
+        background-color: black;
+        width: 100%;
+        height: 111px;
+        position: fixed;
+        padding-top: 87px;
+        display : inline-block;
+        top:-5px;
+        left:0;
+        z-index: 10;
     }
+
+    #logo{
+        width: 185px;
+        height: 158px;
+        position: absolute;
+        top: 5px;
+        left: 869px;
+        z-index: 9;
+    }
+    #allmenu{
+        width: 100px;
+        height: 30px;
+        z-index: 9;
+        position: absolute;
+        top: 150px;
+        left: 657px;
+        font-size: 20px;
+    }
+    #mypage{
+        width: 303px;
+        height: 30px;
+        z-index: 9;
+        position: absolute;
+        top: 150px;
+        left: 1200px;
+        font-size: 20px;
+    }
+
+    a{
+        text-decoration: none;
+        color: white;
+        font-weight: 600;
+    }
+    a:link a:visited a:active a:hover{
+        text-decoration: none;
+        color: white;
+    }
+    #logout{
+        width: 75px;
+        height: 36px;
+        position: absolute;
+        top: 26px;
+        left: 95%;
+    }
+    #login{
+       width: 90px;
+       height: 36px;
+       position: absolute;
+       top: 26px;
+       left: 1686px;
+       color: white;
+       text-align: right;
+    }
+	
+	body{
+		background-color: black;
+		height:100%;
+	}
 
     a>li{
         float:left;
@@ -21,6 +85,7 @@
         width: 120px;
         text-align: center;
         color: white;
+        margin:25px;
         
     }
     ul{
@@ -29,8 +94,15 @@
        
     }
     #ent{
-        position: absolute;
+    	position:absolute;
+    	background-color:gray;
+    	background-color: rgba(128, 128, 128, 0.5);
+    	width:100%;
+    	color:white;
+    	top:20%;
+    	left:0;
         font-weight: 600;
+        
     }
   /* 영화리스트 vsc */
  /*    li.emList{
@@ -48,7 +120,7 @@
     .sort{
         position: absolute;
         text-align: right;
-        top: 30%;
+        top: 40%;
         left: 90%;
         color: white;
     }
@@ -70,19 +142,16 @@
     }
     .moviebar{
         position: absolute;
-        top: 20%;
+        top: 30%;
+        left: 9%;
     }
 
     .searchbar{
         position: absolute;
-        top: 35%;
-    }
-/* 영화리스트 vsc */
-/*     .mo{
-        position: absolute;
         top: 40%;
-        left: 20%; */
+        left: 5%;
     }
+
     table,th,td{
     	
     	border-collapse : collapse;
@@ -92,6 +161,8 @@
     	background-color : hotpink;
     	width: 250px;
         height: 250px;
+        float:left;
+        margin:30px;
         
     }
     
@@ -103,14 +174,14 @@
     	position: absolute;
     
 
-    	top: 40%;
+    	top: 50%;
         left: 20%;
         
     }
-        img{
+       /* img{
         max-width: 60px;
         max-height: 60px;
-    }
+    }*/
     #zzim{
     	position : absolute;
     	top: 30%;
@@ -119,6 +190,33 @@
  	.pageArea{
 		margin: 10px;
 	}
+	#next{
+		clear:left;
+	}
+	.mainImg>img{
+		position: relative;
+		width: 100%;
+		height: 100%;
+		opacity: 0.5; 
+	}
+	a#more{
+		position: absolute;
+		text-align: center;
+		
+	}
+	.sch_text{
+		border:0;
+		outline:0;
+		width:300px;
+		height:30px;
+		background-color: black;
+		background-color: rgb(0, 0, 0, 0.5);
+		
+	}
+	a>div{
+		width:250px;
+		height:250px;
+	}
 
   
 </style>
@@ -126,29 +224,38 @@
 <body>
     <div class="mainbody">
     <!-- 배경이미지 -->
-        <!-- <img src="bgimg.jpg" style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative;" alt=""> -->
-    
-        <div id="ent">Entire film</div>
+    	<div class="mainImg">
+        	<img src="/photo/back.jpg"  />
+    	</div>
+    	<div class="header"><a href="like"><img id="logo" src="/photo/main.png"/></a>
+        <div id="allmenu"><a href="page">전체 메뉴</a></div>
+        <div id="mypage"><a href="myPage.jsp">마이페이지</a></div>
+        <div id="login"></div>
+        <div id="logout"><a href="logout">로그아웃</a></div>
+    </div>
+        <div id="ent"><h1>&nbsp;Entire film</h1></div>
         <!-- 전체영화 메뉴 바 -->
         <div class="moviebar">
             <ul class="genre">
-                <a href="./movieListG?mGenre=로맨스/코미디"><li>로멘스/코미디</li></a>
-                <a href="./movieListG?mGenre=스릴러/공포"><li>스릴러/공포</li></a>
-                <a href="./movieListG?mGenre=SF/판타지"><li>SF/판타지</li></a>
-                <a href="./movieListG?mGenre=드라마/다큐"><li>드라마/다큐</li></a>
-                <a href="./movieListG?mGenre=액션"><li>액션</li></a>
-                <a href="./movieListG?mGenre=애니메이션"><li>애니메이션</li></a>
+           		<a href="./page"><li>전체</li></a>
+                <a href="./movieListG?mGenre=로맨스/코미디"><li id="g">로멘스/코미디</li></a>
+                <a href="./movieListG?mGenre=스릴러/공포"><li class="g">스릴러/공포</li></a>
+                <a href="./movieListG?mGenre=SF/판타지"><li class="g">SF/판타지</li></a>
+                <a href="./movieListG?mGenre=드라마/다큐"><li class="g">드라마/다큐</li></a>
+                <a href="./movieListG?mGenre=액션"><li class="g">액션</li></a>
+                <a href="./movieListG?mGenre=애니메이션"><li class="g">애니메이션</li></a>
             </ul>
         </div>
         </br></br></br>
         <!-- 검색창 -->
-        <div class="searchbar">
+        <form class="searchbar" action="./searchResult">
             <span class='emsearch'>
-                <input type='text' class='sch_text' />
+                <input type='text' placeholder='Search' class='sch_text' name="searchTxt"/>
             </span>
-            <!-- <button type='submit' class='sch'>검색</button> -->
-             <a href="./searchResult" id="sch" target="_parent">검색</a>
-        </div>
+            <button type='submit' class='sch'>√</button>
+            <!-- <button type='submit' class='sch'>검색</button>
+             <a href="./searchResult" id="sch" target="_parent">검색</a> -->
+        </form>
         <!-- 정렬 -->
         <div class="sort">
             <a href="./movieListS?mSort=내림차">최신 개봉일 순</a>/<a href="./movieListS?mSort=오름차">오래된 순</a>
@@ -159,59 +266,33 @@
         <table>
         	<tr>
         	<c:forEach items="${movieList }" var="mlist"> 
-				<td><a href="./movieDetail?mIdx=${mlist.mIdx }">${mlist.mIdx }</a></td>
+				<td><a href="./movieDetail?mIdx=${mlist.mIdx }"><div>${mlist.mfUrl}</div></a></td>
 			</c:forEach>
 			</tr>
 		
 		</table>
+		<!-- 더보기 -->
 		<div class="pageArea">
-			<a href="./movieList?=${currPage+1}" id="more">더보기</a>
+			<a href="./movieList?page=${currPage +1}" id="more">
+			<img src="/photo/more.png" style="width: 30px; height: 30px; ">
+			</a>
 		</div>
 		</div>
-        
-        <%-- <div class="mList">
-        <c:set var="i" value="0" /> 
-        <c:set var="j" value="4" /> 
-        <table > 
-        <c:forEach items="${movieList }" var="mlist"> 
-        <c:if test="${i%j == 0 }"><tr> </c:if> 
-        <td ><a href="./movieDetail?mIdx=${mlist.mIdx }">${mlist.mIdx }</a></td>
-        <c:if test="${i%j == j-1 }"> </tr> </c:if> 
-        <c:set var="i" value="${i+1 }" /> 
-        </c:forEach> 
-        </table>
-        <a href="#" id="more">더보기</a>
-        </div>  --%>
         
 
-<!-- 영화리스트 vsc -->
-        <%-- <div class="mo">
-        <ul class="movie">
-        <c:forEach items="${movieList }" var="mlist">
-            <a href="#"><li class="emList">${mlist.mName }</li></a>
-        </c:forEach>
-        </ul>
-        <a href="#" id="more">더보기</a>
-        </div> --%>
-        
     </div>
 </body>
 <script>
+var loginId = "${sessionScope.loginId}";
 
-    
-/*         $("#more").click(function(){
-            
-            
-            $(".movie").append("<a href='#'><li class='emList' id='next'>movie</li></a>");
-            $(".movie").append("<a href='#'><li class='emList'>movie </li></a>");
-            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>");
-            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>");
-            $(".movie").append(" <a href='#'><li class='emList' id='next'>movie </li></a>");
-            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>");
-            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>");
-            $(".movie").append("<a href='#'><li class='emList'> movie </li></a>"); 
+if(loginId !=""){
+	   $("#login").html(loginId+' 님♡');
+	   if(msg!=""){
+	      alert(msg);
+	      msg="";
+	       }
+	    }
+	    
 
-        });*/
-        
 </script>
 </html>

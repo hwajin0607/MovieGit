@@ -15,7 +15,12 @@ import com.mvc.movie.service.MovieService;
 
 
 
-@WebServlet({"/","/zzim","/zzimadd","/searchResult","/Alldel","/del","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search"})
+
+
+
+@WebServlet({"/conup","/page","/zzim","/zzimadd","/searchResult","/Alldel","/del","/random","/movieList","/movieListG","/movieListS","/movieDetail","/selectBhit","/selectGrade","/writeRating","/showRating","/myPageZ","/search","/movieconten","/randomDetail"})
+
+
 
 public class MovieController extends HttpServlet {
 
@@ -65,17 +70,32 @@ public class MovieController extends HttpServlet {
 			
 		case "/movieList":
 			System.out.println("전체 영화목록 보여주기");
-			req.getSession().setAttribute("mGenre", "");
-			ms.movieList();
+			String genre = String.valueOf(req.getSession().getAttribute("mGenre"));
+			System.out.println("장르 값 확인 용"+genre);
+			String cPage = req.getParameter("page");
+			System.out.println("cPage 값 : "+cPage);
+			int page = 1;
+			if(cPage!=null) {
+				page = Integer.parseInt(cPage);
+			}
+			System.out.println("cPager 값 : "+cPage);
+			System.out.println("page 값 : " +page);
+			if(genre == null || genre =="null") {
+				System.out.println("2차");
+				ms.movieList(page);
+			}else {
+				ms.movieListG(genre,page);
+			}
+			
 			break;
 			
 		case "/movieListG":
-			System.out.println("장르별 영화 보여주기");
 			String mGenre = req.getParameter("mGenre");
-			int page = 0;
 			req.getSession().setAttribute("mGenre", mGenre);
+			page = 1;
 			System.out.println(mGenre);
 			ms.movieListG(mGenre,page);
+			req.getSession().setAttribute("sort", "1");
 			break;
 			
 		case "/movieListS":
@@ -85,22 +105,32 @@ public class MovieController extends HttpServlet {
 			page = 0;
 			if(mSort.equals("내림차")) {
 				sqlb="DESC";
+				req.getSession().setAttribute("sqlb", " DESC");
+			}else {
+				req.getSession().setAttribute("sqlb", " ");
 			}
-			String genre = (String) req.getSession().getAttribute("mGenre");
-			if(genre==null) {
-				genre="";
-			}
-			System.out.println(sqlb+genre);
-			ms.movieListS(sqlb,genre,page);
+			//genre = (String) req.getSession().getAttribute("mGenre");
+			//if(genre==null) {
+			//	genre="";
+			//}
+			// System.out.println(sqlb+genre);
+			//ms.movieListS(sqlb,genre,page);
+			ms.test();
 			break;
 			
 			//상세페이지 띄우기
 		case "/movieDetail":
 			System.out.println("상세페이지 요청");
 			String mIdx = req.getParameter("mIdx");
-			//req.getSession().setAttribute("mIdx", mIdx);
+			req.getSession().setAttribute("mIdx", mIdx);
 			System.out.println(mIdx);
-			ms.movieDetail(mIdx);
+			try {
+				ms.movieDetail(mIdx);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			break;
 			
 			
@@ -138,6 +168,7 @@ public class MovieController extends HttpServlet {
 			System.out.println("랜덤으로 가져오기");
 			ms.random();
 			break;
+			
 			//평점 매기기
 		case "/writeRating" :
 			System.out.println("평점 넣기");
@@ -149,7 +180,30 @@ public class MovieController extends HttpServlet {
 		case "/myPageZ":
 			System.out.println("마이페이지 찜목록 두개 보여주기");
 			ms.myPageZ();
+			
+		case "/page" :
+			
+			req.getSession().removeAttribute("mGenre");
+			page = 1;
+			ms.movieList(page);
+			/*System.out.println("페이지 이동");
+			//mSort = req.getParameter("mSort");
+			//System.out.println("mSort : "+mSort2);
+			sqlb = " ";
+			page = 1;
+			/*
+			 * if(mSort.equals("내림차")) { sqlb="DESC"; };
 
+
+			mGenre = req.getParameter("mGenre");
+			String mgenre = (String) req.getSession().getAttribute("mGenre");
+			System.out.println(mgenre+"/"+page+"/"+sqlb);
+			if(mgenre==null) {
+				mgenre="";
+			}
+			System.out.println(mgenre);
+			ms.page(mgenre,page,sqlb);
+			*/
 			break;
 			
 		case "/Alldel":
@@ -158,7 +212,43 @@ public class MovieController extends HttpServlet {
 			System.out.println("Alldel uidx : " + uidx);
 			ms.Alldel(uidx);
 			break;
+
+			
+
+		case "/randomDetail":
+			System.out.println("randomDetail");
+			ms.randomDetail();
+			break;	
+			
+
+		case "/movieconten":
+			System.out.println("댓글추가");
+			uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
+			String cont = req.getParameter("contentTxt");
+			String contmidx = String.valueOf(req.getSession().getAttribute("mIdx"));
+			try {
+				ms.conten(uidx,cont,contmidx);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+
 		
+		case "/conup":
+			System.out.println("댓글수정");
+			String coment = req.getParameter("coment");
+			String conidx = req.getParameter("conIdx");
+			String cmidx = req.getParameter("midx");
+			System.out.println(coment);
+			try {
+				ms.conup(coment,conidx,cmidx);
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			break;
+			
 		}
 
 		
