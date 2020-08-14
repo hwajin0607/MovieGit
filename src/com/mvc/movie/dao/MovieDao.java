@@ -66,7 +66,11 @@ public class MovieDao {
 		int end = page*pagePerCnt;
 		int start = (end-pagePerCnt)+1;
 		System.out.println(start);
-		String sql = "SELECT DISTINCT m.rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM (SELECT ROW_NUMBER() OVER(ORDER BY m.mIdx DESC) AS rnum, m.mIdx, m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mDate, m.mAge, m.mContent, f.mfURL FROM movie m, movieFoster f WHERE m.mIdx = f.midx) m, movieFoster f WHERE m.rnum BETWEEN ? AND ? ORDER BY m.rnum";
+		String sql ="SELECT DISTINCT mName, uidx, midx, mfurl , zidx, zdate FROM"
+						+ " (SELECT DISTINCT ROW_NUMBER() OVER(ORDER BY uidx DESC) AS rnum, m.mName, z.uidx, z.midx, m.mfurl , z.zidx, z.zdate FROM"
+						+ " (SELECT m.midx,m.mname ,f.mfidx,f.mfurl FROM movie m, moviefoster f WHERE m.midx = f.midx) m,"
+						+ " zzim z where m.midx = z.midx)"
+						+ " WHERE uidx =? BETWEEN ? AND ? ORDER BY uidx";
 		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
 		ps = conn.prepareStatement(sql);
 		ps.setInt(1, start);
@@ -182,12 +186,21 @@ public class MovieDao {
 	}
 	
 	//찜 목록 리스트
-	public ArrayList<MovieDto> list(String uidx) {
-		String sql ="SELECT DISTINCT mo.mName, z.uidx, z.midx, m.mfurl , z.zidx, z.zdate FROM movie mo,zzim z,(SELECT m.midx, f.mfidx,f.mfurl FROM movie m, moviefoster f WHERE m.midx = f.midx) m WHERE mo.midx = z.midx and z.uidx =?";
+	public ArrayList<MovieDto> list(int page, String uidx) throws SQLException {
+		int pagePerCnt =4;//페이지당 보여줄 게시물 갯수
+		int end = page*pagePerCnt;
+		int start = 1;
+		System.out.println("start : " + start);
+		System.out.println("uidx : "+ uidx);
+		System.out.println("end : "+end);
+		
+		String sql ="SELECT DISTINCT mName, uidx, midx, mfurl , zidx, zdate FROM (SELECT DISTINCT ROW_NUMBER() OVER(ORDER BY uidx DESC) AS rnum, m.mName, z.uidx, z.midx, m.mfurl , z.zidx, z.zdate FROM (SELECT m.midx,m.mname ,f.mfidx,f.mfurl FROM movie m, moviefoster f WHERE m.midx = f.midx) m, zzim z where m.midx = z.midx) WHERE uidx =? and rnum BETWEEN ? AND ? ORDER BY zdate";
 		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
-		try {
+		
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, uidx);
+			ps.setInt(2, start);
+			ps.setInt(3, end);
 			rs = ps.executeQuery();
 			while(rs.next()) {
 				MovieDto dto = new MovieDto();
@@ -198,29 +211,29 @@ public class MovieDao {
 				dto.setZidx(rs.getInt("zidx"));
 				dto.setZdate(rs.getDate("zdate"));
 				list.add(dto);
-				
-				System.out.println(dto.getmName());
-				System.out.println(dto.getmIdx());
-				System.out.println(dto.getMfUrl());
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			resClose();
-		}
-		
-		return list;
+			return list;
 	}
 	
 	
+	
 	//검색 목록 리스트
-	public ArrayList<MovieDto> srlist(String mName) {
-		ArrayList<MovieDto> srlist = new ArrayList<MovieDto>();
-		String sql ="SELECT DISTINCT m.midx, m.mName, m.mGenre, d.mdDirector, a.maActor, m.mUrl, m.mAge, m.mOpen" 
-					+" FROM movie m, movieDirector d, movieActor a"
-					+" where m.midx = d.midx and d.midx = a.midx and a.maActor = ? or d.mdDirector = ? or m.mName = ?  or m.mGenre = ?";
+	public ArrayList<MovieDto> srlist(int page, String mName) throws SQLException {
+					int pagePerCnt =4;//페이지당 보여줄 게시물 갯수
+					int end = page*pagePerCnt;
+					int start = (end-pagePerCnt)+1;
 		
-		try {
+		String sql ="SELECT DISTINCT rnum, mIdx,mopen, mName, mGenre, mfUrl FROM "
+						+" (SELECT DISTINCT ROW_NUMBER() OVER(ORDER BY m.mopen) AS rnum,m.mIdx,m.mopen, m.mName, m.mGenre, f.mfUrl FROM movie m" 
+						+"JOIN moviefoster f on m.midx = f.midx where mName LIKE ? or mgenre LIKE ?) WHERE  rnum BETWEEN 1 AND 4 ORDER BY rnum";
+				
+		ArrayList<MovieDto> srlist = new ArrayList<MovieDto>();
+		
+				/*"SELECT DISTINCT m.midx, m.mName, m.mGenre, d.mdDirector, a.maActor, m.mUrl, m.mAge, m.mOpen" 
+					+" FROM movie m, movieDirector d, movieActor a"
+					+" where m.midx = d.midx and d.midx = a.midx and a.maActor = ? or d.mdDirector = ? or m.mName = ?  or m.mGenre = ?";*/
+		
+		
 			ps = conn.prepareStatement(sql);
 			ps.setString(1,mName);
 			ps.setString(2, mName);
@@ -241,15 +254,11 @@ public class MovieDao {
 				dto.setMdDirector(rs.getString("mdDirector"));
 				srlist.add(dto);
 				System.out.println("3차 확인");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			resClose();
+			
 		}
 		
 		return srlist;
-	}
+}
 	// 랜덤으로 값 가져오기 
 	public MovieDto random() {
 		String sql = "SELECT m.mIdx, m.mName, f.mfUrl "
@@ -277,46 +286,43 @@ public class MovieDao {
 	}
 
 	
-	public ArrayList<MovieDto> slist(String mName, String mGenre, String mdDirector, String maActor) {
-		boolean result = false;
-		String sql = "SELECT DISTINCT m.mName, m.mOpen, m.mGenre, m.mUrl, m.mBhit, m.mContent, d.mdDirector, f.mfUrl, m.midx FROM Movie m, movieDirector d, movieActor a, movieFoster f WHERE m.mName=? OR m.mGenre=? OR d.mdDirector=? OR a.maActor=?";
+	public ArrayList<MovieDto> slist(int page, String gen) throws SQLException {
+		int pagePerCnt =4;//페이지당 보여줄 게시물 갯수
+		int end = page*pagePerCnt;
+		int start = 1;
+	
+		String str ="%"+gen+"%";
+		String sql = "SELECT DISTINCT rnum, mIdx,mopen, mName, mGenre, mfUrl FROM "
+						+" (SELECT DISTINCT ROW_NUMBER() OVER(ORDER BY m.mopen) AS rnum,m.mIdx,m.mopen, m.mName, m.mGenre, f.mfUrl FROM movie m" 
+						+" JOIN moviefoster f on m.midx = f.midx where mName LIKE ? or mgenre LIKE ?) WHERE  rnum BETWEEN ? AND ? ORDER BY rnum";
 		ArrayList<MovieDto> slist = new ArrayList<MovieDto>();
-		try {
+
 			ps=conn.prepareStatement(sql);
-			ps.setString(1, mName);
-			ps.setString(2, mGenre);
-			ps.setString(3, mdDirector);
-			ps.setString(4, maActor);
+			ps.setString(1, str);
+			ps.setString(2, str);
+			ps.setInt(3, start);
+			ps.setInt(4, end);
 			rs=ps.executeQuery();
-			result = rs.next();
-			MovieDto dto = new MovieDto();	
-			while(result) {
+			while(rs.next()) {
+				MovieDto dto = new MovieDto();	
 				dto.setmName(rs.getString("mName"));
 				dto.setmGenre(rs.getString("mGenre"));
-				dto.setMdDirector(rs.getString("mdDirector"));
-				dto.setmContent(rs.getString("mContent"));
-				dto.setmOpen(rs.getDate("mOpen"));
-				dto.setmUrl(rs.getString("mUrl"));
-				dto.setMfUrl(rs.getString("mfUrl"));
 				dto.setmIdx(rs.getInt("mIdx"));
-				dto.setmBhit(rs.getInt("mBhit"));
-				
-				result = false;
-				System.out.println("점검 : " + dto.getmName()+ dto.getmGenre()+ dto.getMdDirector()+ dto.getMaActor());
+				dto.setMfUrl(rs.getString("mfUrl"));
 				slist.add(dto);
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+			System.out.println(slist);
 		return slist;
 	}
 
-	public boolean del(String uidx) {
-		String sql = "DELETE FROM zzim WHERE uidx=?";
+	public boolean del(String uidx,String zidx) {
+		System.out.println("uidx 점검 : " + uidx);
+		String sql = "DELETE FROM zzim WHERE uidx=? AND zidx=?";
 		boolean result = false;
 		try {
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, uidx);
+			ps.setString(2, zidx);
 			int success =ps.executeUpdate();
 			if(success>0) {
 				result=true;
