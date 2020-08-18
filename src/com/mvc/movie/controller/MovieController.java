@@ -127,7 +127,6 @@ public class MovieController extends HttpServlet {
 			try {
 				ms.movieDetail(mIdx);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -229,7 +228,6 @@ public class MovieController extends HttpServlet {
 			try {
 				ms.conten(uidx,cont,contmidx);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -240,11 +238,11 @@ public class MovieController extends HttpServlet {
 			String coment = req.getParameter("coment");
 			String conidx = req.getParameter("conIdx");
 			String cmidx = req.getParameter("midx");
-			System.out.println(coment);
+			String uIdx = String.valueOf(req.getSession().getAttribute("uIdx"));
+			System.out.println(coment+conidx+cmidx);
 			try {
-				ms.conup(coment,conidx,cmidx);
+				ms.conup(coment,conidx,cmidx,uIdx);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;

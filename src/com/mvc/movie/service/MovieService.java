@@ -443,14 +443,15 @@ public class MovieService {
 		
 	}
 
-	public void conup(String coment, String conidx, String cmidx) throws SQLException, ServletException, IOException {
+	public void conup(String coment, String conidx, String cmidx, String uIdx) throws SQLException, ServletException, IOException {
 		MovieDao dao = new MovieDao();
 		req.setCharacterEncoding("UTF-8");
 		System.out.println(coment);
-		dao.conup(coment,conidx);
+		String msg = dao.conup(coment,conidx, uIdx);
+		req.setAttribute("msg", msg);
 		RequestDispatcher dis = req.getRequestDispatcher("/movieDetail?mIdx="+cmidx);
 		dis.forward(req, resp);
-		
+		dao.resClose();
 	}
 
 }

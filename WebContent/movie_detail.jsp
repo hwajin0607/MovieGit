@@ -22,7 +22,7 @@
 		        padding-top: 87px;
 		        display : inline-block;
 		        top:-20px;
-		        z-index: 10;
+		        z-index: 9;
 		    }
 		    
 		    #search{
@@ -121,7 +121,7 @@
                 margin-bottom: 30px;
                 margin-left: 7%;
                 position: relative;
-                z-index: 9;
+                z-index: 8;
                 top : -180%;
             }
 
@@ -260,6 +260,49 @@
                 text-align: center;
                 top: 10%;
             }
+            
+            #play{
+                position: fixed;
+                display: none;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                bottom:0; 
+                right:0; 
+                border: 1px solid black; 
+                z-index: 10;
+            }
+
+            iframe{
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                bottom:0; 
+                right:0; 
+                border: none;
+            }
+
+            #close{
+                width: 3%;
+                height: 4%;
+                z-index: 10;
+                position: absolute;
+                right: 3%;
+                top: 2%;
+                color: none;
+                background-color: rgba(0,0,0,0);
+                border: none;
+                display: none;
+            }
+
+            #close:hover{
+                color:white;
+                cursor: pointer; 
+                border: 3px solid white;
+            }
+            
 
             /*댓글 관련*/
              #com{
@@ -268,7 +311,7 @@
                 background-color: rgb(0,0,0,0.9);
                 margin-left: 7%;
                 position: relative;
-                z-index: 9;
+                z-index: 8;
                 top : -178%;
             }
 
@@ -360,9 +403,13 @@
         </style>	
     </head>
     <body>
+     <div id="play">
+    		<iframe width="1280" height="720" src="https://www.youtube-nocookie.com/embed/fzrAeaq5xxI?&amp;autoplay=1&amp;mute=1"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ="true"></iframe>
+        </div> 
  	 <div>
             <img src = "/photo/main.jpg" style = "width : 100%;  height : 100%; position:relative" > 
       </div>
+      <input type="button" value="X" id="close"/>
        <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
         <div id="search"><img id="search2" src="/photo/search.png"/></div>
         <div id="allmenu"><a href="movieList">전체 메뉴</a></div>
@@ -422,8 +469,8 @@
                     <div class="p3">삭제</div>
                 </div>
                 <input type ="hidden" name="conIdx" value="${moviecontent.conidx}"/>
-                <div class="com">${moviecontent.uiden }</div>
-                <div class="mon">${moviecontent.conContent }</div>
+                <div class="com">${moviecontent.uiden}</div>
+                <div class="mon">${moviecontent.conContent}</div>
                 &nbsp;
                 <div class="bar3"></div>
                 </c:forEach>
@@ -433,7 +480,28 @@
 
    </body>
     <script>
-
+    
+	    var uIdx = "${sessionScope.uIdx}";
+	    var loginId = "${sessionScope.loginId}";
+	    var loginPw = "${sessionScope.loginPw}";
+		
+	    if(loginId !=""){
+	    	$("#login").html(loginId+' 님♡');	 
+	    	 }
+    
+    
+	    $("#post").click(function(){
+	        console.log("클릭");
+	        $("#play").css("display","block");
+	        $("#close").css("display","block");
+	        $("#close").css(".header","none");
+	    });
+	
+	    $("#close").click(function(){
+	        $("#play").css("display","none");
+	        $("#close").css("display","none");
+	        $("#close").css(".header","block");
+	    });
    
         $('.p1').click(function(){
             console.log("찍힌다.");
@@ -450,8 +518,8 @@
                    +'<input type="hidden" name="conIdx" value="'+conidx+'"/>'
                    +'</form>');
        });
+        
        $('.p3').click(function(){
-             console.log(conidx);
              location.href="./conDel?conidx="+conidx;
        });
         

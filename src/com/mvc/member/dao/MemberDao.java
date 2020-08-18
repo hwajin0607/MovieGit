@@ -241,6 +241,18 @@ public class MemberDao {
 		
 	}
 
+	public int selectuidx(String conidx) throws SQLException {
+		String sql = "select uidx from Content where conidx=?";
+		int conUidx = 0;
+		ps = conn.prepareStatement(sql);
+		ps.setString(1, conidx);
+		rs = ps.executeQuery();
+		while(rs.next()) {
+			conUidx = rs.getInt("uIdx");
+		}
+		return conUidx;
+	}
+
 
 
 }

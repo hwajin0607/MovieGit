@@ -1,0 +1,9 @@
+diff a/WebContent/movie_detail.jsp b/WebContent/movie_detail.jsp	(rejected hunks)
+@@ -9,6 +9,7 @@
+         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+         <style>
+  		 
++ 		 body{
+  		 	background-color: black;
+  		 	height: 100%;
+  		 }
