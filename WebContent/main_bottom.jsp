@@ -10,9 +10,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <style>
 
-			body{
-				background-color: rgb(0,0,0,0.8);
-			}
+
 			
             #a1{
                 width: 500px;

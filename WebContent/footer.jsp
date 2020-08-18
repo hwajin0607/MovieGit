@@ -43,8 +43,7 @@
                 <p class="txt">Tel : 070-1234-5678</p>
             </div>
             <div>
-                <p class="tit">유경 목장</p>
-                <p class="txt">김유경</p>
+                <p class="tit">영화</p>
                 <p class="txt">101-32-15428</p>
                 <p class="txt">3530000-037-2020-0022</p>
                 <p class="txt"></p>

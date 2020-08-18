@@ -55,7 +55,7 @@ public class MemberController extends HttpServlet {
 	            String pw = req.getParameter("pw");
 	            System.out.println(id+"/"+pw);
 	            String page = "login.jsp";
-	            String msg = "로그인에 실패 하였습니다.";
+	            String msg = "아이디와 패스워드를 확인해 주세요.";
 	            
 	            int login = 0;
 	            
