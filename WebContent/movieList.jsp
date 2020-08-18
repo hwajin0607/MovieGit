@@ -225,19 +225,19 @@
     <div class="mainbody">
     <!-- 배경이미지 -->
     	<div class="mainImg">
-        	<img src="/photo/back.jpg"  />
-    	</div>
-    	<div class="header"><a href="like"><img id="logo" src="/photo/main.png"/></a>
-        <div id="allmenu"><a href="page">전체 메뉴</a></div>
-        <div id="mypage"><a href="myPage.jsp">마이페이지</a></div>
+        	<img src="/photo/main9.jpg"  />
+    <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
+
+        <div id="allmenu"><a href="page">MENU</a></div>
+        <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
         <div id="login"></div>
-        <div id="logout"><a href="logout">로그아웃</a></div>
+        <div id="logout"><a href="logout">logout</a></div>
     </div>
         <div id="ent"><h1>&nbsp;Entire film</h1></div>
         <!-- 전체영화 메뉴 바 -->
         <div class="moviebar">
             <ul class="genre">
-           		<a href="./page"><li>전체</li></a>
+           		<a href="./page"><li>ALL</li></a>
                 <a href="./movieListG?mGenre=로맨스/코미디"><li id="g">로멘스/코미디</li></a>
                 <a href="./movieListG?mGenre=스릴러/공포"><li class="g">스릴러/공포</li></a>
                 <a href="./movieListG?mGenre=SF/판타지"><li class="g">SF/판타지</li></a>
@@ -258,7 +258,7 @@
         </form>
         <!-- 정렬 -->
         <div class="sort">
-            <a href="./movieListS?mSort=내림차">최신 개봉일 순</a>/<a href="./movieListS?mSort=오름차">오래된 순</a>
+            <a href="./movieListS?mSort=내림차" ><p id="d">최신 개봉일 순</p></a>/<a href="./movieListS?mSort=오름차"><div id="a">오래된 순</div></a>
         </div>
         </br>
         <!-- 영화목록보여주기 -->
@@ -287,12 +287,14 @@ var loginId = "${sessionScope.loginId}";
 
 if(loginId !=""){
 	   $("#login").html(loginId+' 님♡');
-	   if(msg!=""){
+	  /*  if(msg!=""){
 	      alert(msg);
 	      msg="";
-	       }
+	       } */
 	    }
-	    
-
+/* $("#d").click(function(){
+	$("#d").css({'font-weight':'800'});
+	console.log("값확인");
+});  */
 </script>
 </html>

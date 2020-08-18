@@ -2,11 +2,22 @@ package com.mvc.movie.dto;
 
 import java.sql.Date;
 
-import com.google.gson.Gson;
+
+
+
+	
+
+
 import com.google.gson.JsonObject;
 
 public class MovieDto {
 
+	private int conIdx;
+
+	private String conContent;
+	private Date conDate;
+	private Date conRedate;
+	private String uIden;
 	private int mIdx;
 	private String mName;
 	private Date mOpen;
@@ -29,9 +40,30 @@ public class MovieDto {
 	private String maactor;
 	private double mrRating;
 	private int conidx;
-	private String conContent;
+
 	private String uiden;
 	
+	
+	
+	
+	public int getConIdx() {
+		return conIdx;
+	}
+
+	public Date getConDate() {
+		return conDate;
+	}
+	public Date getConRedate() {
+		return conRedate;
+	}
+	public String getuIden() {
+		return uIden;
+	}
+	public void setuIden(String uIden) {
+		this.uIden = uIden;
+	}
+
+
 	public int getmIdx() {
 		return mIdx;
 	}
@@ -158,6 +190,22 @@ public class MovieDto {
 	public void setMrRating(double mrRating) {
 		this.mrRating = mrRating;
 	}
+	public void setConIdx(int int1) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setConContent(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setConDate(Date date) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void setConRedate(Date date) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	public int getConidx() {
 		return conidx;
@@ -168,9 +216,7 @@ public class MovieDto {
 	public String getConContent() {
 		return conContent;
 	}
-	public void setConContent(String conContent) {
-		this.conContent = conContent;
-	}
+
 	public String getUiden() {
 		return uiden;
 	}

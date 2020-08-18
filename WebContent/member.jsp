@@ -40,7 +40,7 @@
 				<a href="manager.jsp">초기화면으로 돌아가기</a>
 			
 			</div>
-			<form method="POST" action = "member">
+			<form method="GET" action = "member">
 			<input type="text" class="sech" name="search">
 			
 			<input type="submit" class="member_btn" value="회원명검색" />
@@ -52,6 +52,7 @@
 
 			<table >
 					<tr>
+						
 						<th>No</th>
 						<th>이름</th>
 						<th>생년월일</th>
@@ -64,7 +65,7 @@
 					</tr>
 					<c:forEach items="${list}" var ="member">
 					<tr>
-						<td>${member.uIdx}</td>
+						<td>${member.uIdx} <input type ="hidden" name="uIdx" value="${member.uIdx}"/></td>
 						<td>${member.uName}</td>
 						<td>${member.uBirth}</td>
 						<td>${member.uGender}</td>
@@ -72,8 +73,9 @@
 						<td>${member.uPw}</td>
 						<td>${member.uEmail}</td>
 						<td>${member.uDate}</td>
-						<td><button type="submit" onclick="">댓글</button></td>
-					</tr>
+						<!-- <td><input type = "button" value="댓글목록" onclick="openNew()" /></td> -->
+						<td><input type = "button" value="댓글목록" onclick='window.open("./memberComment?uidx=${member.uIdx}","","width=680,height=800,left=600")' /></td>
+					</tr>	
 					</c:forEach>
 
 			</table>
@@ -97,8 +99,12 @@
 		location.href="./member?page=${currPage+1}";		
 	}
 	
-	
-		
+	var uidx = $('input[name="uIdx"]').val();	
+	function openNew(){
+		console.log(uidx);
+       	var url="./memberComment?uidx="+uidx;
+       	window.open(url,"","width=680,height=800,left=600");
+	}
 	
 </script>
 
