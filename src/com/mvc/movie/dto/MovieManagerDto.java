@@ -1,10 +1,9 @@
 package com.mvc.movie.dto;
 
 import java.sql.Date;
-
 public class MovieManagerDto {
-	
 	private int mIdx;
+	private int conIdx;
 	private String mName;
 	private Date mOpen;
 	private String mGenre;
@@ -13,6 +12,21 @@ public class MovieManagerDto {
 	private Date mDate;
 	private int mAge;
 	private String mContent;
+	private String conContent;
+	
+	
+	public int getConIdx() {
+		return conIdx;
+	}
+	public void setConIdx(int conIdx) {
+		this.conIdx = conIdx;
+	}
+	public String getConContent() {
+		return conContent;
+	}
+	public void setConContent(String conContent) {
+		this.conContent = conContent;
+	}
 	public int getmIdx() {
 		return mIdx;
 	}
@@ -67,8 +81,10 @@ public class MovieManagerDto {
 	public void setmContent(String mContent) {
 		this.mContent = mContent;
 	}
-
-	
-	
-	
+	@Override
+	public String toString() {
+		return "MovieManagerDto [mIdx=" + mIdx + ", conIdx=" + conIdx + ", mName=" + mName + ", mOpen=" + mOpen
+				+ ", mGenre=" + mGenre + ", mUrl=" + mUrl + ", mBhit=" + mBhit + ", mDate=" + mDate + ", mAge=" + mAge
+				+ ", mContent=" + mContent + ", conContent=" + conContent + "]";
+	}
 }

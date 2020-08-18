@@ -23,16 +23,11 @@ import com.mvc.movie.service.MovieService;
 
 
 public class MovieController extends HttpServlet {
-
-
-
 		@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			req.setCharacterEncoding("UTF-8");
 			Process(req,resp);
 	}
-
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -47,9 +42,7 @@ public class MovieController extends HttpServlet {
 		System.out.println(addr);
 		RequestDispatcher dis = null;
 		MovieService ms = new MovieService(req,resp);
-		
 		switch (addr) {
-
 		case "/selectBhit":
 			try {
 				ms.selectBhit();
@@ -118,7 +111,7 @@ public class MovieController extends HttpServlet {
 			ms.test();
 			break;
 			
-			//상세페이지 띄우기
+			//상세페이지 띄우기 + 댓글도불러와야함
 		case "/movieDetail":
 			System.out.println("상세페이지 요청");
 			String mIdx = req.getParameter("mIdx");

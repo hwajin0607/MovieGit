@@ -82,6 +82,7 @@ public class MovieDao {
 		}
 		return list;
 	}
+
 	
 	public ArrayList<MovieDto> img(ArrayList<MovieDto> list) throws SQLException {
 		String sql = "SELECT mfURL FROM moviefoster WHERE midx = ?";
@@ -100,6 +101,7 @@ public class MovieDao {
 		return movieimg;
 	}
 	
+
     //전체영화목록	
 	public ArrayList<MovieDto> movieList(int page, String sqlo) throws SQLException {
 		int z = page *2; //페이지당 보여줄 게시물의 수
