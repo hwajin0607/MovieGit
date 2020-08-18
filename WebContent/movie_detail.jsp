@@ -4,113 +4,113 @@
 <%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <html>
     <head>
-		<meta charset="utf-8">
+      <meta charset="utf-8">
         <title>영화 상세 페이지</title>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <style>
- 		 
- 		 body{
- 		 	background-color: black;
- 		 	height: 100%;
- 		 }
- 		
-		 .header{
-		        background-color: black;
-		        width: 99%;
-		        height: 111px;
-		        position: fixed;
-		        padding-top: 87px;
-		        display : inline-block;
-		        top:-20px;
-		        z-index: 9;
-		    }
-		    
-		    #search{
-		        width: 59px;
-		        height: 52px;
-		        z-index: 9;
-		        position: relative;
-		        top: 48px;
-		        left: 367px;
-		        z-index: 9;
-		        cursor: pointer;
-		    }
-		    
-		    #search2{
-		        width: 62px;
-		        height: 57px;
-		        z-index: 9;
-		        position: absolute;	
-		        z-index: 10;
-		    }
-		    
-		    #logo{
-		        width: 185px;
-		        height: 158px;
-		        position: absolute;
-		        top: 5px;
-		        left: 869px;
-		        z-index: 9;
-		    }
-		    
-		    #allmenu{
-		        width: 100px;
-		        height: 30px;
-		        z-index: 9;
-		        position: absolute;
-		        top: 150px;
-		        left: 657px;
-		        font-size: 20px;
-		    }
-		    
-		    #mypage{
-		        width: 303px;
-		        height: 30px;
-		        z-index: 9;
-		        position: absolute;
-		        top: 150px;
-		        left: 1200px;
-		        font-size: 20px;
-		    }
-		
-		    a{
-		        text-decoration: none;
-		        color: white;
-		        font-weight: 600;
-		    }
-		    a:link a:visited a:active a:hover{
-		        text-decoration: none;
-		        color: white;
-		    }
-		    
-		    #logout{
-		        width: 75px;
-		        height: 36px;
-		        position: absolute;
-		        top: 26px;
-		        left: 95%;
-		    }
-		    
-		    #login{
-		       width: 90px;
-		       height: 36px;
-		       position: absolute;
-		       top: 26px;
-		       left: 1686px;
-		       color: white;
-		       text-align: right;
-		    }
-		    
-		    .panel{
-		        width: 92%;
-		        height: 420px;
-		        background-color: gray;
-		        position: absolute;
-		        top: 129px;
-		        left: 77px;
-		        z-index: 10;
-		        display: none;
-		    }
+        
+        body{
+           background-color: black;
+           height: 100%;
+        }
+       
+       .header{
+              background-color: black;
+              width: 99%;
+              height: 111px;
+              position: fixed;
+              padding-top: 87px;
+              display : inline-block;
+              top:-20px;
+              z-index: 9;
+          }
+          
+          #search{
+              width: 59px;
+              height: 52px;
+              z-index: 9;
+              position: relative;
+              top: 48px;
+              left: 367px;
+              z-index: 9;
+              cursor: pointer;
+          }
+          
+          #search2{
+              width: 62px;
+              height: 57px;
+              z-index: 9;
+              position: absolute;   
+              z-index: 10;
+          }
+          
+          #logo{
+              width: 185px;
+              height: 158px;
+              position: absolute;
+              top: 5px;
+              left: 869px;
+              z-index: 9;
+          }
+          
+          #allmenu{
+              width: 100px;
+              height: 30px;
+              z-index: 9;
+              position: absolute;
+              top: 150px;
+              left: 657px;
+              font-size: 20px;
+          }
+          
+          #mypage{
+              width: 303px;
+              height: 30px;
+              z-index: 9;
+              position: absolute;
+              top: 150px;
+              left: 1200px;
+              font-size: 20px;
+          }
+      
+          a{
+              text-decoration: none;
+              color: white;
+              font-weight: 600;
+          }
+          a:link a:visited a:active a:hover{
+              text-decoration: none;
+              color: white;
+          }
+          
+          #logout{
+              width: 75px;
+              height: 36px;
+              position: absolute;
+              top: 26px;
+              left: 95%;
+          }
+          
+          #login{
+             width: 90px;
+             height: 36px;
+             position: absolute;
+             top: 26px;
+             left: 1686px;
+             color: white;
+             text-align: right;
+          }
+          
+          .panel{
+              width: 92%;
+              height: 420px;
+              background-color: gray;
+              position: absolute;
+              top: 129px;
+              left: 77px;
+              z-index: 10;
+              display: none;
+          }
     
         /*영화 상세 관련*/       
             #ready{
@@ -400,13 +400,13 @@
                 left: 5%;   
             }
 
-        </style>	
+        </style>   
     </head>
     <body>
      <div id="play">
-    		<iframe width="1280" height="720" src="https://www.youtube-nocookie.com/embed/fzrAeaq5xxI?&amp;autoplay=1&amp;mute=1"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ="true"></iframe>
+          <iframe width="1280" height="720" src="https://www.youtube-nocookie.com/embed/fzrAeaq5xxI?&amp;autoplay=1&amp;mute=1"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ="true"></iframe>
         </div> 
- 	 <div>
+     <div>
             <img src = "/photo/main.jpg" style = "width : 100%;  height : 100%; position:relative" > 
       </div>
       <input type="button" value="X" id="close"/>
@@ -422,7 +422,7 @@
           <div id="background">
         <img src="/photo/main.jpg" style="width:100%; height:100%; position:relative;"/>
        </div>
-    	 <c:forEach items="${list}" var="mms">
+        <c:forEach items="${list}" var="mms">
            <div id="ready">
                <div id="post" onclick="location.href='#'">
                    ${mms.mUrl}
@@ -480,27 +480,27 @@
    </body>
     <script>
     
-	    var uIdx = "${sessionScope.uIdx}";
-	    var loginId = "${sessionScope.loginId}";
-	    var loginPw = "${sessionScope.loginPw}";
-		
-	    if(loginId !=""){
-	    	$("#login").html(loginId+' 님♡');	 
-	    	 }
+       var uIdx = "${sessionScope.uIdx}";
+       var loginId = "${sessionScope.loginId}";
+       var loginPw = "${sessionScope.loginPw}";
+      
+       if(loginId !=""){
+          $("#login").html(loginId+' 님♡');    
+           }
     
     
-	    $("#post").click(function(){
-	        console.log("클릭");
-	        $("#play").css("display","block");
-	        $("#close").css("display","block");
-	        $("#close").css(".header","none");
-	    });
-	
-	    $("#close").click(function(){
-	        $("#play").css("display","none");
-	        $("#close").css("display","none");
-	        $("#close").css(".header","block");
-	    });
+       $("#post").click(function(){
+           console.log("클릭");
+           $("#play").css("display","block");
+           $("#close").css("display","block");
+           $("#close").css(".header","none");
+       });
+   
+       $("#close").click(function(){
+           $("#play").css("display","none");
+           $("#close").css("display","none");
+           $("#close").css(".header","block");
+       });
    
         $('.p1').click(function(){
             console.log("찍힌다.");
@@ -544,5 +544,5 @@
            alert(msg);
         }
 
-	</script>
+   </script>
 </html>

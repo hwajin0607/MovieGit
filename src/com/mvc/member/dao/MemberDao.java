@@ -135,7 +135,7 @@ public class MemberDao {
 		   int start = (end-pagePerCnt)+1;
 
 		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
-		String sql = "select distinct f.rnum, f.mfidx, m.midx from (select ROW_NUMBER() OVER(ORDER BY f.mfidx DESC) AS rnum, m.midx, f.mfidx from moviefoster f, movie m WHERE f.midx=m.midx AND m.midx IN(select m.midx from movie m, userGenre u WHERE m.mgenre=u.ggenre AND u.uidx=?)) f, movie m where f.midx = m.midx and f.rnum BETWEEN ? AND ?  ORDER BY f.rnum";
+		String sql = "select distinct f.rnum, f.mfidx, m.midx, f.mfurl from (select ROW_NUMBER() OVER(ORDER BY f.mfidx DESC) AS rnum, m.midx, f.mfidx, f.mfurl from moviefoster f, movie m WHERE f.midx=m.midx AND m.midx IN(select m.midx from movie m, userGenre u WHERE m.mgenre=u.ggenre AND u.uidx=?)) f, movie m where f.midx = m.midx and f.rnum BETWEEN ? AND ?  ORDER BY f.rnum";
 		ps =conn.prepareStatement(sql);
 		ps.setString(1, uIdx);
 		ps.setInt(2, start);
@@ -145,6 +145,7 @@ public class MemberDao {
 			MovieDto dto = new MovieDto();
 			dto.setmIdx(rs.getInt("mIdx"));
 			dto.setMfIdx(rs.getInt("mfIdx"));
+			dto.setMfUrl(rs.getString("mfurl"));
 			list.add(dto);
 		}
 		System.out.println("리스트 보여주기 : "+list);
