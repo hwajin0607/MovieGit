@@ -300,7 +300,6 @@ $(document).ready(function() {
 	function DoSend() {
 		location.href="./randomDetail";
 	}
-=======
 		var uIdx = "${sessionScope.uIdx}";
 		var loginId = "${sessionScope.loginId}";
 		var loginPw = "${sessionScope.loginPw}";
@@ -326,7 +325,6 @@ $(document).ready(function() {
 		    });
 		
 		    });
->>>>>>> 98b7fc1b0b2c33971f578c2b08ee0e69c55b959f
 
 
 </script>
