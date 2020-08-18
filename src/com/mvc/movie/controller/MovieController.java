@@ -23,16 +23,11 @@ import com.mvc.movie.service.MovieService;
 
 
 public class MovieController extends HttpServlet {
-
-
-
 		@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			req.setCharacterEncoding("UTF-8");
 			Process(req,resp);
 	}
-
-	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
@@ -47,9 +42,7 @@ public class MovieController extends HttpServlet {
 		System.out.println(addr);
 		RequestDispatcher dis = null;
 		MovieService ms = new MovieService(req,resp);
-		
 		switch (addr) {
-
 		case "/selectBhit":
 			try {
 				ms.selectBhit();
@@ -118,7 +111,7 @@ public class MovieController extends HttpServlet {
 			ms.test();
 			break;
 			
-			//상세페이지 띄우기
+			//상세페이지 띄우기 + 댓글도불러와야함
 		case "/movieDetail":
 			System.out.println("상세페이지 요청");
 			String mIdx = req.getParameter("mIdx");
@@ -127,7 +120,6 @@ public class MovieController extends HttpServlet {
 			try {
 				ms.movieDetail(mIdx);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -229,7 +221,6 @@ public class MovieController extends HttpServlet {
 			try {
 				ms.conten(uidx,cont,contmidx);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;
@@ -240,11 +231,11 @@ public class MovieController extends HttpServlet {
 			String coment = req.getParameter("coment");
 			String conidx = req.getParameter("conIdx");
 			String cmidx = req.getParameter("midx");
-			System.out.println(coment);
+			String uIdx = String.valueOf(req.getSession().getAttribute("uIdx"));
+			System.out.println(coment+conidx+cmidx);
 			try {
-				ms.conup(coment,conidx,cmidx);
+				ms.conup(coment,conidx,cmidx,uIdx);
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			break;

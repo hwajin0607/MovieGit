@@ -117,7 +117,7 @@
         position: relative;
         width: 95%;
         height: 730px;
-        top: -1989px;
+ 		top:-2084px;
         left: 48px;
 
         z-index: 9;
@@ -270,24 +270,17 @@
 </footer>
 <script>
 
- var uIdx = "${sessionScope.uIdx}";
+var uIdx = "${sessionScope.uIdx}";
 var loginId = "${sessionScope.loginId}";
 var loginPw = "${sessionScope.loginPw}";
 
 
-/*   if(loginPw=="" || loginId==""){
-	alert("로그인이 필요한 서비스입니다.");
-	location.href="login.jsp";
-
-  }else(loginPw !="" || loginId !=""){ */
 	 if(loginId !=""){
 	$("#login").html(loginId+' 님♡');
 
 		 
 	 }
 
-
- 
 
 $(document).ready(function() {
 
@@ -310,24 +303,7 @@ $(document).ready(function() {
 	function DoSend() {
 		location.href="./randomDetail";
 	}
-		var uIdx = "${sessionScope.uIdx}";
-		var loginId = "${sessionScope.loginId}";
-		var loginPw = "${sessionScope.loginPw}";
-		var msg = "${msg}";
-		
-		/*   if(loginPw=="" || loginId==""){
-			alert("로그인이 필요한 서비스입니다.");
-			location.href="login.jsp";
-		
-		  }else(loginPw !="" || loginId !=""){ */
-			 if(loginId !=""){
-			$("#login").html(loginId+' 님♡');
-/* 			if(msg!=""){
-				alert(msg);
-				msg="";
-				 } */
-			 }
-				
+
 		$(document).ready(function() {
 		
 		    $("#search").click(function(){
@@ -340,10 +316,6 @@ $(document).ready(function() {
 		
 		    });
 
-
-		
-            
-        
 
 </script>
 

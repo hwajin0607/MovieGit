@@ -16,11 +16,9 @@
 	<body>
 		<h2>관리자 페이지</h2>
 		<br/>
-			<input type="submit" value="회원관리" onclick="location.href='member'">
+			<input type="submit" value="회원관리" onclick="location.href='member?page=1'">
 			<input type="submit" value="영화관리" onclick="location.href='movie'">
-			<input type="submit" value="영화댓글" onclick="location.href='content?page=1&mIdx=6'">
-
-
+			
 	</body>
 	<script>
 		

@@ -4,113 +4,113 @@
 <%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <html>
     <head>
-		<meta charset="utf-8">
+      <meta charset="utf-8">
         <title>영화 상세 페이지</title>
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <style>
- 		 
- 		 body{
- 		 	background-color: black;
- 		 	height: 100%;
- 		 }
- 		
-		 .header{
-		        background-color: black;
-		        width: 99%;
-		        height: 111px;
-		        position: fixed;
-		        padding-top: 87px;
-		        display : inline-block;
-		        top:-20px;
-		        z-index: 10;
-		    }
-		    
-		    #search{
-		        width: 59px;
-		        height: 52px;
-		        z-index: 9;
-		        position: relative;
-		        top: 48px;
-		        left: 367px;
-		        z-index: 9;
-		        cursor: pointer;
-		    }
-		    
-		    #search2{
-		        width: 62px;
-		        height: 57px;
-		        z-index: 9;
-		        position: absolute;	
-		        z-index: 10;
-		    }
-		    
-		    #logo{
-		        width: 185px;
-		        height: 158px;
-		        position: absolute;
-		        top: 5px;
-		        left: 869px;
-		        z-index: 9;
-		    }
-		    
-		    #allmenu{
-		        width: 100px;
-		        height: 30px;
-		        z-index: 9;
-		        position: absolute;
-		        top: 150px;
-		        left: 657px;
-		        font-size: 20px;
-		    }
-		    
-		    #mypage{
-		        width: 303px;
-		        height: 30px;
-		        z-index: 9;
-		        position: absolute;
-		        top: 150px;
-		        left: 1200px;
-		        font-size: 20px;
-		    }
-		
-		    a{
-		        text-decoration: none;
-		        color: white;
-		        font-weight: 600;
-		    }
-		    a:link a:visited a:active a:hover{
-		        text-decoration: none;
-		        color: white;
-		    }
-		    
-		    #logout{
-		        width: 75px;
-		        height: 36px;
-		        position: absolute;
-		        top: 26px;
-		        left: 95%;
-		    }
-		    
-		    #login{
-		       width: 90px;
-		       height: 36px;
-		       position: absolute;
-		       top: 26px;
-		       left: 1686px;
-		       color: white;
-		       text-align: right;
-		    }
-		    
-		    .panel{
-		        width: 92%;
-		        height: 420px;
-		        background-color: gray;
-		        position: absolute;
-		        top: 129px;
-		        left: 77px;
-		        z-index: 10;
-		        display: none;
-		    }
+        
+        body{
+           background-color: black;
+           height: 100%;
+        }
+       
+       .header{
+              background-color: black;
+              width: 99%;
+              height: 111px;
+              position: fixed;
+              padding-top: 87px;
+              display : inline-block;
+              top:-20px;
+              z-index: 9;
+          }
+          
+          #search{
+              width: 59px;
+              height: 52px;
+              z-index: 9;
+              position: relative;
+              top: 48px;
+              left: 367px;
+              z-index: 9;
+              cursor: pointer;
+          }
+          
+          #search2{
+              width: 62px;
+              height: 57px;
+              z-index: 9;
+              position: absolute;   
+              z-index: 10;
+          }
+          
+          #logo{
+              width: 185px;
+              height: 158px;
+              position: absolute;
+              top: 5px;
+              left: 869px;
+              z-index: 9;
+          }
+          
+          #allmenu{
+              width: 100px;
+              height: 30px;
+              z-index: 9;
+              position: absolute;
+              top: 150px;
+              left: 657px;
+              font-size: 20px;
+          }
+          
+          #mypage{
+              width: 303px;
+              height: 30px;
+              z-index: 9;
+              position: absolute;
+              top: 150px;
+              left: 1200px;
+              font-size: 20px;
+          }
+      
+          a{
+              text-decoration: none;
+              color: white;
+              font-weight: 600;
+          }
+          a:link a:visited a:active a:hover{
+              text-decoration: none;
+              color: white;
+          }
+          
+          #logout{
+              width: 75px;
+              height: 36px;
+              position: absolute;
+              top: 26px;
+              left: 95%;
+          }
+          
+          #login{
+             width: 90px;
+             height: 36px;
+             position: absolute;
+             top: 26px;
+             left: 1686px;
+             color: white;
+             text-align: right;
+          }
+          
+          .panel{
+              width: 92%;
+              height: 420px;
+              background-color: gray;
+              position: absolute;
+              top: 129px;
+              left: 77px;
+              z-index: 10;
+              display: none;
+          }
     
         /*영화 상세 관련*/       
             #ready{
@@ -121,7 +121,7 @@
                 margin-bottom: 30px;
                 margin-left: 7%;
                 position: relative;
-                z-index: 9;
+                z-index: 8;
                 top : -180%;
             }
 
@@ -260,6 +260,49 @@
                 text-align: center;
                 top: 10%;
             }
+            
+            #play{
+                position: fixed;
+                display: none;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                bottom:0; 
+                right:0; 
+                border: 1px solid black; 
+                z-index: 10;
+            }
+
+            iframe{
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                bottom:0; 
+                right:0; 
+                border: none;
+            }
+
+            #close{
+                width: 3%;
+                height: 4%;
+                z-index: 10;
+                position: absolute;
+                right: 3%;
+                top: 2%;
+                color: none;
+                background-color: rgba(0,0,0,0);
+                border: none;
+                display: none;
+            }
+
+            #close:hover{
+                color:white;
+                cursor: pointer; 
+                border: 3px solid white;
+            }
+            
 
             /*댓글 관련*/
              #com{
@@ -268,7 +311,7 @@
                 background-color: rgb(0,0,0,0.9);
                 margin-left: 7%;
                 position: relative;
-                z-index: 9;
+                z-index: 8;
                 top : -178%;
             }
 
@@ -357,12 +400,16 @@
                 left: 5%;   
             }
 
-        </style>	
+        </style>   
     </head>
     <body>
- 	 <div>
+     <div id="play">
+          <iframe width="1280" height="720" src="https://www.youtube-nocookie.com/embed/fzrAeaq5xxI?&amp;autoplay=1&amp;mute=1"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ="true"></iframe>
+        </div> 
+     <div>
             <img src = "/photo/main.jpg" style = "width : 100%;  height : 100%; position:relative" > 
       </div>
+      <input type="button" value="X" id="close"/>
        <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
         <div id="search"><img id="search2" src="/photo/search.png"/></div>
         <div id="allmenu"><a href="movieList">전체 메뉴</a></div>
@@ -375,7 +422,7 @@
           <div id="background">
         <img src="/photo/main.jpg" style="width:100%; height:100%; position:relative;"/>
        </div>
-    	 <c:forEach items="${list}" var="mms">
+        <c:forEach items="${list}" var="mms">
            <div id="ready">
                <div id="post" onclick="location.href='#'">
                    ${mms.mUrl}
@@ -422,8 +469,8 @@
                     <div class="p3">삭제</div>
                 </div>
                 <input type ="hidden" name="conIdx" value="${moviecontent.conidx}"/>
-                <div class="com">${moviecontent.uiden }</div>
-                <div class="mon">${moviecontent.conContent }</div>
+                <div class="com">${moviecontent.uiden}</div>
+                <div class="mon">${moviecontent.conContent}</div>
                 &nbsp;
                 <div class="bar3"></div>
                 </c:forEach>
@@ -433,28 +480,34 @@
 
    </body>
     <script>
-
-    var uIdx = "${sessionScope.uIdx}";
-    var loginId = "${sessionScope.loginId}";
-    var loginPw = "${sessionScope.loginPw}";
-
-
-    /*   if(loginPw=="" || loginId==""){
-    	alert("로그인이 필요한 서비스입니다.");
-    	location.href="login.jsp";
-
-      }else(loginPw !="" || loginId !=""){ */
-    	 if(loginId !=""){
-    	$("#login").html(loginId+' 님♡');
-
-    		 
-    	 }
+    
+       var uIdx = "${sessionScope.uIdx}";
+       var loginId = "${sessionScope.loginId}";
+       var loginPw = "${sessionScope.loginPw}";
       
+       if(loginId !=""){
+          $("#login").html(loginId+' 님♡');    
+           }
+    
+    
+       $("#post").click(function(){
+           console.log("클릭");
+           $("#play").css("display","block");
+           $("#close").css("display","block");
+           $("#close").css(".header","none");
+       });
+   
+       $("#close").click(function(){
+           $("#play").css("display","none");
+           $("#close").css("display","none");
+           $("#close").css(".header","block");
+       });
+   
         $('.p1').click(function(){
             console.log("찍힌다.");
             alert('신고가 되었습니다');
         });
-
+        
         var midx = $('input[name = "mIdx"]').val();
         var conidx = $('input[name = "conIdx"]').val();
         $('.p2').click(function(){
@@ -465,8 +518,8 @@
                    +'<input type="hidden" name="conIdx" value="'+conidx+'"/>'
                    +'</form>');
        });
+        
        $('.p3').click(function(){
-             console.log(conidx);
              location.href="./conDel?conidx="+conidx;
        });
         
@@ -492,5 +545,5 @@
            alert(msg);
         }
 
-	</script>
+   </script>
 </html>

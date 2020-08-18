@@ -82,6 +82,7 @@ public class MovieDao {
 		}
 		return list;
 	}
+
 	
 	public ArrayList<MovieDto> img(ArrayList<MovieDto> list) throws SQLException {
 		String sql = "SELECT mfURL FROM moviefoster WHERE midx = ?";
@@ -100,6 +101,7 @@ public class MovieDao {
 		return movieimg;
 	}
 	
+
     //전체영화목록	
 	public ArrayList<MovieDto> movieList(int page, String sqlo) throws SQLException {
 		int z = page *2; //페이지당 보여줄 게시물의 수
@@ -618,17 +620,34 @@ public class MovieDao {
 		ps.setString(3, cont);
 		ps.executeUpdate();
 		
+		
 	}
 
-	public void conup(String coment, String conidx) throws SQLException {
-		
-		String sql = "UPDATE Content SET conContent = ? WHERE conidx = ?";
+	public String conup(String coment, String conidx, String uIdx) throws SQLException {
+		String sql = "select uidx from content where conidx=?";
 		ps = conn.prepareStatement(sql);
-		ps.setString(1, coment);
-		ps.setString(2, conidx);
-		ps.executeUpdate();
+		ps.setString(1, conidx);
+		rs = ps.executeQuery();
+		String selectUidx ="";
+		String msg = "본인이 작성한 댓글이 아닙니다.";
+		if(rs.next()) {
+			selectUidx = rs.getString("uidx");
+			System.out.println(msg);
+	
+		if(selectUidx.equals(uIdx)) {
+			sql = "UPDATE Content SET conContent = ? WHERE conidx = ?";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, coment);
+			ps.setString(2, conidx);
+			ps.executeUpdate();
+			msg = "수정성공";
+		}
+
+		}
+			return msg;
 		
 	}
+
 
 
 }

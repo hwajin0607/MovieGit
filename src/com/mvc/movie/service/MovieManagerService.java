@@ -12,7 +12,11 @@ import javax.sql.DataSource;
 import com.mvc.movie.dto.MovieManagerDto;
 
 public class MovieManagerService {
-
+	public Connection getConnection() throws Exception{
+		Context ctx = new InitialContext();
+		DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");
+		return ds.getConnection();
+	}
 	public Object list(int page, String search) {
 
 		System.out.println(search+":");
@@ -28,9 +32,8 @@ public class MovieManagerService {
 		
 		
 		try {
-			Context ctx = new InitialContext();
-			DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/Oracle");
-			conn = ds.getConnection();
+			
+			conn = getConnection();
 			String sql = "";
 			
 			//서치가 널이거나 아니면 서치가 공백이라면
@@ -90,8 +93,19 @@ public class MovieManagerService {
 			
 			
 		}
-
 		return list;
+	}
+	//
+	public int deleteMovie(String mIdx) throws Exception{
+		int result = 0;
+		Connection conn = getConnection();
+		String sql = "DELETE FROM movie  "
+				   + "WHERE  mIdx in (?) ";
+		PreparedStatement ps = conn.prepareStatement(sql);
+		ps.setString(1, mIdx);
+		
+		result = ps.executeUpdate();
+		return result;
 	}
 
 }

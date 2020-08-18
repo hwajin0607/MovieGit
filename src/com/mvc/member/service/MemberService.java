@@ -221,23 +221,28 @@ public class MemberService {
 
 	public void conDel() {
 		String conidx = req.getParameter("conidx");
-		System.out.println(conidx);
+		String uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
+		System.out.println("댓글번호 아이디:"+conidx +"로그인한 아이디"+ uidx);
 		MemberDao dao = new MemberDao();
+		String msg = "본인이 작성한 댓글이 아닙니다.";
 		try {
+			String conUidx = String.valueOf(dao.selectuidx(conidx));
+			if( conUidx.equals(uidx)) {
 			dao.conDel(conidx);
+			msg = "삭제되었습니다.";
+			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			dao.resClose();
 		}
 		String cmidx = String.valueOf(req.getSession().getAttribute("mIdx"));
+		 req.setAttribute("msg", msg);
 		System.out.println("idx 값"+cmidx);
-		RequestDispatcher dis = req.getRequestDispatcher("/movieDetail?mIdx="+cmidx);
+		RequestDispatcher dis = req.getRequestDispatcher("/movieDetail?mIdx="+cmidx);		
 		try {
 			dis.forward(req, resp);
 		} catch (ServletException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
