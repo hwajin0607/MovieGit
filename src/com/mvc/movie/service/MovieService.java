@@ -32,7 +32,7 @@ public class MovieService {
 		System.out.println("전체");
 		String pagen =String.valueOf(req.getSession().getAttribute("sort"));
 		System.out.println("확인용 " + pagen);
-		if(Integer.parseInt(String.valueOf(req.getSession().getAttribute("sort")))>1) {
+		if(Integer.parseInt(String.valueOf(req.getSession().getAttribute("sort")))>page) {
 			page = Integer.parseInt(String.valueOf(req.getSession().getAttribute("sort")));
 		}
 		System.out.println("전체 page : " + page);
@@ -44,6 +44,8 @@ public class MovieService {
 
 			e.printStackTrace();
 		} finally {
+			System.out.println(list);
+			System.out.println(page);
 			req.setAttribute("currPage", page);
 			req.setAttribute("movieList", list);
 			req.getSession().setAttribute("sort", page);
@@ -60,7 +62,7 @@ public class MovieService {
 		System.out.println(mGenre);
 		ArrayList<MovieDto> list = null;
 		MovieDao dao = new MovieDao();
-		if(Integer.parseInt(String.valueOf(req.getSession().getAttribute("sort")))>1) {
+		if(Integer.parseInt(String.valueOf(req.getSession().getAttribute("sort")))>page) {
 			page = Integer.parseInt(String.valueOf(req.getSession().getAttribute("sort")));
 		}
 		String sqlb =String.valueOf(req.getSession().getAttribute("sqlb"));
