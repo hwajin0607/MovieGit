@@ -26,28 +26,43 @@ public class MemberManagerController extends HttpServlet {
 		System.out.println(addr);
 		RequestDispatcher dis = null;
 		MovieService ms = new MovieService(req,resp);
+		
 		switch (addr) {
 		case "/member":
 			String search = req.getParameter("search"); // 검색어 값 , 검색어가 존재하면 검색기능 //검색어가 없으면 전체검색
 			String pageparam = req.getParameter("page");
-
-			int page = 1;
-			if(pageparam != null) {
+			System.out.println(search+":"+pageparam);
+			
+			int page = 1; // 명시 해준 부분
+			if(pageparam != null) { 
+				System.out.println("if 절 들어오기");
 				page = Integer.parseInt(pageparam);
-				MemberManagerService service = new MemberManagerService();
-				Object ss = service.list(page,search);
-				System.out.println("SS11");
-				req.setAttribute("list", ss);
-				req.setAttribute("currPage", page);
-				dis = req.getRequestDispatcher("member.jsp");
-				dis.forward(req, resp);
 			}
+			/*
+			 * count = ms.count();
+			 * listPage = 10;
+			 *  totalPage = count / 10 ;
+			 *  if( count % listPage > 0 }
+			 * 	 	totalPage++;
+			 * totalPage  << 총 페이지
+			 * 
+			 */
+			
+			
+			MemberManagerService service = new MemberManagerService();
+			Object ss = service.list(page,search);
+			System.out.println("SS11");
+			req.setAttribute("list", ss);
+			req.setAttribute("currPage", page);
+			//req.setAttribute("endPage", totalPage);
+			dis = req.getRequestDispatcher("member.jsp");
+			dis.forward(req, resp);
 			break;
 			
 		case "/memberComment":
 			String uidx = req.getParameter("uidx"); 
-			MemberManagerService service = new MemberManagerService();
-			Object ss = service.conlist(uidx);
+			service = new MemberManagerService();
+			ss = service.conlist(uidx);
 			System.out.println("SS22");
 			req.setAttribute("list", ss);
 			req.setAttribute("uidx", uidx);
