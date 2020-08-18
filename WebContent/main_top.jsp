@@ -117,7 +117,7 @@
         position: relative;
         width: 95%;
         height: 730px;
-        top: -2154px;
+        top: 100px;
         left: 48px;
         background-color: rgb(0, 0, 0, 0.8);
         z-index: 9;
