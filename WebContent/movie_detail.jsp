@@ -462,7 +462,7 @@
                     <input type="text" name="contentTxt" class="content"/>&nbsp;&nbsp;<input type="submit" value="submit" class="submit"/>
                 </form>
                 &nbsp;&nbsp;
-                <c:forEach items="${Content }" var="moviecontent">
+                <c:forEach items="${Content}" var="moviecontent">
                 <div class="clickbox">
                     <div class="p1" >신고|</div>&nbsp;
                     <div class="p2">수정|</div>&nbsp;
@@ -474,7 +474,6 @@
                 &nbsp;
                 <div class="bar3"></div>
                 </c:forEach>
-                <div>페이징 넣을 예정</div>
             </fieldset>
         </div>
 

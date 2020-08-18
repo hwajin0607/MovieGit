@@ -606,6 +606,7 @@ public class MovieDao {
 			dto.setmIdx(rs.getInt("midx"));
 			dto.setUiden(rs.getString("uiden"));
 			dto.setConContent(rs.getString("conContent"));
+			System.out.println(dto.getConContent());
 			list.add(dto);
 		}
 		System.out.println("확인용" + list);
@@ -618,9 +619,7 @@ public class MovieDao {
 		ps.setString(1, uidx);
 		ps.setString(2, contmidx);
 		ps.setString(3, cont);
-		ps.executeUpdate();
-		
-		
+		ps.executeUpdate();		
 	}
 
 	public String conup(String coment, String conidx, String uIdx) throws SQLException {
