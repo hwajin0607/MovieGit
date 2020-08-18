@@ -434,12 +434,27 @@
    </body>
     <script>
 
-   
+    var uIdx = "${sessionScope.uIdx}";
+    var loginId = "${sessionScope.loginId}";
+    var loginPw = "${sessionScope.loginPw}";
+
+
+    /*   if(loginPw=="" || loginId==""){
+    	alert("로그인이 필요한 서비스입니다.");
+    	location.href="login.jsp";
+
+      }else(loginPw !="" || loginId !=""){ */
+    	 if(loginId !=""){
+    	$("#login").html(loginId+' 님♡');
+
+    		 
+    	 }
+      
         $('.p1').click(function(){
             console.log("찍힌다.");
             alert('신고가 되었습니다');
         });
-        
+
         var midx = $('input[name = "mIdx"]').val();
         var conidx = $('input[name = "conIdx"]').val();
         $('.p2').click(function(){
