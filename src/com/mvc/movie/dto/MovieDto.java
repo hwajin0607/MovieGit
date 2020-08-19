@@ -40,7 +40,6 @@ public class MovieDto {
 	private String maactor;
 	private double mrRating;
 	private int conidx;
-
 	private String uiden;
 	
 	

@@ -174,9 +174,10 @@ public class MovieController extends HttpServlet {
 			ms.myPageZ();
 			
 		case "/page" :
-			
+			req.getSession().setAttribute("sort", "1");
 			req.getSession().removeAttribute("mGenre");
 			page = 1;
+			String z = req.getParameter("page");
 			ms.movieList(page);
 			/*System.out.println("페이지 이동");
 			//mSort = req.getParameter("mSort");

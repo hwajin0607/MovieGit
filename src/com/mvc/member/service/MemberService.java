@@ -24,6 +24,8 @@ public class MemberService {
 	public MemberService(HttpServletRequest req, HttpServletResponse resp) {
 		this.req =req;
 		this.resp =resp;
+		System.out.println(req.getSession().getAttribute("uIdx"));
+		System.out.println(req.getSession().getAttribute("uIdx")==null);
 	}
 	
 	public int login(String id, String pw) throws Exception {
@@ -102,6 +104,9 @@ public class MemberService {
 	}
 	public void like(int page1) throws SQLException, ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
+		if(req.getSession().getAttribute("uIdx")==null) {
+			logout();
+		}
 		String uIdx =  Integer.toString((int) req.getSession().getAttribute("uIdx"));
 		System.out.println("고유번호 : "+uIdx);
 		
@@ -124,28 +129,33 @@ public class MemberService {
 
 	public void info() {
 		String uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
-		System.out.println(uidx);
-		//String uidx = "61";
+		System.out.println(uidx == String.valueOf(req.getSession().getAttribute("uIdx")));
+		boolean sc = uidx == "null";
+		System.out.println(sc);
 		MemberDto info = null;
 		ArrayList<String> infoG = null;
 		MemberDao dao = new MemberDao();
-		try {
-			info = dao.info(uidx);
-			infoG =  dao.genre(uidx);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			dao.resClose();
-			req.setAttribute("info", info);
-			req.setAttribute("infoG", infoG);
-			req.getSession().setAttribute("infoG", infoG);
-			RequestDispatcher dis = req.getRequestDispatcher("MemberInfo.jsp");
+		if(uidx.equals("null")) {
+			logout();
+		}else {
 			try {
-				dis.forward(req, resp);
-			} catch (ServletException | IOException e) {
+				info = dao.info(uidx);
+				infoG =  dao.genre(uidx);
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally {
+				dao.resClose();
+				req.setAttribute("info", info);
+				req.setAttribute("infoG", infoG);
+				req.getSession().setAttribute("infoG", infoG);
+				RequestDispatcher dis = req.getRequestDispatcher("MemberInfo.jsp");
+				try {
+					dis.forward(req, resp);
+				} catch (ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
@@ -158,33 +168,37 @@ public class MemberService {
 		MemberDto info = null;
 		ArrayList<String> infoG = null;
 		MemberDao dao = new MemberDao();
-		try {
-			String str = String.valueOf(req.getSession().getAttribute("infoG"));
-			System.out.println(str);
-			info = dao.info(uidx);
-			infoG =  dao.genre(uidx);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally {
-			dao.resClose();
-			req.setAttribute("info", info);
-			req.setAttribute("infoG", infoG);
-			RequestDispatcher dis = req.getRequestDispatcher("MemberChanging.jsp");
+		if(uidx.equals("null")) {
+			logout();
+		}else {
 			try {
-				dis.forward(req, resp);
-			} catch (ServletException | IOException e) {
+				String str = String.valueOf(req.getSession().getAttribute("infoG"));
+				System.out.println(str);
+				info = dao.info(uidx);
+				infoG =  dao.genre(uidx);
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally {
+				dao.resClose();
+				req.setAttribute("info", info);
+				req.setAttribute("infoG", infoG);
+				RequestDispatcher dis = req.getRequestDispatcher("MemberChanging.jsp");
+				try {
+					dis.forward(req, resp);
+				} catch (ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 		
 	}
 
 	public void infoc() throws IOException {
-		// String uidx = (String) req.getSession().getAttribute("idx"); 나중에 세션값 저장되면 사용할것
+		String uidx = String.valueOf(req.getSession().getAttribute("uIdx"));
 		boolean success = false;
-		String uidx = "61";
+		//String uidx = "61";
 		String pw = req.getParameter("pw");
 		String birth = req.getParameter("birth");
 		String email = req.getParameter("email");
@@ -246,7 +260,18 @@ public class MemberService {
 			e.printStackTrace();
 		}
 	}
-	
+	public void logout() {
+		RequestDispatcher dis = req.getRequestDispatcher("login.jsp");
+		try {
+			dis.forward(req, resp);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 
 	

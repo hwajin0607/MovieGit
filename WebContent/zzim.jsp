@@ -104,12 +104,12 @@
 		    .panel{
 		        width: 92%;
 		        height: 420px;
-		        background-color: gray;
 		        position: absolute;
 		        top: 129px;
 		        left: 77px;
 		        z-index: 10;
 		        display: none;
+		        border: 0px solid;
 		    }
 
             #WishList{
@@ -168,10 +168,11 @@
                 clear: left;
             }
 
-            #close{
+            .close{
             	position:relative;
-            	left:77%;
-                cursor:pointer
+                cursor:pointer;
+                top: -85%;
+                right: 5%;
             }
 
             #remove{
@@ -195,8 +196,21 @@
                 height: 1000px;
                 z-index: 0;
             }
-           
-            
+        #select{
+		    position: absolute;
+		    width: 90%;
+		    height: 100%;
+		    top: 0px;
+	   		left: 100px;
+	   		border: 0px solid;
+	    }
+        .mf{
+        	position: relative;
+        	top: 5%;
+        	left: 5%;
+        	height: 90%;
+        	width: 90%
+        }
             
 			
 		</style>
@@ -212,7 +226,7 @@
     	</div>
     
     
-    	<div class="panel"><a href="">검색창</a></div>
+    	<div class="panel"><iframe  id = "select" src="./selectBhit"></iframe></div>
         
 
         <div class="MainBody">
@@ -244,8 +258,9 @@
                     <ul class="Wishlist">
                         <c:forEach items="${list }" var="list">
                             <div class="molist">
-                                <li class="mo">${list.mIdx}
-                                <a href="./del?zidx=${list.zidx }"><img id="close" src="/photo/close.png" /></a>
+                                <li class="mo">
+								<a href="./movieDetail?mIdx=${list.mIdx }"><img class="mf" src="/photo/${list.mfNew }" /></a>
+                                <a href="./del?zidx=${list.zidx }"><img class="close" src="/photo/close.png" /></a>
                                 </li>
                             </div>
                         </c:forEach>

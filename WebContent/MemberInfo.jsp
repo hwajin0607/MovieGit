@@ -8,12 +8,39 @@
 		<title>Insert title here</title>
 		<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<style>
-			table, tr, th, td{
-				border: 1px solid;
-				border-collapse: collapse;
+			body{
+				background-image: url("/photo/memberinfo.jpg");
+				background-repeat: no-repeat;
 			}
-			table, tr, th{
-				padding: 5px 10px;
+			#mainbody{
+				position: absolute;
+				top : 0px;
+				left: 0px;
+				height: 100%;
+				width: 100%;
+				background-color: rgba(0, 0, 0, 0.4);
+			}
+			table{
+				position: absolute;
+				top : 20%;
+				left: 35%;
+			}
+			table, tr, th, td{
+				border:1px solid rgb(37, 35, 35);
+				border-collapse: collapse;
+				background-color: rgb(37, 35, 35);
+				font:white;
+			}
+			table, tr, th, td{
+				padding: 5px 20px;
+			}
+			td,th{
+				background-color: rgb(37, 35, 35);
+				color: white;
+			}
+			.topbox{
+				background-color: black;
+				color: white;
 			}
 			button{
 				width: 200px;
