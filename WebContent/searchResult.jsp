@@ -14,9 +14,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<style>
             body{
-                background-image: url("/photo/fantasy.jpg");
-                position: relative;
-                z-index: 9;
+                background-color: black;
             }
             
             .header{
@@ -45,7 +43,6 @@
 		        height: 57px;
 		        z-index: 9;
 		        position: absolute;
-		
 		        z-index: 10;
 		    }
 		    #logo{
@@ -127,14 +124,6 @@
 
             }
 
-            /*.SrMain{
-                background-image:url(backimg.jpg);
-                background-size: cover;
-                position: relative;
-                z-index: 5;
-                width: 2000px;
-                height: 1000px;
-            }*/
             .searchLogo>img{
                 position: absolute;
                 width: 70px;
@@ -173,14 +162,13 @@
                 background-color: white;
                 width: 300px;
                 height: 500px;
-                border: 5px solid red;
                 margin:50px;
                 
             }
 
             .movie{
                 position: absolute;
-                z-index: 10;
+                z-index: 1;
                 top: 30%;
             }
 
@@ -189,16 +177,14 @@
             }
 			
          
-            .backimg{
-                /* background-image: url(back.jpg); */
+           .backimg{
                 margin-left: 2%;
                 margin-top: 9%;
                 margin-right: 2%;
                 position: relative;
                 width: 1800px;
                 height: 1000px;
-                z-index: 0;
-            }
+            } 
 
             #searchTxt{
                 width: 400%;
@@ -236,22 +222,33 @@
             
             #more{
                 position: absolute;
-                background-image: url("/photo/arrow.png");
+                background-image: url("/photo/more3.png");
                 width: 3%;
                 height: 4%;
                 background-size: cover;
                 background-position: center;
-                top: 100%;
+                top: 102%;
                 left: 50%;
                 background-position: bottom;
+            }
+            
+            .mainBody{
+            position:relative;
+            width:100%;
+            height:200%;
+            opacity:0.5;
+            
             }
           
             
 		</style>
 		
 	</head>
+	
 	<body>
-		<div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
+	
+	
+		<div class="header"><a href="like"><img id="logo" src="/photo/logo3.png"/></a>
 	        <div id="search"><img id="search2" src="/photo/search.png"/></div>
 	        <div id="allmenu"><a href="page">MENU</a></div>
 	        <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
@@ -268,9 +265,10 @@
         <div class="SrMain">
             
 
-            <div class="backimg">
-                <div class="blackopcaity1"></div>
-                	<!--돋보기 로고-->
+
+            <div class="backimg" >
+            	<img class="mainBody" src="/photo/main9.jpg">
+                <!--돋보기 로고-->
                 <div class="searchLogo">
                     <!--Search Result-->
                     <div id="SearchResult">
@@ -293,14 +291,13 @@
                 <div class="movie">
                     <ul class="list">
                         <c:forEach items="${slist}" var="srlist">
-                        <div class="molist">
-                            <li class="mo">movie${srlist.mName}
-                                <a href="#">
-                                <span class="glyphicon glyphicon-heart"></span>
-                                </a>
-                            </li>
-                        </div>
-                        
+	                        <div class="molist">
+	                            <li class="mo">movie${srlist.mName}
+	                                <a href="#">
+	                                <span class="glyphicon glyphicon-heart"></span>
+	                                </a>
+	                            </li>
+	                        </div>
                         </c:forEach>
                     </ul>
                     <div class="pageArea">

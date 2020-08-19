@@ -175,13 +175,16 @@
 </head>
 <body>
     <div class="mainbody">
-        <img src="/photo/back.jpg" style="width: 100%; height: 100%; opacity: 0.5; position:relative;">
-    	 <div class="header"><a href="like"><img id="logo" src="/photo/main.png"/></a>
+    <div id="background">
+        <img src="/photo/main9.jpg" style="width:100%; height:77%; position:relative; opacity:0.5;"/>
+    	</div>
+       
+    	 <div class="header"><a href="like"><img id="logo" src="/photo/logo3.png"/></a>
         <div id="search"></div>
-        <div id="allmenu"><a href="movieList">전체 메뉴</a></div>
-        <div id="mypage"><a href="myPage.jsp">마이페이지</a></div>
+		<div id="allmenu"><a href="page">MENU</a></div>
+        <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
         <div id="login"></div>
-        <div id="logout"><a href="logout">로그아웃</a></div>
+        <div id="logout"><a href="logout">logout</a></div>
     </div>
         <div id="ent"><h1>&nbsp; profile Detail</h1></div>
         <br/>

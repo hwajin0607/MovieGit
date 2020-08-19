@@ -1,3 +1,4 @@
+<%@page import="oracle.net.aso.s"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
@@ -121,13 +122,14 @@
         position: absolute;
         text-align: right;
         top: 40%;
-        left: 90%;
+        left: 89%;
         color: white;
     }
 
     .sort>a{
         color: white;
     }
+    
     #more{
         
         clear: left;
@@ -159,8 +161,8 @@
     }
     td{
     	background-color : black;
-    	width: 250px;
-        height: 250px;
+    	width: 265px;
+    	height: 377px;
         float:left;
         margin:30px;
         
@@ -209,16 +211,22 @@
 		outline:0;
 		width:300px;
 		height:30px;
-		background-color: black;
-		background-color: rgb(0, 0, 0, 0.5);
+		background-color: rgb(128, 128, 128, 0.5);
+		color: white;
 		
 	}
 	img{
 		max-width: 100%;
 		max-height: 100%;
 	}
+	.movief{
+		position: relative;
+		height: 80%;
+		width: 80%;
+		left: 10%;
+	}
 
-  
+ <%String mgenre = (String) session.getAttribute("mGenre");%> 
 </style>
 </head>
 <body>
@@ -226,7 +234,7 @@
     <!-- 배경이미지 -->
     	<div class="mainImg">
         	<img src="/photo/main9.jpg"  />
-    <div class="header"><a href="like"><img id="logo" src="/photo/main.png"/></a>
+    <div class="header"><a href="like"><img id="logo" src="/photo/logo3.png"/></a>
 
         <div id="allmenu"><a href="page">MENU</a></div>
         <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
@@ -237,8 +245,9 @@
         <!-- 전체영화 메뉴 바 -->
         <div class="moviebar">
             <ul class="genre">
-           		<a href="./page"><li>ALL</li></a>
-                <a href="./movieListG?mGenre=로맨스/코미디"><li id="g">로멘스/코미디</li></a>
+           		<a href="./page?page=1"><li>ALL</li></a>
+
+                <a href="./movieListG?mGenre=로멘스/코미디"><li id="g">로멘스/코미디</li></a>
                 <a href="./movieListG?mGenre=스릴러/공포"><li class="g">스릴러/공포</li></a>
                 <a href="./movieListG?mGenre=SF/판타지"><li class="g">SF/판타지</li></a>
                 <a href="./movieListG?mGenre=드라마/다큐"><li class="g">드라마/다큐</li></a>
@@ -248,17 +257,17 @@
         </div>
         </br></br></br>
         <!-- 검색창 -->
-        <form class="searchbar" action="./searchResult">
+        <form class="searchbar" action="./search">
             <span class='emsearch'>
                 <input type='text' placeholder='Search' class='sch_text' name="searchTxt"/>
             </span>
-            <button type='submit' class='sch'>√</button>
+            <button type='submit' class='sch'>검색</button>
             <!-- <button type='submit' class='sch'>검색</button>
              <a href="./searchResult" id="sch" target="_parent">검색</a> -->
         </form>
         <!-- 정렬 -->
         <div class="sort">
-            <a href="./movieListS?mSort=내림차" ><p id="d">최신 개봉일 순</p></a>/<a href="./movieListS?mSort=오름차"><div id="a">오래된 순</div></a>
+            <a href="./movieListS?mSort=내림차" >최신 개봉일 순</a> / <a href="./movieListS?mSort=오름차">오래된 순</a>
         </div>
         </br>
         <!-- 영화목록보여주기 -->
@@ -266,7 +275,7 @@
 	        <table>
 	        	<tr>
 	        	<c:forEach items="${movieList }" var="mlist"> 
-					<td><a href="./movieDetail?mIdx=${mlist.mIdx }"><img src="/photo/${mlist.mfNew}"/></a></td>
+					<td><div align="center"><a href="./movieDetail?mIdx=${mlist.mIdx }"><img class = "movief" src="/photo/${mlist.mfNew}">${mlist.mfUrl} / ${mlist.mfNew}</a></div></td>
 				</c:forEach>
 				</tr>
 			
@@ -274,7 +283,7 @@
 		<!-- 더보기 -->
 		<div class="pageArea">
 			<a href="./movieList?page=${currPage +1}" id="more">
-			<img src="/photo/more.png" style="width: 30px; height: 30px; ">
+			<img src="/photo/more3.png" style="width: 30px; height: 30px; ">
 			</a>
 		</div>
 		</div>

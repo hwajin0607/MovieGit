@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인</title>
+<title>SPACE Dugi</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
-	html,body{
-		background-color:black;
-		height:100%;
-	}
+   html,body{
+      background-color:black;
+      height:100%;
+   }
     .header{
         background-color: black;
         width: 100%;
@@ -38,7 +38,6 @@
         height: 57px;
         z-index: 9;
         position: absolute;
-
         z-index: 10;
     }
     #logo{
@@ -59,7 +58,7 @@
         font-size: 20px;
     }
     #mypage{
-        width: 303px;
+        width: 110px;
         height: 30px;
         z-index: 9;
         position: absolute;
@@ -85,23 +84,23 @@
         left: 95%;
     }
     #login{
-	    width: 120px;
-	    height: 36px;
-	    position: absolute;
-	    top: 26px;
-	    left: 1670px;
-	    color: white;
-	    text-align: right;
+       width: 120px;
+       height: 36px;
+       position: absolute;
+       top: 26px;
+       left: 1670px;
+       color: white;
+       text-align: right;
     }
     .panel{
         width: 92%;
         height: 420px;
-        background-color: gray;
         position: absolute;
         top: 129px;
         left: 77px;
         z-index: 10;
         display: none;
+        border: 0px solid;
     }
     #alllist{
         position: relative;
@@ -117,7 +116,7 @@
         position: relative;
         width: 95%;
         height: 730px;
- 		top: 100px;
+ 		top: -2074px;
         left: 48px;
         z-index: 9;
     }
@@ -125,7 +124,7 @@
     #recommendmovie{
         width: 100%;
         height: 50px;
-        background-color: rgb(128, 128, 128, 0.5);
+        background-color: rgb(128, 128, 128, 0.4);
         position: absolute;
         top: 110px;
         left: 0%;
@@ -150,16 +149,19 @@
         text-align:center;
     }
     #sid1, #chu{
-    	    width: 98px;
-    		height: 74px;
-    		line-height: 76px;
+           width: 98px;
+          height: 74px;
+          line-height: 76px;
+    }
+        #sid1{
+    	    border-bottom:1px solid white;
     }
     .list{
         backface-visibility: hidden;
         float: left;
         margin: 0px 19px 0px 73px;
         width: 300px;
-    	height: 380px;
+       height: 380px;
         background-color: gray;
         list-style-type: none;
         position: relative;
@@ -183,13 +185,13 @@
         transform: rotateX(180deg);
     }
        #mainbottom{
-	    position: absolute;
+       position: absolute;
 
-	    top: 946px;
-	    left: 48px;
-	    width: 95%;
-	    height: 100%;
-	    z-index: 9;
+       top: 946px;
+       left: 48px;
+       width: 95%;
+       height: 100%;
+       z-index: 9;
           }
     #main{
        width: 100%;
@@ -210,7 +212,7 @@
        
     }
     #footer{
-	position: absolute;
+   position: absolute;
 
     top: 1800px;
     left: 8px;
@@ -218,17 +220,26 @@
     height: 50%;
     z-index: 9;
     }
+    
+    #select{
+	    position: absolute;
+	    width: 90%;
+	    height: 100%;
+	    top: 0px;
+   		left: 100px;
+   		border: 0px solid;
+    }
 
 </style>
 </head>
 <body>
-	<div id="mainbottom">
-	
-		<iframe id ="main" src="main_bottom.jsp" scrolling=no></iframe>
-	
-	</div>
+   <div id="mainbottom">
+   
+      <iframe id ="main" src="main_bottom.jsp" scrolling=no></iframe>
+   
+   </div>
 
-    <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
+    <div class="header"><a href="like"><img id="logo" src="/photo/logo3.png"/></a>
         <div id="search"><img id="search2" src="/photo/search.png"/></div>
         <div id="allmenu"><a href="page">MENU</a></div>
         <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
@@ -237,11 +248,11 @@
     </div>
     
     
-    <div class="panel"><a href="">검색창</a></div>
+    <div class="panel"><iframe  id = "select" src="./selectBhit"></iframe></div>
     
-    		<div id="background">
+          <div id="background">
         <img src="/photo/main9.jpg" style="width:100%; height:77%; position:relative; opacity:0.5;"/>
-    	</div>
+       </div>
 
     <div class="recommend">
 
@@ -267,10 +278,10 @@
 </body>
 <footer>
 <div id="footer">
-	
-		<iframe id="down" src="footer.jsp" scrolling=no></iframe>
-	
-	</div>
+   
+      <iframe id="down" src="footer.jsp" scrolling=no></iframe>
+   
+   </div>
 </footer>
 <script>
 
@@ -279,11 +290,11 @@ var loginId = "${sessionScope.loginId}";
 var loginPw = "${sessionScope.loginPw}";
 
 
-	 if(loginId !=""){
-	$("#login").html(loginId+' 님♡');
+    if(loginId !=""){
+   $("#login").html(loginId+' 님♡');
 
-		 
-	 }
+       
+    }
 
 
 $(document).ready(function() {
@@ -291,7 +302,7 @@ $(document).ready(function() {
         $("#search").click(function(){
             $(".panel").css({"display":"block"});
         });
-	    var arr = ['rotateX(180deg)','rotateX(0deg)','rotateX(180deg)','rotateX(0deg)'];
+       var arr = ['rotateX(180deg)','rotateX(0deg)','rotateX(180deg)','rotateX(0deg)'];
         var i=0;
         setInterval(function(){
             $("#alllist").css({transform:arr[i]});
@@ -300,10 +311,11 @@ $(document).ready(function() {
                         i=0;
                     }
         },3000);  
-		
-	var top = document.querySelector('#main').scrollTop;
-	console.log(top);
+      
+   var top = document.querySelector('#main').scrollTop;
+   console.log(top);
     });
+
 	function DoSend() {
 		location.href="./randomDetail";
 	}

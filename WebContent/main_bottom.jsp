@@ -73,7 +73,6 @@
             } 
 
             #ran1{
-                border: 2px solid black;  
                 width: 40%;
                 height: 90%;
                 position: relative;
@@ -84,8 +83,7 @@
             }
 
             #ran2{
-                border: 2px solid black;
-                width: 30%;
+                width: 45%;
                 height: 10%;
                 position: relative;
                 left: 51%;
@@ -93,6 +91,7 @@
                 z-index: 0;
                 display: none;
                 color:white;
+                font-size: 30px;
             }
             
             #post1{

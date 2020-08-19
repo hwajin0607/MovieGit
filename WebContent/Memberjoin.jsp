@@ -9,11 +9,13 @@
 	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 		<style>
 			table, td{
-				border : 1px solid black;
+				border : 1px solid white;
 				border-collapse: collapse;
+				color:white;
 			}
-			td{
+			td,h3{
 				padding: 5px;
+				color:white;
 			}
 		</style>
 	</head>

@@ -17,7 +17,7 @@
 		<style>
             
             body{
-                background-image: url("/photo/ocean.jpg");
+                background-color:black;
                 position: relative;
                 z-index: 9;
             }
@@ -81,10 +81,19 @@
 		    a{
 		        text-decoration: none;
 		        color: white;
-		        font-weight: 600;
 		    }
 		    a:link a:visited a:active a:hover{
 		        text-decoration: none;
+		        color: white;
+		    }
+		    #mypage>a{
+ 			    
+ 			    text-decoration: none;
+		        color: white;
+		    }
+   		    #allmenu>a{
+ 			    
+ 			    text-decoration: none;
 		        color: white;
 		    }
 		    #logout{
@@ -106,12 +115,12 @@
 		    .panel{
 		        width: 92%;
 		        height: 420px;
-		        background-color: gray;
 		        position: absolute;
 		        top: 129px;
 		        left: 77px;
 		        z-index: 10;
 		        display: none;
+		        border: 0px solid;
 		    }
 
          
@@ -132,7 +141,7 @@
                 border-radius: 10px;
                 opacity: 0.5;
             }
-            #WishList>a{
+            #WishList>p{
                 position: absolute;
                 color: white;
                 font-size: 40px;
@@ -144,7 +153,6 @@
             }
 
             .mo{
-                background-color: aquamarine;
                 width: 300px;
                 height: 500px;
                 top: 50%;
@@ -159,7 +167,7 @@
 
             .movie{
                 position: absolute;
-                top: 30%;
+                top: 40%;
             }
 
             #add{
@@ -172,10 +180,16 @@
                 clear: left;
             }
 
-            #close{
+            .close{
             	position:relative;
+<<<<<<< HEAD
+                cursor:pointer;
+                top: -85%;
+                right: 5%;
+=======
             	left:80%;
                 cursor:pointer
+>>>>>>> a244822cfa09c5ec586634131b79f4a9e6a9e513
             }
 
             #remove{
@@ -195,6 +209,22 @@
                 height: 1000px;
                 z-index: 0;
             }
+            
+        #select{
+		    position: absolute;
+		    width: 90%;
+		    height: 100%;
+		    top: 0px;
+	   		left: 100px;
+	   		border: 0px solid;
+	    }
+        .mf{
+        	position: relative;
+        	top: 5%;
+        	left: 5%;
+        	height: 90%;
+        	width: 90%
+        }
 
             .blackopcaity{
                 background-color: black;
@@ -223,7 +253,8 @@
 	</head>
 	<body>
 	
-	<div class="header"><a href="like"><img id="logo" src="/photo/logoo.png"/></a>
+	
+	<div class="header"><a href="like"><img id="logo" src="/photo/logo3.png"/></a>
 	        <div id="search"><img id="search2" src="/photo/search.png"/></div>
 	        <div id="allmenu"><a href="page">MENU</a></div>
 	        <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
@@ -232,18 +263,17 @@
     </div>
     
     
+    	<!--<div class="panel"><iframe  id = "select" src="./selectBhit"></iframe></div>-->
     	<div class="panel"><a href="">검색창</a></div>
     	
         <div class="blackopcaity"></div>
         <!--로고-->
-            <img class="logo" src="./photo/logoo.png"/>
+            <img class="logo" src="./photo/logo3.png"/>
         
 
         <div class="MainBody">
         <!--전체 삭제-->
-        <div class="AllDelMain" style="left: 90%; margin-top: 8%; z-index: 10;">
-            <a id="AllDel" href="./Alldel?uidx=${Alldel.uidx}" style="color: white;">전체 삭제</a>
-        </div>
+       
 
         <!--로그 아웃-->
         <form>
@@ -253,12 +283,12 @@
         <!--WishList 전체 영역-->
         <div class="WsMain">
             <div class="backimg">
-                <img style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative; background-color: black;" >
+                <img src="/photo/main9.jpg" style="width: 100%; height: 200%; opacity: 0.5; position: relative; " >
 
                     <!--WishList-->
                     <div id="WishList">
                         <div id="WsMainBar"></div>
-                        <a>Wish List</a>
+                        <p>Wish List</p>
                     </div>
                 </div>
 
@@ -269,10 +299,14 @@
                 <!--영화 찜목록 리스트-->
                 <div class="movie">
                     <ul class="Wishlist">
+                     <div class="AllDelMain" style="left: 396%; margin-top: -8%; width:15%">
+           				 <a id="AllDel" href="./Alldel?uidx=${Alldel.uidx}" style="color: white;">전체 삭제</a>
+        			</div>
                         <c:forEach items="${list }" var="list">
                             <div class="molist">
-                                <li class="mo">${list.mIdx}
-                                <a href="./del?zidx=${list.zidx }"><img id="close" src="/photo/closeBar.png" /></a>
+                                <li class="mo">
+								<a href="./movieDetail?mIdx=${list.mIdx }"><img class="mf" src="/photo/${list.mfNew }" /></a>
+                                <a href="./del?zidx=${list.zidx }"><img class="close" src="/photo/close.png" /></a>
                                 </li>
                             </div>
                         </c:forEach>
