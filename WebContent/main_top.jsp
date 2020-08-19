@@ -303,7 +303,6 @@ $(document).ready(function() {
 	function DoSend() {
 		location.href="./randomDetail";
 	}
-
 				
 		$(document).ready(function() {
 		

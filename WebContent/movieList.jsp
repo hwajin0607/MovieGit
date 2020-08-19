@@ -263,14 +263,14 @@
         </br>
         <!-- 영화목록보여주기 -->
         <div class="mList">
-        <table>
-        	<tr>
-        	<c:forEach items="${movieList }" var="mlist"> 
-				<td><a href="./movieDetail?mIdx=${mlist.mIdx }"><div>${mlist.mfUrl}</div></a></td>
-			</c:forEach>
-			</tr>
-		
-		</table>
+	        <table>
+	        	<tr>
+	        	<c:forEach items="${movieList }" var="mlist"> 
+					<td><div><a href="./movieDetail?mIdx=${mlist.mIdx }">${mlist.mfUrl}</a></div></td>
+				</c:forEach>
+				</tr>
+			
+			</table>
 		<!-- 더보기 -->
 		<div class="pageArea">
 			<a href="./movieList?page=${currPage +1}" id="more">
