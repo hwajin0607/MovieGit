@@ -1,5 +1,6 @@
 package com.mvc.movie.service;
 
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,6 +24,9 @@ public class MovieService {
 	public MovieService(HttpServletRequest req, HttpServletResponse resp) {
 		this.req = req;
 		this.resp = resp;
+		if(req.getSession().getAttribute("uIdx")==null) {
+			logout();
+		}
 	}
 
 	// 전체영화목록
@@ -44,7 +48,6 @@ public class MovieService {
 
 			e.printStackTrace();
 		} finally {
-			System.out.println(list);
 			System.out.println(page);
 			req.setAttribute("currPage", page);
 			req.setAttribute("movieList", list);
@@ -456,4 +459,17 @@ public class MovieService {
 		dao.resClose();
 	}
 
+	
+	public void logout() {
+		RequestDispatcher dis = req.getRequestDispatcher("login.jsp");
+		try {
+			dis.forward(req, resp);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

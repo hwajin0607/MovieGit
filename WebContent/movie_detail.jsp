@@ -444,7 +444,6 @@
         <c:forEach items="${list}" var="mms">
            <div id="ready">
                <div id="post">
-                   ${mms.mfUrl}
                <img src="/photo/${mms.mfNew}" id="post1"/>
                </div>
                <div id="age">
