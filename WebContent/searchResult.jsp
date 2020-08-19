@@ -270,7 +270,7 @@
 
             <div class="backimg">
                 <div class="blackopcaity1"></div>
-                <!--돋보기 로고-->
+                	<!--돋보기 로고-->
                 <div class="searchLogo">
                     <!--Search Result-->
                     <div id="SearchResult">
