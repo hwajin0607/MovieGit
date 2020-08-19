@@ -8,7 +8,7 @@
 <title>로그인 페이지</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
-    body{
+   html,body{
         background-color: black;
     }
 
@@ -86,7 +86,7 @@
        width: 473px;
        height: 404px;
        z-index: 9;
-       background-color: white;
+       background-color: black;
       display:none;
     }
     iframe{
@@ -94,7 +94,7 @@
        height: 100%;
        border: 0;
        top: 8px;
-       left: 13px;
+       left: 5px;
        position: absolute;
     }
     span{
@@ -106,7 +106,7 @@
    <div id="memberjoin"><iframe src="Memberjoin.jsp"></iframe></div>
    
        <div>
-        <img src="/photo/main.jpg" style="width: 100%; height: 900px; opacity: 0.3;">
+        <img src="/photo/main9.jpg" style="width: 1000px; height: 870px; opacity: 0.3; position:relative; left:20%;">
        </div>
         <form action="login" method="post">  
             <div class="loginBox"><div id="login-top"><h3>LOGIN</h3></div>   
@@ -115,7 +115,7 @@
                         <td>
                             <input name ="id" id="id" type="text" placeholder="   아이디를 입력하세요"/><br/><br/>
                             <input name ="pw" id="pw" type="password" placeholder="   비밀번호를 입력하세요"/></td>
-                        <td id="login" colspan="2"><input id="login2" type="submit" value="로그인"/></td>
+                        <td id="login" colspan="2"><input id="login2" type="submit" value="LOGIN"/></td>
                     </tr>
                     <tr>
                         <td colspan="2">회원가입 하시려면 <span><ins>여기</ins></span>를 클릭해 주세용</td>

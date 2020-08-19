@@ -159,8 +159,8 @@
     }
     td{
     	background-color : black;
-    	width: 250px;
-        height: 250px;
+    	width: 265px;
+    	height: 377px;
         float:left;
         margin:30px;
         
@@ -209,8 +209,8 @@
 		outline:0;
 		width:300px;
 		height:30px;
-		background-color: black;
-		background-color: rgb(0, 0, 0, 0.5);
+		background-color: rgb(128, 128, 128, 0.5);
+		color: white;
 		
 	}
 	img{
@@ -226,7 +226,7 @@
     <!-- 배경이미지 -->
     	<div class="mainImg">
         	<img src="/photo/main9.jpg"  />
-    <div class="header"><a href="like"><img id="logo" src="/photo/main.png"/></a>
+    <div class="header"><a href="like"><img id="logo" src="/photo/logo3.png"/></a>
 
         <div id="allmenu"><a href="page">MENU</a></div>
         <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
@@ -238,7 +238,7 @@
         <div class="moviebar">
             <ul class="genre">
            		<a href="./page"><li>ALL</li></a>
-                <a href="./movieListG?mGenre=로맨스/코미디"><li id="g">로멘스/코미디</li></a>
+                <a href="./movieListG?mGenre=로멘스/코미디"><li id="g">로멘스/코미디</li></a>
                 <a href="./movieListG?mGenre=스릴러/공포"><li class="g">스릴러/공포</li></a>
                 <a href="./movieListG?mGenre=SF/판타지"><li class="g">SF/판타지</li></a>
                 <a href="./movieListG?mGenre=드라마/다큐"><li class="g">드라마/다큐</li></a>
@@ -252,7 +252,7 @@
             <span class='emsearch'>
                 <input type='text' placeholder='Search' class='sch_text' name="searchTxt"/>
             </span>
-            <button type='submit' class='sch'>√</button>
+            <button type='submit' class='sch'>검색</button>
             <!-- <button type='submit' class='sch'>검색</button>
              <a href="./searchResult" id="sch" target="_parent">검색</a> -->
         </form>
@@ -274,7 +274,7 @@
 		<!-- 더보기 -->
 		<div class="pageArea">
 			<a href="./movieList?page=${currPage +1}" id="more">
-			<img src="/photo/more.png" style="width: 30px; height: 30px; ">
+			<img src="/photo/more3.png" style="width: 30px; height: 30px; ">
 			</a>
 		</div>
 		</div>

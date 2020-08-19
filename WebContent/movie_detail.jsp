@@ -9,7 +9,7 @@
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <style>
         
-        body{
+        html,body{
            background-color: black;
            height: 100%;
         }
@@ -21,7 +21,7 @@
               position: fixed;
               padding-top: 87px;
               display : inline-block;
-              top:-20px;
+              top:0%;
               z-index: 9;
           }
           
@@ -116,13 +116,13 @@
             #ready{
                 width: 85%;
                 height: 55%;
-                background-color: rgb(0,0,0,0.9);
+                background-color: rgb(0,0,0,0.6);
                 margin-top: 3%;
                 margin-bottom: 30px;
                 margin-left: 7%;
-                position: relative;
+                position: absolute;
                 z-index: 8;
-                top : -180%;
+                top : 20%;
             }
 
             #post{
@@ -145,28 +145,31 @@
                 position: absolute;
                 width: 2%;
                 height: 7%;
-                background-color: cadetblue;
-                top: 10%;
-                left: 30%;
-                border-radius: 50px;
+                color: white;
+                top: 11%;
+                left: 31%;
+                border-radius: 50%;
                 text-align: center;
                 line-height: 35px;
+                border: 2px solid white;
             }
 
             #title{
                 position: absolute;
-                width: 25%;
+                width: 36%;
                 height: 8%;
-                background-color: crimson;
+                color: white;
                 top: 10%;
                 left: 34%;
+                font-weight: 800px;
+                font-size: 40px;
             }
 
             #movie{
                 position: absolute;
                 width: 69%;
                 height: 60%;
-                background-color: darkblue;
+                color: white;
                 top: 20%;
                 left: 29%;
             }
@@ -175,7 +178,7 @@
                 position: absolute;
                 width: 110px;
                 height: 25px;
-                background-color: blueviolet;
+                color: white;
                 top: 10%;
                 left: 3%;
                 text-align: center;
@@ -185,7 +188,7 @@
                 position: absolute;
                 width: 70px;
                 height: 25px;
-                background-color: darkorange;
+                color: white;
                 left: 14%;
                 top: 10%;
             }
@@ -213,7 +216,7 @@
                 width: 100px;
                 height: 50px;
                 left: 29%;
-                background-color: aquamarine;
+                color: black;
                 top: 83%;
             }
 
@@ -223,7 +226,7 @@
                 height: 35px;
                 left: 35%;
                 top: 83%;
-                background-color: aquamarine;  
+                color: white; 
             }
 
             #pj2{
@@ -232,7 +235,7 @@
                 height: 35px;
                 left: 45%;
                 top: 83%;
-                background-color: aquamarine;  
+                color: black;
             }
 
             #pj3{
@@ -241,24 +244,23 @@
                 height: 30px;
                 left: 29%;
                 top: 83%;
-                background-color: aquamarine;  
+               color: white;
             }
 
             #m3{
                 position: absolute;
-                color: black;
+                color: white;
                 top: 30%;
                 left: 3%;
                 font-size: 20px;
                 width: 1030px;
                 height: 120px;
-                background-color: tomato;
+                font-size: 14px;
                 
             }
 
             #heart{
                 position: absolute;
-                background-color: red;
                 width: 30px;
                 height: 25px;
                 left: 90%;
@@ -314,11 +316,11 @@
              #com{
                 width: 85%;
                 height: 110%;
-                background-color: rgb(0,0,0,0.9);
+                background-color: rgb(0,0,0,0.6);
                 margin-left: 7%;
-                position: relative;
+                position: absolute;
                 z-index: 8;
-                top : -178%;
+                top : 83%;
             }
 
             .content{
@@ -341,18 +343,19 @@
 
             .com{
                 width: 7%;  
-                background-color: cornflowerblue;
+                color : white;
                 height: 3%;
-                border: 1px solid black;
+                font-size : 25px;
+                font-weight : 600;
                 position: relative;
                 left: 3%;
+                margin-bottom: 5px;
             }
 
             .mon{
                 width: 95%;  
-                background-color: darkcyan;
+                color : white;
                 height: 8%;
-                border: 1px solid black;
                 position: relative;
                 left: 3%; 
             }
@@ -373,7 +376,7 @@
                 left: 90%;
                 margin-bottom: -15;
                 cursor: pointer;
-                width: 115px;
+                width: 130px;
             }
 
             textarea{
@@ -405,31 +408,39 @@
                 position: relative;
                 left: 5%;   
             }
+            
+			#bg{
+				width: 100%;
+				height: 200%;
+			}
+			
+			#zzim{
+				width: 40px;
+				height: 40px;
+			}
 
         </style>   
     </head>
-    <body>
+   <body>
      <div id="play">
      <c:forEach items="${list}" var="mms">
           <iframe width="1280" height="720" src="${mms.mUrl}?&amp;autoplay=1&amp;mute=1"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ="true"></iframe>
     </c:forEach>
-        </div> 
-     <div>
-            <img src = "/photo/main.jpg" style = "width : 100%;  height : 100%; position:relative" > 
-      </div>
+        </div>
       <input type="button" value="X" id="close"/>
-       <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
-        <div id="search"><img id="search2" src="/photo/search.png"/></div>
-        <div id="allmenu"><a href="movieList">전체 메뉴</a></div>
-        <div id="mypage"><a href="myPage.jsp">마이페이지</a></div>
-        <div id="login"></div>
-        <div id="logout"><a href="logout">로그아웃</a></div>
-    </div>
-        <div class="panel"><a href="">검색창</a></div>
-    
-          <div id="background">
-        <img src="/photo/main.jpg" style="width:100%; height:100%; position:relative;"/>
+      
+       <div class="header"><a href="like"><img id="logo" src="/photo/logo3.png"/></a>
+           <div id="search"><img id="search2" src="/photo/search.png"/></div>
+	        <div id="allmenu"><a href="page">MENU</a></div>
+	        <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
+	        <div id="login"></div>
+	        <div id="logout"><a href="logout">logout</a></div>
        </div>
+       <div class="panel"><a href="">검색창</a></div>
+        
+        <div id="bg">
+            <img src="/photo/main9.jpg" style="width:100%; height:100%; position:relative; opacity:0.5;"/>
+        </div>
         <c:forEach items="${list}" var="mms">
            <div id="ready">
                <div id="post">
@@ -443,7 +454,8 @@
                    ${mms.mName}
                </div>
           
-               <div id="heart"><button onclick="location.href='./zzimadd?midx=${mms.mIdx}'">찜</button></div>
+               <div id="heart"><a href='./zzimadd?midx=${mms.mIdx}'><img src="/photo/heart.png" id="zzim"/></a></div>
+<%--                <button onclick="location.href='./zzimadd?midx=${mms.mIdx}'">찜</button> --%>
    
                <div id="movie">
                    <div id="m1">${mms.mGenre}</div>
@@ -458,7 +470,7 @@
                    <input type ="hidden" name="mIdx" value="${mms.mIdx}"/>
                     <div class="3" style="display:none" id="pj3">평점(1~5) </div>
                     <input class = "1" type="hidden" name="pjpoint" min="1" max="5" id ="pj1" />
-                    <input class = "2" type="hidden" id="pj2" />
+                    <input class = "2" type="hidden" id="pj2" value="OK"/>
                 </form> 
             </div>
         </div>

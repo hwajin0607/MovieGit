@@ -17,7 +17,7 @@
 		<style>
             
             body{
-                background-image: url("/photo/ocean.jpg");
+                background-color:black;
                 position: relative;
                 z-index: 9;
             }
@@ -81,10 +81,19 @@
 		    a{
 		        text-decoration: none;
 		        color: white;
-		        font-weight: 600;
 		    }
 		    a:link a:visited a:active a:hover{
 		        text-decoration: none;
+		        color: white;
+		    }
+		    #mypage>a{
+ 			    
+ 			    text-decoration: none;
+		        color: white;
+		    }
+   		    #allmenu>a{
+ 			    
+ 			    text-decoration: none;
 		        color: white;
 		    }
 		    #logout{
@@ -132,7 +141,7 @@
                 border-radius: 10px;
                 opacity: 0.5;
             }
-            #WishList>a{
+            #WishList>p{
                 position: absolute;
                 color: white;
                 font-size: 40px;
@@ -144,7 +153,6 @@
             }
 
             .mo{
-                background-color: aquamarine;
                 width: 300px;
                 height: 500px;
                 top: 50%;
@@ -159,7 +167,7 @@
 
             .movie{
                 position: absolute;
-                top: 30%;
+                top: 40%;
             }
 
             #add{
@@ -223,7 +231,8 @@
 	</head>
 	<body>
 	
-	<div class="header"><a href="like"><img id="logo" src="/photo/logoo.png"/></a>
+	
+	<div class="header"><a href="like"><img id="logo" src="/photo/logo3.png"/></a>
 	        <div id="search"><img id="search2" src="/photo/search.png"/></div>
 	        <div id="allmenu"><a href="page">MENU</a></div>
 	        <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
@@ -236,14 +245,12 @@
     	
         <div class="blackopcaity"></div>
         <!--로고-->
-            <img class="logo" src="./photo/logoo.png"/>
+            <img class="logo" src="./photo/logo3.png"/>
         
 
         <div class="MainBody">
         <!--전체 삭제-->
-        <div class="AllDelMain" style="left: 90%; margin-top: 8%; z-index: 10;">
-            <a id="AllDel" href="./Alldel?uidx=${Alldel.uidx}" style="color: white;">전체 삭제</a>
-        </div>
+       
 
         <!--로그 아웃-->
         <form>
@@ -253,12 +260,12 @@
         <!--WishList 전체 영역-->
         <div class="WsMain">
             <div class="backimg">
-                <img style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative; background-color: black;" >
+                <img src="/photo/main9.jpg" style="width: 100%; height: 200%; opacity: 0.5; position: relative; " >
 
                     <!--WishList-->
                     <div id="WishList">
                         <div id="WsMainBar"></div>
-                        <a>Wish List</a>
+                        <p>Wish List</p>
                     </div>
                 </div>
 
@@ -269,6 +276,9 @@
                 <!--영화 찜목록 리스트-->
                 <div class="movie">
                     <ul class="Wishlist">
+                     <div class="AllDelMain" style="left: 396%; margin-top: -8%; width:15%">
+           				 <a id="AllDel" href="./Alldel?uidx=${Alldel.uidx}" style="color: white;">전체 삭제</a>
+        			</div>
                         <c:forEach items="${list }" var="list">
                             <div class="molist">
                                 <li class="mo">${list.mIdx}

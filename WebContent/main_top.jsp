@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>메인</title>
+<title>SPACE Dugi</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <style>
 	html,body{
@@ -59,7 +59,7 @@
         font-size: 20px;
     }
     #mypage{
-        width: 303px;
+        width: 110px;
         height: 30px;
         z-index: 9;
         position: absolute;
@@ -117,7 +117,7 @@
         position: relative;
         width: 95%;
         height: 730px;
- 		top: 100px;
+ 		top: -2074px;
         left: 48px;
         z-index: 9;
     }
@@ -125,7 +125,7 @@
     #recommendmovie{
         width: 100%;
         height: 50px;
-        background-color: rgb(128, 128, 128, 0.5);
+        background-color: rgb(128, 128, 128, 0.4);
         position: absolute;
         top: 110px;
         left: 0%;
@@ -153,6 +153,9 @@
     	    width: 98px;
     		height: 74px;
     		line-height: 76px;
+    }
+        #sid1{
+    	    border-bottom:1px solid white;
     }
     .list{
         backface-visibility: hidden;
@@ -228,7 +231,7 @@
 	
 	</div>
 
-    <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
+    <div class="header"><a href="like"><img id="logo" src="/photo/logo3.png"/></a>
         <div id="search"><img id="search2" src="/photo/search.png"/></div>
         <div id="allmenu"><a href="page">MENU</a></div>
         <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
