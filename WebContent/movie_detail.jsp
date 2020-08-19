@@ -134,6 +134,12 @@
                 left: 2%;
                 cursor: pointer;
             }
+            
+            #post1{
+               position: absolute;
+               width:100%;
+               height:100%;
+            }
 
             #age{
                 position: absolute;
@@ -427,7 +433,7 @@
         <c:forEach items="${list}" var="mms">
            <div id="ready">
                <div id="post">
-                   ${mms.mfUrl}
+               <img src="/photo/${mms.mfNew}" id="post1"/>
                </div>
                <div id="age">
                    ${mms.mAge}
@@ -440,7 +446,7 @@
    
                <div id="movie">
                    <div id="m1">${mms.mGenre}</div>
-                   <div id="m2">${mms.mdDirector}</div>
+                   <div id="m2" hidden>${mms.mdDirector}</div>
                    <div id="bar1"></div>
                    <div id="bar2"></div>
                    <div id="m3">${mms.mContent}</div>
