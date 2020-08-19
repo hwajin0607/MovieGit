@@ -30,7 +30,8 @@ public class MemberManagerController extends HttpServlet {
 		case "/member":
 			String search = req.getParameter("search"); // 검색어 값 , 검색어가 존재하면 검색기능 //검색어가 없으면 전체검색
 			String pageparam = req.getParameter("page");
-
+			System.out.println(search);
+			System.out.println(pageparam);
 			int page = 1;
 			if(pageparam != null) {
 				page = Integer.parseInt(pageparam);
