@@ -325,7 +325,7 @@ public class MovieDao {
 }
 	// 랜덤으로 값 가져오기 
 	public MovieDto random() {
-		String sql = "SELECT m.mIdx, m.mName, f.mfUrl "
+		String sql = "SELECT m.mIdx, m.mName, f.mfNew "
 				+ "FROM Movie m, movieFoster f "
 				+ "WHERE m.midx = f.midx "
 				+ "ORDER BY SYS.dbms_random.VALUE";
@@ -336,7 +336,8 @@ public class MovieDao {
 			if(rs.next()) {
 				dto.setmIdx(rs.getInt("mIdx"));
 				dto.setmName(rs.getString("mName"));
-				dto.setMfUrl(rs.getString("mfUrl"));
+//				dto.setMfUrl(rs.getString("mfUrl"));
+				dto.setMfNew(rs.getString("mfNew"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -433,7 +434,7 @@ public class MovieDao {
 	public ArrayList<MovieDto> movieDetail(String mIdx) {
 		System.out.println("dao 일 시키기");
 
-		String sql = "select DISTINCT  m.mIdx, m.mName, m.mGenre, m.mUrl, m.mAge, m.mContent, d.mddirector, f.mfurl," + 
+		String sql = "select DISTINCT  m.mIdx, m.mName, m.mGenre, m.mUrl, m.mAge, m.mContent, d.mddirector, f.mfnew," + 
 				" (select ROUND(AVG(mrRating),1) from movierating where midx = ?)as mrRating," + 
 				" (select COUNT(uidx) from movierating where midx = ?) as uIdx" + 
 				"  from Movie m, moviedirector d, moviefoster f" + 
@@ -451,16 +452,16 @@ public class MovieDao {
 				dto.setmIdx(rs.getInt("mIdx"));
 				dto.setmName(rs.getString("mName"));
 				dto.setmGenre(rs.getString("mGenre"));
-				dto.setmUrl(rs.getString("mUrl"));
+				dto.setMfNew(rs.getString("mfNew"));
 				dto.setmAge(rs.getInt("mAge"));
 				dto.setmContent(rs.getString("mContent"));
 				dto.setMdDirector(rs.getString("mddirector"));
-				dto.setMfUrl(rs.getString("mfurl"));
 				dto.setMrRating(rs.getDouble("mrRating"));
 				dto.setUidx(rs.getInt("uidx"));
+				dto.setmUrl(rs.getString("mUrl"));
 				System.out.println(rs.getInt("uidx"));
 				System.out.println(dto.getmIdx()+"/"+dto.getmName()+"/"+dto.getmGenre()+"/"+dto.getmUrl()+"/"+dto.getmAge()+"/"+dto.getmContent()+"/"
-						+dto.getMdDirector() +"/"+ dto.getMaactor() +"/"+ dto.getMfUrl()+"/"+dto.getMrRating());
+						+dto.getMdDirector() +"/"+ dto.getMaactor() +"/"+ dto.getMfNew()+"/"+dto.getMrRating());
 				
 				
 				list.add(dto);
