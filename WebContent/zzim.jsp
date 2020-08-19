@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -14,8 +15,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<style>
+            
             body{
-                background-color: black;
+                background-image: url("/photo/ocean.jpg");
                 position: relative;
                 z-index: 9;
             }
@@ -112,6 +114,8 @@
 		        border: 0px solid;
 		    }
 
+         
+
             #WishList{
                 position: absolute;
                 top: 200px;
@@ -136,7 +140,7 @@
 
             #WishList{
                 position: absolute;
-                top: -28px;
+                top: 20%;
             }
 
             .mo{
@@ -155,7 +159,7 @@
 
             .movie{
                 position: absolute;
-                top: 7%;
+                top: 30%;
             }
 
             #add{
@@ -170,9 +174,14 @@
 
             .close{
             	position:relative;
+<<<<<<< HEAD
                 cursor:pointer;
                 top: -85%;
                 right: 5%;
+=======
+            	left:80%;
+                cursor:pointer
+>>>>>>> a244822cfa09c5ec586634131b79f4a9e6a9e513
             }
 
             #remove{
@@ -180,12 +189,8 @@
                 top: 20%;
             }
             .AllDelMain{
-                position: relative;
+                position: absolute;
                 border-top: 10px;
-                z-index: 5;
-            }
-            #AllDel{
-            	z-index: 5;
             }
             .backimg{
                 margin-left: 2%;
@@ -196,6 +201,7 @@
                 height: 1000px;
                 z-index: 0;
             }
+            
         #select{
 		    position: absolute;
 		    width: 90%;
@@ -211,22 +217,49 @@
         	height: 90%;
         	width: 90%
         }
+
+            .blackopcaity{
+                background-color: black;
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                opacity: 0.5;
+
+            }
+
+            #more{
+                position: absolute;
+                background-image: url("/photo/l화살표.png"");
+                width: 8%;
+                height: 9%;
+                background-size: cover;
+                background-position: center;
+                top: 101%;
+                left: 210%;
+            }
+            
             
 			
 		</style>
 		
 	</head>
 	<body>
-		<div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
+	
+	<div class="header"><a href="like"><img id="logo" src="/photo/logoo.png"/></a>
 	        <div id="search"><img id="search2" src="/photo/search.png"/></div>
 	        <div id="allmenu"><a href="page">MENU</a></div>
 	        <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
 	        <div id="login"></div>
 	        <div id="logout"><a href="logout">logout</a></div>
-    	</div>
+    </div>
     
     
-    	<div class="panel"><iframe  id = "select" src="./selectBhit"></iframe></div>
+    	<!--<div class="panel"><iframe  id = "select" src="./selectBhit"></iframe></div>-->
+    	<div class="panel"><a href="">검색창</a></div>
+    	
+        <div class="blackopcaity"></div>
+        <!--로고-->
+            <img class="logo" src="./photo/logoo.png"/>
         
 
         <div class="MainBody">
@@ -235,12 +268,15 @@
             <a id="AllDel" href="./Alldel?uidx=${Alldel.uidx}" style="color: white;">전체 삭제</a>
         </div>
 
+        <!--로그 아웃-->
+        <form>
+            <a id="Log-Out" style="position: absolute;">Log-Out</a>
+        </form>
+
         <!--WishList 전체 영역-->
         <div class="WsMain">
             <div class="backimg">
-                <img style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative;" src="/photo/main9.jpg" alt="">
-            
-                <div class="searchLogo">
+                <img style="width: 100%; height: 100%; opacity: 0.5; z-index: 0; position: relative; background-color: black;" >
 
                     <!--WishList-->
                     <div id="WishList">
@@ -264,14 +300,18 @@
                                 </li>
                             </div>
                         </c:forEach>
+
                         <div class="pageArea">
-							<a href="./zzim?page=${currPage+1}" id="more">더보기</a>
-						</div>
+							<a href="./zzim?page=${currPage+1}" id="more"></a>
+                        </div>
+                        
                     </ul>
+                    
+                    
+                
                 </div>
 
             </div>
-        </div>
         </div>
 
 	</body>

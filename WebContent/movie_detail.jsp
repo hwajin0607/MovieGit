@@ -134,6 +134,12 @@
                 left: 2%;
                 cursor: pointer;
             }
+            
+            #post1{
+               position: absolute;
+               width:100%;
+               height:100%;
+            }
 
             #age{
                 position: absolute;
@@ -404,7 +410,9 @@
     </head>
     <body>
      <div id="play">
-          <iframe width="1280" height="720" src="https://www.youtube-nocookie.com/embed/fzrAeaq5xxI?&amp;autoplay=1&amp;mute=1"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ="true"></iframe>
+     <c:forEach items="${list}" var="mms">
+          <iframe width="1280" height="720" src="${mms.mUrl}?&amp;autoplay=1&amp;mute=1"  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen ="true"></iframe>
+    </c:forEach>
         </div> 
      <div>
             <img src = "/photo/main.jpg" style = "width : 100%;  height : 100%; position:relative" > 
@@ -424,8 +432,8 @@
        </div>
         <c:forEach items="${list}" var="mms">
            <div id="ready">
-               <div id="post" onclick="location.href='#'">
-                   ${mms.mUrl}
+               <div id="post">
+               <img src="/photo/${mms.mfNew}" id="post1"/>
                </div>
                <div id="age">
                    ${mms.mAge}
@@ -438,7 +446,7 @@
    
                <div id="movie">
                    <div id="m1">${mms.mGenre}</div>
-                   <div id="m2">${mms.mdDirector}</div>
+                   <div id="m2" hidden>${mms.mdDirector}</div>
                    <div id="bar1"></div>
                    <div id="bar2"></div>
                    <div id="m3">${mms.mContent}</div>
@@ -462,7 +470,7 @@
                     <input type="text" name="contentTxt" class="content"/>&nbsp;&nbsp;<input type="submit" value="submit" class="submit"/>
                 </form>
                 &nbsp;&nbsp;
-                <c:forEach items="${Content }" var="moviecontent">
+                <c:forEach items="${Content}" var="moviecontent">
                 <div class="clickbox">
                     <div class="p1" >신고|</div>&nbsp;
                     <div class="p2">수정|</div>&nbsp;
@@ -474,13 +482,12 @@
                 &nbsp;
                 <div class="bar3"></div>
                 </c:forEach>
-                <div>페이징 넣을 예정</div>
             </fieldset>
         </div>
 
    </body>
     <script>
-    
+
        var uIdx = "${sessionScope.uIdx}";
        var loginId = "${sessionScope.loginId}";
        var loginPw = "${sessionScope.loginPw}";

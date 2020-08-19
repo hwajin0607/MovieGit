@@ -80,7 +80,7 @@
 		$(".movie2").mouseenter(function(){
 			$("#foster").attr({"src" : "/photo/${list[1].mfNew }"});
 		});
-/* 		$(".movie3").mouseenter(function(){
+ 		$(".movie3").mouseenter(function(){
 			$("#foster").attr({"src" : "/photo/${list[2].mfNew }"});
 		});
 		$(".movie4").mouseenter(function(){
@@ -103,7 +103,7 @@
 		});
 		$(".movie10").mouseenter(function(){
 			$("#foster").attr({"src" : "/photo/${list[9].mfNew }"});
-		}); */
+		}); 
 
 		function link1() {
 			var z = ${list[0].mIdx };
@@ -113,7 +113,7 @@
 			var z = ${list[1].mIdx };
 			window.parent.location.href='./movieDetail?mIdx='+z;
 		}
-/* 		function link3() {
+ 		function link3() {
 			var z = ${list[2].mIdx };
 			window.parent.location.href='./movieDetail?mIdx='+z;
 		}
@@ -144,7 +144,7 @@
 		function link10() {
 			var z = ${list[9].mIdx };
 			window.parent.location.href='./movieDetail?mIdx='+z;
-		} */
+		} 
 		
 		function search() {
 			var str = $("input[name = 'searchTxt']").val()

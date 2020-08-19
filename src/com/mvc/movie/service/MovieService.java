@@ -43,7 +43,7 @@ public class MovieService {
 		try {
 			String sqlo = String.valueOf(req.getSession().getAttribute("sqlb"));
 			list = dao.movieList(page,sqlo);
-			
+			System.out.println(list);
 		} catch (SQLException e) {
 
 			e.printStackTrace();

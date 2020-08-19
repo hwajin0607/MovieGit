@@ -160,7 +160,7 @@
 
     }
     td{
-    	background-color : hotpink;
+    	background-color : black;
     	width: 250px;
         height: 250px;
         float:left;
@@ -215,9 +215,9 @@
 		background-color: rgb(0, 0, 0, 0.5);
 		
 	}
-	a>div{
-		width:250px;
-		height:250px;
+	img{
+		max-width: 100%;
+		max-height: 100%;
 	}
 	.movief{
 		position: relative;
@@ -234,7 +234,7 @@
     <!-- 배경이미지 -->
     	<div class="mainImg">
         	<img src="/photo/main9.jpg"  />
-    <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
+    <div class="header"><a href="like"><img id="logo" src="/photo/main.png"/></a>
 
         <div id="allmenu"><a href="page">MENU</a></div>
         <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>

@@ -106,7 +106,7 @@
         position: relative;
         top: 315px;
         left: 85px;
-        transition: 1s;
+        transition: 1.5s;
         width: 1698px;
         height: 380px;
         transform-style: preserve-3d;
@@ -116,9 +116,12 @@
         position: relative;
         width: 95%;
         height: 730px;
+<<<<<<< HEAD
        	top: 0px;
+=======
+ 		top: 100px;
+>>>>>>> a244822cfa09c5ec586634131b79f4a9e6a9e513
         left: 48px;
-
         z-index: 9;
     }
 
@@ -163,6 +166,11 @@
         background-color: gray;
         list-style-type: none;
         position: relative;
+    }
+    .re{
+    	 position: absolute;
+    	 width:100%;
+    	 height:100%;
     }
     .front{
         position: absolute;
@@ -253,14 +261,14 @@
 
         <div id="alllist">
             <div class="front">
-               <c:forEach items="${list }" var="likelist"  begin="0" end="3" step="1">
-                  <a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list">${likelist.mfNew}</li></a>
-                 </c:forEach>
+         		<c:forEach items="${list }" var="likelist"  begin="0" end="3" step="1">
+            		<a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list"><img class="re" src="/photo/${likelist.mfNew}"></li></a>
+           		</c:forEach>
             </div>
             <div class="back">
-                 <c:forEach items="${list }" var="likelist"  begin="4" end="7" step="1">
-                  <a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list">${likelist.mfNew}</li></a>
-                 </c:forEach>
+           		<c:forEach items="${list }" var="likelist"  begin="4" end="7" step="1">
+            		<a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list"><img class="re" src="/photo/${likelist.mfNew}"></li></a>
+           		</c:forEach>
             </div>
 
     </div>
@@ -308,22 +316,22 @@ $(document).ready(function() {
    var top = document.querySelector('#main').scrollTop;
    console.log(top);
     });
-   function DoSend() {
-      location.href="./randomDetail";
-   }
 
-      $(document).ready(function() {
-      
-          $("#search").click(function(){
-              $(".panel").css({"display":"block"});
-          });
-          
-         $("#chu").click(function(e){
-            $('html, body').scrollTop(850);
-         });
-      
-          });
+	function DoSend() {
+		location.href="./randomDetail";
+	}
 
+		$(document).ready(function() {
+		
+		    $("#search").click(function(){
+		        $(".panel").css({"display":"block"});
+		    });
+		    
+			$("#chu").click(function(e){
+				$('html, body').scrollTop(850);
+			});
+		
+		    });
 
 </script>
 

@@ -56,12 +56,11 @@ public class MemberManagerService {
 			ps.setInt(2, end);
 			System.out.println("제대로 작동");
 			
-			}else {
-				
+			}else{
+				System.out.println("서치기능 실행");
 				sql = "select rnum, uidx, uname, ubirth, ugender, uIden, upw, uemail, udate "
 						+ "from (select row_number() over (order by uidx desc) as rnum, uidx, uname, "
 						+ "ubirth, ugender, uIden, upw, uemail, udate from member) where uname like ? and "
-						
 						+ "rnum between ? and ? ";
 				
 				ps = conn.prepareStatement(sql);
