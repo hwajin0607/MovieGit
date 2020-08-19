@@ -107,7 +107,7 @@
         position: relative;
         top: 315px;
         left: 85px;
-        transition: 1s;
+        transition: 1.5s;
         width: 1698px;
         height: 380px;
         transform-style: preserve-3d;
@@ -163,6 +163,11 @@
         background-color: gray;
         list-style-type: none;
         position: relative;
+    }
+    .re{
+    	 position: absolute;
+    	 width:100%;
+    	 height:100%;
     }
     .front{
         position: absolute;
@@ -245,12 +250,12 @@
         <div id="alllist">
             <div class="front">
          		<c:forEach items="${list }" var="likelist"  begin="0" end="3" step="1">
-            		<a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list">${likelist.mfUrl}</li></a>
+            		<a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list"><img class="re" src="/photo/${likelist.mfNew}"></li></a>
            		</c:forEach>
             </div>
             <div class="back">
            		<c:forEach items="${list }" var="likelist"  begin="4" end="7" step="1">
-            		<a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list">${likelist.mfUrl}</li></a>
+            		<a href="./movieDetail?mIdx=${likelist.mIdx}"><li class="list"><img class="re" src="/photo/${likelist.mfNew}"></li></a>
            		</c:forEach>
             </div>
 

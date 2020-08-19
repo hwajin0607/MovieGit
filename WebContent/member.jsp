@@ -80,7 +80,7 @@
 
 			</table>
 					<div class = "pageArea">
-				<a href = "./member?page=${currPage-1}"><span >이전 페이지</span></a>
+				<a href = "./member?page=${currPage-1}"><span id="prevPage">이전 페이지</span></a>
 				<span><b>${currPage}</b></span>
 				<a href = "./member?page=${currPage+1}"><span>다음 페이지</span></a>
 					</div>			
@@ -93,9 +93,24 @@
 
 	
 	var d = ${currPage};
+	//var e = ${endPage};
 	
+	/*
+	if(d==1){
+		document.getElementById('prevPage').style.display="none";
+	}
 	
-		if(d < 1){
+	if(currpage <1 && currpage < endpage){
+		document.getElementById('prevPage').style.display="inline";
+		document.getElementById('nextPage').style.display="inline";
+	}
+	
+	if(currpage == endPage){
+		페이지 사라지게 -->
+	}
+	
+	*/
+	if(d < 1){
 		location.href="./member?page=${currPage+1}";		
 	}
 	

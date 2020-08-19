@@ -92,6 +92,13 @@
                 top: -50%;
                 z-index: 0;
                 display: none;
+                color:white;
+            }
+            
+            #post1{
+            	position: absolute;
+            	width:100%;
+            	height:100%;
             }
             
         </style>	
@@ -110,7 +117,7 @@
      		<div id="ad3"><img src="/photo/클릭.gif" id="ad4"/></div>
      
       	<div id="ran1">
-	      	<img src="" alt="포스터1" class="poster_img" />
+	      	<img src="/photo/" alt="포스터1" class="poster_img" id="post1" />
       	</div>
         <div id="ran2">
         	<h3 class="movie_title"></h3>
@@ -145,7 +152,7 @@
 	        			$('#ad3').css({'display':'none'});
 	     	            $('#ran1').css({'display':'block'});
 	     	            $('#ran2').css({'display':'block'});
-	        			$('img.poster_img').attr('src', movie.mfUrl);
+	        			$('img.poster_img').attr('src', "/photo/"+movie.mfNew);
 						$('h3.movie_title').html(movie.mName); 
 						//parent.Form.input.value = movie.mIdx;
 						// window.opener.location.href = "movieDetail?mIdx="+movie.mIdx ;

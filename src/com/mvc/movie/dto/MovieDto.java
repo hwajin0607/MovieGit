@@ -5,526 +5,451 @@ import java.sql.Date;
 
 
 
-	
+   
 
 
 import com.google.gson.JsonObject;
 
 public class MovieDto {
 
-	private int conIdx;
+   private int conIdx;
+   private String conContent;
+   private Date conDate;
+   private Date conRedate;
+   private String uIden;
+   private int mIdx;
+   private String mName;
+   private Date mOpen;
+   private String mGenre;
+   private String mUrl;
+   private int mBhit;
+   private Date mDate;
+   private int mAge;
+   private String mdDirector;
+   private String maActor;
+   private String mContent;
+   private String mfUrl;
+   private String mravg;
+   private int mfIdx;
+   private String mfOri;
+   private String mfNew;
+   private int zidx;
+   private int uidx;
+   private Date zdate;
+   private String maactor;
+   private double mrRating;
+   private int conidx;
+   private String uiden;
+   
+   
+   
 
-	private String conContent;
-	private Date conDate;
-	private Date conRedate;
-	private String uIden;
-	private int mIdx;
-	private String mName;
-	private Date mOpen;
-	private String mGenre;
-	private String mUrl;
-	private int mBhit;
-	private Date mDate;
-	private int mAge;
-	private String mdDirector;
-	private String maActor;
-	private String mContent;
-	private String mfUrl;
-	private String mravg;
-	private int mfIdx;
-	private String mfOri;
-	private String mfNew;
-	private int zidx;
-	private int uidx;
-	private Date zdate;
-	private String maactor;
-	private double mrRating;
-	private int conidx;
-	private String uiden;
-	private String mfnew;
-	
-	
-	
-	
+   @Override
+   public String toString() {
+      return "{mIdx:" + mIdx + ", mName:" + mName + ", mOpen:" + mOpen + ", mGenre:" + mGenre + ", mUrl:"
+            + mUrl + ", mBhit:" + mBhit + ", mDate:" + mDate + ", mAge:" + mAge + ", mdDirector:" + mdDirector
+            + ", maActor:" + maActor + ", mContent:" + mContent + ", mfUrl:" + mfUrl + ", mravg:" + mravg
+            + ", mfIdx:" + mfIdx + ", mfOri:" + mfOri + ", mfNew:" + mfNew + ", zidx:" + zidx + ", uidx:" + uidx
+            + ", zdate:" + zdate + ", maactor:" + maactor + ", mrRating:" + mrRating + "}";
+   }
 
-	public int getConIdx() {
-		return conIdx;
-	}
 
 
 
+   public int getConIdx() {
+      return conIdx;
+   }
 
 
-	public void setConIdx(int conIdx) {
-		this.conIdx = conIdx;
-	}
 
 
+   public void setConIdx(int conIdx) {
+      this.conIdx = conIdx;
+   }
 
 
 
-	public String getConContent() {
-		return conContent;
-	}
 
+   public String getConContent() {
+      return conContent;
+   }
 
 
 
 
-	public void setConContent(String conContent) {
-		this.conContent = conContent;
-	}
+   public void setConContent(String conContent) {
+      this.conContent = conContent;
+   }
 
 
 
 
+   public Date getConDate() {
+      return conDate;
+   }
 
-	public Date getConDate() {
-		return conDate;
-	}
 
 
 
+   public void setConDate(Date conDate) {
+      this.conDate = conDate;
+   }
 
 
-	public void setConDate(Date conDate) {
-		this.conDate = conDate;
-	}
 
 
+   public Date getConRedate() {
+      return conRedate;
+   }
 
 
 
-	public Date getConRedate() {
-		return conRedate;
-	}
 
+   public void setConRedate(Date conRedate) {
+      this.conRedate = conRedate;
+   }
 
 
 
 
-	public void setConRedate(Date conRedate) {
-		this.conRedate = conRedate;
-	}
+   public String getuIden() {
+      return uIden;
+   }
 
 
 
 
+   public void setuIden(String uIden) {
+      this.uIden = uIden;
+   }
 
-	public String getuIden() {
-		return uIden;
-	}
 
 
 
+   public int getmIdx() {
+      return mIdx;
+   }
 
 
-	public void setuIden(String uIden) {
-		this.uIden = uIden;
-	}
 
 
+   public void setmIdx(int mIdx) {
+      this.mIdx = mIdx;
+   }
 
 
 
-	public int getmIdx() {
-		return mIdx;
-	}
 
+   public String getmName() {
+      return mName;
+   }
 
 
 
 
-	public void setmIdx(int mIdx) {
-		this.mIdx = mIdx;
-	}
+   public void setmName(String mName) {
+      this.mName = mName;
+   }
 
 
 
 
+   public Date getmOpen() {
+      return mOpen;
+   }
 
-	public String getmName() {
-		return mName;
-	}
 
 
 
+   public void setmOpen(Date mOpen) {
+      this.mOpen = mOpen;
+   }
 
 
-	public void setmName(String mName) {
-		this.mName = mName;
-	}
 
 
+   public String getmGenre() {
+      return mGenre;
+   }
 
 
 
-	public Date getmOpen() {
-		return mOpen;
-	}
 
+   public void setmGenre(String mGenre) {
+      this.mGenre = mGenre;
+   }
 
 
 
 
-	public void setmOpen(Date mOpen) {
-		this.mOpen = mOpen;
-	}
+   public String getmUrl() {
+      return mUrl;
+   }
 
 
 
 
+   public void setmUrl(String mUrl) {
+      this.mUrl = mUrl;
+   }
 
-	public String getmGenre() {
-		return mGenre;
-	}
 
 
 
+   public int getmBhit() {
+      return mBhit;
+   }
 
 
-	public void setmGenre(String mGenre) {
-		this.mGenre = mGenre;
-	}
 
 
+   public void setmBhit(int mBhit) {
+      this.mBhit = mBhit;
+   }
 
 
 
-	public String getmUrl() {
-		return mUrl;
-	}
 
+   public Date getmDate() {
+      return mDate;
+   }
 
 
 
 
-	public void setmUrl(String mUrl) {
-		this.mUrl = mUrl;
-	}
+   public void setmDate(Date mDate) {
+      this.mDate = mDate;
+   }
 
 
 
 
+   public int getmAge() {
+      return mAge;
+   }
 
-	public int getmBhit() {
-		return mBhit;
-	}
 
 
 
+   public void setmAge(int mAge) {
+      this.mAge = mAge;
+   }
 
 
-	public void setmBhit(int mBhit) {
-		this.mBhit = mBhit;
-	}
 
 
+   public String getMdDirector() {
+      return mdDirector;
+   }
 
 
 
-	public Date getmDate() {
-		return mDate;
-	}
 
+   public void setMdDirector(String mdDirector) {
+      this.mdDirector = mdDirector;
+   }
 
 
 
 
-	public void setmDate(Date mDate) {
-		this.mDate = mDate;
-	}
+   public String getMaActor() {
+      return maActor;
+   }
 
 
 
 
+   public void setMaActor(String maActor) {
+      this.maActor = maActor;
+   }
 
-	public int getmAge() {
-		return mAge;
-	}
 
 
 
+   public String getmContent() {
+      return mContent;
+   }
 
 
-	public void setmAge(int mAge) {
-		this.mAge = mAge;
-	}
 
 
+   public void setmContent(String mContent) {
+      this.mContent = mContent;
+   }
 
 
 
-	public String getMdDirector() {
-		return mdDirector;
-	}
 
+   public String getMfUrl() {
+      return mfUrl;
+   }
 
 
 
 
-	public void setMdDirector(String mdDirector) {
-		this.mdDirector = mdDirector;
-	}
+   public void setMfUrl(String mfUrl) {
+      this.mfUrl = mfUrl;
+   }
 
 
 
 
+   public String getMravg() {
+      return mravg;
+   }
 
-	public String getMaActor() {
-		return maActor;
-	}
 
 
 
+   public void setMravg(String mravg) {
+      this.mravg = mravg;
+   }
 
 
-	public void setMaActor(String maActor) {
-		this.maActor = maActor;
-	}
 
 
+   public int getMfIdx() {
+      return mfIdx;
+   }
 
 
 
-	public String getmContent() {
-		return mContent;
-	}
 
+   public void setMfIdx(int mfIdx) {
+      this.mfIdx = mfIdx;
+   }
 
 
 
 
-	public void setmContent(String mContent) {
-		this.mContent = mContent;
-	}
+   public String getMfOri() {
+      return mfOri;
+   }
 
 
 
 
+   public void setMfOri(String mfOri) {
+      this.mfOri = mfOri;
+   }
 
-	public String getMfUrl() {
-		return mfUrl;
-	}
 
 
 
+   public String getMfNew() {
+      return mfNew;
+   }
 
 
-	public void setMfUrl(String mfUrl) {
-		this.mfUrl = mfUrl;
-	}
 
 
+   public void setMfNew(String mfNew) {
+      this.mfNew = mfNew;
+   }
 
 
 
-	public String getMravg() {
-		return mravg;
-	}
 
+   public int getZidx() {
+      return zidx;
+   }
 
 
 
 
-	public void setMravg(String mravg) {
-		this.mravg = mravg;
-	}
+   public void setZidx(int zidx) {
+      this.zidx = zidx;
+   }
 
 
 
 
+   public int getUidx() {
+      return uidx;
+   }
 
-	public int getMfIdx() {
-		return mfIdx;
-	}
 
 
 
+   public void setUidx(int uidx) {
+      this.uidx = uidx;
+   }
 
 
-	public void setMfIdx(int mfIdx) {
-		this.mfIdx = mfIdx;
-	}
 
 
+   public Date getZdate() {
+      return zdate;
+   }
 
 
 
-	public String getMfOri() {
-		return mfOri;
-	}
 
+   public void setZdate(Date zdate) {
+      this.zdate = zdate;
+   }
 
 
 
 
-	public void setMfOri(String mfOri) {
-		this.mfOri = mfOri;
-	}
+   public String getMaactor() {
+      return maactor;
+   }
 
 
 
 
+   public void setMaactor(String maactor) {
+      this.maactor = maactor;
+   }
 
-	public String getMfNew() {
-		return mfNew;
-	}
 
 
 
+   public double getMrRating() {
+      return mrRating;
+   }
 
 
-	public void setMfNew(String mfNew) {
-		this.mfNew = mfNew;
-	}
 
 
+   public void setMrRating(double mrRating) {
+      this.mrRating = mrRating;
+   }
 
 
 
-	public int getZidx() {
-		return zidx;
-	}
 
+   public int getConidx() {
+      return conidx;
+   }
 
 
 
 
-	public void setZidx(int zidx) {
-		this.zidx = zidx;
-	}
+   public void setConidx(int conidx) {
+      this.conidx = conidx;
+   }
 
 
 
 
+   public String getUiden() {
+      return uiden;
+   }
 
-	public int getUidx() {
-		return uidx;
-	}
 
 
 
+   public void setUiden(String uiden) {
+      this.uiden = uiden;
+   }
 
-
-	public void setUidx(int uidx) {
-		this.uidx = uidx;
-	}
-
-
-
-
-
-	public Date getZdate() {
-		return zdate;
-	}
-
-
-
-
-
-	public void setZdate(Date zdate) {
-		this.zdate = zdate;
-	}
-
-
-
-
-
-	public String getMaactor() {
-		return maactor;
-	}
-
-
-
-
-
-	public void setMaactor(String maactor) {
-		this.maactor = maactor;
-	}
-
-
-
-
-
-	public double getMrRating() {
-		return mrRating;
-	}
-
-
-
-
-
-	public void setMrRating(double mrRating) {
-		this.mrRating = mrRating;
-	}
-
-
-
-
-
-	public int getConidx() {
-		return conidx;
-	}
-
-
-
-
-
-	public void setConidx(int conidx) {
-		this.conidx = conidx;
-	}
-
-
-
-
-
-	public String getUiden() {
-		return uiden;
-	}
-
-
-
-
-
-	public void setUiden(String uiden) {
-		this.uiden = uiden;
-	}
-
-
-
-
-
-	public String getMfnew() {
-		return mfnew;
-	}
-
-
-
-
-
-	public void setMfnew(String mfnew) {
-		this.mfnew = mfnew;
-	}
-
-
-
-
-
-	@Override
-	public String toString() {
-		return "{mIdx:" + mIdx + ", mName:" + mName + ", mOpen:" + mOpen + ", mGenre:" + mGenre + ", mUrl:"
-				+ mUrl + ", mBhit:" + mBhit + ", mDate:" + mDate + ", mAge:" + mAge + ", mdDirector:" + mdDirector
-				+ ", maActor:" + maActor + ", mContent:" + mContent + ", mfUrl:" + mfUrl + ", mravg:" + mravg
-				+ ", mfIdx:" + mfIdx + ", mfOri:" + mfOri + ", mfNew:" + mfNew + ", zidx:" + zidx + ", uidx:" + uidx
-				+ ", zdate:" + zdate + ", maactor:" + maactor + ", mrRating:" + mrRating + "}";
-	}
-
-		//	public String toJSON () {
-		//		Gson obj = new JsonObject();
-		//		obj.add("mIdx", this.mIdx);
-		//		return "";
-		//	}
-			//
+      //   public String toJSON () {
+      //      Gson obj = new JsonObject();
+      //      obj.add("mIdx", this.mIdx);
+      //      return "";
+      //   }
+         //
 
 }
