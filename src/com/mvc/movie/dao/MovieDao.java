@@ -256,7 +256,7 @@ public class MovieDao {
 		System.out.println("uidx : "+ uidx);
 		System.out.println("end : "+end);
 		
-		String sql ="SELECT DISTINCT mName, uidx, midx, mfurl , zidx, zdate FROM (SELECT DISTINCT ROW_NUMBER() OVER(ORDER BY uidx DESC) AS rnum, m.mName, z.uidx, z.midx, m.mfurl , z.zidx, z.zdate FROM (SELECT m.midx,m.mname ,f.mfidx,f.mfurl FROM movie m, moviefoster f WHERE m.midx = f.midx) m, zzim z where m.midx = z.midx) WHERE uidx =? and rnum BETWEEN ? AND ? ORDER BY zdate";
+		String sql ="SELECT DISTINCT mName, uidx, midx, mfNew , zidx, zdate FROM (SELECT DISTINCT ROW_NUMBER() OVER(ORDER BY uidx DESC) AS rnum, m.mName, z.uidx, z.midx, m.mfNew , z.zidx, z.zdate FROM (SELECT m.midx,m.mname ,f.mfidx,f.mfNew FROM movie m, moviefoster f WHERE m.midx = f.midx) m, zzim z where m.midx = z.midx) WHERE uidx =? and rnum BETWEEN ? AND ? ORDER BY zdate";
 		ArrayList<MovieDto> list = new ArrayList<MovieDto>();
 		
 			ps = conn.prepareStatement(sql);
@@ -267,7 +267,7 @@ public class MovieDao {
 			while(rs.next()) {
 				MovieDto dto = new MovieDto();
 				dto.setUidx(rs.getInt("uidx"));					
-				dto.setMfUrl(rs.getString("mfurl"));			
+				dto.setMfNew(rs.getString("mfNew"));			
 				dto.setmName(rs.getString("mName"));	
 				dto.setmIdx(rs.getInt("midx"));				
 				dto.setZidx(rs.getInt("zidx"));
@@ -350,8 +350,8 @@ public class MovieDao {
 		int start = 1;
 	
 		String str ="%"+gen+"%";
-		String sql = "SELECT DISTINCT rnum, mIdx,mopen, mName, mGenre, mfUrl FROM "
-						+" (SELECT DISTINCT ROW_NUMBER() OVER(ORDER BY m.mopen) AS rnum,m.mIdx,m.mopen, m.mName, m.mGenre, f.mfUrl FROM movie m" 
+		String sql = "SELECT DISTINCT rnum, mIdx,mopen, mName, mGenre, mfNew FROM "
+						+" (SELECT DISTINCT ROW_NUMBER() OVER(ORDER BY m.mopen) AS rnum,m.mIdx,m.mopen, m.mName, m.mGenre, f.mfNew FROM movie m" 
 						+" JOIN moviefoster f on m.midx = f.midx where mName LIKE ? or mgenre LIKE ?) WHERE  rnum BETWEEN ? AND ? ORDER BY rnum";
 		ArrayList<MovieDto> slist = new ArrayList<MovieDto>();
 
@@ -366,7 +366,7 @@ public class MovieDao {
 				dto.setmName(rs.getString("mName"));
 				dto.setmGenre(rs.getString("mGenre"));
 				dto.setmIdx(rs.getInt("mIdx"));
-				dto.setMfUrl(rs.getString("mfUrl"));
+				dto.setMfNew(rs.getString("mfNew"));
 				slist.add(dto);
 			}
 			System.out.println(slist);
