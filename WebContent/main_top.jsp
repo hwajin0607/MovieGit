@@ -117,7 +117,7 @@
         position: relative;
         width: 95%;
         height: 730px;
- 		top:-2084px;
+ 		top: 100px;
         left: 48px;
         z-index: 9;
     }
@@ -302,7 +302,6 @@ $(document).ready(function() {
 	function DoSend() {
 		location.href="./randomDetail";
 	}
-
 
 		$(document).ready(function() {
 		

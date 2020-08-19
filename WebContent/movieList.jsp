@@ -158,7 +158,7 @@
 
     }
     td{
-    	background-color : hotpink;
+    	background-color : black;
     	width: 250px;
         height: 250px;
         float:left;
@@ -213,9 +213,9 @@
 		background-color: rgb(0, 0, 0, 0.5);
 		
 	}
-	a>div{
-		width:250px;
-		height:250px;
+	img{
+		max-width: 100%;
+		max-height: 100%;
 	}
 
   
@@ -226,7 +226,7 @@
     <!-- 배경이미지 -->
     	<div class="mainImg">
         	<img src="/photo/main9.jpg"  />
-    <div class="header"><a href="like"><img id="logo" src="/photo/logo.png"/></a>
+    <div class="header"><a href="like"><img id="logo" src="/photo/main.png"/></a>
 
         <div id="allmenu"><a href="page">MENU</a></div>
         <div id="mypage"><a href="myPage.jsp">MY PAGE</a></div>
@@ -263,14 +263,14 @@
         </br>
         <!-- 영화목록보여주기 -->
         <div class="mList">
-        <table>
-        	<tr>
-        	<c:forEach items="${movieList }" var="mlist"> 
-				<td><a href="./movieDetail?mIdx=${mlist.mIdx }"><div>${mlist.mfUrl}</div></a></td>
-			</c:forEach>
-			</tr>
-		
-		</table>
+	        <table>
+	        	<tr>
+	        	<c:forEach items="${movieList }" var="mlist"> 
+					<td><a href="./movieDetail?mIdx=${mlist.mIdx }"><img src="/photo/${mlist.mfNew}"/></a></td>
+				</c:forEach>
+				</tr>
+			
+			</table>
 		<!-- 더보기 -->
 		<div class="pageArea">
 			<a href="./movieList?page=${currPage +1}" id="more">
