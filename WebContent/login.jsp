@@ -152,9 +152,8 @@
      });
 
      function DoSend() {
-
         $("#memberjoin").css('display','none');
-   }
+	}
 
 
 

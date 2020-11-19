@@ -292,10 +292,7 @@ var loginPw = "${sessionScope.loginPw}";
 
     if(loginId !=""){
    $("#login").html(loginId+' 님♡');
-
-       
     }
-
 
 $(document).ready(function() {
 
@@ -320,17 +317,14 @@ $(document).ready(function() {
 		location.href="./randomDetail";
 	}
 
-		$(document).ready(function() {
-		
-		    $("#search").click(function(){
-		        $(".panel").css({"display":"block"});
-		    });
-		    
-			$("#chu").click(function(e){
-				$('html, body').scrollTop(850);
-			});
-		
-		    });
+    $("#search").click(function(){
+        $(".panel").css({"display":"block"});
+    });
+    
+	$("#chu").click(function(e){
+		$('html, body').scrollTop(850);
+	});
+
 
 </script>
 

@@ -49,48 +49,43 @@ public class MemberController extends HttpServlet {
 		MemberService ms = new MemberService(req,resp);
 		switch (addr) {
 		
+		//내가 한 부분 - 로그인
 	      case "/login":
-	    		  	System.out.println("로그인 요청");
-		            String id = req.getParameter("id");
-		            String pw = req.getParameter("pw");
-		            System.out.println(id+"/"+pw);
-		            String page = "login.jsp";
-		            String msg = "아이디와 패스워드를 확인해 주세요.";
-		            
-		            int login = 0;
-		            
-		            if(id==null || pw ==null) {
-		            	msg = "로그인이 필요한 서비스 입니다.";
-		            }
-	            	login = ms.login(id,pw);
-	
-	 	            if(login != 0) {
-	 	            	msg = "로그인에 성공 하였습니다.";
-	 	                page = "like";
-	
-	 	                if(id.equals("manager")){
-	
-		                	//msg = "관리자 페이지 입니다.";
-		                	msg = "관리자 페이지 입니다.";
-		                	page="manager.jsp";	
-		                	
-		                } 
-	 	            }
-	            	
-	
-	                req.getSession().setAttribute("loginId", id);
-	                req.getSession().setAttribute("loginPw", pw);
-	 	            req.getSession().setAttribute("uIdx", login);
-		            req.getSession().setAttribute("sort","0");
-	
-	                System.out.println("loginId=="+req.getSession().getAttribute("loginId"));
-		            req.setAttribute("msg", msg);
-		            req.getSession().setAttribute("sort","0");
-		            dis = req.getRequestDispatcher(page);
-		            dis.forward(req, resp);
-	           
-	            break;
+		  	System.out.println("로그인 요청");
+            String id = req.getParameter("id");
+            String pw = req.getParameter("pw");
+            System.out.println(id+"/"+pw);
+            String page = "login.jsp";
+            String msg = "아이디와 패스워드를 확인해 주세요.";
+            
+            int login = 0;
+            
+            if(id==null || pw ==null) {
+            	msg = "로그인이 필요한 서비스 입니다.";
+            }
+        	login = ms.login(id,pw);
+
+            if(login != 0) {
+            	msg = "로그인에 성공 하였습니다.";
+                page = "like";
+                if(id.equals("manager")){
+                	msg = "관리자 페이지 입니다.";
+                	page="manager.jsp";	
+                } 
+            }
+            req.getSession().setAttribute("loginId", id);
+            req.getSession().setAttribute("loginPw", pw);
+            req.getSession().setAttribute("uIdx", login);
+            req.getSession().setAttribute("sort","0");
+
+            System.out.println("loginId=="+req.getSession().getAttribute("loginId"));
+            req.setAttribute("msg", msg);
+            req.getSession().setAttribute("sort","0");
+            dis = req.getRequestDispatcher(page);
+            dis.forward(req, resp);
+            break;
 			
+      //내가 한 부분 - 로그아웃
 		case "/logout":
 			req.getSession().removeAttribute("uIdx");
 			req.getSession().removeAttribute("loginId");
@@ -108,11 +103,9 @@ public class MemberController extends HttpServlet {
 			//dis.forward(req, resp);
 			break;
 			
-		//사용자의 취향에 맞춰 8개 추천영화 리스트 가져오기
+		//내가 한 부분 - 사용자의 취향에 맞춰 8개 추천영화 리스트 가져오기
 		case "/like":
-			/* req.setCharacterEncoding("UTF-8"); */
 			System.out.println("취향 요청");
-			/* String msg1 = "like"; */
 			 String pageParam = req.getParameter("page");
 				int page1 = 1;
 				page=null;
@@ -129,8 +122,6 @@ public class MemberController extends HttpServlet {
 				}
 				dis = req.getRequestDispatcher(page);
 				dis.include(req, resp);
-//				msg = "로그인에 성공 하였습니다.";
-//			 	req.setAttribute("msg", msg);
 				req.setAttribute("currPage", page1);
 			
 			break;

@@ -32,6 +32,7 @@ public class MemberDao {
 			}
 		}
 	
+	//내가 한 부분 - 로그인
 	public int login(String id, String pw) throws SQLException {
 		int useridx = 0;
 		String sql = "SELECT uIdx FROM Member WHERE uIden=? AND uPw=?";
@@ -152,6 +153,7 @@ public class MemberDao {
 		System.out.println("리스트 보여주기 : "+list);
 		return list;
 	}
+	
 	public MemberDto info(String uidx) throws SQLException {
 		MemberDto dto = null;
 		String sql = "select uiden, uname, ubirth, ugender, uemail  FROM member WHERE uidx = ?";

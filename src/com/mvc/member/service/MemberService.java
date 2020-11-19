@@ -28,6 +28,7 @@ public class MemberService {
 		System.out.println(req.getSession().getAttribute("uIdx")==null);
 	}
 	
+	//내가 한 부분 - 로그인
 	public int login(String id, String pw) throws Exception {
 		req.setCharacterEncoding("UTF-8");
 		MemberDao dao = new MemberDao();
@@ -38,9 +39,7 @@ public class MemberService {
 		 }
 		 dao.resClose();
 		 return useridx;
-
 	}
-	
 	
 	public void join() throws IOException {
 		boolean success = false;
@@ -125,7 +124,6 @@ public class MemberService {
 			RequestDispatcher dis = req.getRequestDispatcher("main_top.jsp");
 			dis.forward(req, resp);
 		}
-		
 		
 	}
 
