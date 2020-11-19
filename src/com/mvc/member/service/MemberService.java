@@ -102,6 +102,8 @@ public class MemberService {
 		}
 		
 	}
+	
+	//사용자의 취향에 맞춰 8개 추천영화 리스트 가져오기
 	public void like(int page1) throws SQLException, ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		if(req.getSession().getAttribute("uIdx")==null) {

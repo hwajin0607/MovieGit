@@ -127,6 +127,7 @@ public class MemberDao {
 		return useridx;
 	}
 
+	//사용자의 취향에 맞춰 8개 추천영화 리스트 가져오기
 	public ArrayList<MovieDto> like(String uIdx,int page1) throws SQLException {
 		System.out.println("아이디 고유번호 2차 확인 : "+uIdx);
 		

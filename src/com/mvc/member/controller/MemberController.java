@@ -108,7 +108,7 @@ public class MemberController extends HttpServlet {
 			//dis.forward(req, resp);
 			break;
 			
-
+		//사용자의 취향에 맞춰 8개 추천영화 리스트 가져오기
 		case "/like":
 			/* req.setCharacterEncoding("UTF-8"); */
 			System.out.println("취향 요청");
