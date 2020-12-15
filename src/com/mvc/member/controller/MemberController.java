@@ -80,7 +80,6 @@ public class MemberController extends HttpServlet {
 
             System.out.println("loginId=="+req.getSession().getAttribute("loginId"));
             req.setAttribute("msg", msg);
-            req.getSession().setAttribute("sort","0");
             dis = req.getRequestDispatcher(page);
             dis.forward(req, resp);
             break;
